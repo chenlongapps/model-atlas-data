@@ -10,6 +10,9 @@
 - `baseline.json`：旧八条维护成绩及其定义／来源／映射的完整对象，Android 随包五条成绩与版本，以及受保护文件的摘要。这里只是不可变审核依据，不是另一套日常维护源。
 - `batch.json`：明确列出本轮候选结果 ID、调查项目和附件，不把所有 pending 当成本轮候选。
 - `evidence-*.json`：官方入口、实际查询记录、必要原文摘录与定位、可获得的响应摘要、仅系统级记录及阻塞原因。不是上游数据集或网页全文镜像。
+- `staging-*.json`：本轮分组采集时保留的原始工作记录，其中部分文件已由维护者纳入版本控制；合并后不再作为日常维护或构建输入。正式候选仍以 `data/benchmarks.json`、`sources.json`、`model-mappings.json` 和 `results/` 为准，不能只编辑 staging 就认为已更新维护数据。
+
+**本轮暂未完整合并：**已追加全部 13 项待审定义、18 个待审来源、43 条待审映射及 4 条指数成绩；其余候选仍只在分组 staging 中。未核实的 `staging-indices.json` 保留原状且不参与模拟导入，只有 `staging-verified-indices.json` 中的四条进入候选。维护层没有写入完整批次 `batch.json`；为了避免留下引用不完整的数据，未导入的成绩继续留在 staging。
 
 只保存筛选必要的目录事实，不代理目录／价格。模型发布日期有争议、未知或精度跨边界时记录待核实，不补造日期。规范 ID 去重不等于 checkpoint 去重；`latest`、高速变体及同名记录不自动继承成绩。
 
@@ -45,15 +48,35 @@
 
 ## 生成报告
 
+首次将已核对的分组候选加入维护层时，确保无其他进程或会话正在编辑数据，先在仓库外隔离副本校验，再明确执行合并：
+
+```sh
+python3 -B scripts/merge_candidate_staging.py --check
+# 核对上一步打印的 snapshot-sha256 后：
+python3 -B scripts/merge_candidate_staging.py --apply --expected-sha256 <snapshot-sha256>
+```
+
+合并器只追加 pending，保留旧对象；相同 ID 内容不同则拒绝，不会删除 staging 或覆盖用户工作。它先验证证据、范围和完整候选集，并要求 apply 时的输入摘要与 check 一致，使用临时文件原子替换，并在失败时尽力回滚。摘要不是锁；**跨多个文件不是文件系统事务，也不保证意外崩溃后的恢复**，check 和 apply 期间都必须停止其他写入者。此命令不批准、发布或更新 Android。
+
+当前数据尚未完整导入时，使用隔离暂存预览：
+
+```sh
+python3 scripts/preview_candidates.py --staging --check-android
+```
+
+该命令在仓库外临时目录模拟完整候选合并及校验，并用实际相邻 Android 工作区核对受保护文件；不写维护数据。报告明确标注 `stagingOnly: true`，不能说成完整维护层已导入。**它不是发布包，也不会导出到 Android。** 临时模拟会同时纳入已追加的四条成绩，但不会重复计数。
+
+完整合并后才使用普通模式：
+
 ```sh
 python3 scripts/validate.py
 python3 scripts/preview_candidates.py --check
 python3 scripts/preview_candidates.py --check-android
 ```
 
-默认输出 **`build/candidate-review-2026-10-28/report.md` 与 `report.json`**。只有这两份报告，不写 `manifest.json`、版本化 scores、发布配置或 Android assets。输入必须来自 `data/reviews/`，输出限仓库 `build/` 的独立目录，禁止经符号链接覆盖维护数据。
+默认输出 **`build/candidate-review-2026-10-28/report.md` 与 `report.json`**。只有这两份报告，不写 `manifest.json`、版本化 scores、发布配置或 Android assets。输入必须来自 `data/reviews/`，输出限仓库 `build/` 的独立目录；仅允许空目录或同批次、内容完全一致的 candidate-only 报告重跑，拒绝覆盖已修改的报告或混入已有生产／preview 产物。报告内容变化时指定新的空输出目录。通过独占临时文件和原子替换避免截断已有硬链接，也拒绝符号链接输出。
 
-普通 `validate.py` 会离线检查所有 `data/reviews/*/batch.json`，不要求 CI 存在相邻 Android 仓库。加 `--check-android` 才核对相邻 checkout 的受保护摘要；未检查的外部文件明确显示 `not-checked`，不冒称已验证。内仓库受保护文件和旧维护对象始终核验。
+普通 `validate.py` 会离线检查所有 `data/reviews/*/batch.json`，不要求 CI 存在相邻 Android 仓库。加 `--check-android` 才核对相邻 checkout 的受保护摘要；未检查的外部文件在报告显示 `not-checked`，CLI／CI 日志也明确打印 NOTICE，不冒称已验证。基线内部摘要一致性、内仓库受保护文件和旧维护对象始终核验。每批只选择其明确列出的候选 ID，其他批次不会被自动纳入。本批次的十一项目标及日期／版本另有固定策略检查；证据附件有独立 Schema。
 
 报告包含两套**假设**差异：
 

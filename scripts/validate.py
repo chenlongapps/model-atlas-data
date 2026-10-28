@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 from common import DataError, ROOT, load_catalog, read_artifacts, read_json, validate_schema
-from preview_candidates import review_candidates
+from preview_candidates import print_protection_notice, review_candidates
 
 
 def main() -> int:
@@ -26,6 +26,7 @@ def main() -> int:
         for batch in sorted((ROOT / "data/reviews").glob("*/batch.json")):
             report = review_candidates(ROOT, batch)
             print(f"OK: {report['batchId']}: {report['summary']['candidateResults']} pending candidates; not deployable")
+            print_protection_notice(report)
         return 0
     except DataError as error:
         print(f"ERROR: {error}", file=sys.stderr)

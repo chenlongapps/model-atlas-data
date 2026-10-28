@@ -1,0 +1,148 @@
+{
+  "targets": [
+    {
+      "id": "aa-intelligence-index",
+      "benchmarkIds": ["aa-intelligence-index-v5"],
+      "officialUrls": ["https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "https://artificialanalysis.ai/leaderboards/models"],
+      "status": "collected",
+      "notes": "仅独立准备的四条候选：AA v5.0 GPT-6 Astra max=57、xhigh=55；GDPval-AA v2.1 max=1584、CI -19/+19；Vals v2.2=65.02%。均为官网表显、pending，不复算。原 staging 263 条未整体逐行核实、部分为 fallback，不整体导入；其中除四条对应项外的 259 条均不纳入，原文件完整保留。模型身份、配置和分发许可仍需人工审核；collected 不代表批准发布。",
+      "searches": [
+        {"tier": 1, "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index", "outcome": "官方标题明确 v5.0；Background 列出九项。"},
+        {"tier": 1, "url": "https://artificialanalysis.ai/leaderboards/models", "outcome": "当前榜给出模型、配置和 Intelligence Index 表列；默认 Status: Current。"},
+        {"tier": 1, "url": "https://artificialanalysis.ai/models/muse-spark-1-3", "outcome": "已弃用模型详情给出 Max 配置指数 36，并明确当前图表为 v5.0。"}
+      ]
+    },
+    {
+      "id": "vals-index",
+      "benchmarkIds": ["vals-index-v2.2"],
+      "officialUrls": ["https://www.vals.ai/benchmarks/vals_index"],
+      "status": "collected",
+      "notes": "仅独立准备的四条候选：AA v5.0 GPT-6 Astra max=57、xhigh=55；GDPval-AA v2.1 max=1584、CI -19/+19；Vals v2.2=65.02%。均为官网表显、pending，不复算；Vals 原 staging 的 65.023 更高精度未确认。原 staging 共 263 条未整体逐行核实、部分为 fallback；除四条对应项外其余 259 条不纳入，原文件整体不导入且完整保留。模型身份、配置和分发许可仍需人工审核；collected 不代表批准发布。",
+      "searches": [
+        {"tier": 1, "url": "https://www.vals.ai/benchmarks/vals_index", "outcome": "官方标注 Version 2.2、Updated 10/27/2026；可见模型行和 Accuracy 列。"}
+      ]
+    },
+    {
+      "id": "gdpval-aa",
+      "benchmarkIds": ["gdpval-aa-v2.1"],
+      "officialUrls": ["https://artificialanalysis.ai/evaluations/gdpval-aa", "https://artificialanalysis.ai/methodology/intelligence-benchmarking#gdpval-aa"],
+      "status": "collected",
+      "notes": "仅独立准备的四条候选：AA v5.0 GPT-6 Astra max=57、xhigh=55；GDPval-AA v2.1 max=1584、CI -19/+19；Vals v2.2=65.02%。均为官网表显、pending，不复算；GDP 原 staging 的 1584.4 更高精度未确认。原 staging 共 263 条未整体逐行核实、部分为 fallback；除四条对应项外其余 259 条不纳入，原文件整体不导入且完整保留。模型身份、配置和分发许可仍需人工审核；collected 不代表批准发布。",
+      "searches": [
+        {"tier": 1, "url": "https://artificialanalysis.ai/evaluations/gdpval-aa", "outcome": "官方 v2.1 Leaderboard 有模型名、Elo 和 CI；表中显示整数。"},
+        {"tier": 1, "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking#gdpval-aa", "outcome": "官方说明 220 个公共 gold 任务、Stirrup 和 DeepSeek V4.1 Flash (max)=1600 的新标尺。"}
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "indices-aa-astra-displayed-check",
+      "sourceId": "indices-aa",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": null,
+      "locator": "LLM Leaderboard，Status: Current，GPT-6 Astra (max) 和 (xhigh) 行的 Artificial Analysis Intelligence Index 列；版本另见 https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh",
+      "excerpt": "GPT-6 Astra (max) | OpenAI | 57；GPT-6 Astra (xhigh) | OpenAI | 55",
+      "notes": "官网显示整数；比较页同时标注指数 v5.0。仅这两行表显核实；模型及许可仍待人工审核。本次未保存响应字节摘要。"
+    },
+    {
+      "id": "indices-gdp-astra-displayed-check",
+      "sourceId": "indices-gdp",
+      "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": null,
+      "locator": "GDPval-AA v2.1 Leaderboard，第 42 行，GPT-6 Astra (Max)，Name / Elo / CI 列",
+      "excerpt": "OpenAI | GPT-6 Astra (Max) | 1584 | -19 / +19",
+      "notes": "仅核实官网整数表显及 CI；原 staging 的 1584.4 更高精度未确认。本次未保存响应字节摘要。"
+    },
+    {
+      "id": "indices-vals-astra-displayed-check",
+      "sourceId": "indices-vals",
+      "url": "https://www.vals.ai/benchmarks/vals_index",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": null,
+      "locator": "Version 2.2，Vals Index leaderboard，第 5 行，GPT-6 Astra，Accuracy 列",
+      "excerpt": "GPT-6 Astra | 65.02%",
+      "notes": "仅核实官网两位小数表显；原 staging 的 65.023 更高精度未确认。模型详情表显 ±1.10；原有配置需再核实。本次未保存响应字节摘要。"
+    },
+    {
+      "id": "indices-aa-leaderboard-observation",
+      "sourceId": "indices-aa",
+      "url": "https://artificialanalysis.ai/leaderboards/models",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": "83050522e92f728d05a218d1dd950cef998c8a6c9b87c78664d1e900f8e61624",
+      "locator": "LLM Leaderboard，Status: Current，Artificial Analysis Intelligence Index 列；例如 GPT-6 Astra (max) 行",
+      "excerpt": "GPT-6 Astra (max) | OpenAI | 57",
+      "notes": "对应版本须结合官方 v5.0 评测页确认；这只是一个具体示例，不证明所有行或模型映射。摘要为本次取得的原始 HTML 响应字节。"
+    },
+    {
+      "id": "indices-gdp-leaderboard-observation",
+      "sourceId": "indices-gdp",
+      "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": "d47cffe7aeb7b4f904a388a8a18b0fec44263df94868660d8e3001d3441c8193",
+      "locator": "GDPval-AA v2.1 Leaderboard，Name / Elo / CI 列，第 31 行",
+      "excerpt": "Claude Fable 5 (Max, Opus 4.8 Fallback) | 1618 | -16 / +16",
+      "notes": "表格显示整数而非 staging 精度；该例明确涉及另一模型，不作为单模型成绩。摘要为本次取得的原始 HTML 响应字节。"
+    },
+    {
+      "id": "indices-vals-leaderboard-observation",
+      "sourceId": "indices-vals",
+      "url": "https://www.vals.ai/benchmarks/vals_index",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": "7763ddf247a20015bda15c0f74f44157de2a8582f616b64d2de3cde6ad6d1b89",
+      "locator": "Version 2.2；HTML 转义的 benchmarkView.tasks.overall，键 anthropic/claude-sonnet-5-5 和 anthropic/claude-opus-5-5 下的 accuracy；另见 leaderboard 第 1、2 行",
+      "excerpt": "anthropic/claude-sonnet-5-5 accuracy 70.854；anthropic/claude-opus-5-5 accuracy 70.177。",
+      "notes": "在本次响应的 HTML 嵌入数据中核实两个三位小数；表显分别为 70.85% 和 70.18%。是否使用 fallback 未由此证明。页面称 Proprietary，权利待审。摘要为本次取得的原始 HTML 响应字节。"
+    },
+    {
+      "id": "indices-vals-overall-embedded-check",
+      "sourceId": "indices-vals",
+      "url": "https://www.vals.ai/benchmarks/vals_index",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": "7763ddf247a20015bda15c0f74f44157de2a8582f616b64d2de3cde6ad6d1b89",
+      "locator": "HTML 中转义的 benchmarkView.tasks.overall；以每条 staging 结果的 sourceLocator 中方括号键定位，再取 accuracy 数值。特别注意 alibaba/qwen3.8-max-internal 是网页内部键。",
+      "excerpt": "google/gemini-4-argon accuracy 69.237；alibaba/qwen3.8-max-internal accuracy 59.045。",
+      "notes": "按键和 accuracy 逐项与现存 indices-rv03 至 indices-rv28 共 26 条比较一致；这只核实来源数值，不证明内部键与目录 ID 的身份关系、运行条件或再分发授权。原始 HTML 字节摘要见 responseSha256。"
+    },
+    {
+      "id": "indices-aa-spark13-observation",
+      "sourceId": "indices-aa-spark13",
+      "url": "https://artificialanalysis.ai/models/muse-spark-1-3",
+      "retrievedAt": "2026-10-28",
+      "responseSha256": "67df7aa5637d25b73d814be23ff7b5337b77d85c66ecf582e00443dfb998da09",
+      "locator": "Model summary > Intelligence；Comparison Summary；Intelligence > Artificial Analysis Intelligence Index",
+      "excerpt": "Muse Spark 1.3 (Max) scores 36 on the Artificial Analysis Intelligence Index；页面 Intelligence 图表标注 v5.0。",
+      "notes": "页面标记 deprecated；这是模型详情与当前版本的证据，不自动证明冻结目录映射或分发授权。摘要为本次取得的原始 HTML 响应字节。"
+    }
+  ],
+  "systemOnly": [
+    {
+      "id": "indices-system-gdp-fable5-opus48",
+      "url": "https://artificialanalysis.ai/evaluations/gdpval-aa#gdpval-aa-leaderboard-table",
+      "sourceModelName": "Claude Fable 5 (Max, Opus 4.8 Fallback)",
+      "reason": "官方榜明确另一模型 Opus 4.8 作为 fallback；不是单模型实验。表显 Elo 1618，CI -16 / +16；原 staging 的额外两位小数尚未逐项核实。",
+      "sourceId": "indices-gdp",
+      "responseSha256": "d47cffe7aeb7b4f904a388a8a18b0fec44263df94868660d8e3001d3441c8193",
+      "originalResult": {"id":"indices-rg033","benchmarkId":"gdpval-aa-v2.1","mappingId":"indices-g08","score":1618.43,"sourceId":"indices-gdp","sourceLocator":"Claude Fable 5 (Max, Opus 4.8 Fallback); elo","collectedAt":"2026-10-28","evaluatedAt":null,"subset":"220 public gold tasks","harness":"Stirrup; E2B; 250 turns","reasoningEffort":"max","toolsEnabled":true,"status":"pending","unrepresentedConditions":["95% CI: -16 / +16","Opus 4.8 Fallback"],"notes":"原Elo。"}
+    },
+    {
+      "id": "indices-system-vals-sonnet55",
+      "url": "https://www.vals.ai/benchmarks/vals_index",
+      "sourceModelName": "Claude Sonnet 5.5",
+      "reason": "未核验调查线索，不是已确认组合系统：Sonnet 5 refusal fallback 是否用于本次 v2.2 实验不明，因此不归属单模型。原网页嵌入 accuracy 70.854 已核实，配置尚待逐项核实。",
+      "sourceId": "indices-vals",
+      "responseSha256": "7763ddf247a20015bda15c0f74f44157de2a8582f616b64d2de3cde6ad6d1b89",
+      "originalResult": {"id":"indices-rv01","benchmarkId":"vals-index-v2.2","mappingId":"indices-v01","score":70.854,"sourceId":"indices-vals","sourceLocator":"benchmarkView.tasks.overall[anthropic/claude-sonnet-5-5].accuracy","collectedAt":"2026-10-28","evaluatedAt":null,"subset":null,"harness":"Vals agentic suite; component-specific harnesses; provider=Anthropic","reasoningEffort":"max (compute_effort)","toolsEnabled":null,"status":"pending","unrepresentedConditions":["stderr=0.928 percentage points","temperature=1; max_output_tokens=128000","Code Migration index subset: 50 CLI + 10 COBOL, weighted 75%/25%","Vals announced Sonnet 5 refusal fallback; per-v2.2-rerun fallback details unknown"],"notes":"原嵌入accuracy，非复算；表显70.85%。"}
+    },
+    {
+      "id": "indices-system-vals-opus55",
+      "url": "https://www.vals.ai/benchmarks/vals_index",
+      "sourceModelName": "Claude Opus 5.5",
+      "reason": "未核验调查线索，不是已确认组合系统：Opus 5 / Opus 4.8 refusal fallback 是否用于本次 v2.2 实验不明，因此不归属单模型。原网页嵌入 accuracy 70.177 已核实，配置尚待逐项核实。",
+      "sourceId": "indices-vals",
+      "responseSha256": "7763ddf247a20015bda15c0f74f44157de2a8582f616b64d2de3cde6ad6d1b89",
+      "originalResult": {"id":"indices-rv02","benchmarkId":"vals-index-v2.2","mappingId":"indices-v02","score":70.177,"sourceId":"indices-vals","sourceLocator":"benchmarkView.tasks.overall[anthropic/claude-opus-5-5].accuracy","collectedAt":"2026-10-28","evaluatedAt":null,"subset":null,"harness":"Vals agentic suite; component-specific harnesses; provider=Anthropic","reasoningEffort":"max (compute_effort)","toolsEnabled":null,"status":"pending","unrepresentedConditions":["stderr=1.004 percentage points","temperature=1; max_output_tokens=128000","Code Migration index subset: 50 CLI + 10 COBOL, weighted 75%/25%","Vals announced Opus 5 / Opus 4.8 refusal fallbacks; per-v2.2-rerun fallback details unknown"],"notes":"原嵌入accuracy，非复算。"}
+    }
+  ]
+}

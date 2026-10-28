@@ -1,0 +1,117 @@
+{
+  "targets": [
+    {
+      "id": "terminal-bench",
+      "benchmarkIds": ["terminal-bench-v4"],
+      "officialUrls": ["https://www.tbench.ai/?version=4", "https://www.tbench.ai/news/terminal-bench-4-0", "https://github.com/harbor-framework/terminal-bench/releases/tag/v4.0.0"],
+      "status": "collected",
+      "notes": "已核实独立榜单 name=4-0-0，package=terminal-bench/terminal-bench，dataset_version_ids=[1922072f-a433-429a-8929-350d5e1bcf02]。采集全部35条官方主榜，明确对应冻结23模型；保留同模型全部effort，不取最高分。主页面SSR表格空壳，但RSC dehydrated query含完整35行。metadata.date列官方标为Release Date，故evaluatedAt均null。Vals公开页面和JSON也已读到，但其TB元数据仅写4.0，尚未独立证明其具体4.0.0 pin，未混入精确4.0.0目标；其Qwen max-internal显示0902与原始key不一致，Beam-1.0不能凭名称推成501B-A23B，均不猜。官方缺项已做下列定向检索；不是全部151模型的逐家厂商穷尽调查，更不是穷尽网友。采集中曾出现统一ECONNRESET/SSL EOF，现已恢复并重拉主要响应进行逐值核对及真实hash/时间记录；厂商403和Vals精确pin仍未解决。许可、人审和未表达条件继续阻止发布。",
+      "searches": [
+        {"tier":1,"url":"https://www.tbench.ai/?version=4","outcome":"成功；HTML内嵌4-0-0完整35行，原始metrics.accuracy未复算。"},
+        {"tier":1,"url":"https://www.tbench.ai/news/terminal-bench-4-0","outcome":"成功；明确harbor run -d terminal-bench/terminal-bench@4.0.0、8小时agent预算、Sonnet未启用128k输出设置。"},
+        {"tier":2,"url":"https://openai.com/index/introducing-gpt-6-1-terra","outcome":"定向补查最新Terra：webfetch及独立fetch均403。搜索摘要提及TB4.0 50.3%，未把摘要当完整实验条件或正式成绩抄入。"},
+        {"tier":3,"url":"https://www.vals.ai/benchmarks/terminal-bench-4","outcome":"成功读取56行及方法；公开JSON给出原始三位小数accuracy。待证实精确4.0.0数据pin，未与官方成绩合并。"},
+        {"tier":3,"url":"https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.BY6uB9ku.json","outcome":"成功；响应hash已记录。metadata.version=4.0，不猜为4.0.0。"},
+        {"tier":3,"url":"https://antigma.ai/eval","outcome":"成功；默认返回TB2.1，页面虽有TB4.0切换但无可核实TB4.0成绩在当前响应中，不抄82.7等2.1分数。"},
+        {"tier":4,"url":"https://www.reddit.com/r/LocalLLaMA/comments/1vjklwo/deepseek_v4_flash_0731_hits_827_on_terminalbench","outcome":"定向搜索Terminal-Bench 4.0 + DeepSeek + 0731返回该帖摘要，明确为2.1，排除。未单独抓取帖全文。"}
+      ]
+    },
+    {
+      "id": "deepswe",
+      "benchmarkIds": ["deepswe-v1.1"],
+      "officialUrls": ["https://deepswe.datacurve.ai/blog/deepswe-v1-1", "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json", "https://github.com/datacurve-ai/deep-swe"],
+      "status": "collected",
+      "notes": "独立核实v1.1隔离提交diff重评，与v1不同。公开官方artifact共70个配置、28个原始model slug；采集60个配置/21个可明确对应冻结模型。原始pass_at_1为0至1 fraction，未乘100、未按UI Best过滤，也未丢弃隐藏低分模型。排除gpt-5-5四配置、gpt-5-4、muse-spark-1-1、claude-sonnet-4-6、gemini-3-1-pro-preview（不在冻结名单）；另deepseek-v4-pro和deepseek-v4-flash原始slug没有0813/0731证据，不能挪用Science的专用release链接跨源确认，故未关联两条。Opus4.8 max仅111个任务有attempts，保留子集差异。Fable五档均记录接入暂停造成未完成trial条件。官方缺项定向搜索了DeepSeek、Mistral、NVIDIA、MiniMax、Kimi最新发布线索；并非151模型逐家厂商完整覆盖。LLMLearner公开直读仅loading，厂商链接和第三方聚合仍需后续独立核验，不从搜索摘要造分数。",
+      "searches": [
+        {"tier":1,"url":"https://deepswe.datacurve.ai/blog/deepswe-v1-1","outcome":"成功；正式v1.1、113任务、2026-06-14发布、隔离patch评分及Fable接入暂停说明。"},
+        {"tier":1,"url":"https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json","outcome":"成功；70配置全部检查，60配置录入；直接保留pass_at_1与n_attempted/n_tasks_attempted/n_runs。"},
+        {"tier":1,"url":"https://deepswe.datacurve.ai/artifacts/v1.1/trials.json","outcome":"成功；仅检查model/provider/source/config身份元数据，不复制31617条rollout或数据集。OpenAI/Vertex/OpenRouter等是transport/provider，不冒充模型开发商。"},
+        {"tier":1,"url":"https://deepswe.datacurve.ai/run","outcome":"成功；官方明确所有榜单成绩均为Pier + mini-swe-agent + Modal，并给出anthropic/claude-opus-4-8命令。"},
+        {"tier":2,"url":"https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813","outcome":"定向搜索DeepSWE v1.1 + DeepSeek + 0813返回官方模型卡摘要，含DeepSWE 62.7，但摘要未证明benchmark为v1.1且不能绑定Datacurve通用slug，未采集该值。未抓取模型卡全文。"},
+        {"tier":2,"url":"https://openai.com/index/introducing-gpt-6-1-sol/","outcome":"定向补查新Sol官方发布页；webfetch与fetch均403，未采集其中图表。"},
+        {"tier":3,"url":"https://llmlearner.com/rankings/deepswe","outcome":"定向搜索DeepSWE v1.1 + mistral/nemotron/MiniMax/kimi-k2.7返回该页厂商链接线索；公开直读仅Loading，无法独立核对新增发布实验。"},
+        {"tier":3,"url":"https://codingfleet.com/blog/deepswe-v11-leaderboard-2026","outcome":"上述定向搜索返回46模型聚合摘要，包括厂商自报和官方混合数值；未获取逐结果原始出处条件，未批量转抄。"},
+        {"tier":3,"url":"https://www.together.ai/blog/deepseek-v4-pro-0813-vs-gpt-5-6-sol-on-deepswe-cost-coding-and-routing","outcome":"定向搜索返回routing/fallback分析摘要；未独立获取完整版本/配置和数据来源，系统组合未关联任何单模型。"}
+      ]
+    },
+    {
+      "id": "swe-bench-pro",
+      "benchmarkIds": ["swe-bench-pro-v2"],
+      "officialUrls": ["https://labs.scale.com/leaderboard/swe_bench_pro", "https://github.com/scaleapi/SWE-bench_Pro-os/blob/main/v2/README.md", "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2", "https://labs.scale.com/blog/swe-bench-pro-v2"],
+      "status": "collected",
+      "notes": "入口旧榜仍为731题，独立读取v2 README后找到新public_v2端点。新页SSR默认显示HARD（98/92.2等），但RSC tabs[key=full]含16条642-task public结果，全部单独采集。另保留Reflection官方研究3模型×3agent的9条独立配置，不按最大值合并。Kimi mini官方主榜97.7与研究图97.5矛盾，分别保留并放入unrepresentedConditions。Gemini/Meta新增row version含openai relay前缀，来源company也写openai；不据此误认模型公司，明确底层slug。部分旧主榜模型version字段空，但原始模型标签明确了版本与company，不猜额外日期快照。V2页面中仍留有v1 731题/250turn旧文案；定义与执行条件以独立v2 README为依据并阻止批准。所有HARD/private和oracle/nop gate分数排除。未声称主榜外模型无成绩。",
+      "searches": [
+        {"tier":1,"url":"https://labs.scale.com/leaderboard/swe_bench_pro","outcome":"成功读到旧731-task榜；不作为V2成绩来源。Python直连403但webfetch公开成功，无登录。"},
+        {"tier":1,"url":"https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/main/v2/README.md","outcome":"成功；明确642公共任务、HARD-51独立、v1=731、50分钟、锁网和pristine patch重评分。"},
+        {"tier":1,"url":"https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/main/README.md","outcome":"成功；确认9/22 V2发布并保留legacy v1 pipeline，不混用。"},
+        {"tier":1,"url":"https://labs.scale.com/leaderboard/swe_bench_pro_public_v2","outcome":"成功；Code Mode公开fetch取得RSC，分离Full/HARD两tab，全部16 Full条目已录入。"},
+        {"tier":1,"url":"https://labs.scale.com/blog/swe-bench-pro-v2","outcome":"成功；提取Section4 Pass@1图的公开dataJson，9组model+agent配置，其他效率图不冒充成绩。"},
+        {"tier":1,"url":"https://scaleapi.github.io/SWE-bench_Pro-os/","outcome":"成功；页注明730 problems及旧模型，排除为V2来源。"},
+        {"tier":3,"url":"https://llmlearner.com/rankings/swe-bench-pro-v2","outcome":"定向搜索SWE-bench Pro V2 + 642 + leaderboard命中10模型快照摘要；优先使用成功获取的官方16行，不复制第三方旧快照或best-score排名。未单独抓取该页。"}
+      ]
+    },
+    {
+      "id": "terminal-bench-science",
+      "benchmarkIds": ["terminal-bench-science-v0.1"],
+      "officialUrls": ["https://www.terminal-bench-science.ai/", "https://github.com/harbor-framework/terminal-bench-science/releases/tag/v0.1.0", "https://www.terminal-bench-science.ai/api/leaderboard?package=terminal-bench-science%2Fterminal-bench-science&name=v0-1-eval"],
+      "status": "collected",
+      "notes": "精确release v0.1.0、commit f81afac4f11048e77a15dfc8fb1dbfb897fea0ce、70任务独立核实。页面数字动画让markdown显示0.9876543210，并非真正版本，未照抄；JS明确leaderboard=v0-1-eval，API dataset_version_ids=[2b817f26-dc4f-4477-8032-2218dcc553b5]，task_matrix有70任务。全部17官方整体row均匹配冻结模型，原始百分数保留。另从Vals明确写upstream v0.1.0的独立JSON采集39条：包含官方缺项及同模型不同agent/执行协议，不取最高分。先采19条exact source dictionary key=canonical frozen key的缺项，后补20条，包括对grok/zai/kimi namespace及Meta下划线slug逐一记录明确版本和公司证据；未做名称近似或日期快照猜测。Vals单次评测且infra/provider错误重试，与官方三次trial不能当等价。剩余4个原始key排除：gemini-3.1-pro-preview不在冻结名单；reflection/Beam-1.0缺501B-A23B身份；meta/muse-wonder裸名缺1.0/Full身份；meta/muse_spark_1_3_max未证明只是同1.3的effort配置而非独立版本。未采集官方domain分项、费用或token效率指标，也不声称第三方结果已穷尽。",
+      "searches": [
+        {"tier":1,"url":"https://www.terminal-bench-science.ai/","outcome":"成功；SSR仅空榜，后续读取公开client chunk确定实际API参数。"},
+        {"tier":1,"url":"https://www.terminal-bench-science.ai/api/leaderboard?package=terminal-bench-science%2Fterminal-bench-science&name=v0-1-eval","outcome":"成功；17行、210 trials/row、70任务matrix；原始metrics.accuracy全部保留。"},
+        {"tier":1,"url":"https://github.com/harbor-framework/terminal-bench-science/releases/tag/v0.1.0","outcome":"成功；精确v0.1.0及70任务，version DOI 22110254，不把main当前72任务当0.1.0。"},
+        {"tier":1,"url":"https://hub.harborframework.com/datasets/terminal-bench-science/terminal-bench-science/0.1.0","outcome":"公开HTML仅Loading；不从此空壳捏造成绩。"},
+        {"tier":2,"url":"https://openai.com/index/introducing-gpt-6-1-terra","outcome":"定向搜索Terminal-Bench-Science 0.1 + gpt-6.1获得官方发布页线索；直读403，图表分数/effort未核实，未录入。"},
+        {"tier":3,"url":"https://www.vals.ai/benchmarks/terminal-bench-science","outcome":"成功；明言all70 tasks upstream v0.1.0，逐row harness和single-run/provider-error retry方法已读。"},
+        {"tier":3,"url":"https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.3WIeBdiC.json","outcome":"成功；43原始model keys，39个明确匹配冻结模型的成绩采集，4个排除理由见notes；保留已覆盖模型不同agent/协议，raw accuracy三位小数未复算。"},
+        {"tier":3,"url":"https://llm-stats.com/benchmarks/terminal-bench-science-0.1","outcome":"定向搜索返回聚合摘要，来源/agent混合；已有更直接的官方和Vals结果，未用摘要代替实验记录。未单独抓取该页。"}
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id":"coding-e-tb-table","sourceId":"coding-harbor","url":"https://www.tbench.ai/?version=4","retrievedAt":"2026-10-28T12:31:21.808400Z","responseSha256":"c387515d824e03e933fb9993facd206fc7eb8fe74ea8fd2214d40510bcae561b","locator":"HTML script self.__next_f.push -> RSC state.queries[queryKey=[leaderboard,terminal-bench/terminal-bench,4-0-0]].state.data; rows by UUID in every result","excerpt":"name: 4-0-0; title: Terminal-Bench 4.0; metrics.accuracy: 64.85; model_display.label: Opus 5.5; agent_display.label: Claude Code; reasoning_effort: max","notes":"真实HTTP响应bytes SHA-256及此次重拉完成UTC时间，非markdown摘要hash。35条原始accuracy逐值机器校验通过；没有保存完整网页到仓库。"
+    },
+    {
+      "id":"coding-e-tb-version","sourceId":"coding-harbor","url":"https://www.tbench.ai/news/terminal-bench-4-0","retrievedAt":"2026-10-28T12:31:20.099676Z","responseSha256":"5bb66a421a314d126b2adc0a9c71bd1f7873be1061613b19a8ed21e2fe84b3c1","locator":"Current results; Calibrating resources; Sonnet paragraph","excerpt":"harbor run -d terminal-bench/terminal-bench@4.0.0; All tasks in TB 4.0 are now set to a flat agent timeout of 8 hours.","notes":"真实原始响应hash及重拉完成时间。Sonnet原文另明确未启用128k max-output设置，已进入结果条件。"
+    },
+    {
+      "id":"coding-e-deep-table","sourceId":"coding-deepswe","url":"https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json","retrievedAt":"2026-10-28T12:30:46.260248Z","responseSha256":"a7c15d66288fd249c020b9931c017b92d1a3b90e480b3ff34974b752bd030019","locator":"top-level scope/unit/generated_at/n_tasks_in_set; rows[config=...] as cited per result","excerpt":"pass@1 is attempt pass rate over scored rollout attempts. Context-window failures and agent timeouts are scored failures; provider/verifier/network errors are excluded.","notes":"真实原始响应hash及重拉完成时间。70配置全部审阅，60配置逐值与pass_at_1机器核对。generated_at=2026-09-22T06:27:15.860279+00:00，不冒充evaluatedAt。"
+    },
+    {
+      "id":"coding-e-deep-identity","sourceId":"coding-deepswe","url":"https://deepswe.datacurve.ai/artifacts/v1.1/trials.json","retrievedAt":"2026-10-28T12:31:29.428490Z","responseSha256":"310cb428fe8914cff21b8edcb0b17256884efca55666bd6d6646d223c77d2ce6","locator":"rows filtered source=deep-swe, unique(model,provider,config); e.g. rows[trial_name=abs-module-cache-flags__26RXreW]","excerpt":"model: gpt-6-astra; provider: openai; harness: mini-swe-agent; config: mini_swe_agent_gpt_6_astra_max; metrics_source: verified_openai_handoff","notes":"真实原始响应hash及重拉完成时间；仅核实身份元数据，未保存rollout数据。slug deepseek-v4-pro/flash未含快照后缀，不能由公司或发布时间推成0813/0731。"
+    },
+    {
+      "id":"coding-e-deep-definition","sourceId":"coding-deepswe","url":"https://deepswe.datacurve.ai/blog/deepswe-v1-1","retrievedAt":"2026-10-28T12:31:20.990047Z","responseSha256":"afb33e183fb058d75abbcd6c3278f4f514e7f36cce9bf7dbf03228242a7a83e1","locator":"Introduction; What changed; note below leaderboard","excerpt":"DeepSWE v1.1 keeps the same long-horizon engineering tasks as v1, but updates how agents are executed and scored by grading their committed code in a clean, isolated environment.","notes":"另独立读到73/2260 Fable trials因access suspension未完成，只有completed trials计分。真实HTML响应hash及重拉完成时间。"
+    },
+    {
+      "id":"coding-e-deep-harness","sourceId":"coding-deepswe","url":"https://deepswe.datacurve.ai/run","retrievedAt":"2026-10-28T12:31:20.870576Z","responseSha256":"8ae681020a7c3fd12dba3dc89dd9d65a4e97753891a9c6998032f8c1b027f160","locator":"What is Pier; Quickstart command","excerpt":"All leaderboard scores were produced with Pier running mini-swe-agent on Modal. --model anthropic/claude-opus-4-8","notes":"实读官方方法，不把示例注释的via Claude Code当实际agent。真实原始响应hash及重拉完成时间。"
+    },
+    {
+      "id":"coding-e-pro-full","sourceId":"coding-pro","url":"https://labs.scale.com/leaderboard/swe_bench_pro_public_v2","retrievedAt":"2026-10-28T12:31:56.470902Z","responseSha256":"745988d82e825f8da34d9c13e1ed4a3487eecc63db5ee7909bf30322968af3a3","locator":"HTML RSC decoded JSON object {key:full,label:SWE-Bench Pro V2 Full,entries:[...]}; separate object key=hard excluded","excerpt":"Full: Opus 5 (Claude Code) xhigh 99.4; Kimi-K3 (mini-swe-agent) max 97.7; GPT-6.1-Sol version=gpt-6.1-sol 96.11; Haiku 5.5 version=claude-haiku-5-5 87.23","notes":"公开200原始HTML响应真实hash及抓取完成UTC时间。全部16行与该响应逐值机器核对通过，HARD的98/92.2等未混入。仅留必要摘录，不保存完整受限网页。"
+    },
+    {
+      "id":"coding-e-pro-definition","sourceId":"coding-pro","url":"https://raw.githubusercontent.com/scaleapi/SWE-bench_Pro-os/main/v2/README.md","retrievedAt":"2026-10-28T12:31:21.706551Z","responseSha256":"dde4168fed17ca1ea00b26a93aca78dad43c7b3f981b93a2872428259428231f","locator":"README line 3 (validated split); The locked protocol items 1-3; The v1 pipeline","excerpt":"V2 is the validated public split of SWE-bench Pro: 642 tasks across 11 repositories. 50-minute budget per task. Report the re-graded number; publish both.","notes":"真实raw响应hash及重拉完成时间；行3定义和标题锚点可追溯。无v1分数、HARD或private成绩。"
+    },
+    {
+      "id":"coding-e-pro-harness-study","sourceId":"coding-pro-study","url":"https://labs.scale.com/blog/swe-bench-pro-v2","retrievedAt":"2026-10-28T12:31:57.590877Z","responseSha256":"e3aa8d665aeeb2f910ec0f636db05683266f7b05ac20ef0f7a3348b8a43b9b45","locator":"Section 4 How do modern LLM harnesses affect model behavior?; chart caption Pass@1 rate; RSC dataJson with label mini-swe-agent/Pi/OpenCode and series GLM-5.3 (max)/Kimi K3 (max)/Inkling (xhigh)","excerpt":"mini-swe-agent: 95.6 / 97.5 / 89.9; Pi: 96.6 / 96 / 84.1; OpenCode: 96.4 / 97.7 / 91.6","notes":"公开200原始HTML真实hash及完成时间；9值逐一与该响应chart dataJson机器核对通过。均为642任务public同锁定预算。mini保留30s bash timeout；无meaningful turn/token limits。主榜不同值分开存，不校正、不取最高。"
+    },
+    {
+      "id":"coding-e-science-table","sourceId":"coding-harbor","url":"https://www.terminal-bench-science.ai/api/leaderboard?package=terminal-bench-science%2Fterminal-bench-science&name=v0-1-eval","retrievedAt":"2026-10-28T12:30:47.146214Z","responseSha256":"86e6278ca64da88b69c1efd6059a33248bd300f27673098f60184286b470c4a7","locator":"leaderboard.name/description/dataset_version_ids; rows[id=...] per result; task_matrix.tasks","excerpt":"name: v0-1-eval; description: Evaluation results for Terminal-Bench-Science 0.1 with 3 trials per task; GPT-6 Astra / Codex / max / accuracy 68.0952380952381","notes":"原始响应真实hash及完成时间；17行全部与该次响应逐值机器核对通过，域分项未重复入库。DeepSeek Pro行专用news260813链接及2026-08-13 release date支持0813映射，不推广到其他来源generic slug。"
+    },
+    {
+      "id":"coding-e-science-release","sourceId":"coding-harbor","url":"https://github.com/harbor-framework/terminal-bench-science/releases/tag/v0.1.0","retrievedAt":"2026-10-28T12:31:20.871867Z","responseSha256":"8eff4b467be6dd49310d9d1d07558847008a23d952cd69bbded37b1d62c6be0d","locator":"Release title Terminal-Bench-Science v0.1.0; commit f81afac4f11048e77a15dfc8fb1dbfb897fea0ce; first paragraph; Tasks (70)","excerpt":"Initial release containing 70 expert-curated research workflow tasks across the life, physical, earth, mathematical, and engineering sciences. DOI: 10.5281/zenodo.22110254","notes":"真实原始响应hash及重拉完成时间；main README当前72任务与此不同，不代替版本定义。只留短摘录，未复制任务内容。"
+    },
+    {
+      "id":"coding-e-vals-science-values","sourceId":"coding-vals-science","url":"https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.3WIeBdiC.json","retrievedAt":"2026-10-28T12:30:47.061975Z","responseSha256":"ce88b9f5f17902678b92ecec0dae7b011a2f5a75c6e879a3184f26abb272cd84","locator":"metadata; tasks.overall[exact model key].accuracy, .harness, .reasoning_effort and .compute_effort","excerpt":"openai/gpt-6.1-sol: accuracy 52.857, harness Mini-SWE-agent; tencent/hy4-preview: accuracy 1.429, harness Terminus 2; alibaba/qwen3.8-27b: accuracy 0.0","notes":"真实响应bytes hash及完成时间；39条全部与该次响应逐值机器核对通过，包括19条首批exact规范key缺项及20条后补明确版本/不同agent结果。namespace/slug差异逐mapping显式说明，不批量近似匹配。没有把explicit零当缺失，也未推算费用。已逐条保留来源原始维度：25条非null reasoning_effort写入reasoningEffort，来源为null的保持null；8条非null compute_effort分别写入unrepresentedConditions，不混同于reasoning_effort。所有候选仍为pending，许可和人工审核待完成。"
+    },
+    {
+      "id":"coding-e-vals-science-method","sourceId":"coding-vals-science","url":"https://www.vals.ai/benchmarks/terminal-bench-science","retrievedAt":"2026-10-28T12:31:21.192021Z","responseSha256":"6ef39ee2144cff446ca2c346787920dbe79a9d37a177a6ff6d6b754cd2227458","locator":"Background paragraph 1; Methodology paragraphs 1-3; Notes on difficulty","excerpt":"We score all 70 tasks from upstream v0.1.0. All results are pass@1 from a single run per model. Where a task ended in an infrastructure or provider error rather than a graded result, we re-attempted it.","notes":"harness逐row保持，Terminus 2不替换成metadata默认mini。错误重试和8小时预算均进入unrepresentedConditions阻止批准。真实原始HTMLhash及重拉完成时间。"
+    }
+  ],
+  "systemOnly": [
+    {"id":"coding-routing-lead","url":"https://www.together.ai/blog/deepseek-v4-pro-0813-vs-gpt-5-6-sol-on-deepswe-cost-coding-and-routing","benchmarkIds":["deepswe-v1.1"],"sourceModelName":"DeepSeek V4 Pro 0813 + GPT-5.6 Sol routing/fallback discussion","score":null,"reason":"仅定向搜索线索，摘要讨论Pro先行和Sol组合，尚未独立证明benchmark版本和实际路由实验条件；不收联合覆盖率为单模型成绩，也不创建任何单模型映射。"},
+    {"id":"coding-fallback-label-scope","url":"https://openai.com/index/introducing-gpt-6-sol-and-luna","benchmarkIds":[],"sourceModelName":"Claude Fable 5.1 w/ Opus 5 Fallback","score":null,"reason":"搜索结果出现该标签，但明确在AutomationBench上下文，不足以声称本组四项评测使用fallback。发布页未独立读取成功；仅记录调查线索，未关联Fable或Opus单模型。官方TB/Science/Pro原始行本身没有fallback字段，不借其他benchmark外推。"},
+    {"id":"coding-anthropic-science-safeguards-lead","url":"https://www.anthropic.com/claude-opus-5-5","benchmarkIds":["terminal-bench-science-v0.1"],"sourceModelName":"Claude Opus 5.5 / Opus 5 (Anthropic independent benchmark table)","score":null,"retrievedAt":"2026-10-28","locator":"Performance and cost-effectiveness: Agentic scientific research Terminal-Bench-Science 0.1 table row, following safeguards paragraph and footnote 3","reason":"Anthropic独立实验表报Opus 5.5 58.7%、Opus 5 29.0%；官方榜对应Claude Code max行分别为63.33333333333333%和30%（coding-sc02、coding-sc04），不是同一结果；原文脚注称官方榜Opus 5为30.0%、3 trials/task、Claude Code，实验复现29.0%。页面同时称Opus 5.5启用生产安全措施，干预时网络安全任务由Opus 4.8完成，生物及前沿LLM开发任务由Opus 5完成；但未证明这些接手具体发生在此Science评测中。是否涉及多模型及逐任务条件待核，作为系统级线索不归属单模型；来源再分发授权待审，未批准。"}
+  ]
+}

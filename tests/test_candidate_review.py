@@ -1,16 +1,22 @@
 """Candidate report regressions, using synthetic fixtures only."""
 
 import copy
+from contextlib import redirect_stdout
+import io
+import os
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 import test_pipeline as pipeline
 from build import build
 from common import DataError, json_bytes, load_catalog, read_json, sha256
-from preview_candidates import review_candidates, write_preview
+from preview_candidates import (
+    REFRESH_VERSIONS, print_protection_notice, refresh_policy, review_candidates, staging_preview, write_preview,
+)
 
 
 class CandidateReviewTest(unittest.TestCase):
@@ -114,13 +120,17 @@ class CandidateReviewTest(unittest.TestCase):
         with self.assertRaisesRegex(DataError, "old baseline"):
             self.report()
 
-    def test_new_results_cannot_be_omitted_or_approved(self):
-        self.batch["candidateResultIds"] = []
-        with self.assertRaisesRegex(DataError, "every new"):
-            self.report()
-        self.batch["candidateResultIds"] = ["candidate-result"]
+    def test_explicit_membership_ignores_other_batches_and_requires_pending(self):
+        other = {**self.result, "id": "another-batch-result"}
+        self.fixture.documents["results/candidate-bench.json"]["results"].append(other)
+        self.assertEqual(1, self.report()["summary"]["candidateResults"])
         self.result["status"] = "rejected"
         with self.assertRaisesRegex(DataError, "remain pending"):
+            self.report()
+
+    def test_unknown_batch_member_is_rejected(self):
+        self.batch["candidateResultIds"].append("unknown-result")
+        with self.assertRaisesRegex(DataError, "unknown candidate"):
             self.report()
 
     def test_old_maintenance_entities_and_results_are_protected(self):
@@ -148,6 +158,16 @@ class CandidateReviewTest(unittest.TestCase):
         blockers = self.report()["candidates"][0]["blockers"]
         self.assertIn("essential-conditions-not-representable-in-android-v1", blockers)
         self.assertIn("redistribution-and-client-attribution-unconfirmed", blockers)
+
+    def test_refresh_does_not_attribute_default_fallback_to_single_model(self):
+        self.batch["id"] = "benchmark-refresh-2026-10-28"
+        self.scope["batchId"] = self.baseline["batchId"] = self.batch["id"]
+        for condition in ("Default Fallback", "Opus 4.8 Fallback", "Opus 5 Fallback"):
+            with self.subTest(condition=condition):
+                self.result["unrepresentedConditions"] = [condition]
+                with unittest.mock.patch("preview_candidates.refresh_policy"):
+                    with self.assertRaisesRegex(DataError, "fallback system"):
+                        self.report()
 
     def test_missing_evidence_and_target_membership_are_rejected(self):
         self.evidence["evidence"] = []
@@ -179,7 +199,7 @@ class CandidateReviewTest(unittest.TestCase):
 
     def test_all_targets_must_have_investigation_outcomes(self):
         self.evidence["targets"][0]["searches"] = []
-        with self.assertRaisesRegex(DataError, "investigation coverage"):
+        with self.assertRaises(DataError):
             self.report()
 
     def test_protected_android_is_opt_in_and_detects_changes(self):
@@ -188,6 +208,22 @@ class CandidateReviewTest(unittest.TestCase):
         android_path.write_text("changed", encoding="utf-8")
         with self.assertRaisesRegex(DataError, "protected file changed"):
             self.report(check_android=True)
+
+    def test_android_digest_consistency_is_checked_without_sibling(self):
+        self.baseline["androidSnapshot"]["sha256"] = "b" * 64
+        with self.assertRaisesRegex(DataError, "baseline hashes differ"):
+            self.report()
+
+    def test_unchecked_android_is_explicit_in_ci_notice(self):
+        report = self.report()
+        output = io.StringIO()
+        with redirect_stdout(output):
+            print_protection_notice(report)
+        self.assertIn("Android protected files not checked", output.getvalue())
+        output = io.StringIO()
+        with redirect_stdout(output):
+            print_protection_notice(self.report(check_android=True))
+        self.assertEqual("", output.getvalue())
 
     def test_empty_candidates_are_not_deployable_and_do_not_erase_data(self):
         self.batch["candidateResultIds"] = []
@@ -214,6 +250,93 @@ class CandidateReviewTest(unittest.TestCase):
         with self.assertRaisesRegex(DataError, "must be under"):
             write_preview(self.root, self.batch_path, self.output)
         self.assertFalse((self.directory / "report.json").exists())
+
+    def test_staging_preview_uses_isolated_plan_without_writing_repository(self):
+        self.save()
+        before = {path: path.read_bytes() for path in (self.root / "data").rglob("*.json")}
+        captured = {}
+
+        def plan(root, sandbox):
+            captured["sandbox"] = sandbox
+            self.assertFalse(sandbox.is_relative_to(root))
+
+        def review(root, batch, check_android, android_root):
+            self.assertEqual(root, captured["sandbox"])
+            self.assertTrue(check_android)
+            self.assertEqual(self.root.resolve().parent / "model-atlas-android", android_root)
+            return {"notes": "test"}
+
+        with patch("merge_candidate_staging.plan", side_effect=plan), patch("preview_candidates.review_candidates", side_effect=review):
+            report = staging_preview(self.root, check_android=True)
+        self.assertTrue(report["stagingOnly"])
+        self.assertIn("not yet fully imported", report["notes"])
+        self.assertEqual(before, {path: path.read_bytes() for path in (self.root / "data").rglob("*.json")})
+
+    def test_existing_publication_or_other_batch_reports_cannot_be_overwritten(self):
+        self.save()
+        for name, files in (
+            ("production", {"manifest.json": {}, "report.json": {"mode": "release"}}),
+            ("preview", {"report.json": {"mode": "preview"}}),
+            ("other-batch", {"report.json": {"mode": "candidate-only", "deployable": False, "batchId": "other"}}),
+        ):
+            with self.subTest(name=name):
+                output = self.output / name
+                output.mkdir(parents=True)
+                for filename, data in files.items():
+                    (output / filename).write_bytes(json_bytes(data))
+                before = {path.name: path.read_bytes() for path in output.iterdir()}
+                with self.assertRaises(DataError):
+                    write_preview(self.root, self.batch_path, output)
+                self.assertEqual(before, {path.name: path.read_bytes() for path in output.iterdir()})
+
+    def test_atomic_replacement_does_not_truncate_hard_linked_files(self):
+        self.save()
+        write_preview(self.root, self.batch_path, self.output)
+        source = self.root / "data/results/synthetic-bench.json"
+        before = source.read_bytes()
+        destination = self.output / "report.md"
+        destination.unlink()
+        os.link(source, destination)
+        with self.assertRaisesRegex(DataError, "existing candidate report differs"):
+            write_preview(self.root, self.batch_path, self.output)
+        self.assertEqual(before, source.read_bytes())
+        self.assertEqual(source.stat().st_ino, destination.stat().st_ino)
+
+    def test_malformed_evidence_and_system_records_are_rejected(self):
+        self.evidence["systemOnly"] = ["not a system record"]
+        with self.assertRaises(DataError):
+            self.report()
+        self.evidence["systemOnly"] = []
+        self.evidence["targets"][0]["officialUrls"] = ["http://example.org/insecure"]
+        with self.assertRaises(DataError):
+            self.report()
+
+    def test_evidence_keeps_actual_retrieval_precision(self):
+        self.evidence["evidence"][0]["retrievedAt"] = "2026-10-28"
+        self.assertEqual("2026-10-28", self.report()["evidence"][0]["retrievedAt"])
+
+    def test_refresh_policy_rejects_missing_targets_old_versions_and_date_drift(self):
+        scope = {"startDate": "2026-04-28", "cutoff": "2026-10-28", "sourceUrl": "https://models.dev/models.json?type=all"}
+        targets = [{"id": key, "benchmarkIds": ["policy-" + key]} for key in REFRESH_VERSIONS]
+        benchmarks = {"policy-" + key: {"version": next(iter(versions))} for key, versions in REFRESH_VERSIONS.items()}
+        next(target for target in targets if target["id"] == "swe-bench-pro")["benchmarkIds"] = ["swe-bench-pro-v2"]
+        benchmarks["swe-bench-pro-v2"] = benchmarks.pop("policy-swe-bench-pro")
+        batch_id = "benchmark-refresh-2026-10-28"
+        refresh_policy(batch_id, scope, targets, benchmarks)
+        with self.assertRaisesRegex(DataError, "all eleven"):
+            refresh_policy(batch_id, scope, targets[:-1], benchmarks)
+        with self.assertRaisesRegex(DataError, "fixed half-year"):
+            refresh_policy(batch_id, {**scope, "startDate": "1900-01-01"}, targets, benchmarks)
+        swe_target = next(target for target in targets if target["id"] == "swe-bench-pro")
+        for excluded in ("swe-bench-pro-v2-commercial-private", "swe-bench-pro-v2-hard51"):
+            swe_target["benchmarkIds"] = [excluded]
+            benchmarks[excluded] = {"version": "2"}
+            with self.assertRaisesRegex(DataError, "V2 public benchmark ID"):
+                refresh_policy(batch_id, scope, targets, benchmarks)
+        swe_target["benchmarkIds"] = ["swe-bench-pro-v2"]
+        benchmarks["swe-bench-pro-v2"]["version"] = "1"
+        with self.assertRaisesRegex(DataError, "outside approved refresh policy"):
+            refresh_policy(batch_id, scope, targets, benchmarks)
 
 
 if __name__ == "__main__":

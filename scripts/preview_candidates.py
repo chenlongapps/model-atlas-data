@@ -6,13 +6,49 @@ import argparse
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
+import os
 import re
 import sys
+import tempfile
 
 from common import (
-    DataError, ROOT, check_urls, json_bytes, load_catalog, read_json, require,
+    DataError, ROOT, check_urls, https_url, json_bytes, load_catalog, read_json, require,
     sha256, unique_index, validate_schema, validate_snapshot,
 )
+
+
+REFRESH_VERSIONS = {
+    "aa-intelligence-index": {"5.0"}, "vals-index": {"2.2"},
+    "terminal-bench": {"4.0", "4.0.0"}, "deepswe": {"1.1"},
+    "swe-bench-pro": {"2", "2.0", "V2 public"}, "osworld": {"2.1"},
+    "automationbench": {"1.0.6"}, "hle": {"original-2025-04-03", "2025-04-03", "original-2025-05"},
+    "gdpval-aa": {"2.1"}, "chartography": {None},
+    "terminal-bench-science": {"0.1", "0.1.0"},
+}
+
+
+def refresh_policy(batch_id: str, scope: dict, targets: list[dict], benchmarks: dict) -> None:
+    """Freeze the user-approved policy for this batch, not for unrelated future reviews."""
+    if batch_id != "benchmark-refresh-2026-10-28":
+        return
+    require((scope["startDate"], scope["cutoff"]) == ("2026-04-28", "2026-10-28"),
+            "refresh requires the approved fixed half-year window")
+    require(scope["sourceUrl"] == "https://models.dev/models.json?type=all", "unexpected model scope source")
+    require({target["id"] for target in targets} == set(REFRESH_VERSIONS),
+            "refresh requires all eleven approved targets")
+    for target in targets:
+        for benchmark_id in target["benchmarkIds"]:
+            benchmark = benchmarks[benchmark_id]
+            if target["id"] == "swe-bench-pro":
+                require(benchmark_id == "swe-bench-pro-v2", "SWE-bench Pro refresh allows only the explicit V2 public benchmark ID")
+            value = benchmark["version"]
+            normalized = value[1:] if isinstance(value, str) and value.startswith("v") else value
+            allowed = normalized in REFRESH_VERSIONS[target["id"]]
+            if target["id"] == "chartography" and isinstance(value, str):
+                allowed = re.fullmatch(r"(?:commit[: ]+)?[0-9a-f]{40}", value) is not None
+            require(allowed, f"{benchmark_id}: version outside approved refresh policy: {value}")
+            require(not any(word in benchmark_id.lower() for word in ("diamond", "rolling", "hard-51", "automationbench-aa")),
+                    f"{benchmark_id}: excluded benchmark variant")
 
 
 def attachment(directory: Path, relative: str) -> Path:
@@ -55,7 +91,7 @@ def model_scope(scope: dict, batch_id: str) -> dict:
 
 
 def baseline_check(root: Path, baseline: dict, catalog, batch_id: str,
-                   check_external: bool) -> list[dict]:
+                   check_external: bool, android_root: Path | None = None) -> list[dict]:
     require(type(baseline.get("schemaVersion")) is int and baseline["schemaVersion"] == 1,
             "invalid baseline schemaVersion")
     require(baseline.get("batchId") == batch_id, "baseline belongs to another batch")
@@ -77,13 +113,15 @@ def baseline_check(root: Path, baseline: dict, catalog, batch_id: str,
         require(relative not in seen, f"duplicate protected file: {relative}")
         seen.add(relative)
         require(digest(item.get("sha256")), f"invalid protected digest: {relative}")
+        if relative == android["path"]:
+            require(item["sha256"] == android["sha256"], "Android baseline hashes differ")
         external = relative.startswith("../model-atlas-android/")
         relative_path = Path(relative)
         allowed_parts = relative_path.parts[2:] if external else relative_path.parts
         require(not relative_path.is_absolute() and ".." not in allowed_parts,
                 f"invalid protected path: {relative}")
-        path = root / relative
-        allowed_root = root.parent / "model-atlas-android" if external else root
+        allowed_root = (android_root or root.parent / "model-atlas-android") if external else root
+        path = allowed_root.joinpath(*relative_path.parts[2:]) if external else root / relative
         require(not path.is_symlink() and path.resolve().is_relative_to(allowed_root.resolve()),
                 f"protected path escapes allowed repository: {relative}")
         if external and not check_external:
@@ -92,7 +130,6 @@ def baseline_check(root: Path, baseline: dict, catalog, batch_id: str,
         require(path.is_file(), f"protected file missing: {relative}")
         require(sha256(path.read_bytes()) == item["sha256"], f"protected file changed: {relative}")
         if relative == android["path"]:
-            require(item["sha256"] == android["sha256"], "Android baseline hashes differ")
             live = read_json(path)
             require(live["version"] == android["version"] and live["scores"] == android["scores"],
                     "Android baseline does not match protected snapshot")
@@ -101,16 +138,18 @@ def baseline_check(root: Path, baseline: dict, catalog, batch_id: str,
     return checks
 
 
-def review_candidates(root: Path, batch_path: Path, check_android: bool = False) -> dict:
+def review_candidates(root: Path, batch_path: Path, check_android: bool = False,
+                      android_root: Path | None = None) -> dict:
     try:
-        return _review_candidates(root, batch_path, check_android)
+        return _review_candidates(root, batch_path, check_android, android_root)
     except DataError:
         raise
     except (KeyError, TypeError, ValueError, AttributeError) as error:
         raise DataError(f"invalid review attachment: {error}") from error
 
 
-def _review_candidates(root: Path, batch_path: Path, check_android: bool = False) -> dict:
+def _review_candidates(root: Path, batch_path: Path, check_android: bool = False,
+                       android_root: Path | None = None) -> dict:
     root, batch_path = root.resolve(), batch_path.resolve()
     require(batch_path.is_relative_to(root / "data" / "reviews"), "batch must be under data/reviews/")
     batch = read_json(batch_path)
@@ -120,10 +159,11 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
     models = model_scope(scope, batch["id"])
     baseline = read_json(attachment(directory, batch["baselineFile"]))
     catalog = load_catalog(root)
-    checks = baseline_check(root, baseline, catalog, batch["id"], check_android)
+    checks = baseline_check(root, baseline, catalog, batch["id"], check_android, android_root)
     targets, evidence, systems = [], [], []
     for relative in batch["evidenceFiles"]:
         document = read_json(attachment(directory, relative))
+        validate_schema(document, "candidate-evidence.schema.json", root)
         check_urls(document)
         targets.extend(document["targets"])
         evidence.extend(document["evidence"])
@@ -131,6 +171,7 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
     target_index = unique_index(targets, "review target")
     require(set(target_index) == set(batch["targetIds"]), "target coverage does not match batch")
     unique_index(evidence, "evidence")
+    unique_index(systems, "system-only record")
     benchmark_targets = {}
     evidence_sources = set()
     for entry in evidence:
@@ -145,6 +186,8 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
         require(target["status"] in ("collected", "blocked"), "invalid investigation status")
         require(bool(target["notes"]) and bool(target["officialUrls"]) and bool(target["searches"]),
                 f"{target['id']}: missing investigation coverage")
+        for url in target["officialUrls"]:
+            https_url(url)
         for search in target["searches"]:
             require(type(search["tier"]) is int and search["tier"] in (1, 2, 3, 4), "invalid source priority")
             require(bool(search["url"]) and bool(search["outcome"]), "missing search outcome")
@@ -152,19 +195,26 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
             require(benchmark_id in catalog.benchmarks, f"unknown target benchmark: {benchmark_id}")
             require(benchmark_id not in benchmark_targets, f"benchmark assigned to multiple targets: {benchmark_id}")
             benchmark_targets[benchmark_id] = target["id"]
+    refresh_policy(batch["id"], scope, targets, catalog.benchmarks)
     all_results = unique_index(catalog.results, "result")
     old_ids = {row["id"] for row in baseline["maintenanceResults"]}
     candidate_ids = set(batch["candidateResultIds"])
     require(not old_ids & candidate_ids, "old baseline results cannot be new candidates")
     # Explicit membership avoids silently including the three pending legacy rows.
-    new_ids = set(all_results) - old_ids
-    require(candidate_ids == new_ids, "batch must account for every new maintenance result")
+    require(candidate_ids <= set(all_results), "batch references an unknown candidate result")
     candidates = []
     counts = Counter()
     represented_models = set()
     for result_id in sorted(candidate_ids):
         result = all_results[result_id]
         require(result["status"] == "pending", f"{result_id}: candidate must remain pending")
+        if batch["id"] == "benchmark-refresh-2026-10-28":
+            conditions = [result.get("harness") or "", result.get("reasoningEffort") or "", *result["unrepresentedConditions"]]
+            require(not any(
+                re.search(r"\bdefault[- ]fallbacks?\b", text, re.IGNORECASE)
+                or re.fullmatch(r"\s*opus[- ](?:4\.8|5)\s+fallbacks?\s*", text, re.IGNORECASE)
+                for text in conditions
+            ), f"{result_id}: fallback system must not be attributed to a single model")
         require(result["benchmarkId"] in benchmark_targets, f"{result_id}: outside target benchmark list")
         benchmark = catalog.benchmarks[result["benchmarkId"]]
         source = catalog.sources[result["sourceId"]]
@@ -183,6 +233,9 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
         if result["unrepresentedConditions"]:
             blockers.append("essential-conditions-not-representable-in-android-v1")
         target_id = benchmark_targets[benchmark["id"]]
+        if batch["id"] == "benchmark-refresh-2026-10-28" and target_id == "swe-bench-pro":
+            require(not any(word in (result["subset"] or "").lower() for word in ("private", "commercial", "hard")),
+                    f"{result_id}: SWE-bench Pro subset outside V2 public")
         if model_id:
             represented_models.add(model_id)
             counts[model_id, target_id] += 1
@@ -206,7 +259,8 @@ def _review_candidates(root: Path, batch_path: Path, check_android: bool = False
         "summary": {"scopeModels": len(models), "investigatedTargets": len(coverage),
                     "candidateResults": len(candidates), "modelsWithCandidates": len(represented_models),
                     "unmappedCandidates": sum(row["modelId"] is None for row in candidates),
-                    "systemOnlyRecords": len(systems), "approvedNewResults": 0},
+                    "systemOnlyRecords": len(systems),
+                    "systemOnlyRows": sum(len(item.get("rows", [item])) for item in systems), "approvedNewResults": 0},
         "maintenanceDiff": {"hypothetical": True, "beforeCount": len(old_ids),
                             "afterCandidateCount": len(candidates), "wouldRemove": sorted(old_ids),
                             "wouldAddPending": sorted(candidate_ids)},
@@ -240,11 +294,13 @@ def markdown(report: dict) -> str:
              "## 假设替换影响", "",
              "维护层和 Android 随包为两个不同基线；本报告不是线上站点验收。", "",
              "### 维护层拟移出（当前文件及审核状态均未改动）", ""]
+    if report.get("stagingOnly"):
+        lines.insert(3, "**隔离暂存预览：候选尚未完整写入日常维护文件；本报告不表示维护层已完成导入。**")
     lines.extend(f"- `{result_id}`" for result_id in report["maintenanceDiff"]["wouldRemove"])
     lines.extend(["", f"### Android 随包 v{report['androidDiff']['baselineVersion']} 拟移出（未改 assets／设备）", ""])
     lines.extend(f"- `{result_id}`" for result_id in report["androidDiff"]["wouldRemove"])
     lines.extend(["", "候选拟加入集合见下表及 JSON 的 `candidates`。**并非全部可直接导出 Android**；无发布清单、无目标内容版本。", "",
-                  "## 十一项调查覆盖", "", "| 项目 | 候选成绩 | 已关联模型 | 调查结论 |", "| --- | ---: | ---: | --- |"])
+                  "## 项目调查覆盖", "", "| 项目 | 候选成绩 | 已关联模型 | 调查结论 |", "| --- | ---: | ---: | --- |"])
     for target in report["coverage"]:
         lines.append(f"| {cell(target['id'])} | {target['candidateCount']} | {target['matchedModelCount']} | {cell(target['notes'])} |")
     lines.extend(["", "## 原始候选成绩（全部 pending）", "",
@@ -268,29 +324,76 @@ def markdown(report: dict) -> str:
         for search in target["searches"]:
             lines.append(f"- 来源优先级 {search['tier']}：{search['url']} — {search['outcome']}")
         lines.append("")
-    lines.extend(["## 仅系统级记录", "", "多模型 fallback 不作为单个模型的候选成绩。完整原文依据及原因见 JSON 的 `systemOnly`。", "",
-                  f"本轮记录 {summary['systemOnlyRecords']} 项。", "", "## 保护校验", ""])
+    lines.extend(["## 系统级记录与未核实线索", "", "多模型 fallback 不作为单个模型的候选成绩；此处也可包括身份、版本或原始精度尚未核实的调查线索，不能据此认定均为组合系统。完整依据和排除原因见 JSON 的 `systemOnly`。", "",
+                  f"本轮记录 {summary['systemOnlyRecords']} 组／{summary['systemOnlyRows']} 行记录。", "", "## 保护校验", ""])
     lines.extend(f"- `{entry['path']}`：{entry['status']}" for entry in report["protectedFiles"])
     lines.extend(["", "证据索引、精确模型映射及无法由 Android v1 表达的条件详见 JSON。公开可读不等于获准再分发。", ""])
     return "\n".join(lines)
 
 
-def write_preview(root: Path, batch_path: Path, output: Path, check_android: bool = False) -> dict:
+def write_report(root: Path, output: Path, report: dict) -> dict:
     root = root.resolve()
     output = output.absolute()
     require(not output.is_symlink() and output.resolve().is_relative_to(root / "build"),
             "candidate reports must be under repository build/")
     require(output.resolve() != root / "build", "use a dedicated candidate report directory")
-    report = review_candidates(root, batch_path, check_android)
+    content_by_name = {"report.json": json_bytes(report), "report.md": markdown(report).encode("utf-8")}
+    if output.exists():
+        require(output.is_dir(), "candidate output is not a directory")
+        names = {path.name for path in output.iterdir()}
+        require(names <= {"report.json", "report.md"}, "candidate output contains other artifacts; use a dedicated empty directory")
+        if names:
+            require("report.json" in names, "existing report directory has no candidate identity")
+            previous = read_json(output / "report.json")
+            require(previous.get("mode") == "candidate-only" and previous.get("deployable") is False
+                    and previous.get("batchId") == report["batchId"],
+                    "output belongs to another report mode or candidate batch")
+            for name in names:
+                require((output / name).read_bytes() == content_by_name[name],
+                        f"existing candidate report differs; use a fresh directory: {output / name}")
     # Never write manifest.json, scores-v*.json, release config or source data.
     for name in ("report.json", "report.md"):
         path = output / name
         require(not path.is_symlink() and path.resolve().is_relative_to((root / "build").resolve()),
                 f"report output escapes build/: {path}")
     output.mkdir(parents=True, exist_ok=True)
-    (output / "report.json").write_bytes(json_bytes(report))
-    (output / "report.md").write_text(markdown(report), encoding="utf-8")
+    for name, content in content_by_name.items():
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=output, prefix=".candidate-", delete=False) as stream:
+                temporary = Path(stream.name)
+                stream.write(content)
+            # Replace the directory entry, never truncate a potentially hard-linked inode.
+            os.replace(temporary, output / name)
+        finally:
+            if temporary is not None and temporary.exists():
+                temporary.unlink()
     return report
+
+
+def write_preview(root: Path, batch_path: Path, output: Path, check_android: bool = False) -> dict:
+    return write_report(root, output, review_candidates(root, batch_path, check_android))
+
+
+def staging_preview(root: Path, check_android: bool = False) -> dict:
+    """Validate a temporary hypothetical merge without modifying source files."""
+    from merge_candidate_staging import REVIEW, plan
+
+    root = root.resolve()
+    with tempfile.TemporaryDirectory(prefix="candidate-review-") as directory:
+        sandbox = Path(directory).resolve()
+        require(not sandbox.is_relative_to(root), "temporary directory must be outside repository")
+        plan(root, sandbox)
+        report = review_candidates(sandbox, sandbox / REVIEW / "batch.json", check_android,
+                                   android_root=root.parent / "model-atlas-android")
+    report["stagingOnly"] = True
+    report["notes"] += " Hypothetical staging preview; candidates are not yet fully imported into maintenance documents."
+    return report
+
+
+def print_protection_notice(report: dict) -> None:
+    if any(entry["status"] == "not-checked" for entry in report["protectedFiles"]):
+        print("NOTICE: Android protected files not checked; use --check-android with the sibling checkout")
 
 
 def main() -> int:
@@ -299,10 +402,17 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=ROOT / "build/candidate-review-2026-10-28")
     parser.add_argument("--check-android", action="store_true", help="also verify protected files in sibling Android checkout")
     parser.add_argument("--check", action="store_true", help="validate review only, without writing reports")
+    parser.add_argument("--staging", action="store_true", help="preview hypothetical staging merge in a temporary directory without importing")
     args = parser.parse_args()
     try:
-        report = review_candidates(ROOT, args.batch, args.check_android) if args.check else write_preview(ROOT, args.batch, args.output, args.check_android)
+        if args.staging:
+            report = staging_preview(ROOT, args.check_android)
+            if not args.check:
+                write_report(ROOT, args.output, report)
+        else:
+            report = review_candidates(ROOT, args.batch, args.check_android) if args.check else write_preview(ROOT, args.batch, args.output, args.check_android)
         print(f"OK: candidate-only, {report['summary']['candidateResults']} pending results, no approval/export/deployment")
+        print_protection_notice(report)
         if not args.check:
             print(f"Reports: {args.output / 'report.md'} and report.json")
         return 0
