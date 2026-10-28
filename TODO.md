@@ -78,3 +78,9 @@
 - `build/site-local-v3` 由真实维护数据和 v2 基线生成，仅作本地测试候选；通过导出脚本写入 Android instrumentation assets 的 `benchmark-contract-v3/`。验证随包 v2 → 注入 Python v3 原始 HTTP 响应 → 生产 HTTPS／大小／SHA 校验 → Room 全量替换并清除本地手改条目 → 详情 Flow 更新；不连接真实远程服务器，未发布 v3。主随包及待发布配置仍为 v2。
 - MIT 正文核对一致；上游文件无末尾换行，本地副本仅增加末尾换行，未改许可条文。导出保留本地许可文件的完整字节。
 - 只读运行 `check_remote.py --expected-version 2` 返回 HTTP 404，确认预期地址目前未上线；这是待部署状态，不记为线上验收通过。尚未提交、推送、创建 GitHub Release、部署 Pages 或完成真实 HTTPS 更新；远程 v1 不同步归属旁车，新来源的客户端许可兼容性仍须单独审核。
+
+### 2026-10-28：修复首次 Actions 依赖缓存失败
+
+- 用户提供的 Actions run `40667384443` / job `122745206444` 在 `setup-python` 失败：pip 缓存默认查找 `requirements.txt`／`pyproject.toml`，但仓库仅有 `requirements-dev.txt`。
+- 在 `validate.yml` 与 `publish.yml` 的两个 pip 缓存步骤显式设置 `cache-dependency-path: requirements-dev.txt`；不改变数据或发布门禁。Node.js 20 弃用和 ubuntu-latest 迁移提示不是此次失败原因，未扩大范围升级 Actions。
+- 本地 YAML 解析、两个缓存步骤的依赖路径及文件存在检查、`git diff --check` 通过；仅工作流配置修改，未重复执行数据／Android 测试。尚未提交、推送、重新触发 Actions 或部署；需在包含修复的新提交上运行工作流，重跑旧提交不会加载新配置。
