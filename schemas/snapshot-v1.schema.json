@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Android BenchmarkSnapshot v1 (publication policy)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "version", "scores"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "version": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+    "scores": {
+      "type": "array",
+      "maxItems": 100000,
+      "items": {"$ref": "#/$defs/score"}
+    }
+  },
+  "$defs": {
+    "text": {"type": ["string", "null"], "minLength": 1, "pattern": "\\S"},
+    "score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "modelId", "benchmarkId", "score"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "modelId": {"type": "string", "pattern": "^[^\\s/]+/[^\\s]+$"},
+        "benchmarkId": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+        "score": {"type": "number"},
+        "cost": {"type": ["number", "null"]},
+        "metric": {"$ref": "#/$defs/text"},
+        "unit": {"$ref": "#/$defs/text"},
+        "higherIsBetter": {"type": ["boolean", "null"]},
+        "subset": {"$ref": "#/$defs/text"},
+        "harness": {"$ref": "#/$defs/text"},
+        "reasoningEffort": {"$ref": "#/$defs/text"},
+        "toolsEnabled": {"type": ["boolean", "null"]},
+        "sourceUrl": {"type": ["string", "null"], "format": "uri", "pattern": "^https://"},
+        "sourceType": {"enum": ["benchmark_author", "model_developer", "independent", null]},
+        "evaluatedAt": {"type": ["string", "null"], "format": "date"}
+      }
+    }
+  }
+}

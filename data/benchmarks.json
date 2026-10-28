@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "benchmarks": [
+    {
+      "id": "mmlu-pro",
+      "name": "MMLU-Pro",
+      "version": null,
+      "description": "多领域、以推理为重点的多项选择知识理解评测；不是通用能力总分。当前仅调研官方仓库 Mini-Leaderboard，尚未确认该表对应的数据集修订及完整配置。",
+      "category": "knowledge_reasoning",
+      "officialUrl": "https://github.com/TIGER-AI-Lab/MMLU-Pro",
+      "metric": "Overall Accuracy",
+      "unit": "percent",
+      "higherIsBetter": true,
+      "minimum": 0,
+      "maximum": 100,
+      "status": "pending"
+    },
+    {
+      "id": "mmlu-pro-em",
+      "name": "MMLU-Pro (EM)",
+      "version": null,
+      "description": "DeepSeek-R1 官方评测表中的 MMLU-Pro exact match；与旧 Mini-Leaderboard 的 Overall Accuracy 分开维护，不声称相同测试配置。",
+      "category": "knowledge_reasoning",
+      "officialUrl": "https://github.com/TIGER-AI-Lab/MMLU-Pro",
+      "metric": "EM",
+      "unit": "percent",
+      "higherIsBetter": true,
+      "minimum": 0,
+      "maximum": 100,
+      "status": "approved"
+    },
+    {
+      "id": "math-500",
+      "name": "MATH-500",
+      "version": null,
+      "description": "DeepSeek-R1 官方评测表中的 MATH-500 pass@1，保留原始百分数；不将数据集名称中的 500 当作版本号。",
+      "category": "math",
+      "officialUrl": "https://github.com/openai/prm800k",
+      "metric": "pass@1",
+      "unit": "percent",
+      "higherIsBetter": true,
+      "minimum": 0,
+      "maximum": 100,
+      "status": "approved"
+    }
+  ]
+}

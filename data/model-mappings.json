@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "mappings": [
+    {
+      "id": "mmlu-pro-readme-gpt-4o",
+      "sourceId": "mmlu-pro-readme-f418b116",
+      "sourceModelName": "GPT-4o",
+      "modelId": null,
+      "evidenceUrl": null,
+      "catalogUrl": null,
+      "status": "pending",
+      "notes": "来源未注明精确日期版本，不将名称直接匹配到 openai/gpt-4o 或任一日期快照。需核对原始评测记录与 Models.dev 规范目录。"
+    },
+    {
+      "id": "mmlu-pro-readme-gemini-1-5-pro",
+      "sourceId": "mmlu-pro-readme-f418b116",
+      "sourceModelName": "Gemini-1.5-Pro",
+      "modelId": null,
+      "evidenceUrl": null,
+      "catalogUrl": null,
+      "status": "pending",
+      "notes": "未确认具体 API 版本及当前规范目录关联，不通过相似名称推断。"
+    },
+    {
+      "id": "mmlu-pro-readme-claude-3-opus",
+      "sourceId": "mmlu-pro-readme-f418b116",
+      "sourceModelName": "Claude-3-Opus",
+      "modelId": null,
+      "evidenceUrl": null,
+      "catalogUrl": null,
+      "status": "pending",
+      "notes": "需从原始实验记录确认模型版本，并记录 Models.dev 规范 ID 的对应证据。"
+    },
+    {
+      "id": "deepseek-r1-readme-r1",
+      "sourceId": "deepseek-r1-readme-0cf78561",
+      "sourceModelName": "DeepSeek R1",
+      "modelId": "deepseek/deepseek-r1",
+      "evidenceUrl": "https://github.com/deepseek-ai/DeepSeek-R1/blob/0cf78561f1d51c84a21b2190626b21116d5c68bb/README.md#3-model-downloads",
+      "catalogUrl": "https://models.dev/models.json?type=all",
+      "status": "approved",
+      "notes": "原表第一代 R1；官方 README 和规范目录 weights 均显式链接 https://huggingface.co/deepseek-ai/DeepSeek-R1 。目录 release_date=2025-01-20，与独立的 deepseek-r1-0528 分开。2026-10-28 已核对并经维护者批准。"
+    },
+    {
+      "id": "deepseek-r1-readme-v3",
+      "sourceId": "deepseek-r1-readme-0cf78561",
+      "sourceModelName": "DeepSeek V3",
+      "modelId": "deepseek/deepseek-v3",
+      "evidenceUrl": "https://github.com/deepseek-ai/DeepSeek-V3#3-model-downloads",
+      "catalogUrl": "https://models.dev/models.json?type=all",
+      "status": "approved",
+      "notes": "R1 原表中的初代 V3 Chat，不是 V3-Base、0324 或 V3.1。官方模型下载与目录 weights 均显式链接 https://huggingface.co/deepseek-ai/DeepSeek-V3 ，目录 release_date=2024-12-26。2026-10-28 已核对并经维护者批准。"
+    },
+    {
+      "id": "deepseek-r1-readme-distill-qwen-32b",
+      "sourceId": "deepseek-r1-readme-0cf78561",
+      "sourceModelName": "DeepSeek-R1-Distill-Qwen-32B",
+      "modelId": "deepseek/deepseek-r1-distill-qwen-32b",
+      "evidenceUrl": "https://github.com/deepseek-ai/DeepSeek-R1/blob/0cf78561f1d51c84a21b2190626b21116d5c68bb/README.md#deepseek-r1-distill-models",
+      "catalogUrl": "https://models.dev/models.json?type=all",
+      "status": "approved",
+      "notes": "原表、官方模型下载与目录 weights 均显式对应 https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B ，不映射为 Qwen 基础模型或其他蒸馏规模。2026-10-28 已核对并经维护者批准。"
+    }
+  ]
+}

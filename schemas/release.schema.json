@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "allowRemovals", "reason"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 2, "maximum": 9223372036854775807},
+    "allowRemovals": {"type": "boolean"},
+    "reason": {"type": "string", "minLength": 1, "pattern": "\\S"}
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "mmlu-pro-readme-f418b116",
+      "publisher": "MMLU-Pro authors / TIGER-AI-Lab",
+      "url": "https://github.com/TIGER-AI-Lab/MMLU-Pro/blob/f418b116db00b065c2aea046518d8fcf74d39872/README.md#-mini-leaderboard",
+      "retrievedAt": "2026-10-28",
+      "publishedAt": null,
+      "sourceType": "benchmark_author",
+      "license": {
+        "name": "Apache-2.0 (repository)",
+        "url": "https://github.com/TIGER-AI-Lab/MMLU-Pro/blob/f418b116db00b065c2aea046518d8fcf74d39872/LICENSE",
+        "licenseFile": "third_party/mmlu-pro/APACHE-2.0.txt",
+        "redistribution": "pending",
+        "attribution": "MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark, Wang et al., 2024. https://arxiv.org/abs/2406.01574",
+        "notes": "已查到仓库 Apache-2.0 许可；仅摘录官方 README 的三项事实性成绩，未复制题目、答案或模型输出。摘录和字段重组由 ModelAtlas Data 完成。发布前仍需确认结果再分发适用范围、NOTICE 要求及客户端归属展示。"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "deepseek-r1-readme-0cf78561",
+      "publisher": "DeepSeek-AI",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1/blob/0cf78561f1d51c84a21b2190626b21116d5c68bb/README.md#4-evaluation-results",
+      "retrievedAt": "2026-10-28",
+      "publishedAt": null,
+      "sourceType": "model_developer",
+      "license": {
+        "name": "MIT (repository documentation)",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R1/blob/0cf78561f1d51c84a21b2190626b21116d5c68bb/LICENSE",
+        "licenseFile": "third_party/deepseek-r1/MIT.txt",
+        "redistribution": "allowed",
+        "attribution": "DeepSeek-AI, DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning (2025), https://arxiv.org/abs/2501.12948. Copyright (c) 2023 DeepSeek.",
+        "notes": "仅摘录 MIT 仓库 README 的事实性表值并重组字段，不分发模型权重、题目、答案或模型输出。保留许可和归属；不宣称原始 Benchmark 数据集或 V3 权重采用 MIT。维护者于 2026-10-28 在本次任务中明确批准五条成绩首批试用，未授权上线。"
+      },
+      "status": "approved"
+    }
+  ]
+}

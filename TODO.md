@@ -1,0 +1,80 @@
+# ModelAtlas Data TODO
+
+## 目标与边界
+
+将 Benchmark 数据维护／发布与 Android 应用发版解耦。当前采用人工核实 + JSON + Python 校验／构建 + 静态 HTTPS 分发，不建设运行时后端或通用爬虫平台。
+
+## P0：协议对齐
+
+- [x] 对照 Android 当前 `BenchmarkManifest` / `BenchmarkSnapshot` / 更新逻辑，记录 v1 契约。
+- [x] 修正初始清单和空骨架格式；明确版本 1 不是生产数据、首次远程真实数据需更高版本。
+- [x] 明确全量替换、版本与摘要一致、客户端大小上限和高版本纠错规则。
+- [x] 同步 Android 可选 `cost`：维护／发布 Schema、构建透传及费用语义文档；现有真实成绩不补造费用。
+- [x] 使用 Android 实际解析器消费 Python 生成的原字节清单及快照，并完成隔离 Room 更新验收；不替代真实线上下载验收。
+
+## P1：最小维护工具
+
+- [x] 分离 Benchmark、来源、显式模型映射与成绩维护文件。
+- [x] 建立严格 Schema、重复键／非有限数值检查、引用／范围／审核依赖校验。
+- [x] 确定性全量构建、字节摘要、差异报告、不可变历史与空生产包门禁。
+- [x] 增加校验 CI 配置，不包含部署权限或自动发布。
+- [x] 完成本轮本地测试与命令验证，结果见下方验证记录。
+
+## P2：真实数据试点
+
+- [x] 选定 MMLU-Pro 为维护流程试点，核对官方固定修订 README 与仓库许可。
+- [x] 录入三条官方表值，保留来源定位、采集日期、未知配置与待审核状态。
+- [ ] 核实具体模型快照、Models.dev 规范 ID 及映射证据。
+- [ ] 确认 Benchmark 数据修订、评测配置及 v1 可表达性。
+- [ ] 完成结果再分发、归属、许可／NOTICE 与客户端展示复核。
+- [x] 经维护者明确批准，改用 DeepSeek-R1 固定文档的五条成绩完成首批非空 v2 包；原三条试点未批准，以上三个待核实项仍针对旧试点。
+
+## P3：发布与 Android 闭环
+
+- [x] 准备版本化 GitHub Release 完整候选 archive／来源提交及恢复流程；候选先归档再部署，归档存在不代表上线成功。不依赖被忽略的本地 build 或有过期时间的 Actions artifact。
+- [x] 准备人工触发 Pages Actions，串行发布，只上传生产站点并保留历史快照；尚未在线执行。
+- [ ] 验证实际 HTTPS 地址、200 无重定向、缓存一致性和线上 SHA-256。
+- [x] 在 Android 配置 `benchmark_manifest_url`，从同一生产构建导出真实随包 v2、归属和 MIT 许可，设置页展示首批来源。
+- [x] 更新 Android README / TODO / 数据源与架构中的旧状态。
+- [ ] 完成真实客户端更新、失败保留旧数据、离线及纠错验收。
+- [x] 完成本地跨仓库原字节契约、隔离 Room 更新／事务失败保留／离线重开及相关页面验收；真实 HTTPS 与真机验收不勾选。
+
+## P4：覆盖扩展
+
+- [ ] 按实际查询需求补充其他任务类别的 Benchmark，不把待核实名称直接作为已接入清单。
+- [ ] 数据维护量上升后再添加具体来源导入脚本，仍需人工审核。
+- [ ] 根据实际数据评估 Benchmark 名称／说明协议、关键配置扩展及可比性建模；不预先建设综合排名。
+
+## 项目许可
+
+- [ ] 由维护者确定本项目代码、原创文档及整理成果的许可；第三方材料仍遵守其各自条款，不自动套用项目许可。
+
+## 验证记录
+
+2026-10-28，macOS / Python 3.12.2 / jsonschema 4.26.0：
+
+- `python3 scripts/validate.py` 通过：1 项 Benchmark、3 条待审核成绩、0 条已批准成绩；根目录 v1 骨架摘要匹配。
+- `python3 -m unittest discover -s tests -v`：29 项通过。覆盖协议字段、严格 JSON、版本／摘要、未知值及 false／零值、审核依赖、许可／映射证据、范围、数量／字节限制、不可变历史、幂等构建和删除确认。
+- `python3 scripts/build.py --version 2` 及产物校验通过：预览 v2 为空，明确列出三条被排除的成绩，没有更新根目录或线上清单。
+- `python3 scripts/build.py --version 2 --release` 按预期返回 1：没有已批准成绩，拒绝空生产快照；未创建生产站点。
+- Apache-2.0 副本与固定上游修订 LICENSE 逐字节一致。
+- 本地相对文档链接与新增源码空白检查通过。
+- 尚未执行 GitHub Actions、线上发布、Android Kotlin 解析／数据库或设备验收；没有改动 Android 仓库。
+
+### 2026-10-28：同步可选 cost
+
+- 维护与发布 Schema 接受可选数值／null，构建缺失输出 null，保留零及有限原值；不修改历史快照、清单或三条真实维护成绩，结构版本仍为 1。
+- 全量单元测试 34 项通过，新增覆盖缺失／null／零／有限费用、非法类型与非有限 JSON 拒绝、费用单独变更的差异报告，以及旧快照省略 cost 的兼容性和原字节保留。
+- 维护／骨架校验、预览构建及产物校验通过，`git diff --check` 通过。
+- 未修改 Android、运行 Android 测试或执行发布；币种、单位及费用口径仍需另行确认。
+
+### 2026-10-28：首批真实数据与两仓库本地闭环
+
+- 维护者查看固定原文、五个分数、三个规范模型映射及许可后明确批准首批试用；维护数据共 3 项定义、8 条成绩，5 条 approved、3 条 pending。新增 MMLU-Pro EM 与 MATH-500；不合并旧 Overall Accuracy，不补费用、日期或未知工具状态。
+- `prepare_release.py --output build/site-real-v2`、产物校验、Android assets 导出及 `--check` 通过。根目录初始骨架未变；没有发布新快照到线上。
+- Python 全量 39 项通过，覆盖导出／只读核对、归档恢复与路径穿越拒绝、HTTPS 检查逻辑等；两份工作流 YAML 语法解析通过。未安装 actionlint、未运行 GitHub Actions。
+- Android 相关单元测试实际 42 项全部通过（BenchmarkUpdate 5、SyncRunner 6、HttpSource 3、ModelDetailMapper 9、ModelRepository 19）；Debug APK、测试 APK 构建与 Debug Lint 通过。
+- API 37 / `emulator-5554` 首轮 24 项 `OK`；补持久化后集成类 5 项 `OK`；再补真实构建 v3 经生产 HTTPS source 的完整替换测试，最终重建测试 APK、集成类 6 项 `OK`。共覆盖 26 个不同用例：Room 隔离库、断网保留、原字节清单更新、事务回滚、文件库重开、目录／收藏独立、评测详情、来源许可、阅读恢复与返回链路。未清数据或卸载现有应用，未操作连接的真机。
+- `build/site-local-v3` 由真实维护数据和 v2 基线生成，仅作本地测试候选；通过导出脚本写入 Android instrumentation assets 的 `benchmark-contract-v3/`。验证随包 v2 → 注入 Python v3 原始 HTTP 响应 → 生产 HTTPS／大小／SHA 校验 → Room 全量替换并清除本地手改条目 → 详情 Flow 更新；不连接真实远程服务器，未发布 v3。主随包及待发布配置仍为 v2。
+- MIT 正文核对一致；上游文件无末尾换行，本地副本仅增加末尾换行，未改许可条文。导出保留本地许可文件的完整字节。
+- 只读运行 `check_remote.py --expected-version 2` 返回 HTTP 404，确认预期地址目前未上线；这是待部署状态，不记为线上验收通过。尚未提交、推送、创建 GitHub Release、部署 Pages 或完成真实 HTTPS 更新；远程 v1 不同步归属旁车，新来源的客户端许可兼容性仍须单独审核。

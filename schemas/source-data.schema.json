@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModelAtlas maintenance documents v1",
+  "oneOf": [
+    {"$ref": "#/$defs/benchmarkDocument"},
+    {"$ref": "#/$defs/sourceDocument"},
+    {"$ref": "#/$defs/mappingDocument"},
+    {"$ref": "#/$defs/resultDocument"}
+  ],
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"},
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "optionalText": {"type": ["string", "null"], "minLength": 1, "pattern": "\\S"},
+    "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "optionalUrl": {"type": ["string", "null"], "format": "uri", "pattern": "^https://"},
+    "date": {"type": "string", "format": "date"},
+    "optionalDate": {"type": ["string", "null"], "format": "date"},
+    "status": {"enum": ["pending", "approved", "rejected"]},
+    "benchmarkDocument": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "benchmarks"],
+      "properties": {"schemaVersion": {"const": 1}, "benchmarks": {"type": "array", "items": {"$ref": "#/$defs/benchmark"}}}
+    },
+    "sourceDocument": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "sources"],
+      "properties": {"schemaVersion": {"const": 1}, "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}}}
+    },
+    "mappingDocument": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "mappings"],
+      "properties": {"schemaVersion": {"const": 1}, "mappings": {"type": "array", "items": {"$ref": "#/$defs/mapping"}}}
+    },
+    "resultDocument": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "results"],
+      "properties": {"schemaVersion": {"const": 1}, "results": {"type": "array", "items": {"$ref": "#/$defs/result"}}}
+    },
+    "benchmark": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "version", "description", "category", "officialUrl", "metric", "unit", "higherIsBetter", "minimum", "maximum", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "name": {"$ref": "#/$defs/text"},
+        "version": {"$ref": "#/$defs/optionalText"}, "description": {"$ref": "#/$defs/text"},
+        "category": {"enum": ["coding", "agent", "knowledge_reasoning", "math", "multimodal", "professional", "science", "other"]},
+        "officialUrl": {"$ref": "#/$defs/url"}, "metric": {"$ref": "#/$defs/optionalText"},
+        "unit": {"$ref": "#/$defs/optionalText"}, "higherIsBetter": {"type": ["boolean", "null"]},
+        "minimum": {"type": ["number", "null"]}, "maximum": {"type": ["number", "null"]},
+        "status": {"$ref": "#/$defs/status"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "publisher", "url", "retrievedAt", "publishedAt", "sourceType", "license", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "publisher": {"$ref": "#/$defs/text"}, "url": {"$ref": "#/$defs/url"},
+        "retrievedAt": {"$ref": "#/$defs/date"}, "publishedAt": {"$ref": "#/$defs/optionalDate"},
+        "sourceType": {"enum": ["benchmark_author", "model_developer", "independent"]},
+        "status": {"$ref": "#/$defs/status"},
+        "license": {
+          "type": "object", "additionalProperties": false,
+          "required": ["name", "url", "licenseFile", "redistribution", "attribution", "notes"],
+          "properties": {
+            "name": {"$ref": "#/$defs/optionalText"}, "url": {"$ref": "#/$defs/optionalUrl"},
+            "licenseFile": {"$ref": "#/$defs/optionalText"},
+            "redistribution": {"enum": ["pending", "allowed", "prohibited"]},
+            "attribution": {"$ref": "#/$defs/text"}, "notes": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "mapping": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "sourceId", "sourceModelName", "modelId", "evidenceUrl", "catalogUrl", "status", "notes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "sourceId": {"$ref": "#/$defs/id"},
+        "sourceModelName": {"$ref": "#/$defs/text"},
+        "modelId": {"type": ["string", "null"], "pattern": "^[^\\s/]+/[^\\s]+$"},
+        "evidenceUrl": {"$ref": "#/$defs/optionalUrl"}, "catalogUrl": {"$ref": "#/$defs/optionalUrl"},
+        "status": {"$ref": "#/$defs/status"}, "notes": {"$ref": "#/$defs/text"}
+      }
+    },
+    "result": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "benchmarkId", "mappingId", "score", "sourceId", "sourceLocator", "collectedAt", "evaluatedAt", "subset", "harness", "reasoningEffort", "toolsEnabled", "status", "unrepresentedConditions", "notes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "benchmarkId": {"$ref": "#/$defs/id"},
+        "mappingId": {"$ref": "#/$defs/id"}, "sourceId": {"$ref": "#/$defs/id"}, "score": {"type": "number"},
+        "cost": {"type": ["number", "null"]},
+        "sourceLocator": {"$ref": "#/$defs/text"}, "collectedAt": {"$ref": "#/$defs/date"},
+        "evaluatedAt": {"$ref": "#/$defs/optionalDate"}, "subset": {"$ref": "#/$defs/optionalText"},
+        "harness": {"$ref": "#/$defs/optionalText"}, "reasoningEffort": {"$ref": "#/$defs/optionalText"},
+        "toolsEnabled": {"type": ["boolean", "null"]}, "status": {"$ref": "#/$defs/status"},
+        "unrepresentedConditions": {"type": "array", "items": {"$ref": "#/$defs/text"}, "uniqueItems": true},
+        "notes": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}
