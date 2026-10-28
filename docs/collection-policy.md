@@ -8,6 +8,8 @@
 
 2026-10-28 已核对固定修订 `f418b116db00b065c2aea046518d8fcf74d39872` 的 README 和 Apache-2.0 LICENSE，摘录三条真实表值；来源与修改说明见 [third_party/mmlu-pro](../third_party/mmlu-pro/README.md)。名称未充分确认具体模型快照，评测配置及分发范围尚待复核，这批定义、来源、映射和结果仍为 `pending`。
 
+后续候选调查的用户确认范围见[候选采集与替换预览](candidate-review.md)：收集 2026-04-28～2026-10-28 发布模型的十一项评测；本轮保留旧成绩，只追加 pending 和证据，不批准或部署。综合指数仅摘录发布方公布值，不自行生成复合分数或排名。
+
 同日改用 [DeepSeek-R1 官方固定文档](../third_party/deepseek-r1/README.md) 完成首批：MMLU-Pro EM 两条、MATH-500 pass@1 三条，共三个有显式权重链接的规范模型。维护者审阅原始链接、五个分数、映射与文档许可后，明确批准首批试用；不代表授权发布或独立复现。保留原执行条件限定和未知字段，不把旧 Overall Accuracy 表换名合并。
 
 ## 文件职责

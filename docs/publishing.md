@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-已实现本地校验、预览／生产构建、Android assets 导出、发布基线归档、人工触发 Pages 工作流及线上只读检查。**本轮不提交、不推送、不部署；工作流未在线执行。** Android 已配置预期 HTTPS 地址，但未完成真实服务器下载验收。首批维护者批准的数据为 v2／五条成绩，旧三条仍待审。
+已实现本地校验、预览／生产构建、Android assets 导出、发布基线归档、人工触发 Pages 工作流及线上只读检查。**本轮不提交、不推送、不部署。** 2026-10-28 本轮只读运行 `check_remote.py --expected-version 2`，确认线上 v2 直接 HTTPS 200、五条成绩及 SHA-256 通过；不代表真实 Android 客户端更新验收。首批维护者批准的数据为 v2／五条成绩，旧三条仍待审。十一项新候选保持 pending，其[假设替换预览](candidate-review.md)不是本节的发布包预览。
 
 不要选择 Pages 的 `Deploy from a branch / (root)`：根目录是维护仓库，且当前只有空骨架，不是待部署站点。后续使用 Actions 只上传审核通过的生产构建目录。
 
@@ -61,7 +61,7 @@ python3 scripts/build.py --version 3 --baseline build/site --output build/site-v
 
 `build/` 不入 Git，不能作为唯一历史存档。后续发布流程必须将成功产物与来源提交关联，保留可恢复的发布基线；若基线遗失，应先恢复并校验线上不可变历史，不从维护数据重新生成旧文件冒充原件。
 
-## 已准备的 Pages 发布工作流（尚未执行）
+## Pages 发布工作流
 
 1. 在 GitHub 仓库 Settings → Pages 选择 **GitHub Actions**。建议给 `github-pages` 环境设置人工审核及仅 main 部署保护；不要部署维护分支根目录。
 2. 修改 `data/`、审核来源／映射／许可，递增 `data/release.json.version`；成绩删除必须在预览报告核实后设置 `allowRemovals: true` 并说明 reason。PR／push 的 `validate.yml` 不部署。

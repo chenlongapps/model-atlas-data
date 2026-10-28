@@ -5,6 +5,7 @@ from pathlib import Path
 import sys
 
 from common import DataError, ROOT, load_catalog, read_artifacts, read_json, validate_schema
+from preview_candidates import review_candidates
 
 
 def main() -> int:
@@ -22,6 +23,9 @@ def main() -> int:
             print(f"NOTICE: {len(summary['excludedResults'])} pending/rejected results are excluded from builds")
         if not snapshot["scores"]:
             print("NOTICE: empty bootstrap/preview is NOT a production release")
+        for batch in sorted((ROOT / "data/reviews").glob("*/batch.json")):
+            report = review_candidates(ROOT, batch)
+            print(f"OK: {report['batchId']}: {report['summary']['candidateResults']} pending candidates; not deployable")
         return 0
     except DataError as error:
         print(f"ERROR: {error}", file=sys.stderr)

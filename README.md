@@ -2,7 +2,9 @@
 
 [ModelAtlas Android](https://github.com/chenlongapps/model-atlas-android) 的 Benchmark 数据维护与静态发布仓库，使数据更新不依赖应用发版。
 
-**当前状态：已获维护者批准的首批真实数据为 2 项 Benchmark、3 个模型、5 条 DeepSeek 官方自报成绩；已导出 Android 随包 v2，Pages 工作流已准备但未执行。** 原有三条 MMLU-Pro Mini-Leaderboard 成绩继续待审核，不猜测映射。
+**当前状态：已获维护者批准的首批真实数据为 2 项 Benchmark、3 个模型、5 条 DeepSeek 官方自报成绩；已导出 Android 随包 v2。** 2026-10-28 本轮只读确认线上 v2 直接 HTTPS 200、五条成绩及 SHA-256 一致；不代表真实 Android 客户端更新已验收。原有三条 MMLU-Pro Mini-Leaderboard 成绩继续待审核，不猜测映射。
+
+新增的半年模型／十一项评测调查仅产生 **pending 候选、证据及假设替换报告**，不代表批准、Android 接入或发布；旧八条维护成绩及 Android 随包仍保留。范围、命令和双基线差异见[候选采集与替换预览](docs/candidate-review.md)。
 
 ## 职责与边界
 
@@ -20,6 +22,7 @@ data/                           # 人工维护的唯一数据源
   model-mappings.json           # 来源名称到规范模型 ID 的显式证据
   release.json                  # 下一候选内容版本与删除审核说明
   results/<benchmark-id>.json    # 原始成绩、条件及审核状态
+  reviews/2026-10-28/            # 固定范围、旧数据基线、候选 ID 及证据附件
 schemas/                        # 维护文档与 Android 发布协议
 scripts/                        # 离线校验、确定性构建
 tests/                          # 合成测试数据，不进入生产快照
@@ -59,7 +62,7 @@ python3 scripts/export_android.py --artifacts build/site-real-v2
 ```text
 官方来源 → 人工录入／审核 → Schema 与业务校验 → 完整快照 + 清单
                                                         ↓
-                                      Pages 完整站点发布（工作流待执行）
+                                      Pages 完整站点发布（线上已有 v2）
                                                         ↓
                                      Android 验证 → Room → 离线展示
 ```
@@ -70,17 +73,18 @@ python3 scripts/export_android.py --artifacts build/site-real-v2
 
 首批真实包为 v2，Android 新随包同为 v2；旧测试 v1 客户端可更新到远程 v2，新随包客户端要到远程 v3 才下载更新。新发布包含全部保留成绩，旧快照不可改写；纠错同样发布更高版本。
 
-入口已配置为 `https://chenlongapps.github.io/model-atlas-data/manifest.json`；2026-10-28 只读检查仍返回 404，尚未部署或验证真实在线更新。只部署审核后的构建产物，不发布维护仓库根目录。后续更新维护 JSON、递增 `data/release.json` 版本，审核后运行发布工作流；用户更新成绩不需要升级 APK。
+入口已配置为 `https://chenlongapps.github.io/model-atlas-data/manifest.json`；2026-10-28 本轮 `check_remote.py --expected-version 2` 只读检查返回直接 HTTPS 200，线上 v2／五条成绩摘要通过，先前的 404 记录不再代表当前状态。本轮未执行发布，也未操作 Android 客户端。只部署审核后的构建产物，不发布维护仓库根目录。后续更新维护 JSON、递增 `data/release.json` 版本，审核后运行发布工作流；用户更新成绩不需要升级 APK。
 
 ## 文档与计划
 
 - [文档索引](docs/README.md)
 - [Android 数据契约](docs/data-contract.md)
 - [采集、模型映射与人工审核](docs/collection-policy.md)
+- [候选采集与假设替换预览](docs/candidate-review.md)
 - [构建、发布及纠错](docs/publishing.md)
 - [分阶段任务与验证结果](TODO.md)
 
-近期优先级：首次 Pages 部署与真实 HTTPS 验收 → 按需求扩展覆盖，不先建设通用多源平台。
+近期优先级：十一项候选证据与替换预览 → 维护者审核／分发条件复核 → 另行确认替换与真实客户端验收；不先建设通用多源平台。
 
 ## 数据声明与许可
 
