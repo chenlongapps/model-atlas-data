@@ -1,0 +1,233 @@
+{
+  "results": [
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-0",
+      "mappingId": "agent-os-opus5",
+      "notes": "Release explicitly v2.1; not historical v2026.08.08 row.",
+      "reasoningEffort": "low",
+      "score": 18.81,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[0].binaryAccuracy; Claude Opus 5 / low / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=29242; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-1",
+      "mappingId": "agent-os-opus5",
+      "notes": "Explicit v2.1 row.",
+      "reasoningEffort": "medium",
+      "score": 33.01,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[1].binaryAccuracy; Claude Opus 5 / medium / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=48645; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-2",
+      "mappingId": "agent-os-opus5",
+      "notes": "Explicit v2.1 row.",
+      "reasoningEffort": "high",
+      "score": 36.89,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[2].binaryAccuracy; Claude Opus 5 / high / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=65555; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-3",
+      "mappingId": "agent-os-opus5",
+      "notes": "Lower than high binary score; retained, not best-selected.",
+      "reasoningEffort": "xhigh",
+      "score": 33.33,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[3].binaryAccuracy; Claude Opus 5 / xhigh / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=88387; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-4",
+      "mappingId": "agent-os-opus5",
+      "notes": "Explicit v2.1 row.",
+      "reasoningEffort": "max",
+      "score": 44.33,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[4].binaryAccuracy; Claude Opus 5 / max / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=107919; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-b-5",
+      "mappingId": "agent-os-opus5",
+      "notes": "Offline scope kept separate from full.",
+      "reasoningEffort": "low",
+      "score": 22.08,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[5].binaryAccuracy; Claude Opus 5 / low / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=28902; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-b-6",
+      "mappingId": "agent-os-opus5",
+      "notes": "Offline scope kept separate.",
+      "reasoningEffort": "medium",
+      "score": 37.18,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[6].binaryAccuracy; Claude Opus 5 / medium / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=51770; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-b-7",
+      "mappingId": "agent-os-opus5",
+      "notes": "Offline scope kept separate.",
+      "reasoningEffort": "high",
+      "score": 39.74,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[7].binaryAccuracy; Claude Opus 5 / high / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=63098; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-b-8",
+      "mappingId": "agent-os-opus5",
+      "notes": "Not best-selected.",
+      "reasoningEffort": "xhigh",
+      "score": 34.67,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[8].binaryAccuracy; Claude Opus 5 / xhigh / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=88228; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-b-9",
+      "mappingId": "agent-os-opus5",
+      "notes": "Offline scope kept separate.",
+      "reasoningEffort": "max",
+      "score": 48.65,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[9].binaryAccuracy; Claude Opus 5 / max / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=113319; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-spark13",
+      "mappingId": "agent-os-spark13",
+      "notes": "updatedAt=2026-10-15 is table update, not evaluation date.",
+      "reasoningEffort": "max",
+      "score": 39.25,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[53].binaryAccuracy; MuseSpark 1.3 / max / full / v2.1",
+      "status": "pending",
+      "subset": "full (source label)",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Trajectory filename says merged-106tasks.zip, while datasetSize=108 and datasetScope=full; effective denominator/completeness needs review"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-binary",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-b-spark12",
+      "mappingId": "agent-os-spark12",
+      "notes": "No evaluation date inferred from trajectory filename.",
+      "reasoningEffort": "xhigh",
+      "score": 15.84,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[54].binaryAccuracy; MuseSpark 1.2 / xhigh / full / v2.1",
+      "status": "pending",
+      "subset": "full (source label)",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Trajectory filename says merged-105tasks.zip, while datasetSize=108 and datasetScope=full; effective denominator/completeness needs review"
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}

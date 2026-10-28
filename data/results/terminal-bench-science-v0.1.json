@@ -1,0 +1,1077 @@
+{
+  "results": [
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs20",
+      "mappingId": "coding-v20",
+      "notes": "Different agent/protocol from official Codex retained.",
+      "reasoningEffort": "max",
+      "score": 62.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-6-astra].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs21",
+      "mappingId": "coding-v21",
+      "notes": "Different agent retained.",
+      "reasoningEffort": null,
+      "score": 47.143,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-opus-5-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs22",
+      "mappingId": "coding-v22",
+      "notes": "Different agent retained; no fallback specified.",
+      "reasoningEffort": null,
+      "score": 40,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-fable-5-1].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs23",
+      "mappingId": "coding-v23",
+      "notes": "Different agent retained.",
+      "reasoningEffort": null,
+      "score": 27.143,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-opus-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs24",
+      "mappingId": "coding-v24",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "max",
+      "score": 20,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-5.6-sol].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs25",
+      "mappingId": "coding-v25",
+      "notes": "Different agent retained.",
+      "reasoningEffort": null,
+      "score": 15.714,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-fable-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs26",
+      "mappingId": "coding-v26",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "high",
+      "score": 11.429,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[grok/grok-4.6].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs27",
+      "mappingId": "coding-v27",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "xhigh",
+      "score": 10,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[grok/grok-4.7].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs28",
+      "mappingId": "coding-v28",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "max",
+      "score": 10,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-5.6-terra].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs29",
+      "mappingId": "coding-v29",
+      "notes": "Same named agent but distinct trial protocol, not deduplicated.",
+      "reasoningEffort": "high",
+      "score": 8.571,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[google/gemini-3.8-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs30",
+      "mappingId": "coding-v30",
+      "notes": "Distinct trial protocol retained.",
+      "reasoningEffort": "high",
+      "score": 7.143,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[google/gemini-3.7-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs31",
+      "mappingId": "coding-v31",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "max",
+      "score": 5.714,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[zai/glm-5.3].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs32",
+      "mappingId": "coding-v32",
+      "notes": "Separate _max source entity left unmapped; no score substituted.",
+      "reasoningEffort": "xhigh",
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[meta/muse_spark_1_3].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs33",
+      "mappingId": "coding-v33",
+      "notes": "Different agent retained.",
+      "reasoningEffort": null,
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-opus-4-8].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs34",
+      "mappingId": "coding-v34",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "max",
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[deepseek/deepseek-v4-pro-0813].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs35",
+      "mappingId": "coding-v35",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "max",
+      "score": 2.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[zai/glm-5.3-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs36",
+      "mappingId": "coding-v36",
+      "notes": "Different agent retained.",
+      "reasoningEffort": "max",
+      "score": 1.429,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[kimi/kimi-k3].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs37",
+      "mappingId": "coding-v37",
+      "notes": "Explicit measured zero; different agent retained.",
+      "reasoningEffort": "max",
+      "score": 0,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-5.6-luna].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs38",
+      "mappingId": "coding-v38",
+      "notes": "Explicit measured zero; different agent retained.",
+      "reasoningEffort": "max",
+      "score": 0,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[deepseek/deepseek-v4.1-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs39",
+      "mappingId": "coding-v39",
+      "notes": "Explicit K3.1 Pro source slug; no K3 score reused.",
+      "reasoningEffort": "max",
+      "score": 31.429,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[kimi/kimi-k3.1-pro].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs01",
+      "mappingId": "coding-v01",
+      "notes": "Raw JSON percent; no recalculation from display or task count.",
+      "reasoningEffort": "max",
+      "score": 52.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-6.1-sol].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs02",
+      "mappingId": "coding-v02",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 47.143,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-sonnet-5-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs03",
+      "mappingId": "coding-v03",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "high",
+      "score": 44.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[google/gemini-4-argon].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs04",
+      "mappingId": "coding-v04",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "max",
+      "score": 37.143,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[meta/muse-wonder-full].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs05",
+      "mappingId": "coding-v05",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "max",
+      "score": 30,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-6-sol].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs06",
+      "mappingId": "coding-v06",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 12.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[alibaba/qwen3.8-max].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs07",
+      "mappingId": "coding-v07",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 10,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-haiku-5-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs08",
+      "mappingId": "coding-v08",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "high",
+      "score": 5.714,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[google/gemini-3.5-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs09",
+      "mappingId": "coding-v09",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 5.714,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[anthropic/claude-sonnet-5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented.",
+        "Source compute_effort: max."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs10",
+      "mappingId": "coding-v10",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 5.714,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[fireworks/ember-1].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs11",
+      "mappingId": "coding-v11",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "max",
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[openai/gpt-6-luna].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs12",
+      "mappingId": "coding-v12",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "high",
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[deepseek/deepseek-v4-flash-0731].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs13",
+      "mappingId": "coding-v13",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": "high",
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[google/gemini-3.6-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs14",
+      "mappingId": "coding-v14",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 4.286,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[xiaomi/mimo-v2.6-flash].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs15",
+      "mappingId": "coding-v15",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 2.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[stepfun/step-5-preview].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs16",
+      "mappingId": "coding-v16",
+      "notes": "Raw JSON percent.",
+      "reasoningEffort": null,
+      "score": 2.857,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[xiaomi/mimo-v2.6-pro].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Terminus 2 / Harbor",
+      "id": "coding-vs17",
+      "mappingId": "coding-v17",
+      "notes": "Row explicitly uses Terminus 2, not metadata default Mini-SWE-agent.",
+      "reasoningEffort": null,
+      "score": 1.429,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[tencent/hy4-preview].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs18",
+      "mappingId": "coding-v18",
+      "notes": "Explicit measured zero, not missing value.",
+      "reasoningEffort": "high",
+      "score": 0,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[inception/mercury-2.5].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Mini-SWE-agent / Harbor",
+      "id": "coding-vs19",
+      "mappingId": "coding-v19",
+      "notes": "Explicit measured zero, not missing value.",
+      "reasoningEffort": "xhigh",
+      "score": 0,
+      "sourceId": "coding-vals-science",
+      "sourceLocator": "tasks.overall[alibaba/qwen3.8-27b].accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Single run with infrastructure/provider-error retries; 8-hour agent limit; standard error/cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc01",
+      "mappingId": "coding-t03",
+      "notes": "Raw API percent; model_release_date not evaluation date.",
+      "reasoningEffort": "max",
+      "score": 68.0952380952381,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "https://www.terminal-bench-science.ai/api/leaderboard?package=terminal-bench-science%2Fterminal-bench-science&name=v0-1-eval ; rows[id=76867ebc-8f35-43c5-a8b0-0cee9db46c96].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc02",
+      "mappingId": "coding-t01",
+      "notes": "Endpoint in coding-sc01 and evidence.",
+      "reasoningEffort": "max",
+      "score": 63.33333333333333,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=cb24f3a2-82ab-4f97-be88-92a28118bf1c].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc03",
+      "mappingId": "coding-t05",
+      "notes": "No fallback stated in row.",
+      "reasoningEffort": "max",
+      "score": 40,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=1264a994-632f-4742-a143-a848a6ad4114].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc04",
+      "mappingId": "coding-t06",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 30,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=bcf50bd8-8555-48a6-8cae-9f697af54051].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc05",
+      "mappingId": "coding-t11",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 22.380952380952383,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=378f8b49-dbd8-4acf-a065-8c07e1712de2].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc06",
+      "mappingId": "coding-t08",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 21.428571428571427,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=e3f2861a-97db-4730-a0ff-99f08d8c7299].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc07",
+      "mappingId": "coding-s01",
+      "notes": "DeepSeek on Codex, not bare model.",
+      "reasoningEffort": "max",
+      "score": 15.714285714285714,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=58d4c48d-791b-4873-ba3e-af1cf997a79c].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Grok Build",
+      "id": "coding-sc08",
+      "mappingId": "coding-t10",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "xhigh",
+      "score": 14.285714285714286,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=360317df-baea-4ead-8a11-09db70a27d15].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "mini-SWE-agent",
+      "id": "coding-sc09",
+      "mappingId": "coding-t17",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "high",
+      "score": 12.380952380952381,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=409f68a6-d6a4-43c9-adb8-63679dc17a45].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc10",
+      "mappingId": "coding-t14",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 10.476190476190476,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=e8bf7739-3c94-46a3-95a5-fa4d4444034e].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc11",
+      "mappingId": "coding-t15",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 8.571428571428571,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=c79d5ef6-b3c6-40da-84b5-946c11099426].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc12",
+      "mappingId": "coding-s04",
+      "notes": "GLM on Claude Code, not bare model.",
+      "reasoningEffort": "max",
+      "score": 8.095238095238095,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=78f18248-3ee9-4eb4-b7af-19019f1fc64f].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Claude Code",
+      "id": "coding-sc13",
+      "mappingId": "coding-s03",
+      "notes": "Kimi on Claude Code, not bare model.",
+      "reasoningEffort": "max",
+      "score": 7.142857142857142,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=66e64f64-abbd-40a6-a470-2151df25472e].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Grok Build",
+      "id": "coding-sc14",
+      "mappingId": "coding-t16",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "xhigh",
+      "score": 7.142857142857142,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=231bc6c3-8f2b-455e-8c87-5a08ec200b05].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "mini-SWE-agent",
+      "id": "coding-sc15",
+      "mappingId": "coding-t23",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "high",
+      "score": 5.714285714285714,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=5a71d088-1bfd-4bbe-a65a-973a4fffd50f].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc16",
+      "mappingId": "coding-s02",
+      "notes": "0813 identity explicit in source date and dedicated release link.",
+      "reasoningEffort": "max",
+      "score": 3.8095238095238093,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=00b5eabf-caca-435c-b8a8-458633192aa8].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    },
+    {
+      "benchmarkId": "terminal-bench-science-v0.1",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Codex",
+      "id": "coding-sc17",
+      "mappingId": "coding-t18",
+      "notes": "Raw API percent.",
+      "reasoningEffort": "max",
+      "score": 3.3333333333333335,
+      "sourceId": "coding-harbor",
+      "sourceLocator": "Science v0-1-eval API rows[id=7cf10b06-3e5b-4723-b98f-c679e773959b].metrics.accuracy",
+      "status": "pending",
+      "subset": "70 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "3 trials/task, 210 trials; standard error and cost/token aggregates not represented."
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}

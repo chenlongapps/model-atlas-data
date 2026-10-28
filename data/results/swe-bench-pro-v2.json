@@ -1,0 +1,480 @@
+{
+  "results": [
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Claude Code / Harbor; pristine-image regrade",
+      "id": "coding-pr01",
+      "mappingId": "coding-p01",
+      "notes": "Full tab, not server-rendered HARD tab. createdAt not evaluation date.",
+      "reasoningEffort": "xhigh",
+      "score": 99.4,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC tabs[key=full].entries[model=Opus 5 (Claude Code) xhigh].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented; legacy page prose conflicts with V2 protocol, V2 README governs."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr02",
+      "mappingId": "coding-p02",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "high",
+      "score": 99.22,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=openai/gemini/gemini-4-argon].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; relay company/prefix not developer; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Claude Code / Harbor; pristine-image regrade",
+      "id": "coding-pr03",
+      "mappingId": "coding-p03",
+      "notes": "No fallback stated.",
+      "reasoningEffort": "high",
+      "score": 99.1,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=Fable 5.1 (Claude Code) high].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr04",
+      "mappingId": "coding-p04",
+      "notes": "Original 97.7 retained, not best selected.",
+      "reasoningEffort": "max",
+      "score": 97.7,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=Kimi-K3 (mini-swe-agent) max].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; Reflection study says mini 97.5, unresolved discrepancy; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Codex / Harbor; pristine-image regrade",
+      "id": "coding-pr05",
+      "mappingId": "coding-p05",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "high",
+      "score": 96.9,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=GPT-6-Astra (Codex) high].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr06",
+      "mappingId": "coding-p06",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 96.73,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=openai/meta_ai/muse-wonder-1.0].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; relay company/prefix not developer; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr07",
+      "mappingId": "coding-p07",
+      "notes": "Different scaffold retained.",
+      "reasoningEffort": "xhigh",
+      "score": 96.11,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=gpt-6.1-sol].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr08",
+      "mappingId": "coding-p08",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 95.79,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=anthropic/claude-sonnet-5-5].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr09",
+      "mappingId": "coding-p09",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "max",
+      "score": 95.6,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=GLM-5.3 (mini-swe-agent) max].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Codex / Harbor; pristine-image regrade",
+      "id": "coding-pr10",
+      "mappingId": "coding-p10",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 95.5,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=GPT-5.6-sol (Codex) xhigh].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr11",
+      "mappingId": "coding-p11",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 95.02,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=openai/fireworks_ai/muse-spark-open].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; relay company/prefix not developer; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr12",
+      "mappingId": "coding-p12",
+      "notes": "Raw 94.86, not rounded paper 94.9.",
+      "reasoningEffort": "high",
+      "score": 94.86,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=Gemini 3.8 Flash (mini-swe-agent) high].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Claude Code / Harbor; pristine-image regrade",
+      "id": "coding-pr13",
+      "mappingId": "coding-p13",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 93.15,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=Sonnet 5 (Claude Code) xhigh].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked Codex / Harbor; pristine-image regrade",
+      "id": "coding-pr14",
+      "mappingId": "coding-p14",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "xhigh",
+      "score": 92.37,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=GPT-5.6-Terra (Codex) xhigh].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr15",
+      "mappingId": "coding-p15",
+      "notes": "Raw 89.88, not study-rounded 89.9.",
+      "reasoningEffort": "xhigh",
+      "score": 89.88,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[model=Inkling (mini-swe-agent) xhigh].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "locked mini-swe-agent / Harbor; pristine-image regrade",
+      "id": "coding-pr16",
+      "mappingId": "coding-p16",
+      "notes": "Raw Full score.",
+      "reasoningEffort": "high",
+      "score": 87.23,
+      "sourceId": "coding-pro",
+      "sourceLocator": "RSC Full entries[version=claude-haiku-5-5].score",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "50-minute budget; model-endpoint-only network; CI not represented."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "mini-swe-agent, locked protocol",
+      "id": "coding-ps01",
+      "mappingId": "coding-p17",
+      "notes": "Original chart value.",
+      "reasoningEffort": "max",
+      "score": 95.6,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; mini-swe-agent / GLM-5.3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; mini 30s bash timeout; separate study, not merged with leaderboard."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "mini-swe-agent, locked protocol",
+      "id": "coding-ps02",
+      "mappingId": "coding-p18",
+      "notes": "Original study 97.5, not maximum selected.",
+      "reasoningEffort": "max",
+      "score": 97.5,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; mini-swe-agent / Kimi K3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; mini 30s bash timeout; leaderboard instead says 97.7, unresolved discrepancy."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "mini-swe-agent, locked protocol",
+      "id": "coding-ps03",
+      "mappingId": "coding-p19",
+      "notes": "Original chart value.",
+      "reasoningEffort": "xhigh",
+      "score": 89.9,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; mini-swe-agent / Inkling (xhigh)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; mini 30s bash timeout; chart precision differs from leaderboard 89.88."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Pi, locked protocol",
+      "id": "coding-ps04",
+      "mappingId": "coding-p17",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "max",
+      "score": 96.6,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; Pi / GLM-5.3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Pi, locked protocol",
+      "id": "coding-ps05",
+      "mappingId": "coding-p18",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "max",
+      "score": 96,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; Pi / Kimi K3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Pi, locked protocol",
+      "id": "coding-ps06",
+      "mappingId": "coding-p19",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "xhigh",
+      "score": 84.1,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; Pi / Inkling (xhigh)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OpenCode, locked protocol",
+      "id": "coding-ps07",
+      "mappingId": "coding-p17",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "max",
+      "score": 96.4,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; OpenCode / GLM-5.3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OpenCode, locked protocol",
+      "id": "coding-ps08",
+      "mappingId": "coding-p18",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "max",
+      "score": 97.7,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; OpenCode / Kimi K3 (max)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    },
+    {
+      "benchmarkId": "swe-bench-pro-v2",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OpenCode, locked protocol",
+      "id": "coding-ps09",
+      "mappingId": "coding-p19",
+      "notes": "Distinct agent.",
+      "reasoningEffort": "xhigh",
+      "score": 91.6,
+      "sourceId": "coding-pro-study",
+      "sourceLocator": "Section 4 Pass@1 rate chart dataJson; OpenCode / Inkling (xhigh)",
+      "status": "pending",
+      "subset": "Public V2, 642 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Same locked budget; no meaningful turn/token limits; structured read/search/edit plus shell, unlike mini bash-only."
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}

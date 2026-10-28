@@ -1,0 +1,255 @@
+{
+  "results": [
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Anthropic OSWorld 2.1; offline VM; 1080p; 500 steps; max effort; five attempts/task; Claude Opus 4.8 grader when needed; server-side compaction",
+      "id": "agent-v-haiku-os-partial",
+      "mappingId": "agent-v-haiku55",
+      "notes": "Separate Anthropic offline experiment; no full-scope substitution.",
+      "reasoningEffort": "max",
+      "score": 72.4,
+      "sourceId": "agent-v-haiku55",
+      "sourceLocator": "System card section 8.9.3, page 128: Haiku 5.5 partial score 72.4%",
+      "status": "pending",
+      "subset": "official offline subset, 82 of 108 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Exact release component commits not specified in this experiment",
+        "Partial checkpoint score and strict pass rate are separate; this row is partial",
+        "Safety blocks do not fall back on first-party products and API; benchmark-specific safeguard intervention counts not stated",
+        "Confidence intervals shown graphically but exact bounds not stated"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-0",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, not binary completion.",
+      "reasoningEffort": "low",
+      "score": 59.09,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[0].partialScore; Claude Opus 5 / low / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=29242; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-1",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, not binary completion.",
+      "reasoningEffort": "medium",
+      "score": 64.85,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[1].partialScore; Claude Opus 5 / medium / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=48645; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-2",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, not binary completion.",
+      "reasoningEffort": "high",
+      "score": 68.92,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[2].partialScore; Claude Opus 5 / high / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=65555; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-3",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, not binary completion.",
+      "reasoningEffort": "xhigh",
+      "score": 73.11,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[3].partialScore; Claude Opus 5 / xhigh / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=88387; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-4",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, not binary completion.",
+      "reasoningEffort": "max",
+      "score": 77.67,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[4].partialScore; Claude Opus 5 / max / full / v2.1",
+      "status": "pending",
+      "subset": "full",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=107919; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-p-5",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, offline scope.",
+      "reasoningEffort": "low",
+      "score": 60.34,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[5].partialScore; Claude Opus 5 / low / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=28902; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-p-6",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, offline scope.",
+      "reasoningEffort": "medium",
+      "score": 66.25,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[6].partialScore; Claude Opus 5 / medium / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=51770; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-p-7",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, offline scope.",
+      "reasoningEffort": "high",
+      "score": 70.55,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[7].partialScore; Claude Opus 5 / high / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=63098; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-p-8",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, offline scope.",
+      "reasoningEffort": "xhigh",
+      "score": 72.03,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[8].partialScore; Claude Opus 5 / xhigh / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=88228; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps; offline task scope",
+      "id": "agent-os-p-9",
+      "mappingId": "agent-os-opus5",
+      "notes": "Partial score, offline scope.",
+      "reasoningEffort": "max",
+      "score": 79.2,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[9].partialScore; Claude Opus 5 / max / offline / v2.1",
+      "status": "pending",
+      "subset": "offline",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "outputTokensPerTask=113319; run count/aggregation not specified"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-spark13",
+      "mappingId": "agent-os-spark13",
+      "notes": "Partial score, not binary.",
+      "reasoningEffort": "max",
+      "score": 69.56,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[53].partialScore; MuseSpark 1.3 / max / full / v2.1",
+      "status": "pending",
+      "subset": "full (source label)",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Trajectory filename says merged-106tasks.zip, while datasetSize=108 and datasetScope=full; effective denominator/completeness needs review"
+      ]
+    },
+    {
+      "benchmarkId": "osworld-v2.1-partial",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "OSWorld-V2 v2.1; foundation e2e; batch tool; 500 steps",
+      "id": "agent-os-p-spark12",
+      "mappingId": "agent-os-spark12",
+      "notes": "Partial score, not binary.",
+      "reasoningEffort": "xhigh",
+      "score": 44.08,
+      "sourceId": "agent-os-table",
+      "sourceLocator": "$.results[54].partialScore; MuseSpark 1.2 / xhigh / full / v2.1",
+      "status": "pending",
+      "subset": "full (source label)",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Trajectory filename says merged-105tasks.zip, while datasetSize=108 and datasetScope=full; effective denominator/completeness needs review"
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -12,7 +12,7 @@
 - `evidence-*.json`：官方入口、实际查询记录、必要原文摘录与定位、可获得的响应摘要、仅系统级记录及阻塞原因。不是上游数据集或网页全文镜像。
 - `staging-*.json`：本轮分组采集时保留的原始工作记录，其中部分文件已由维护者纳入版本控制；合并后不再作为日常维护或构建输入。正式候选仍以 `data/benchmarks.json`、`sources.json`、`model-mappings.json` 和 `results/` 为准，不能只编辑 staging 就认为已更新维护数据。
 
-**本轮暂未完整合并：**已追加全部 13 项待审定义、18 个待审来源、43 条待审映射及 4 条指数成绩；其余候选仍只在分组 staging 中。未核实的 `staging-indices.json` 保留原状且不参与模拟导入，只有 `staging-verified-indices.json` 中的四条进入候选。维护层没有写入完整批次 `batch.json`；为了避免留下引用不完整的数据，未导入的成绩继续留在 staging。
+**本轮已完整合并：**359 条候选、206 条相关映射、13 项定义和 18 个来源与三份纳入范围的 staging 逐对象一致，全部保持 pending；维护层已写入 `batch.json`。未核实的 `staging-indices.json` 保留原状且不参与导入，只有 `staging-verified-indices.json` 中的四条指数成绩进入候选；另有 259 条原指数记录不在本批范围。旧八条及 Android 随包未替换。
 
 只保存筛选必要的目录事实，不代理目录／价格。模型发布日期有争议、未知或精度跨边界时记录待核实，不补造日期。规范 ID 去重不等于 checkpoint 去重；`latest`、高速变体及同名记录不自动继承成绩。
 
@@ -58,7 +58,7 @@ python3 -B scripts/merge_candidate_staging.py --apply --expected-sha256 <snapsho
 
 合并器只追加 pending，保留旧对象；相同 ID 内容不同则拒绝，不会删除 staging 或覆盖用户工作。它先验证证据、范围和完整候选集，并要求 apply 时的输入摘要与 check 一致，使用临时文件原子替换，并在失败时尽力回滚。摘要不是锁；**跨多个文件不是文件系统事务，也不保证意外崩溃后的恢复**，check 和 apply 期间都必须停止其他写入者。此命令不批准、发布或更新 Android。
 
-当前数据尚未完整导入时，使用隔离暂存预览：
+导入前可使用隔离暂存预览；当前维护层已导入，日常核对使用下方普通模式：
 
 ```sh
 python3 scripts/preview_candidates.py --staging --check-android
@@ -77,6 +77,8 @@ python3 scripts/preview_candidates.py --check-android
 默认输出 **`build/candidate-review-2026-10-28/report.md` 与 `report.json`**。只有这两份报告，不写 `manifest.json`、版本化 scores、发布配置或 Android assets。输入必须来自 `data/reviews/`，输出限仓库 `build/` 的独立目录；仅允许空目录或同批次、内容完全一致的 candidate-only 报告重跑，拒绝覆盖已修改的报告或混入已有生产／preview 产物。报告内容变化时指定新的空输出目录。通过独占临时文件和原子替换避免截断已有硬链接，也拒绝符号链接输出。
 
 普通 `validate.py` 会离线检查所有 `data/reviews/*/batch.json`，不要求 CI 存在相邻 Android 仓库。加 `--check-android` 才核对相邻 checkout 的受保护摘要；未检查的外部文件在报告显示 `not-checked`，CLI／CI 日志也明确打印 NOTICE，不冒称已验证。基线内部摘要一致性、内仓库受保护文件和旧维护对象始终核验。每批只选择其明确列出的候选 ID，其他批次不会被自动纳入。本批次的十一项目标及日期／版本另有固定策略检查；证据附件有独立 Schema。
+
+**审批流程阻塞：**当前批次校验要求所有候选和依赖保持 pending，并保护旧基线对象。正式批准部分候选或淘汰旧记录前，须先设计并测试保留原始审核证据、支持分批审核及基线演进的流程；不能直接改状态导致校验失败，也不能削弱发布许可与条件门禁。候选报告的移除列表只是全量替换假设，不是已批准的删除清单。
 
 报告包含两套**假设**差异：
 

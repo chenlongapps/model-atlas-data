@@ -4,7 +4,7 @@
 
 **当前状态：已获维护者批准的首批真实数据为 2 项 Benchmark、3 个模型、5 条 DeepSeek 官方自报成绩；已导出 Android 随包 v2。** 2026-10-28 本轮只读确认线上 v2 直接 HTTPS 200、五条成绩及 SHA-256 一致；不代表真实 Android 客户端更新已验收。原有三条 MMLU-Pro Mini-Leaderboard 成绩继续待审核，不猜测映射。
 
-新增的半年模型／十一项评测调查仅产生 **pending 候选、证据及假设替换报告**，不代表批准、Android 接入或发布；旧八条维护成绩及 Android 随包仍保留。范围、命令和双基线差异见[候选采集与替换预览](docs/candidate-review.md)。
+新增的半年模型／十一项评测调查的 **359 条 pending 候选已完整导入维护数据**；证据及假设替换报告不代表批准、Android 接入或发布，旧八条维护成绩及 Android 随包仍保留。范围、命令和双基线差异见[候选采集与替换预览](docs/candidate-review.md)。
 
 ## 职责与边界
 
@@ -53,7 +53,7 @@ python3 scripts/prepare_release.py --output build/site-real-v2
 python3 scripts/export_android.py --artifacts build/site-real-v2
 ```
 
-默认构建仅生成 `build/preview/`，不修改维护数据、根目录骨架或线上站点。当前预览包含五条已批准成绩，报告列出三条被排除的待审记录。**不要部署预览或空骨架**：客户端采用全量替换，空快照会删除已有成绩。已有同版本预览字节不同时请换新的候选输出目录，不覆盖旧产物。
+默认构建仅生成 `build/preview/`，不修改维护数据、根目录骨架或线上站点。当前预览包含五条已批准成绩，排除 362 条待审记录（原三条及本批 359 条）。**不要部署预览或空骨架**：客户端采用全量替换，空快照会删除已有成绩。已有同版本预览字节不同时请换新的候选输出目录，不覆盖旧产物。
 
 `prepare_release.py` 读取 `data/release.json` 并执行相同的非空／审核／删除门禁，不执行发布。`export_android.py` 默认仅写 `build/android-assets/`，带 `--output ../model-atlas-android/app/src/main/assets` 才显式更新相邻 Android 的随包文件；`--check` 只核对字节。正式发布与历史基线规则见[构建与发布](docs/publishing.md)。
 

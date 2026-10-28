@@ -1,0 +1,1492 @@
+{
+  "results": [
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier AutomationBench1.0.6;claude-opus-5-5 without fallbacks;API;50-step cap;refusals failures",
+      "id": "agent-zr-opus55-low",
+      "mappingId": "agent-zr-opus55",
+      "notes": "Published rounded percent retained, not recomputed from153/657.",
+      "reasoningEffort": "Low",
+      "score": 23.3,
+      "sourceId": "agent-zap-opus55",
+      "sourceLocator": "#effort Results by effort: Low23.3%,153/657; Without fallbacks",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Run dates2026-09-17–2026-09-18 are a range, not a single evaluatedAt date",
+        "Cost/task USD $1.62 is no-cache estimate at launch rates, not billed cost"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier AutomationBench1.0.6;claude-opus-5-5 without fallbacks;API;50-step cap;refusals failures",
+      "id": "agent-zr-opus55-medium",
+      "mappingId": "agent-zr-opus55",
+      "notes": "Rounded report percent retained separately from fallback board29.53%.",
+      "reasoningEffort": "Medium",
+      "score": 28.6,
+      "sourceId": "agent-zap-opus55",
+      "sourceLocator": "#effort Results by effort: Medium28.6%,188/657; Without fallbacks",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Run dates2026-09-17–2026-09-18 are a range",
+        "Cost/task USD $2.33 is no-cache estimate at launch rates, not billed cost"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier AutomationBench1.0.6;claude-opus-5-5 without fallbacks;API;50-step cap;refusals failures",
+      "id": "agent-zr-opus55-high",
+      "mappingId": "agent-zr-opus55",
+      "notes": "Published rounded percent retained.",
+      "reasoningEffort": "High",
+      "score": 32,
+      "sourceId": "agent-zap-opus55",
+      "sourceLocator": "#effort Results by effort: High32.0%,210/657; Without fallbacks",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Run dates2026-09-17–2026-09-18 are a range",
+        "Cost/task USD $2.57 is no-cache estimate at launch rates, not billed cost"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier AutomationBench1.0.6;claude-opus-5-5 without fallbacks;API;50-step cap;refusals failures",
+      "id": "agent-zr-opus55-xhigh",
+      "mappingId": "agent-zr-opus55",
+      "notes": "Published rounded percent retained.",
+      "reasoningEffort": "XHigh",
+      "score": 34.4,
+      "sourceId": "agent-zap-opus55",
+      "sourceLocator": "#effort Results by effort: XHigh34.4%,226/657; Without fallbacks",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Run dates2026-09-17–2026-09-18 are a range",
+        "Cost/task USD $3.17 is no-cache estimate at launch rates, not billed cost"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier AutomationBench1.0.6;claude-opus-5-5 without fallbacks;API;50-step cap;refusals failures",
+      "id": "agent-zr-opus55-max",
+      "mappingId": "agent-zr-opus55",
+      "notes": "Not42.47 default-fallback system. All five report efforts retained.",
+      "reasoningEffort": "Max",
+      "score": 40,
+      "sourceId": "agent-zap-opus55",
+      "sourceLocator": "#effort Results by effort: Max40.0%,263/657; Without fallbacks",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Run dates2026-09-17–2026-09-18 are a range",
+        "Cost/task USD $4.22 is no-cache estimate at launch rates, not billed cost"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": "2026-09-28",
+      "harness": "Zapier1.0.6 strict;47 tools;API;50-step cap per Argon report;refusals count as failures",
+      "id": "agent-z-r1",
+      "mappingId": "agent-z-argon",
+      "notes": "Date/cap from matching official Argon report; no best-selection.",
+      "reasoningEffort": "High",
+      "score": 51.29,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[0], rank1: Gemini 4 Argon (High), 51.29%",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task $1.70* is list-price estimate, not billed;50% promotion;assumed cache-read pricing"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": "2026-09-28",
+      "harness": "Zapier1.0.6 strict;47 tools;API;50-step cap per Argon report;refusals count as failures",
+      "id": "agent-z-r2",
+      "mappingId": "agent-z-argon",
+      "notes": "Medium retained alongside High.",
+      "reasoningEffort": "Medium",
+      "score": 50.08,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[1], rank2: Gemini 4 Argon (Medium), 50.08%",
+      "status": "pending",
+      "subset": "held-out private evaluation,657 tasks",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task $1.54* is list-price estimate, not billed;50% promotion;assumed cache-read pricing"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r5",
+      "mappingId": "agent-z-astra",
+      "notes": "Raw official strict row; not AutomationBench-AA.",
+      "reasoningEffort": "Max",
+      "score": 41.4,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[4], rank5: GPT-6 Astra (Max), 41.40%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.73; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r6",
+      "mappingId": "agent-z-astra",
+      "notes": "Raw official row.",
+      "reasoningEffort": "XHigh",
+      "score": 38.96,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[5], rank6: GPT-6 Astra (XHigh), 38.96%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.50; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r7",
+      "mappingId": "agent-z-astra",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 37.14,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[6], rank7: GPT-6 Astra (High), 37.14%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.44; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r10",
+      "mappingId": "agent-z-astra",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 34.09,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[9], rank10: GPT-6 Astra (Medium), 34.09%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.27; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r11",
+      "mappingId": "agent-z-sol6",
+      "notes": "XHigh exceeds Max here; both retained.",
+      "reasoningEffort": "XHigh",
+      "score": 33.2,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[10], rank11: GPT-6 Sol (XHigh), 33.2%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.27; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r13",
+      "mappingId": "agent-z-sol6",
+      "notes": "Not best-selected.",
+      "reasoningEffort": "Max",
+      "score": 32,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[12], rank13: GPT-6 Sol (Max), 32.0%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.34; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r15",
+      "mappingId": "agent-z-sol6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 31.2,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[14], rank15: GPT-6 Sol (High), 31.2%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.24; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r16",
+      "mappingId": "agent-z-g37",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 30.44,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[15], rank16: Gemini 3.7 Flash (High), 30.44%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task $0.61* list basis;promotional $0.30/task through2026-12-31;v1 cannot normalize pricing basis"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r17",
+      "mappingId": "agent-z-astra",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 30.29,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[16], rank17: GPT-6 Astra (Low), 30.29%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.08; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r18",
+      "mappingId": "agent-z-g38",
+      "notes": "Both tied effort scores retained.",
+      "reasoningEffort": "Medium",
+      "score": 29.68,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[17], rank18: Gemini 3.8 Flash (Medium), 29.68%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task $0.55* list basis;promotional $0.27 Medium;v1 cannot normalize pricing basis"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r19",
+      "mappingId": "agent-z-g38",
+      "notes": "Both tied effort scores retained.",
+      "reasoningEffort": "High",
+      "score": 29.68,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[18], rank19: Gemini 3.8 Flash (High), 29.68%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task $0.62* list basis;promotional $0.31 High;v1 cannot normalize pricing basis"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r22",
+      "mappingId": "agent-z-sol56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 28.77,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[21], rank22: GPT-5.6 Sol (Max), 28.77%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.67; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r23",
+      "mappingId": "agent-z-opus5",
+      "notes": "No fallback label on this row.",
+      "reasoningEffort": "Max",
+      "score": 26.94,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[22], rank23: Claude Opus 5 (Max), 26.94%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $3.05; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r24",
+      "mappingId": "agent-z-sol6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 26.9,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[23], rank24: GPT-6 Sol (Medium), 26.9%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.21; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r25",
+      "mappingId": "agent-z-sol56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "XHigh",
+      "score": 26.33,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[24], rank25: GPT-5.6 Sol (XHigh), 26.33%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.74; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r26",
+      "mappingId": "agent-z-opus5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "XHigh",
+      "score": 25.27,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[25], rank26: Claude Opus 5 (XHigh), 25.27%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.15; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r27",
+      "mappingId": "agent-z-astra",
+      "notes": "Explicit None differs from unknown effort.",
+      "reasoningEffort": "None",
+      "score": 25.27,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[26], rank27: GPT-6 Astra (None), 25.27%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.28; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r28",
+      "mappingId": "agent-z-sol56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 24.81,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[27], rank28: GPT-5.6 Sol (High), 24.81%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.64; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r30",
+      "mappingId": "agent-z-opus5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 23.9,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[29], rank30: Claude Opus 5 (Medium), 23.9%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.89; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r31",
+      "mappingId": "agent-z-terra56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 23.59,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[30], rank31: GPT-5.6 Terra (Max), 23.59%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.51; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r33",
+      "mappingId": "agent-z-k3",
+      "notes": "No effort specified; not inferred Max.",
+      "reasoningEffort": null,
+      "score": 22.68,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[32], rank33: Kimi K3, 22.68%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.43; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass;not with-Opus5-Fallback row",
+      "id": "agent-z-r34",
+      "mappingId": "agent-z-fable51",
+      "notes": "Combination31.4% excluded to systemOnly.",
+      "reasoningEffort": "Max",
+      "score": 22.37,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[33], rank34: Claude Fable 5.1 (Max), 22.37%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $2.45; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass;not with-Opus5-Fallback row",
+      "id": "agent-z-r35",
+      "mappingId": "agent-z-fable51",
+      "notes": "Raw non-fallback-labeled row.",
+      "reasoningEffort": "XHigh",
+      "score": 21.31,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[34], rank35: Claude Fable 5.1 (XHigh), 21.31%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $2.14; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r36",
+      "mappingId": "agent-z-sol6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 21.2,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[35], rank36: GPT-6 Sol (Low), 21.2%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.19; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r37",
+      "mappingId": "agent-z-luna6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 20.7,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[36], rank37: GPT-6 Luna (Max), 20.7%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.04; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r38",
+      "mappingId": "agent-z-spark13",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 20.7,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[37], rank38: Muse Spark 1.3 (Max), 20.7%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.39; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r39",
+      "mappingId": "agent-z-opus5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 20.55,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[38], rank39: Claude Opus 5 (High), 20.55%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.03; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r40",
+      "mappingId": "agent-z-opus5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 20.4,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[39], rank40: Claude Opus 5 (Low), 20.4%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.75; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r41",
+      "mappingId": "agent-z-sol56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 19.63,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[40], rank41: GPT-5.6 Sol (Medium), 19.63%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.57; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r45",
+      "mappingId": "agent-z-luna56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 17.05,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[44], rank45: GPT-5.6 Luna (Max), 17.05%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.07; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r46",
+      "mappingId": "agent-z-g36",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 17.05,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[45], rank46: Gemini 3.6 Flash (High), 17.05%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.58; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r48",
+      "mappingId": "agent-z-opus48",
+      "notes": "XHigh exceeds Max; both retained.",
+      "reasoningEffort": "XHigh",
+      "score": 16.89,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[47], rank48: Claude Opus 4.8 (XHigh), 16.89%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.91; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r50",
+      "mappingId": "agent-z-g36",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 16.44,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[49], rank50: Gemini 3.6 Flash (Medium), 16.44%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.55; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r51",
+      "mappingId": "agent-z-opus48",
+      "notes": "Not best-selected.",
+      "reasoningEffort": "Max",
+      "score": 16.44,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[50], rank51: Claude Opus 4.8 (Max), 16.44%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $2.36; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r52",
+      "mappingId": "agent-z-opus48",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 16.13,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[51], rank52: Claude Opus 4.8 (High), 16.13%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.48; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r54",
+      "mappingId": "agent-z-g36",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 15.68,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[53], rank54: Gemini 3.6 Flash (Low), 15.68%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.48; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r56",
+      "mappingId": "agent-z-terra56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "XHigh",
+      "score": 14.76,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[55], rank56: GPT-5.6 Terra (XHigh), 14.76%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.37; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r57",
+      "mappingId": "agent-z-luna6",
+      "notes": "High exceeds XHigh; both retained.",
+      "reasoningEffort": "High",
+      "score": 14.46,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[56], rank57: GPT-6 Luna (High), 14.46%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.02; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r58",
+      "mappingId": "agent-z-opus48",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 14,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[57], rank58: Claude Opus 4.8 (Medium), 14.0%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.44; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r60",
+      "mappingId": "agent-z-opus48",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 13.55,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[59], rank60: Claude Opus 4.8 (Low), 13.55%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $1.20; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r61",
+      "mappingId": "agent-z-g35",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 13.39,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[60], rank61: Gemini 3.5 Flash (High), 13.39%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.42; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r63",
+      "mappingId": "agent-z-luna56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "XHigh",
+      "score": 12.94,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[62], rank63: GPT-5.6 Luna (XHigh), 12.94%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.06; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r65",
+      "mappingId": "agent-z-luna6",
+      "notes": "Not best-selected.",
+      "reasoningEffort": "XHigh",
+      "score": 12.63,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[64], rank65: GPT-6 Luna (XHigh), 12.63%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.02; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r68",
+      "mappingId": "agent-z-terra56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 11.72,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[67], rank68: GPT-5.6 Terra (High), 11.72%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.29; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r69",
+      "mappingId": "agent-z-sol56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 11.72,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[68], rank69: GPT-5.6 Sol (Low), 11.72%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.42; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r71",
+      "mappingId": "agent-z-g35",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 11.42,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[70], rank71: Gemini 3.5 Flash (Medium), 11.42%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.38; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r72",
+      "mappingId": "agent-z-sonnet5",
+      "notes": "No fallback label on this row.",
+      "reasoningEffort": "Max",
+      "score": 10.65,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[71], rank72: Claude Sonnet 5 (Max), 10.65%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.88; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r76",
+      "mappingId": "agent-z-sonnet5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 9.89,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[75], rank76: Claude Sonnet 5 (High), 9.89%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.56; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r78",
+      "mappingId": "agent-z-luna6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 9.44,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[77], rank78: GPT-6 Luna (Medium), 9.44%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.02; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r79",
+      "mappingId": "agent-z-luna56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "High",
+      "score": 9.13,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[78], rank79: GPT-5.6 Luna (High), 9.13%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.05; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r81",
+      "mappingId": "agent-z-sol6",
+      "notes": "Explicit None, not unknown.",
+      "reasoningEffort": "None",
+      "score": 9.1,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[80], rank81: GPT-6 Sol (None), 9.1%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.25; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r82",
+      "mappingId": "agent-z-g35",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 8.98,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[81], rank82: Gemini 3.5 Flash (Low), 8.98%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.30; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r86",
+      "mappingId": "agent-z-terra56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 8.07,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[85], rank86: GPT-5.6 Terra (Medium), 8.07%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.22; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r87",
+      "mappingId": "agent-z-glm52",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Max",
+      "score": 7.76,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[86], rank87: GLM 5.2 (Max), 7.76%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.22; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r88",
+      "mappingId": "agent-z-sonnet5",
+      "notes": "Below High; retained.",
+      "reasoningEffort": "XHigh",
+      "score": 7.61,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[87], rank88: Claude Sonnet 5 (XHigh), 7.61%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.67; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r89",
+      "mappingId": "agent-z-terra56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 7.46,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[88], rank89: GPT-5.6 Terra (Low), 7.46%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.19; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r94",
+      "mappingId": "agent-z-sonnet5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 5.78,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[93], rank94: Claude Sonnet 5 (Medium), 5.78%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.41; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r99",
+      "mappingId": "agent-z-m3",
+      "notes": "Exact M3 version.",
+      "reasoningEffort": "Max",
+      "score": 4.87,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[98], rank99: Minimax M3 (Max), 4.87%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.07; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r102",
+      "mappingId": "agent-z-luna56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 4.26,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[101], rank102: GPT-5.6 Luna (Medium), 4.26%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.02; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r103",
+      "mappingId": "agent-z-lite35",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Medium",
+      "score": 3.96,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[102], rank103: Gemini 3.5 Flash Lite (Medium), 3.96%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.12; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r104",
+      "mappingId": "agent-z-sol56",
+      "notes": "Unsuffixed row effort unknown, not inferred None.",
+      "reasoningEffort": null,
+      "score": 3.81,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[103], rank104: GPT-5.6 Sol, 3.81%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.41; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r106",
+      "mappingId": "agent-z-sonnet5",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 3.65,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[105], rank106: Claude Sonnet 5 (Low), 3.65%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.26; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r108",
+      "mappingId": "agent-z-lite35",
+      "notes": "Below Medium; retained.",
+      "reasoningEffort": "High",
+      "score": 3.35,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[107], rank108: Gemini 3.5 Flash Lite (High), 3.35%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.13; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r109",
+      "mappingId": "agent-z-k27code",
+      "notes": "Effort unspecified; no Highspeed transfer.",
+      "reasoningEffort": null,
+      "score": 3.2,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[108], rank109: Kimi K2.7 Code, 3.2%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.24; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r113",
+      "mappingId": "agent-z-luna56",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 1.83,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[112], rank113: GPT-5.6 Luna (Low), 1.83%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.01; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r116",
+      "mappingId": "agent-z-luna6",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Low",
+      "score": 1.22,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[115], rank116: GPT-6 Luna (Low), 1.22%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.01; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r117",
+      "mappingId": "agent-z-g35",
+      "notes": "Raw official row.",
+      "reasoningEffort": "Minimal",
+      "score": 1.22,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[116], rank117: Gemini 3.5 Flash (Minimal), 1.22%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.18; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r119",
+      "mappingId": "agent-z-terra56",
+      "notes": "Unsuffixed effort unknown.",
+      "reasoningEffort": null,
+      "score": 0.76,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[118], rank119: GPT-5.6 Terra, 0.76%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.12; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r122",
+      "mappingId": "agent-z-luna6",
+      "notes": "Explicit None retained.",
+      "reasoningEffort": "None",
+      "score": 0.3,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[121], rank122: GPT-6 Luna (None), 0.3%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.01; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r124",
+      "mappingId": "agent-z-luna56",
+      "notes": "Unsuffixed effort unknown.",
+      "reasoningEffort": null,
+      "score": 0.15,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[123], rank124: GPT-5.6 Luna, 0.15%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.02; cost basis not normalized in v1"
+      ]
+    },
+    {
+      "benchmarkId": "automationbench-v1.0.6",
+      "collectedAt": "2026-10-28",
+      "evaluatedAt": null,
+      "harness": "Zapier1.0.6;47 tools;autonomous agent;strict all-assertions pass",
+      "id": "agent-z-r126",
+      "mappingId": "agent-z-lite35",
+      "notes": "Explicit true zero retained, not missing.",
+      "reasoningEffort": "Low",
+      "score": 0,
+      "sourceId": "agent-zap-table",
+      "sourceLocator": "module L[125], rank126: Gemini 3.5 Flash Lite (Low), 0.0%",
+      "status": "pending",
+      "subset": "held-out private evaluation",
+      "toolsEnabled": true,
+      "unrepresentedConditions": [
+        "Cost/task USD $0.06; cost basis not normalized in v1"
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}
