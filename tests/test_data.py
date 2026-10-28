@@ -2,13 +2,18 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
+import sys
 import tempfile
 import unittest
 import zipfile
+from contextlib import redirect_stdout
+from unittest.mock import patch
 
+import scripts.build as build_script
 from scripts.build import build
 from scripts.validate import DataError, load_data, read_bundle, read_json
 
@@ -132,6 +137,21 @@ class BuildTest(unittest.TestCase):
         self.assertEqual([], report["removed"])
         self.assertFalse({row["id"] for row in rows if row["status"] == "pending"} &
                          {row["id"] for row in snapshot["scores"]})
+
+    def test_cli_entrypoint_builds_from_repository_root(self):
+        rows = self.scores()
+        added = copy.deepcopy(next(row for row in rows if row["status"] == "approved"))
+        added["id"] = "synthetic-cli-check-score"
+        added["score"] = 88.8
+        rows.append(added)
+        self.write_scores(rows)
+
+        args = ["build.py", "--version", "3", "--baseline", str(self.root), "--output", str(self.output)]
+        with patch.object(build_script, "ROOT", self.root), patch.object(sys, "argv", args):
+            with redirect_stdout(io.StringIO()):
+                self.assertEqual(0, build_script.main())
+
+        self.assertTrue((self.output / "manifest.json").is_file())
 
     def test_noop_or_same_version_release_is_refused(self):
         with self.assertRaisesRegex(DataError, "no Android-visible score changes"):

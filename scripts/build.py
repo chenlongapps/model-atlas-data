@@ -26,6 +26,7 @@ except ImportError:
 DEFAULT_BASE_URL = "https://chenlongapps.github.io/model-atlas-data"
 VERSION_FILE_RE = re.compile(r"^scores-v([0-9]+)\.json$")
 ATTRIBUTION_FILE_RE = re.compile(r"^v([0-9]+)\.json$")
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def safe_relative_path(value: str) -> Path:
