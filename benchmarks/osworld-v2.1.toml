@@ -1,0 +1,13 @@
+id = "osworld-v2.1"
+name = "OSWorld"
+version = "osworld-v2.1"
+category = "computer-use"
+description = "Evaluates agents' ability to complete long-horizon computer-use workflows in real desktop environments and applications. This definition uses binary task completion rate; partial credit is a different scoring measure and must not be conflated with completion rate."
+
+organization = "XLANG Lab"
+metric = "binary task completion rate"
+unit = "percent"
+higher_is_better = true
+
+url = "https://github.com/xlang-ai/OSWorld-V2"
+methodology = "https://arxiv.org/abs/2606.29537"

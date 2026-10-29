@@ -2,7 +2,7 @@ id = "artificial-analysis-intelligence-index-v5"
 name = "Artificial Analysis Intelligence Index"
 version = "5.0"
 category = "composite"
-description = "综合评估语言模型在知识工作、编程、科学及通用能力方面的表现。"
+description = "A composite evaluation of language model performance across knowledge work, coding, science, and general knowledge, aggregating nine evaluations into a single score."
 
 organization = "Artificial Analysis"
 metric = "index score"

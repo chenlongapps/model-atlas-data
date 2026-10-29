@@ -1,0 +1,13 @@
+id = "chartography"
+name = "Chartography"
+version = "unspecified"
+category = "multimodal"
+description = "Evaluates visual reading, domain interpretation, and multi-step chart reasoning using charts from specialized fields and expert-written questions. Official materials describe 100 tasks but do not specify a semantic version; tool-use conditions and multiple-sampling metrics must be recorded separately."
+
+organization = "Surge AI"
+metric = "accuracy (mean; Pass@1)"
+unit = "percent"
+higher_is_better = true
+
+url = "https://surgehq.ai/benchmarks/chartography"
+methodology = "https://github.com/surge-ai/chartography"

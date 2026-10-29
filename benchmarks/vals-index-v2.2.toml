@@ -1,0 +1,13 @@
+id = "vals-index-v2.2"
+name = "Vals Index"
+version = "2.2"
+category = "composite"
+description = "Aggregates agent performance on finance, coding, legal, and tax tasks using weights proportional to each sector's share of U.S. GDP, with the information sector used as a proxy for coding."
+
+organization = "Vals AI"
+metric = "performance score"
+unit = "percent"
+higher_is_better = true
+
+url = "https://www.vals.ai/benchmarks/vals_index"
+methodology = "https://www.vals.ai/benchmarks/vals_index"

@@ -1,0 +1,13 @@
+id = "humanitys-last-exam"
+name = "Humanity's Last Exam"
+version = "unspecified"
+category = "reasoning"
+description = "A multimodal academic question-answering benchmark covering more than 100 disciplines. This definition refers to the original 2,500-question set officially finalized on 2025-04-03; the official materials do not assign it a semantic version, and it excludes HLE-Rolling and HLE-Diamond."
+
+organization = "Center for AI Safety / Scale AI"
+metric = "accuracy"
+unit = "percent"
+higher_is_better = true
+
+url = "https://lastexam.ai/"
+methodology = "https://arxiv.org/abs/2501.14249"

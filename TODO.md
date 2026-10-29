@@ -1,0 +1,4 @@
+- [ ] 数据校验脚本。主要检查 检查 TOML 语法。
+- [ ] JSON 构建脚本
+- [ ] github pages 发布脚本
+- [ ] github action 自动化脚本（ci 和 发布）

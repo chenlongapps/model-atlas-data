@@ -1,0 +1,13 @@
+id = "automationbench-v1.0.6"
+name = "AutomationBench"
+version = "1.0.6"
+category = "agent"
+description = "Evaluates agents' ability to complete cross-application workflows in simulated business applications, using the percentage of tasks for which all assertions pass as the primary metric. The official leaderboard uses a separate, held-out private task set; results on the public task set should not be treated as equivalent."
+
+organization = "Zapier"
+metric = "task_completed_correctly"
+unit = "percent"
+higher_is_better = true
+
+url = "https://zapier.com/benchmarks"
+methodology = "https://github.com/zapier/AutomationBench"

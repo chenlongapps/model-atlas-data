@@ -1,0 +1,13 @@
+id = "terminal-bench-science-v0.1"
+name = "Terminal-Bench-Science"
+version = "0.1.0"
+category = "science"
+description = "Evaluates agents on 70 expert-curated, terminal-based research workflows across the life, physical, Earth, mathematical, and engineering sciences. Task-specific tests verify outputs such as scientific data analyses, simulations, optimizations, proofs, and model fits."
+
+organization = "Terminal-Bench-Science / Stanford University"
+metric = "task resolution rate"
+unit = "percent"
+higher_is_better = true
+
+url = "https://www.tbench.ai/news/terminal-bench-science-0-1"
+methodology = "https://github.com/harbor-framework/terminal-bench-science"

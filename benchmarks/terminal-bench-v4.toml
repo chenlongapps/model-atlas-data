@@ -1,0 +1,13 @@
+id = "terminal-bench-v4"
+name = "Terminal-Bench"
+version = "4.0.0"
+category = "coding"
+description = "Evaluates agents' ability to perform tasks such as software development, scientific computing, security, and system administration in a sandboxed terminal; this version changes the task set, environments, and resource configurations."
+
+organization = "Terminal-Bench / Harbor"
+metric = "task resolution rate"
+unit = "percent"
+higher_is_better = true
+
+url = "https://www.tbench.ai/"
+methodology = "https://www.tbench.ai/news/terminal-bench-4-0"

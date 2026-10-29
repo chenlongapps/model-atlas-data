@@ -1,0 +1,13 @@
+id = "swe-bench-pro-v2"
+name = "SWE-bench Pro"
+version = "2.0.0"
+category = "coding"
+description = "Evaluates agents' ability to solve long-horizon software engineering tasks in real-world codebases using hidden tests. The V2 default configuration contains 642 tasks; the HARD subset and the original 731-task V1 configuration are different datasets and should not be combined with the default configuration."
+
+organization = "Scale AI"
+metric = "task resolution rate"
+unit = "percent"
+higher_is_better = true
+
+url = "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro"
+methodology = "https://github.com/scaleapi/SWE-bench_Pro-os"
