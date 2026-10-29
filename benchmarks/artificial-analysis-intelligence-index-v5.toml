@@ -1,0 +1,16 @@
+id = "artificial-analysis-intelligence-index-v5"
+name = "Artificial Analysis Intelligence Index"
+version = "5.0"
+category = "composite"
+description = "综合评估语言模型在知识工作、编程、科学及通用能力方面的表现。"
+
+organization = "Artificial Analysis"
+metric = "index score"
+unit = "points"
+higher_is_better = true
+
+min_score = 0
+max_score = 100
+
+url = "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index"
+methodology = "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
