@@ -31,6 +31,39 @@ python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 ```
 
+## JSON 构建
+
+同样使用 Python 3.11+，无需第三方依赖：
+
+```sh
+python3 scripts/build.py
+```
+
+默认读取脚本所在仓库的源数据并生成以下文件（`dist/` 不提交 Git）：
+
+```text
+dist/
+  models.json         # { "<lab>/<model-id>": { ...模型字段... } }
+  benchmarks.json     # { "<benchmark-id>": { ...定义字段... } }
+  i18n/
+    zh-CN.json        # 保留 model.descriptions / benchmark.description 表结构
+```
+
+- 不增加顶层 `version`、内嵌翻译、派生 `results` 或排行榜。模型保留 `schema`，Benchmark 的 `id` 作为对象键，不在定义内部重复。
+- 保留其余源字段（包括未知但可转换为 JSON 的字段）、成绩条件、来源、数组顺序和缺失状态；不补默认值、不合并成绩、不选择最高分。JSON 不保留 TOML 注释或数字的书写形式，如 `42.10` 可能输出为 `42.1`，不会主动取整或重评分。
+- 检查 TOML、模型路径、`schema = 2`、主要字段类型、成绩的 `name`/`score`、重复或冲突记录、已有来源 URL 的格式、Benchmark 定义必填字段及唯一 ID、本地化表结构与键引用。未知本地化 ID、无效类型等错误使构建失败，返回 `1`。
+- 成绩与定义按名称、显式版本和指标精确匹配。未匹配或存在歧义的数量、缺失的来源或现有语言中的描述翻译仅作为警告报告，构建仍返回 `0`；不推断版本、指标或默认条件，不丢弃原始成绩。没有任何有效模型时失败；`benchmarks/`、`i18n/` 可以暂缺。
+- 使用 UTF-8、稳定键排序和末尾换行，相同源数据生成相同内容。拒绝 NaN、Infinity 及不能直接转换为 JSON 的 TOML 日期/时间值；日期字段应使用源格式要求的字符串。
+- 全部校验、序列化和临时文件写入成功后才逐文件原子替换产物；这不是整个目录的事务，替换阶段的 I/O 故障可能留下部分更新，应修复后重跑。不会清空输出目录或删除无关文件；若存在已无对应源文件的 `i18n/*.json`，需先手动移走旧产物。
+
+这些检查不等于完整 Models.dev Schema 校验，也不会联网核验来源内容、评测真实性或翻译语义。修改后的测试仍使用上面的 `unittest` 命令运行。
+
+支持从其他目录运行，以及指定源仓库和输出目录；显式传入的相对路径相对于当前工作目录：
+
+```sh
+python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-data --output /path/to/output
+```
+
 ## 自动同步新增模型
 
 `.github/workflows/sync-models.yml` 每小时第 17 分钟运行，也可在 GitHub Actions 手动触发。它从 [Models.dev 的 `dev` 分支](https://github.com/anomalyco/models.dev/tree/dev/models) 拉取研发机构级 `models/` 数据，并直接提交本仓库默认分支；不创建 PR。需要允许 `GITHUB_TOKEN` 写入仓库，且默认分支保护规则允许机器人推送；推送被拒绝或分支并发更新时任务失败，不强推或自动变基。
