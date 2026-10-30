@@ -1,4 +1,5 @@
-- [ ] 数据校验脚本。主要检查 检查 TOML 语法。
+- [x] 数据校验脚本。主要检查 TOML 语法。
 - [ ] JSON 构建脚本
+- [x] github action 自动同步 https://models.dev/ 的数据,只同步新增模型，不修改和删除。
 - [ ] github pages 发布脚本
 - [ ] github action 自动化脚本（ci 和 发布）

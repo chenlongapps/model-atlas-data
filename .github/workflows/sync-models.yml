@@ -1,0 +1,59 @@
+name: Sync new Models.dev models
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-models
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Test sync and validation scripts
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Fetch upstream lab files
+        run: |
+          git clone --depth=1 --branch=dev --filter=blob:none --sparse https://github.com/anomalyco/models.dev.git "$RUNNER_TEMP/models-dev"
+          git -C "$RUNNER_TEMP/models-dev" sparse-checkout set models
+
+      - name: Add new models only
+        run: |
+          python3 scripts/sync_models.py sync --upstream "$RUNNER_TEMP/models-dev" --report "$RUNNER_TEMP/models-dev-sync.json" --summary "$GITHUB_STEP_SUMMARY"
+
+      - name: Validate TOML syntax
+        run: python3 scripts/validate.py
+
+      - name: Verify additions and push
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git add -- models/
+          python3 scripts/sync_models.py check-staged --report "$RUNNER_TEMP/models-dev-sync.json"
+          if git diff --cached --quiet; then
+            echo "No new models to commit."
+            exit 0
+          fi
+          UPSTREAM_SHA=$(git -C "$RUNNER_TEMP/models-dev" rev-parse HEAD)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: sync new Models.dev models' -m "Source: https://github.com/anomalyco/models.dev/tree/$UPSTREAM_SHA/models"
+          git push origin "HEAD:refs/heads/$DEFAULT_BRANCH"
