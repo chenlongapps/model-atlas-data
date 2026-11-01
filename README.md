@@ -64,6 +64,36 @@ dist/
 python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-data --output /path/to/output
 ```
 
+## GitHub Pages 数据发布
+
+`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 发布 JSON，不生成展示网站、不提交 `dist/`，也不修改 JSON 结构。发布包只包含本次构建的 JSON 和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。
+
+首次启用：
+
+1. 在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。
+2. 确认 **Settings → Environments → github-pages** 的部署规则允许默认分支；如需审批，需批准部署后才会发布。
+3. 在 **Actions → Deploy data to GitHub Pages → Run workflow** 中选择默认分支并运行。部署成功后可从该次运行的 `github-pages` 环境链接查看站点地址。
+
+此仓库默认地址下的数据端点为（如配置自定义域名，以部署输出地址为准）：
+
+```text
+https://chenlongapps.github.io/model-atlas-data/models.json
+https://chenlongapps.github.io/model-atlas-data/benchmarks.json
+https://chenlongapps.github.io/model-atlas-data/i18n/zh-CN.json
+https://chenlongapps.github.io/model-atlas-data/LICENSE.models-dev
+```
+
+未提供 `index.html`，站点根路径返回 404 不代表 JSON 发布失败，应访问具体数据端点。
+
+自动发布规则：
+
+- `main` 分支的模型、Benchmark 定义、本地化、构建或校验脚本、测试、上游许可及 Pages 工作流变更时触发。若将默认分支从 `main` 改名，需同步修改工作流中的 `push.branches`。
+- `Sync new Models.dev models` 工作流成功完成后触发，即使没有新增模型也会重建。同步使用 `GITHUB_TOKEN` 推送，不会触发普通 `push` 工作流，因此单独使用 `workflow_run` 衔接；更改同步工作流的 `name` 时也须更新此引用。
+- 支持手动触发，但只允许默认分支部署；同步完成事件还须来自本仓库的默认分支。各入口均检出默认分支的最新代码，不下载或执行同步运行的产物；排队期间有新提交时，实际构建版本可能晚于触发版本，以 checkout 日志为准。
+- 发布串行执行，不取消进行中的发布。测试、校验或构建失败时不部署，保留此前已发布的数据。构建仅有仓库读取权限，部署任务单独授予 `pages: write` 和 `id-token: write`，无需个人访问令牌。
+
+失败时先查看 Actions 中失败步骤：数据或测试失败时修正源文件后重试；Pages 配置、权限或环境审批失败时检查上述仓库设置。现有构建警告仍不阻止发布，不代表成绩来源和翻译已通过人工核验。该工作流只服务发布，不替代面向 PR 的通用 CI。
+
 ## 自动同步新增模型
 
 `.github/workflows/sync-models.yml` 每小时第 17 分钟运行，也可在 GitHub Actions 手动触发。它从 [Models.dev 的 `dev` 分支](https://github.com/anomalyco/models.dev/tree/dev/models) 拉取研发机构级 `models/` 数据，并直接提交本仓库默认分支；不创建 PR。需要允许 `GITHUB_TOKEN` 写入仓库，且默认分支保护规则允许机器人推送；推送被拒绝或分支并发更新时任务失败，不强推或自动变基。
