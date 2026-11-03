@@ -8,6 +8,7 @@ on:
       - 'benchmarks/**'
       - 'i18n/**'
       - 'scripts/build.py'
+      - 'scripts/manifest.py'
       - 'scripts/validate.py'
       - 'tests/**'
       - 'LICENSE.models-dev'
@@ -58,6 +59,9 @@ jobs:
         run: |
           python3 scripts/build.py --output "$RUNNER_TEMP/pages"
           cp LICENSE.models-dev "$RUNNER_TEMP/pages/LICENSE.models-dev"
+
+      - name: Generate release manifest
+        run: python3 scripts/manifest.py --output "$RUNNER_TEMP/pages"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0

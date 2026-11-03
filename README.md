@@ -66,7 +66,7 @@ python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-d
 
 ## GitHub Pages 数据发布
 
-`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 发布 JSON，不生成展示网站、不提交 `dist/`，也不修改 JSON 结构。发布包只包含本次构建的 JSON 和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。
+`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 发布 JSON，不生成展示网站、不提交 `dist/`，也不修改现有数据 JSON 结构。发布包包含本次构建的 JSON、`manifest.json` 和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。
 
 首次启用：
 
@@ -80,14 +80,33 @@ python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-d
 https://chenlongapps.github.io/model-atlas-data/models.json
 https://chenlongapps.github.io/model-atlas-data/benchmarks.json
 https://chenlongapps.github.io/model-atlas-data/i18n/zh-CN.json
+https://chenlongapps.github.io/model-atlas-data/manifest.json
 https://chenlongapps.github.io/model-atlas-data/LICENSE.models-dev
 ```
+
+`manifest.json` 描述本次发布包：
+
+- `schema_version`：manifest 格式版本，当前为整数 `1`。
+- `git_commit`：构建时实际检出的完整 Git 提交 ID，不一定是触发工作流的提交。
+- `published_at`：UTC 时间，格式为 `YYYY-MM-DDTHH:MM:SSZ`；表示生成发布包的时间，而非部署完成时间。
+- `files`：以相对于 manifest 的路径为键，列出 `models.json`、`benchmarks.json`、所有构建的 `i18n/*.json` 和 `LICENSE.models-dev`；每项包含文件实际字节的 `sha256`（小写十六进制）和 `size`（字节数）。manifest 不包含自身。
+- `data_version`：`sha256:` 加上 `files` 对象规范化后的 SHA-256 摘要。规范化使用 UTF-8 编码 JSON、按键排序、不转义非 ASCII 字符、无多余空格（Python 的 `json.dumps(files, ensure_ascii=False, sort_keys=True, separators=(",", ":"))`），不添加换行。同一文件清单和内容得到相同版本；Git 提交或生成时间变化不影响版本。
+
+本地生成完整发布包（须先提交相关源码，且输出目录应为全新目录）：
+
+```sh
+python3 scripts/build.py --output /path/to/release
+cp LICENSE.models-dev /path/to/release/LICENSE.models-dev
+python3 scripts/manifest.py --output /path/to/release
+```
+
+manifest 脚本支持 `--root` 指定 Git 仓库，`--output` 默认为 `<root>/dist`；相对路径相对于当前工作目录。它拒绝相关模型、定义、本地化、构建脚本、manifest 脚本或许可文件存在未提交更改，检查输出 JSON 清单和许可文件，并先完成校验再原子替换 manifest。脚本不会自行重建或证明已有 JSON 确实由当前提交生成，因此应紧接构建步骤执行；Pages 工作流使用干净检出和全新输出目录。校验值用于检测文件是否一致，不提供签名或来源真实性保证。
 
 未提供 `index.html`，站点根路径返回 404 不代表 JSON 发布失败，应访问具体数据端点。
 
 自动发布规则：
 
-- `main` 分支的模型、Benchmark 定义、本地化、构建或校验脚本、测试、上游许可及 Pages 工作流变更时触发。若将默认分支从 `main` 改名，需同步修改工作流中的 `push.branches`。
+- `main` 分支的模型、Benchmark 定义、本地化、构建、manifest 或校验脚本、测试、上游许可及 Pages 工作流变更时触发。若将默认分支从 `main` 改名，需同步修改工作流中的 `push.branches`。
 - `Sync new Models.dev models` 工作流成功完成后触发，即使没有新增模型也会重建。同步使用 `GITHUB_TOKEN` 推送，不会触发普通 `push` 工作流，因此单独使用 `workflow_run` 衔接；更改同步工作流的 `name` 时也须更新此引用。
 - 支持手动触发，但只允许默认分支部署；同步完成事件还须来自本仓库的默认分支。各入口均检出默认分支的最新代码，不下载或执行同步运行的产物；排队期间有新提交时，实际构建版本可能晚于触发版本，以 checkout 日志为准。
 - 发布串行执行，不取消进行中的发布。测试、校验或构建失败时不部署，保留此前已发布的数据。构建仅有仓库读取权限，部署任务单独授予 `pages: write` 和 `id-token: write`，无需个人访问令牌。
