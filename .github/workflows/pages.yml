@@ -7,6 +7,7 @@ on:
       - 'models/**'
       - 'benchmarks/**'
       - 'i18n/**'
+      - 'web/**'
       - 'scripts/build.py'
       - 'scripts/manifest.py'
       - 'scripts/validate.py'
@@ -52,6 +53,9 @@ jobs:
       - name: Run tests
         run: python3 -m unittest discover -s tests -v
 
+      - name: Run Web tests
+        run: node --test tests/web.test.mjs
+
       - name: Validate TOML syntax
         run: python3 scripts/validate.py
 
@@ -62,6 +66,9 @@ jobs:
 
       - name: Generate release manifest
         run: python3 scripts/manifest.py --output "$RUNNER_TEMP/pages"
+
+      - name: Copy Web Explorer assets
+        run: cp -R web/. "$RUNNER_TEMP/pages/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0

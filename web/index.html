@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Explore AI model profiles, benchmark definitions and traceable results.">
+  <title>ModelAtlas Data — AI Models &amp; Benchmarks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Rubik:wght@300..900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <div class="header-brand"><a class="brand" href="#/models">ModelAtlas Data</a></div>
+    <div class="header-actions"><nav class="top-nav" aria-label="Main navigation" data-i18n-aria="mainNav"><a href="#/models" data-nav="models" data-i18n="models">Models</a><a href="#/benchmarks" data-nav="benchmarks" data-i18n="benchmarks">Benchmarks</a></nav><a class="github" href="https://github.com/chenlongapps/model-atlas-data" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only" data-i18n="external"> (opens in a new tab)</span></a><button id="search-trigger" class="search-trigger" type="button" aria-label="Search" data-i18n-aria="search" aria-haspopup="dialog" aria-controls="search-dialog" aria-keyshortcuts="Control+K Meta+K"><span>⌕ &nbsp; <span data-i18n="search">Search</span></span><kbd>Ctrl K</kbd></button><div id="language"></div><button id="theme" type="button" aria-label="Change theme">Theme: System</button><button id="menu-trigger" class="menu-trigger" type="button" aria-label="Open menu" data-i18n-aria="openMenu" aria-haspopup="dialog" aria-controls="mobile-menu">☰</button></div>
+  </div></header>
+  <div class="page-scroll"><main id="main" tabindex="-1"><p class="state" role="status">Loading data…</p></main>
+  <footer><div id="data-info" class="footer-meta">Loading release information…</div><div class="footer-links"><a href="https://github.com/chenlongapps/model-atlas-data" target="_blank" rel="noopener noreferrer" data-i18n="sourceRepository">Source repository ↗</a><a href="./LICENSE.models-dev" data-i18n="licenseLink">Models.dev license</a><a href="./models.json" data-i18n="jsonData">JSON data</a></div></footer></div>
+  <dialog id="search-dialog" aria-labelledby="search-title"><div class="dialog-heading"><h2 id="search-title" data-i18n="searchTitle">Search models and benchmarks</h2><button type="button" data-close="search-dialog" aria-label="Close search" data-i18n-aria="closeSearch">×</button></div><input id="global-search" type="search" placeholder="Search by name or ID" data-i18n-placeholder="searchPlaceholder" aria-label="Search models and benchmarks" data-i18n-aria="searchTitle" autocomplete="off"><p id="search-count" class="dialog-meta" aria-live="polite"></p><div id="search-results" class="search-results"></div></dialog>
+  <dialog id="mobile-menu" aria-labelledby="menu-title"><div class="dialog-heading"><h2 id="menu-title" data-i18n="menu">Menu</h2><button type="button" data-close="mobile-menu" aria-label="Close menu" data-i18n-aria="closeMenu">×</button></div><nav class="mobile-nav" aria-label="Mobile navigation" data-i18n-aria="mobileNav"><a href="#/models" data-nav="models" data-i18n="models">Models</a><a href="#/benchmarks" data-nav="benchmarks" data-i18n="benchmarks">Benchmarks</a><a href="https://github.com/chenlongapps/model-atlas-data">GitHub ↗</a></nav></dialog>
+</body>
+</html>

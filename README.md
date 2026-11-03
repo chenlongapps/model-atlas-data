@@ -64,9 +64,23 @@ dist/
 python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-data --output /path/to/output
 ```
 
-## GitHub Pages 数据发布
+## Web Explorer 与 GitHub Pages 数据发布
 
-`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 发布 JSON，不生成展示网站、不提交 `dist/`，也不修改现有数据 JSON 结构。发布包包含本次构建的 JSON、`manifest.json` 和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。
+Web Explorer 是数据集的轻量静态浏览入口，默认地址为 <https://chenlongapps.github.io/model-atlas-data/>（需先成功部署）。界面参考 Models.dev，Models 和 Benchmarks 分别提供搜索、筛选、表格排序、详情与双向导航；顶部搜索支持 `Ctrl+K` / `⌘K`。界面支持简体中文和英文，可在顶部切换并在浏览器允许时记住选择；首次使用浏览器语言，不支持时回退英文。中文描述优先使用现有翻译，缺失时回退原文；英文显示原文，原始数据未必均为英文。成绩逐条保留原始条件及来源，不提供未经可比性验证的排名。关联只采用名称、显式版本和指标的精确唯一匹配，未匹配的成绩仍在模型详情中显示。
+
+网站直接读取同一发布目录的 JSON，不修改数据或 Android 所用结构。`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 同时发布网页和 JSON；不提交 `dist/`。发布包包含本次构建的 JSON、`manifest.json`、网页资源和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。网页资源不加入 manifest，也不影响 `data_version`。
+
+本地预览（Python 3.11+，无需第三方依赖）：
+
+```sh
+python3 scripts/preview.py
+```
+
+浏览 <http://127.0.0.1:8000/>，按 `Ctrl+C` 停止。可用 `--port 端口号` 指定端口，`--port 0` 自动选择可用端口。脚本构建当前源数据并在临时目录中提供网页和数据，退出时清理；仅监听本机，不生成 manifest，因此页面显示发布信息不可用。如需生成完整 manifest，使用下方发布包命令，源数据相关文件须先提交。网页测试使用 Node.js（20+）：
+
+```sh
+node --test tests/web.test.mjs
+```
 
 首次启用：
 
@@ -98,15 +112,14 @@ https://chenlongapps.github.io/model-atlas-data/LICENSE.models-dev
 python3 scripts/build.py --output /path/to/release
 cp LICENSE.models-dev /path/to/release/LICENSE.models-dev
 python3 scripts/manifest.py --output /path/to/release
+cp -R web/. /path/to/release/
 ```
 
 manifest 脚本支持 `--root` 指定 Git 仓库，`--output` 默认为 `<root>/dist`；相对路径相对于当前工作目录。它拒绝相关模型、定义、本地化、构建脚本、manifest 脚本或许可文件存在未提交更改，检查输出 JSON 清单和许可文件，并先完成校验再原子替换 manifest。脚本不会自行重建或证明已有 JSON 确实由当前提交生成，因此应紧接构建步骤执行；Pages 工作流使用干净检出和全新输出目录。校验值用于检测文件是否一致，不提供签名或来源真实性保证。
 
-未提供 `index.html`，站点根路径返回 404 不代表 JSON 发布失败，应访问具体数据端点。
-
 自动发布规则：
 
-- `main` 分支的模型、Benchmark 定义、本地化、构建、manifest 或校验脚本、测试、上游许可及 Pages 工作流变更时触发。若将默认分支从 `main` 改名，需同步修改工作流中的 `push.branches`。
+- `main` 分支的模型、Benchmark 定义、本地化、网页资源、构建、manifest 或校验脚本、测试、上游许可及 Pages 工作流变更时触发。若将默认分支从 `main` 改名，需同步修改工作流中的 `push.branches`。
 - `Sync new Models.dev models` 工作流成功完成后触发，即使没有新增模型也会重建。同步使用 `GITHUB_TOKEN` 推送，不会触发普通 `push` 工作流，因此单独使用 `workflow_run` 衔接；更改同步工作流的 `name` 时也须更新此引用。
 - 支持手动触发，但只允许默认分支部署；同步完成事件还须来自本仓库的默认分支。各入口均检出默认分支的最新代码，不下载或执行同步运行的产物；排队期间有新提交时，实际构建版本可能晚于触发版本，以 checkout 日志为准。
 - 发布串行执行，不取消进行中的发布。测试、校验或构建失败时不部署，保留此前已发布的数据。构建仅有仓库读取权限，部署任务单独授予 `pages: write` 和 `id-token: write`，无需个人访问令牌。
