@@ -4,6 +4,7 @@ import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchma
 import { messages, resolveLanguage, descriptionLocale } from '../web/i18n.mjs';
 import { readFile } from 'node:fs/promises';
 import { createSelect } from '../web/select.mjs';
+import { groupModalities, renderModalities } from '../web/modalities.mjs';
 
 const models = {
   'lab/A': { name: 'Alpha', open_weights: true, release_date: '2025-01-01' },
@@ -12,6 +13,43 @@ const models = {
 };
 const definition = { name: 'Bench', version: '1', metric: 'accuracy', category: 'reasoning', organization: 'Org' };
 const result = { name: 'Bench', version: '1', metric: 'accuracy', score: 42, dataset: 'set A', variant: 'no tools' };
+
+test('modality grouping preserves MIME formats and unknown values', () => {
+  assert.deepEqual(groupModalities(['text', 'text/plain', 'image/png', 'image/jpeg', 'image/png', 'application/pdf', 'pdf', 'embedding', 'audio/wav', 'video/mp4']), [
+    { type: 'text', formats: ['text', 'text/plain'] },
+    { type: 'image', formats: ['image/png', 'image/jpeg'] },
+    { type: 'pdf', formats: ['application/pdf', 'pdf'] },
+    { type: 'embedding', formats: ['embedding'] },
+    { type: 'audio', formats: ['audio/wav'] },
+    { type: 'video', formats: ['video/mp4'] },
+  ]);
+  assert.deepEqual(groupModalities(undefined), []);
+  assert.deepEqual(groupModalities([]), []);
+});
+
+test('modality icons provide translated accessible labels and unknown types remain visible', () => {
+  class Element {
+    constructor() { this.children = []; this.attributes = {}; }
+    setAttribute(name, value) { this.attributes[name] = value; }
+    append(child) { this.children.push(child); }
+  }
+  const previousDocument = globalThis.document;
+  globalThis.document = { createElement: () => new Element(), createElementNS: () => new Element() };
+  try {
+    assert.equal(renderModalities([], messages.en.modalityLabels), '—');
+    const rendered = renderModalities(['image/png', 'image/jpeg', 'embedding', 'decision', 'reranking', 'future-type'], messages['zh-CN'].modalityLabels);
+    assert.equal(rendered.children[0].attributes['aria-label'], '图片: image/png, image/jpeg');
+    assert.equal(rendered.children[0].attributes.title, '图片: image/png, image/jpeg');
+    assert.equal(rendered.children[0].children[0].attributes['aria-hidden'], 'true');
+    for (const [index, label] of [[1, '嵌入'], [2, '决策'], [3, '重排序']]) {
+      assert.equal(rendered.children[index].className, 'modality-icon');
+      assert.equal(rendered.children[index].attributes['aria-label'], label);
+      assert.equal(rendered.children[index].children.length, 1);
+    }
+    assert.equal(rendered.children[4].textContent, 'future-type');
+    assert.equal(rendered.children[4].attributes['aria-label'], 'future-type');
+  } finally { globalThis.document = previousDocument; }
+});
 
 test('lab logo URLs stay on the expected host and reject invalid IDs', () => {
   assert.equal(labLogoUrl('anthropic'), 'https://models.dev/logos/anthropic.svg');

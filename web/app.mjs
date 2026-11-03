@@ -1,6 +1,7 @@
 import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchmarks, sortEntries, description, loadData } from './data.mjs';
 import { messages, resolveLanguage, descriptionLocale } from './i18n.mjs';
 import { createSelect } from './select.mjs';
+import { renderModalities } from './modalities.mjs';
 
 let savedLanguage;
 try { savedLanguage = localStorage.getItem('model-atlas-language'); } catch { /* Optional preference. */ }
@@ -104,17 +105,17 @@ function listing(kind) {
     const pager = pagination(items.length, s, update);
     const rows = items.slice((s.page - 1) * pageSize, s.page * pageSize).map(([id, item]) => isModel ? [
       el('div', {}, internal('models', id, item.name || id, 'primary'), el('span', { class: 'sub mono' }, id)),
-      labLabel(id), item.release_date, badge(item.open_weights), compact(item.limit?.context), (data.index.byModel.get(id) || []).length,
+      labLabel(id), item.release_date, badge(item.open_weights), renderModalities(item.modalities?.input, T.modalityLabels), renderModalities(item.modalities?.output, T.modalityLabels), compact(item.limit?.context), (data.index.byModel.get(id) || []).length,
     ] : [
       el('div', {}, internal('benchmarks', id, item.name || id, 'primary'), el('span', { class: 'sub mono' }, id)),
       item.version, item.category, item.metric, item.unit,
       el('div', { class: 'description-cell' }, text(description(descriptionLocale(language, data.locale), 'benchmark', id, item.description))),
     ]);
-    const sorting = { state: s, fields: isModel ? ['name', 'lab', 'release', 'weights', 'context', 'results'] : ['name', 'version', 'category', 'metric', 'unit', null], change: field => {
+    const sorting = { state: s, fields: isModel ? ['name', 'lab', 'release', 'weights', null, null, 'context', 'results'] : ['name', 'version', 'category', 'metric', 'unit', null], change: field => {
       s.direction = s.sortField === field && s.direction === 'asc' ? 'desc' : 'asc'; s.sortField = field; s.page = 1; update();
       output.querySelector(`[data-sort="${field}"]`)?.focus({ preventScroll: true });
     } };
-    output.replaceChildren(table(isModel ? [T.model, T.organization, T.release, T.weights, T.context, T.results] : [T.benchmark, T.version, T.category, T.metric, T.unit, T.description], rows, '', sorting), pager);
+    output.replaceChildren(table(isModel ? [T.model, T.organization, T.release, T.weights, T.input, T.output, T.context, T.results] : [T.benchmark, T.version, T.category, T.metric, T.unit, T.description], rows, '', sorting), pager);
   };
   const change = field => value => { s[field] = value; if (field === 'sort') s.sortField = ''; s.page = 1; update(); };
   const choices = isModel ? [...new Set(Object.keys(collection).map(modelLab))].sort() : [...new Set(Object.values(collection).map(d => d.category).filter(Boolean))].sort();
