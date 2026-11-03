@@ -104,6 +104,14 @@ test('multiple exact candidates remain ambiguous', () => {
   assert.equal(index.byModel.get('lab/a')[0].benchmarkId, undefined);
   assert.equal(index.byBenchmark.get('b1').length, 0);
 });
+test('optional effort stays separate from variant and does not change definition association', () => {
+  const results = [result, { ...result, effort: 'xhigh' }, { ...result, effort: 'Adaptive/Max' }];
+  const index = buildIndex({ 'lab/a': { benchmarks: results } }, { b1: definition });
+  assert.deepEqual(index.byModel.get('lab/a').map(r => r.status), ['matched', 'matched', 'matched']);
+  assert.deepEqual(index.byBenchmark.get('b1').map(r => r.result), results);
+  assert.equal(Object.hasOwn(results[0], 'effort'), false);
+  assert.deepEqual(results.map(r => r.variant), ['no tools', 'no tools', 'no tools']);
+});
 test('empty input and missing localization fall back', () => {
   assert.deepEqual(filterModels(), []);
   assert.deepEqual(filterBenchmarks(), []);

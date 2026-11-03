@@ -127,6 +127,47 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn("i18n", model)
         self.assertNotIn("results", self.read_json("benchmarks.json")["example-bench"])
 
+    def test_optional_effort_preserves_official_names_and_legacy_records(self):
+        legacy = RESULT.replace('variant = "without tools"', 'variant = "xhigh effort; without tools"')
+        efforts = ("xhigh", "XHigh", "Adaptive/Max", "Vendor Tier 7", "default")
+        content = MODEL + legacy + ''.join(RESULT + f'effort = "{effort}"\n' for effort in efforts)
+        self.write("models/lab/example.toml", content)
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        self.assertEqual(stderr, "")
+        results = self.read_json("models.json")["lab/example"]["benchmarks"]
+        self.assertEqual(results, tomllib.loads(content)["benchmarks"])
+        self.assertNotIn("effort", results[0])
+        self.assertEqual(results[0]["variant"], "xhigh effort; without tools")
+        self.assertEqual([r["effort"] for r in results[1:]], list(efforts))
+        self.assertTrue(all(r["variant"] == "without tools" for r in results[1:]))
+
+    def test_effort_must_be_a_nonempty_string(self):
+        for value in ('42', 'true', '[]', '{}', '""', '"   "'):
+            with self.subTest(value=value):
+                self.write("models/lab/example.toml", MODEL + RESULT + f'effort = {value}\n')
+                self.assert_failure(".effort:")
+
+    def test_effort_is_part_of_duplicate_and_conflict_identity(self):
+        for effort in (None, "xhigh", "Adaptive/Max"):
+            record = RESULT + (f'effort = "{effort}"\n' if effort is not None else '')
+            for score in ("42.10", "99.0"):
+                with self.subTest(effort=effort, score=score):
+                    self.write("models/lab/example.toml", MODEL + record + record.replace("42.10", score))
+                    self.assert_failure("duplicate or conflicting benchmark record")
+
+    def test_effort_and_variant_are_independent_conditions(self):
+        content = MODEL + RESULT
+        content += RESULT + 'effort = "default"\n'
+        content += RESULT + 'effort = "xhigh"\n'
+        content += RESULT.replace("without tools", "with tools") + 'effort = "xhigh"\n'
+        self.write("models/lab/example.toml", content)
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        self.assertEqual(stderr, "")
+        self.assertEqual(self.read_json("models.json")["lab/example"]["benchmarks"],
+                         tomllib.loads(content)["benchmarks"])
+
     def test_repeated_build_has_identical_bytes_and_leaves_unrelated_files_alone(self):
         self.write("dist/keep.txt", "not a generated file")
         self.assertEqual(self.run_build()[0], 0)

@@ -13,6 +13,24 @@ ModelAtlas Data 是 [ModelAtlas Android](https://github.com/chenlongapps/model-a
 - **数据分发**：将 TOML 源数据转换为 JSON，供 ModelAtlas Android 使用。
 - **可追溯性**：保留成绩来源及评测条件，便于核实和后续维护。
 
+## Benchmark 成绩的推理档位
+
+模型文件的 `[[benchmarks]]` 支持 ModelAtlas 扩展字段 `effort`：
+
+```toml
+[[benchmarks]]
+name = "Example Bench"
+score = 42.1
+effort = "xhigh"
+variant = "without tools"
+```
+
+- `effort` 是可选非空字符串，原样保留来源中的官方档位名称和大小写，不限制枚举；例如 `"xhigh"`、`"Adaptive/Max"` 都可使用。
+- 来源未说明档位时省略，不设置默认值、不根据模型名推断。`variant` 继续保存其他评测条件。
+- 没有 `effort` 的旧记录仍然有效；不会自动解析或迁移旧 `variant`。构建 JSON 和自动同步均保留原值及缺失状态。
+- 判重包含 `effort`：不同档位或未注明档位分别保留，缺失不等于 `"default"`。条件相同而分数相同或不同均报告重复或冲突，不自动选择高分。定义映射仍只按名称、版本和指标进行。
+- 此字段是本仓库扩展，不代表 Models.dev 的严格 Schema 已支持；向严格遵循上游 Schema 的消费者传递数据时，需先显式处理（如移除）此扩展字段。
+
 ## 数据校验
 
 需要 Python 3.11+，无需安装第三方依赖。在仓库根目录运行：

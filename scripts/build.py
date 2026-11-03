@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
-RESULT_TEXT_FIELDS = ("name", "metric", "version", "dataset", "variant", "harness", "source", "date")
+RESULT_TEXT_FIELDS = ("name", "metric", "version", "dataset", "effort", "variant", "harness", "source", "date")
 
 
 def require(condition, message):
@@ -82,7 +82,8 @@ def validate_model(data):
         require(number(score) or text(score), f"{label}.score: expected a finite number or nonempty string")
         if "source" in result:
             require(http_url(result["source"]), f"{label}.source: expected an HTTP(S) URL")
-        # Include every known or future condition except the score; never select a higher score.
+        # Include every known or future condition except the score, including effort.
+        # Missing effort stays distinct from any explicit value; never infer defaults.
         identity = json.dumps({k: v for k, v in result.items() if k != "score"},
                               sort_keys=True, allow_nan=False)
         require(identity not in seen, f"{label}: duplicate or conflicting benchmark record")

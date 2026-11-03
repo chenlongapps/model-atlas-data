@@ -18,7 +18,7 @@ SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 MODEL_FIELDS = set("schema v2_only type name description family open_weights knowledge "
                    "release_date last_updated modalities capabilities limit license links "
                    "weights benchmarks metadata".split())
-BENCHMARK_FIELDS = set("name score metric version dataset variant harness source date".split())
+BENCHMARK_FIELDS = set("name score metric version dataset effort variant harness source date".split())
 
 
 def require(condition, message):
@@ -147,6 +147,7 @@ def validate_model(data, definitions):
         require(url(result.get("source")), f"{result['name']}: verifiable HTTP(S) source required")
         if "date" in result:
             require(calendar_date(result["date"]), "benchmark.date: invalid date")
+        # Exact conditions include effort; omitted values are not default effort.
         identity = tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"}))
         require(identity not in seen, f"{result['name']}: duplicate or conflicting benchmark record")
         seen.add(identity)

@@ -172,6 +172,29 @@ class SyncTests(unittest.TestCase):
         self.assertIn("mapping is missing", report["skipped"]["models/lab/new.toml"])
         self.assertEqual(report["added"], {})
 
+    def test_sync_preserves_optional_effort_without_changing_source_bytes(self):
+        definition = b'''id = "example-bench-v1"
+name = "Example Bench"
+version = "1.0"
+metric = "accuracy"
+'''
+        self.write(self.root, "benchmarks/example.toml", definition)
+        result = b'''
+[[benchmarks]]
+name = "Example Bench"
+score = 42.10
+version = "1.0"
+metric = "accuracy"
+variant = "without tools"
+source = "https://example.com/results"
+'''
+        content = MODEL + result + result + b'effort = "Adaptive/Max"\n'
+        self.write(self.upstream, "models/lab/new.toml", content)
+        report = sync_models(self.upstream, self.root)
+        self.assertEqual(report["skipped"], {})
+        self.assertEqual(list(report["added"]), ["models/lab/new.toml"])
+        self.assertEqual((self.root / "models/lab/new.toml").read_bytes(), content)
+
     def stage_new_model(self):
         self.init_git()
         self.write(self.upstream, "models/lab/new.toml")
@@ -283,6 +306,36 @@ class ModelValidationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "duplicate or conflicting"):
                 validate_model(self.data, [DEFINITION])
         self.data["benchmarks"] = [RESULT, {**RESULT, "variant": "with tools"}]
+        validate_model(self.data, [DEFINITION])
+
+    def test_optional_effort_preserves_official_names_and_legacy_records(self):
+        legacy = {**RESULT, "variant": "xhigh effort; without tools"}
+        efforts = ("xhigh", "XHigh", "Adaptive/Max", "Vendor Tier 7", "default")
+        self.data["benchmarks"] = [legacy] + [
+            {**RESULT, "effort": effort, "variant": "without tools"} for effort in efforts
+        ]
+        before = json.dumps(self.data, sort_keys=True)
+        validate_model(self.data, [DEFINITION])
+        self.assertEqual(json.dumps(self.data, sort_keys=True), before)
+        self.assertNotIn("effort", legacy)
+
+    def test_effort_must_be_a_nonempty_string(self):
+        for value in (42, True, [], {}, None, "", "   "):
+            with self.subTest(value=value):
+                self.data["benchmarks"] = [{**RESULT, "effort": value}]
+                with self.assertRaisesRegex(ValueError, r"benchmark\.effort:"):
+                    validate_model(self.data, [DEFINITION])
+
+    def test_effort_is_part_of_duplicate_and_conflict_identity(self):
+        for effort in (None, "xhigh", "Adaptive/Max"):
+            result = {**RESULT, **({"effort": effort} if effort is not None else {})}
+            for score in (42.10, 43):
+                with self.subTest(effort=effort, score=score):
+                    self.data["benchmarks"] = [result, {**result, "score": score}]
+                    with self.assertRaisesRegex(ValueError, "duplicate or conflicting"):
+                        validate_model(self.data, [DEFINITION])
+        self.data["benchmarks"] = [RESULT, {**RESULT, "effort": "default"}, {**RESULT, "effort": "xhigh"},
+                                   {**RESULT, "effort": "xhigh", "variant": "with tools"}]
         validate_model(self.data, [DEFINITION])
 
     def test_required_fields_types_and_dates(self):

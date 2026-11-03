@@ -26,7 +26,16 @@ class ValidateTests(unittest.TestCase):
         return code, stdout.getvalue(), stderr.getvalue()
 
     def test_valid_files_in_all_source_directories(self):
-        self.write("models/lab/model.toml", b"schema = 2\n")
+        self.write("models/lab/model.toml", b'''schema = 2
+[[benchmarks]]
+name = "Example"
+score = 42
+[[benchmarks]]
+name = "Example"
+score = 43
+effort = "Adaptive/Max"
+variant = "without tools"
+''')
         self.write("benchmarks/example.toml", b'name = "Example"\n')
         self.write("i18n/zh-CN.toml", 'description = "中文"\n'.encode())
         self.write("dist/ignored.toml", b"invalid = [")
