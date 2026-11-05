@@ -4,7 +4,7 @@ name = "Mistral Medium 3.5"
 description = "Balanced Mistral model for enterprise assistants, multilingual work, and tools"
 family = "mistral-medium"
 open_weights = true
-release_date = "2026-04-28"
+release_date = "2026-04-29"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]

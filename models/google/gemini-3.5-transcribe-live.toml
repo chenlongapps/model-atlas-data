@@ -26,5 +26,5 @@ top_p = true
 top_k = true
 
 [limit]
-context = 98_304
-output = 32_768
+context = 0
+output = 0

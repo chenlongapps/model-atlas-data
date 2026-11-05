@@ -7,7 +7,7 @@ description = "Largest Gemma 4 instruction model for open, self-hosted chat and 
 family = "gemma"
 open_weights = true
 knowledge = "2025-01"
-release_date = "2026-03-31"
+release_date = "2026-04-02"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]

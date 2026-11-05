@@ -14,7 +14,7 @@ description = "Gemma 4 based discrete text diffusion model for fast chat, reason
 family = "gemma"
 open_weights = true
 knowledge = "2025-01"
-release_date = "2026-06-10"
+release_date = "2026-06-09"
 last_updated = "2026-07-15"
 license = "Apache 2.0"
 

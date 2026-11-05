@@ -6,7 +6,7 @@ name = "Muse Spark 1.1"
 description = "Muse Spark is a natively multimodal reasoning model with support for tool-use, visual chain of thought, and multi-agent orchestration."
 family = "muse"
 open_weights = false
-release_date = "2026-07-09"
+release_date = "2026-04-08"
 last_updated = "2026-07-09"
 
 [modalities]

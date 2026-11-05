@@ -7,7 +7,7 @@ family = "gemini-flash"
 open_weights = false
 knowledge = "2025-01"
 # Official release date: https://blog.google/innovation-and-ai/technology/developers-tools/build-with-nano-banana-2/ (2026-02-26)
-release_date = "2026-02-26"
+release_date = "2026-05-28"
 
 [modalities]
 input = [

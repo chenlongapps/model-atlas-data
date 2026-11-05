@@ -10,7 +10,7 @@ description = "Fast hosted text-to-speech model for real-time use"
 family = "qwen"
 open_weights = false
 # Model Studio lifecycle lists this exact API model ID as released on 2026-07-14: https://help.aliyun.com/en/model-studio/newly-released-models
-release_date = "2026-07-14"
+release_date = "2026-07"
 
 [modalities]
 input = ["text"]

@@ -7,7 +7,7 @@ family = "gemini-pro"
 open_weights = false
 knowledge = "2025-01"
 # Official release date: https://blog.google/innovation-and-ai/products/nano-banana-pro/ (2025-11-20)
-release_date = "2025-11-20"
+release_date = "2026-05-28"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]

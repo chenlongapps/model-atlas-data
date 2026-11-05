@@ -7,7 +7,7 @@ name = "Gemma 4 12B IT"
 description = "Compact Gemma 4 instruction model for open, self-hosted chat and reasoning"
 family = "gemma"
 open_weights = true
-release_date = "2026-06-03"
+release_date = "2026-06-09"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
