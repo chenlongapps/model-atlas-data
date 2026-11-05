@@ -27,3 +27,267 @@ score = 34.5552385392508
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/tencent-hy4"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 74.9
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "SWE-Marathon"
+score = 43.8
+metric = "score"
+version = "1.1"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "ProgramBench"
+score = 30.0
+metric = "score"
+variant = "Almost Solved; highest available reasoning setting"
+harness = "Claude Code"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 44.4
+metric = "score"
+version = "4.0"
+variant = "highest available reasoning setting; up to 500 turns; 13-hour task limit"
+harness = "Claude Code"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 31.0
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-CompanyBench (internal)"
+score = 78.8
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-SWE Max Verified (internal)"
+score = 45.4
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-Backend (internal)"
+score = 45.1
+metric = "score"
+version = "3.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "WebCraftBench (internal)"
+score = 78.9
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "GameFix Bench (internal)"
+score = 68.4
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "3DArena-Modeling (internal)"
+score = 37.1
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Goal2Repo (internal)"
+score = 23.2
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "AutoCatBench (internal)"
+score = 57.2
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-LifeSearch (internal)"
+score = 60.2
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-BrowseComp (internal)"
+score = 59.9
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "APEX-Agents"
+score = 75.2
+metric = "pass@1"
+version = "1.1"
+variant = "highest available reasoning setting; up to 250 steps per trial"
+harness = "Official APEX harness"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 41.0
+metric = "Pass Rate"
+version = "1.1"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 56.2
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "600 public tasks"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "E-Bench (internal)"
+score = 70.0
+metric = "score"
+version = "2.0"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Agents' First Exam-IF (internal)"
+score = 79.9
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Tag-bench (internal)"
+score = 48.8
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "PPTGen-Bench (internal)"
+score = 60.9
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 59.1
+metric = "accuracy"
+dataset = "HLE-Full"
+variant = "with tools; highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Hy-FrontierMath T5 (internal)"
+score = 13.0
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "ProofBench (internal)"
+score = 5.5
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 19.8
+metric = "score"
+version = "0.1.0"
+variant = "up to 500 turns; 13-hour task limit; highest available reasoning setting"
+harness = "Claude Code"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "PostTrainBench"
+score = 35.2
+metric = "score"
+version = "1.2"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "Foundation Model Bench (internal)"
+score = 28.1
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "TenureTrail (internal)"
+score = 53.6
+metric = "score"
+dataset = "123 executable tasks across seven disciplines"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 78.9
+metric = "partial score"
+version = "2.1"
+dataset = "Full suite"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "MMMU-Pro"
+score = 78.6
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "ZeroBench-main"
+score = 55.4
+metric = "pass@5"
+variant = "with tools; 10 runs per problem; up to 80 tool rounds; highest available reasoning setting"
+harness = "Jupyter notebook"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "BuddyVQA Atlas (internal)"
+score = 81.0
+metric = "score"
+variant = "with tools; highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+[[benchmarks]]
+name = "BuddyVQA Atlas (internal)"
+score = 55.6
+metric = "score"
+variant = "without tools; highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4?langVersion=en"
