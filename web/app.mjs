@@ -1,4 +1,4 @@
-import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchmarks, sortEntries, description, loadData } from './data.mjs';
+import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchmarks, sortEntries, sortBenchmarkResults, description, loadData } from './data.mjs';
 import { messages, resolveLanguage, descriptionLocale } from './i18n.mjs';
 import { createSelect } from './select.mjs';
 import { renderModalities } from './modalities.mjs';
@@ -133,11 +133,11 @@ function resultTable(entries, forModel) {
     const r = entry.result;
     const name = forModel ? (entry.status === 'matched' ? internal('benchmarks', entry.benchmarkId, r.name, 'primary') : el('span', {}, r.name, ' ', el('span', { class: 'pill' }, entry.status === 'ambiguous' ? T.ambiguous : T.unmatched))) : internal('models', entry.modelId, data.models[entry.modelId]?.name || entry.modelId, 'primary');
     // Keep every present/future result field, including nested test conditions.
-    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'metric', 'version', 'source'].includes(key));
+    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'metric', 'version', 'source', ...(!forModel ? ['effort'] : [])].includes(key));
     const conditions = el('div', { class: 'conditions' }, extra.length ? extra.map(([key, value]) => el('span', { class: 'condition' }, el('b', {}, `${key}: `), text(value))) : '—');
-    return [name, r.score, r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
+    return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, ...(!forModel ? [r.effort] : []), r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
   });
-  return table([forModel ? T.benchmark : T.model, T.score, T.metric, T.version, T.conditions, T.source], rows, 'result-table');
+  return table([forModel ? T.benchmark : T.model, T.score, ...(!forModel ? [T.effort] : []), T.metric, T.version, T.conditions, T.source], rows, 'result-table');
 }
 function detailHeader(kind, id, title, desc) {
   const copy = el('button', { class: 'copy-button', type: 'button', 'aria-label': T.copyId, onclick: async () => {
@@ -167,12 +167,12 @@ function benchmarkDetail(id) {
   if (!Object.hasOwn(data.benchmarks, id)) return notFound();
   const b = data.benchmarks[id];
   const links = [external(b.url, T.website), external(b.methodology, T.methodLink)].filter(Boolean);
-  const entries = data.index.byBenchmark.get(id) || [];
+  const entries = sortBenchmarkResults(data.index.byBenchmark.get(id) || [], b);
   main.replaceChildren(detailHeader('benchmarks', id, b.name, description(descriptionLocale(language, data.locale), 'benchmark', id, b.description)),
     section(T.overview, facts([[T.benchmarkId, id], [T.version, b.version], [T.category, b.category], [T.organization, b.organization]])),
     section(T.definition, facts([[T.metric, b.metric], [T.unit, b.unit], [T.higherBetter, b.higher_is_better], [T.minScore, b.min_score], [T.maxScore, b.max_score]])),
     section(T.methodology, links.length ? el('div', { class: 'external-links' }, links) : el('p', {}, T.noLinks)),
-    section(T.modelResults, el('div', {}, el('p', { class: 'note' }, T.matchNote, ' ', T.resultNote), resultTable(entries, false)), T.countRecords(entries.length.toLocaleString(language))));
+    section(T.modelResults, el('div', {}, el('p', { class: 'note' }, T.matchNote, ' ', typeof b.higher_is_better === 'boolean' ? T.sortedResultNote : T.resultNote), resultTable(entries, false)), T.countRecords(entries.length.toLocaleString(language))));
 }
 function notFound() {
   main.replaceChildren(el('p', { class: 'eyebrow' }, T.dataExplorer), el('h1', {}, T.notFound), el('p', {}, T.notFoundText), el('a', { href: routeFor('models') }, T.backModels));

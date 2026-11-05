@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchmarks, sortEntries, buildIndex, description, loadData } from '../web/data.mjs';
+import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchmarks, sortEntries, sortBenchmarkResults, buildIndex, description, loadData } from '../web/data.mjs';
 import { messages, resolveLanguage, descriptionLocale } from '../web/i18n.mjs';
 import { readFile } from 'node:fs/promises';
 import { createSelect } from '../web/select.mjs';
@@ -85,6 +85,31 @@ test('table sorting keeps missing values last in either direction without mutati
   assert.deepEqual(sortEntries(entries, ([, item]) => item.n, 'desc').map(([id]) => id), ['a', 'b', 'c']);
   assert.deepEqual(entries.map(([id]) => id), ['c', 'b', 'a']);
 });
+test('benchmark results follow the scoring direction, keep ties stable and never drop records', () => {
+  const entries = [
+    { modelId: 'lab/z', result: { ...result, score: 0 } },
+    { modelId: 'lab/b', result: { ...result, score: 42.12, effort: 'xhigh' } },
+    { modelId: 'lab/a', result: { ...result, score: 42.12 } },
+    { modelId: 'lab/b', result: { ...result, score: 42.12, effort: 'Adaptive/Max' } },
+    { modelId: 'lab/c', result: { ...result, score: -1.5 } },
+  ];
+  const original = [...entries];
+  assert.deepEqual(sortBenchmarkResults(entries, { higher_is_better: true }), [entries[2], entries[1], entries[3], entries[0], entries[4]]);
+  assert.deepEqual(sortBenchmarkResults(entries, { higher_is_better: false }), [entries[4], entries[0], entries[2], entries[1], entries[3]]);
+  assert.deepEqual(entries, original);
+  assert.deepEqual(sortBenchmarkResults([], { higher_is_better: true }), []);
+  for (const definition of [undefined, {}, { higher_is_better: 'false' }]) {
+    assert.deepEqual(sortBenchmarkResults(entries, definition), original);
+  }
+});
+test('benchmark sorting leaves missing or invalid scores last rather than treating them as zero', () => {
+  const entries = [undefined, null, '', NaN, Infinity, '99', 0, -2, 1.25].map((score, i) => ({ modelId: `lab/${i}`, result: { score } }));
+  for (const higher of [true, false]) {
+    const sorted = sortBenchmarkResults(entries, { higher_is_better: higher });
+    assert.deepEqual(sorted.slice(0, 3).map(entry => entry.result.score), higher ? [1.25, 0, -2] : [-2, 0, 1.25]);
+    assert.deepEqual(sorted.slice(3), entries.slice(0, 6));
+  }
+});
 test('exact association requires explicit version and metric and preserves every record', () => {
   const withoutVersion = { ...result }; delete withoutVersion.version;
   const withoutMetric = { ...result }; delete withoutMetric.metric;
@@ -164,6 +189,89 @@ test('descriptions follow the selected language and preserve fallback', () => {
   assert.equal(description(descriptionLocale('zh-CN', locale), 'benchmark', 'b', 'benchmark'), '评测');
   assert.equal(description(descriptionLocale('en', locale), 'benchmark', 'b', 'benchmark'), 'benchmark');
   assert.equal(description(descriptionLocale('zh-CN', {}), 'model', 'lab/a', 'original'), 'original');
+});
+
+test('benchmark detail renders best scores first and effort in its own column without duplicating conditions', async () => {
+  class Element {
+    constructor(tag = '') { this.tag = tag; this.children = []; this.attributes = {}; this.dataset = {}; this.handlers = {}; this.classList = { toggle() {} }; }
+    setAttribute(name, value) { this.attributes[name] = value; }
+    append(...children) { this.children.push(...children); }
+    replaceChildren(...children) { this.children = children; }
+    addEventListener(name, handler) { this.handlers[name] = handler; }
+    querySelectorAll() { return []; }
+    set textContent(value) { this.children = [String(value)]; }
+    get textContent() { return this.children.map(child => child instanceof Element ? child.textContent : String(child)).join(''); }
+  }
+  const nodes = new Map();
+  const select = selector => {
+    if (!nodes.has(selector)) nodes.set(selector, new Element());
+    return nodes.get(selector);
+  };
+  const handlers = {};
+  let rendered;
+  const ready = new Promise(resolve => { rendered = resolve; });
+  select('.page-scroll').scrollTo = rendered;
+  const defs = { b1: { ...definition, higher_is_better: true } };
+  const fixture = {
+    'lab/a': { name: 'Alpha', benchmarks: [{ ...result, score: 10 }] },
+    'lab/b': { name: 'Beta', benchmarks: [{ ...result, score: 20, effort: 'Adaptive/Max', harness: 'H', future: { budget: 2 } }] },
+  };
+  const globals = {
+    Node: Element,
+    document: { createElement: tag => new Element(tag), createTextNode: String, querySelector: select, querySelectorAll: () => [], addEventListener() {}, documentElement: new Element() },
+    window: { addEventListener: (name, handler) => { handlers[name] = handler; } },
+    location: { hash: '#/benchmarks/b1' },
+    navigator: { languages: ['en'] },
+    localStorage: { getItem: () => null },
+    fetch: async path => ({ ok: true, json: async () => path === './models.json' ? fixture : path === './benchmarks.json' ? defs : null }),
+  };
+  const previous = new Map(Object.keys(globals).map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
+  const find = (node, tag) => node.tag === tag ? node : node.children.filter(child => child instanceof Element).map(child => find(child, tag)).find(Boolean);
+  const resultTable = () => find(select('#main'), 'table');
+  const cells = row => row.children.map(cell => cell.textContent);
+  try {
+    for (const [key, value] of Object.entries(globals)) Object.defineProperty(globalThis, key, { configurable: true, writable: true, value });
+    await import('../web/app.mjs');
+    await ready;
+    assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Model', 'Score', 'Effort', 'Metric', 'Version', 'Test conditions', 'Source']);
+    const rows = find(resultTable(), 'tbody').children;
+    assert.deepEqual(cells(rows[0]).slice(0, 5), ['Beta', '20.0', 'Adaptive/Max', 'accuracy', '1']);
+    assert.equal(cells(rows[1])[1], '10.0');
+    assert.equal(cells(rows[1])[2], '—');
+    assert.match(cells(rows[0])[5], /variant: no tools/);
+    assert.match(cells(rows[0])[5], /harness: H/);
+    assert.match(cells(rows[0])[5], /future: \{"budget":2\}/);
+    assert.doesNotMatch(cells(rows[0])[5], /effort|Adaptive\/Max/);
+    assert.ok(select('#main').textContent.includes(messages.en.sortedResultNote));
+
+    defs.b1.higher_is_better = false;
+    handlers.hashchange();
+    assert.equal(cells(find(resultTable(), 'tbody').children[0])[0], 'Alpha');
+
+    fixture['lab/a'].benchmarks[0].score = 10.11;
+    fixture['lab/b'].benchmarks[0].score = 10.14;
+    defs.b1.higher_is_better = true;
+    handlers.hashchange();
+    assert.deepEqual(find(resultTable(), 'tbody').children.map(row => cells(row).slice(0, 2)), [['Beta', '10.1'], ['Alpha', '10.1']]);
+    assert.equal(fixture['lab/a'].benchmarks[0].score, 10.11);
+    assert.equal(fixture['lab/b'].benchmarks[0].score, 10.14);
+
+    globals.location.hash = '#/models/lab%2Fb';
+    handlers.hashchange();
+    assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Benchmark', 'Score', 'Metric', 'Version', 'Test conditions', 'Source']);
+    assert.match(cells(find(resultTable(), 'tbody').children[0])[4], /effort: Adaptive\/Max/);
+    assert.ok(select('#main').textContent.includes(messages.en.resultNote));
+    for (const [score, displayed] of [[42, '42.0'], [42.16, '42.2'], [0, '0.0'], [-1.26, '-1.3']]) {
+      fixture['lab/b'].benchmarks[0].score = score;
+      handlers.hashchange();
+      assert.equal(cells(find(resultTable(), 'tbody').children[0])[1], displayed);
+      assert.equal(fixture['lab/b'].benchmarks[0].score, score);
+    }
+  } finally {
+    for (const [key, descriptor] of previous) {
+      if (descriptor) Object.defineProperty(globalThis, key, descriptor); else delete globalThis[key];
+    }
+  }
 });
 
 test('custom selects support keyboard, selection, dismissal and a single open list', () => {

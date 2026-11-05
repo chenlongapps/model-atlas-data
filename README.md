@@ -84,7 +84,7 @@ python3 /path/to/model-atlas-data/scripts/build.py --root /path/to/model-atlas-d
 
 ## Web Explorer 与 GitHub Pages 数据发布
 
-Web Explorer 是数据集的轻量静态浏览入口，默认地址为 <https://chenlongapps.github.io/model-atlas-data/>（需先成功部署）。界面参考 Models.dev，Models 和 Benchmarks 分别提供搜索、筛选、表格排序、详情与双向导航；顶部搜索支持 `Ctrl+K` / `⌘K`。界面支持简体中文和英文，可在顶部切换并在浏览器允许时记住选择；首次使用浏览器语言，不支持时回退英文。中文描述优先使用现有翻译，缺失时回退原文；英文显示原文，原始数据未必均为英文。成绩逐条保留原始条件及来源，不提供未经可比性验证的排名。关联只采用名称、显式版本和指标的精确唯一匹配，未匹配的成绩仍在模型详情中显示。
+Web Explorer 是数据集的轻量静态浏览入口，默认地址为 <https://chenlongapps.github.io/model-atlas-data/>（需先成功部署）。界面参考 Models.dev，Models 和 Benchmarks 分别提供搜索、筛选、表格排序、详情与双向导航；顶部搜索支持 `Ctrl+K` / `⌘K`。界面支持简体中文和英文，可在顶部切换并在浏览器允许时记住选择；首次使用浏览器语言，不支持时回退英文。中文描述优先使用现有翻译，缺失时回退原文；英文显示原文，原始数据未必均为英文。成绩逐条保留原始条件及来源，不提供未经可比性验证的排名。评测详情按定义的 `higher_is_better` 将成绩由好到差展示（评分方向未知时保留原顺序），`effort` 单独成列，未注明时显示 `—`；此展示顺序不代表不同测试条件下的成绩可比较。关联只采用名称、显式版本和指标的精确唯一匹配，未匹配的成绩仍在模型详情中显示。
 
 网站直接读取同一发布目录的 JSON，不修改数据或 Android 所用结构。`.github/workflows/pages.yml` 复用上述测试、校验和构建命令，通过官方 Pages Actions 同时发布网页和 JSON；不提交 `dist/`。发布包包含本次构建的 JSON、`manifest.json`、网页资源和上游许可声明 `LICENSE.models-dev`；使用全新的临时输出目录，避免发布历史产物或仓库中的其他文件。网页资源不加入 manifest，也不影响 `data_version`。
 

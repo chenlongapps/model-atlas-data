@@ -58,6 +58,14 @@ export function sortEntries(entries, valueOf, direction = 'asc') {
   });
 }
 
+// Display order only: matching a definition does not establish comparability.
+export function sortBenchmarkResults(entries, definition) {
+  if (typeof definition?.higher_is_better !== 'boolean') return [...entries];
+  return sortEntries(entries.map(entry => [entry.modelId, entry]),
+    ([, entry]) => Number.isFinite(entry.result.score) ? entry.result.score : undefined,
+    definition.higher_is_better ? 'desc' : 'asc').map(([, entry]) => entry);
+}
+
 const key = d => JSON.stringify([d.name, d.version, d.metric]);
 
 export function buildIndex(models = {}, definitions = {}) {
