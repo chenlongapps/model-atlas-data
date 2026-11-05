@@ -25,3 +25,9 @@ top_k = false
 [limit]
 context = 262_144
 output = 131_072
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 22.0
+metric = "accuracy"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-omni-vs-mimo-v2-pro"

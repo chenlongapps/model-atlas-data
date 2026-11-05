@@ -133,3 +133,39 @@ variant = "1M pointwise, 8-needle"
 version = "v2"
 source = "https://deepmind.google/models/evals-methodology/gemini-3-6-flash/"
 date = "2026-07-21"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 17.0
+dataset = "Private set"
+source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 34.0
+metric = "accuracy (mean; Pass@1)"
+dataset = "SurgeAI Chartography (100 tasks; 20 trials per task)"
+effort = "Medium reasoning"
+variant = "no tools"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 38.0
+metric = "accuracy"
+dataset = "Artificial Analysis May 2025 text-only subset (2,158 questions)"
+effort = "high reasoning"
+variant = "no tools; pass@1"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/articles/gemini-3-6-flash-3-5-flash-lite-halving-time"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 4.29
+metric = "accuracy"
+version = "0.1.0"
+dataset = "Terminal-Bench Science v0.1.0 (70 tasks)"
+variant = "pass@1; single run"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"

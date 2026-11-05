@@ -70,7 +70,7 @@ source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
 [[benchmarks]]
 name = "AutomationBench"
 score = 52.3
-metric = "score"
+metric = "task_completed_correctly"
 version = "1.0.6"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
 
@@ -89,8 +89,8 @@ source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 28.8
-metric = "score"
-version = "4.0"
+metric = "task resolution rate"
+version = "4.0.0"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
 
 [[benchmarks]]
@@ -147,3 +147,26 @@ name = "MiMo VisualCoding"
 score = 71.5
 metric = "score"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 35
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original 2,500-item HLE set"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-flash-vs-step-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 27
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/mimo-v2-6-flash"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1615
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-flash-vs-step-5"

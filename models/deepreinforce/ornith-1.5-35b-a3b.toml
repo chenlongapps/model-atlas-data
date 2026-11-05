@@ -29,6 +29,34 @@ context = 262_144
 label = "Hugging Face"
 url = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
 
+[[benchmarks]]
+name = "DeepSWE"
+score = 22
+variant = "mean of 5 runs; temperature=1.0; top_p=0.95; context=256K"
+harness = "Claude Code"
+source = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 59.6
+variant = "mean of 5 runs; temperature=1.0; top_p=0.95; context=256K; network disabled; git history removed"
+harness = "OpenHands"
+source = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 25.6
+metric = "accuracy"
+variant = "no tools; mean of 5 runs; Claude 4.6 Opus judge"
+source = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 33.4
+metric = "accuracy"
+variant = "with tools; mean of 5 runs; Claude 4.6 Opus judge"
+source = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
+
 [[links]]
 label = "Model card"
 url = "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"

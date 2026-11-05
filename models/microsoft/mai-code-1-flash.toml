@@ -58,3 +58,10 @@ name = "GPQA Diamond"
 score = 84.6
 metric = "accuracy"
 source = "https://llm-stats.com/benchmarks/gpqa"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 18
+metric = "accuracy"
+dataset = "Academic reasoning, text"
+source = "https://microsoft.ai/pdf/MAI-Code-1-Flash-Model-Card.PDF"

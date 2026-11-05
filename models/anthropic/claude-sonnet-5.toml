@@ -73,3 +73,67 @@ metric = "pass rate"
 version = "v1"
 source = "https://www.anthropic.com/news/claude-sonnet-5"
 date = "2026-06-30"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 54
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+variant = "Reported uncertainty ±4%"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 93.15
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "642 public tasks"
+effort = "xhigh"
+variant = "Reported uncertainty ±1.71 percentage points; uncapped cost; up to 250 turns"
+harness = "Claude Code"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 14
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "Max"
+variant = "pass@1; averaged over 3 repeats per task; maximum 500 agent steps; Artificial Analysis run"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-vs-claude-sonnet-4-6"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 41
+metric = "accuracy"
+dataset = "2,158 text-only questions"
+effort = "Max"
+variant = "pass@1; judged by GPT-5.6 Luna (medium)"
+source = "https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-vs-claude-sonnet-4-6"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1221
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Non-reasoning, High"
+variant = "Reported uncertainty −19/+19 Elo; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1167
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Medium"
+variant = "Reported uncertainty −18/+18 Elo; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

@@ -89,7 +89,7 @@ source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1107
-metric = "Elo"
+metric = "Elo rating"
 version = "2.1"
 variant = "MiMo-V2.5 Pro comparison column"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
@@ -158,3 +158,69 @@ score = 17.7
 metric = "score"
 variant = "MiMo-V2.5 Pro comparison column"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 48
+metric = "accuracy"
+variant = "MiMo-V2.5-Pro-FP8"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 47
+metric = "accuracy"
+variant = "MiMo-V2.5-Pro-MXFP4"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 34
+metric = "accuracy"
+variant = "MiMo-V2.5-Pro-FP8; without tool"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 33
+metric = "accuracy"
+variant = "MiMo-V2.5-Pro-MXFP4; without tool"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 36
+metric = "pass@1"
+dataset = "Artificial Analysis text-only subset; 2,158 questions"
+variant = "MiMo-V2.5-Pro (Reasoning; Artificial Analysis legacy HLE evaluation)"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-5-pro-vs-gpt-5-codex"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1121
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+variant = "MiMo-V2.5-Pro (Reasoning; Artificial Analysis comparison)"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-5-pro-vs-mimo-v2-5-0424"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1129
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+variant = "MiMo-V2.5-Pro (Reasoning; current Artificial Analysis leaderboard)"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 0.51
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks; 3 runs per task (avg@3)"
+variant = "Vals AI; pass@1; temperature 1; top_p 0.95; top_k default; max output 128,000"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/models/xiaomi_mimo-v2.5-pro"

@@ -115,3 +115,95 @@ variant = "max"
 version = "1.1"
 source = "https://artificialanalysis.ai/articles/gpt-5-6-has-landed"
 date = "2026-07-09"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 73
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+harness = "Pier; mini-swe-agent on Modal"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 95.50
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "Full; 642 tasks"
+effort = "xhigh"
+variant = "95% CI ±1.40 percentage points"
+harness = "Codex"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 37.3
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "95% CI ±3.8 percentage points"
+harness = "Codex"
+source = "https://www.tbench.ai/?efforts=all&version=4.0"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 22.4
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "3 trials per task"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-science-0-1"
+
+[[benchmarks]]
+name = "Chartography"
+score = 45.0
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "max reasoning"
+variant = "20 trials per task; no tools; 95% CI ±1.1 percentage points"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"
+
+[[benchmarks]]
+name = "Chartography"
+score = 39.5
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "default"
+variant = "20 trials per task; no tools; 95% CI ±1.2 percentage points"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 49
+metric = "accuracy"
+dataset = "May 2025 HLE revision; 2,158 text-only questions"
+effort = "Max"
+variant = "pass@1"
+harness = "GPT-5.6 Luna (medium) equality checker"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-xhigh-vs-gpt-5-6-sol"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1609
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Max"
+harness = "Stirrup; shell and web browsing"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-xhigh-vs-gpt-5-6-sol"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1250
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Non-reasoning"
+harness = "Stirrup; shell and web browsing"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

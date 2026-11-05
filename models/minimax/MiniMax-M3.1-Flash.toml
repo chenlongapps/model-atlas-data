@@ -31,3 +31,77 @@ top_k = false
 [limit]
 context = 1_000_000
 output = 512_000
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 73.7
+metric = "pass@1"
+version = "1.1"
+dataset = "v1.1 (113 tasks)"
+variant = "512K context"
+harness = "mini-SWE-agent 2.4.5"
+source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 96.57
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "Full public V2 split (642 tasks)"
+effort = "xhigh"
+variant = "Scale leaderboard alias: Minimax M3p1 Flash; reported ±1.16"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 38.1
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "terminal-bench/terminal-bench@4.0.0 (66 tasks)"
+harness = "Codex 0.149.1"
+source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 3.3
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "harborframework/terminal-bench-science; terminalbenchscience_0_1 (70 tasks)"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/blob/main/.eval_results/terminal-bench-science.yaml"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 62.8
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "600 publicly released tasks"
+source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 43.4
+metric = "accuracy"
+version = "unspecified"
+dataset = "Text-only subset (2,158 questions)"
+variant = "without tools"
+source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 29
+metric = "index score"
+version = "5.0"
+source = "https://artificialanalysis.ai/models/minimax-m3-1-flash"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 53.78
+metric = "performance score"
+version = "2.2"
+effort = "max"
+variant = "Official MiniMax API; temperature=1; top_p=0.95; max output=262,144 tokens"
+source = "https://www.vals.ai/models/minimax_MiniMax-M3.1-flash"
+date = "2026-10-20"

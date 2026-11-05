@@ -79,3 +79,47 @@ metric = "Elo"
 variant = "max effort"
 version = "2"
 source = "https://huggingface.co/zai-org/GLM-5.3-Flash"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 37.37
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+variant = "avg@3; each run pass@1"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 2.86
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "single run"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 5
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "mean over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-minimax-m3"
+
+[[benchmarks]]
+name = "Chartography"
+score = 16.3
+metric = "accuracy (mean; Pass@1)"
+variant = "Max reasoning"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 50.86
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/benchmarks/vals_index"

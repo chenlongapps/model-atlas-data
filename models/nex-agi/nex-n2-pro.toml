@@ -27,3 +27,11 @@ output = 262_144
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/nex-agi/Nex-N2-Pro"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 34
+metric = "accuracy"
+dataset = "May 2025 revision; 2,158 text-only questions"
+variant = "Reasoning version; pass@1; no tools"
+source = "https://artificialanalysis.ai/models/comparisons/nex-n2-pro-vs-gpt-5-5"

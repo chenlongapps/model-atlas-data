@@ -46,3 +46,12 @@ type = "model_card"
 label = "Introducing Recursive Flint"
 url = "https://www.recursive.com/updates/introducing-recursive-flint"
 type = "announcement"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 89.7
+metric = "task resolution rate"
+version = "2.0.0"
+variant = "Average pass@1 over at least 5 attempts; no internet access; timeout up to 5 hours; temperature 1.0; top-p 0.95; top-k 20"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/RecursiveSI/flint"

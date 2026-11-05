@@ -26,8 +26,7 @@ output = 128_000
 name = "SWE-Bench Pro"
 score = 58.6
 metric = "resolve rate"
-source = "https://www.anthropic.com/news/claude-opus-4-8"
-date = "2026-05-28"
+source = "https://openai.com/index/introducing-gpt-5-5/"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -266,3 +265,22 @@ metric = "success rate"
 variant = "original prompts"
 source = "https://openai.com/index/introducing-gpt-5-5/"
 date = "2026-04-23"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67
+metric = "pass rate"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 31
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "xHigh"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"

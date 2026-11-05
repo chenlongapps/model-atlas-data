@@ -49,3 +49,11 @@ metric = "success rate"
 version = "2.1"
 source = "https://www.minimax.io/blog/minimax-m3"
 date = "2026-06-01"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 28.0
+metric = "accuracy"
+dataset = "HLE no-tool subset"
+variant = "thinking enabled; no tools; single sample (pass@1); Artificial Analysis Index v4.0 protocol"
+source = "https://arxiv.org/html/2605.26494"

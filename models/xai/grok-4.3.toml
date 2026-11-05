@@ -48,3 +48,11 @@ score = 81
 metric = "accuracy"
 source = "https://artificialanalysis.ai/articles/xai-launches-grok-4-3-with-improved-agentic-performance-and-lower-pricing"
 date = "2026-04-30"
+
+[[benchmarks]]
+name = "Chartography"
+score = 12.9
+dataset = "Chartography full task set (100 tasks)"
+variant = "High reasoning"
+harness = "Inspect AI Chartography harness; leaderboard configuration: 10 runs per task, Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"

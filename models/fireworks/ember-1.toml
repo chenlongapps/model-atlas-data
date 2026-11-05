@@ -26,3 +26,40 @@ top_k = true
 [limit]
 context = 1_048_576
 output = 131_072
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 75.2
+metric = "score"
+version = "1.1"
+dataset = "113 tasks"
+source = "https://fireworks.ai/blog/ember-1"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67.0
+metric = "score"
+version = "1.1"
+dataset = "113 tasks"
+variant = "avg@3 (three-run mean)"
+source = "https://fireworks.ai/specialized-intelligence-index/benchmarks/code-generation/deepswe-v1-1"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "20.71 ± 3.64"
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+variant = "avg@3 (three full runs; each run pass@1)"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = "5.71 ± 2.79"
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "single-run pass@1"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"

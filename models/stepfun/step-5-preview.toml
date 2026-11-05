@@ -32,3 +32,60 @@ output = 1_000_000
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/stepfun-ai/Step-5-Preview"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67.7
+metric = "pass@1"
+version = "1.1"
+effort = "High"
+variant = "temperature=1.0; top_p=0.95"
+harness = "SWE-agent"
+source = "https://huggingface.co/stepfun-ai/Step-5-Preview"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 33.3
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+source = "https://huggingface.co/datasets/harborframework/terminal-bench?eval_result=stepfun-ai/Step-5-Preview&leaderboard_task_id=terminalbench_4"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 31.82
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+variant = "avg@3; three full runs, each run scored pass@1; reported ±2.62 percentage points"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 2.4
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "High"
+variant = "pass@1 averaged over three repeats; reported to one decimal place"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/stepfun-ai/Step-5-Preview/discussions/10"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 2.86
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+variant = "single run; pass@1; reported ±2.01 percentage points"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 54.76
+metric = "performance score"
+version = "2.2"
+variant = "reported ±1.16 percentage points"
+source = "https://www.vals.ai/benchmarks/vals_index"

@@ -51,3 +51,11 @@ score = 32.6
 metric = "success rate"
 source = "https://openrouter.ai/stepfun/step-3.5-flash/benchmarks"
 date = "2026-06-02"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = "24%"
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE dataset (Artificial Analysis evaluation)"
+variant = "pass@1; GPT-5.6 Luna (medium) equality checker"
+source = "https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-step-3-5-flash"

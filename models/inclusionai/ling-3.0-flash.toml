@@ -28,3 +28,14 @@ output = 32_768
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/inclusionAI/Ling-3.0-flash"
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 56.6
+dataset = "ScaleAI/SWE-bench_Pro"
+harness = "OpenHands"
+source = "https://huggingface.co/inclusionAI/Ling-3.0-flash/blob/main/.eval_results/swe-bench_pro.yaml"
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 22.7
+dataset = "cais/hle"
+source = "https://huggingface.co/inclusionAI/Ling-3.0-flash/blob/main/.eval_results/hle.yaml"

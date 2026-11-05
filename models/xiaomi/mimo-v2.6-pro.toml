@@ -1,4 +1,4 @@
-# Benchmarks sourced from MiMo-V2.6-Flash-RL use its "MiMo-V2.6 Pro" comparison column.
+# Benchmarks: official MiMo-V2.6-Pro-RL model card evaluation table.
 # Formats (Xiaomi MiMo API, lists this model as supported):
 #   images JPEG, PNG, GIF, WebP, BMP: https://mimo.mi.com/docs/en-US/quick-start/usage-guide/multimodal-understanding/image-understanding
 #   audio MP3, WAV, FLAC, M4A, OGG: https://mimo.mi.com/docs/en-US/quick-start/usage-guide/multimodal-understanding/audio-understanding
@@ -54,59 +54,59 @@ score = 71.9
 metric = "score"
 version = "1.1"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "ProgramBench"
 score = 26.5
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "MiMo Code Bench"
 score = 63.2
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "AutomationBench"
 score = 53.1
-metric = "score"
+metric = "task_completed_correctly"
 version = "1.0.6"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "Toolathlon-Verified"
 score = 76.9
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1673
-metric = "Elo"
+metric = "Elo rating"
 version = "2.1"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "Agents' Last Exam"
 score = 31.6
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 34.9
-metric = "score"
-version = "4.0"
+metric = "task resolution rate"
+version = "4.0.0"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -114,60 +114,83 @@ score = 89.9
 metric = "score"
 version = "2.1"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "OSWorld-Verified"
 score = 82
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "JobBench"
 score = 62
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "CyberGym"
 score = 94
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "MiMo Cyber Bench"
 score = 80.2
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "ExploitGym"
 score = 17.8
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "ExploitBench"
 score = 47.9
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "SEC-Bench Pro"
 score = 66.3
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
 
 [[benchmarks]]
 name = "MiMo VisualCoding"
 score = 72.3
 metric = "score"
 variant = "MiMo-V2.6 Pro comparison column"
-source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 49
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original 2,500-item HLE set"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-gpt-6-astra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 30
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1691
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-gpt-6-astra"

@@ -24,3 +24,10 @@ top_k = true
 [limit]
 context = 131_072
 output = 117_964
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 5
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/granite-4-2-8b/"

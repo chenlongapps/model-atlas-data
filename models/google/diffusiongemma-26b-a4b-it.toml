@@ -1,4 +1,5 @@
 # Model card: https://huggingface.co/google/diffusiongemma-26B-A4B-it
+# Release date: https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/ (2026-06-10)
 # Context: config.json text_config.max_position_embeddings = 262144 (card: "up to 256K tokens").
 # Output limit is an estimate: neither the card nor the repo config publishes an output cap,
 # so it mirrors models/google/gemma-4-26b-a4b-it.toml, the architecture this model is built on.
@@ -13,7 +14,7 @@ description = "Gemma 4 based discrete text diffusion model for fast chat, reason
 family = "gemma"
 open_weights = true
 knowledge = "2025-01"
-release_date = "2026-06-09"
+release_date = "2026-06-10"
 last_updated = "2026-07-15"
 license = "Apache 2.0"
 
@@ -35,3 +36,17 @@ output = 32_768
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/google/diffusiongemma-26B-A4B-it"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 11.0
+metric = "accuracy"
+variant = "no tools"
+source = "https://ai.google.dev/gemma/docs/diffusiongemma/model_card"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 11.9
+metric = "accuracy"
+variant = "with search"
+source = "https://ai.google.dev/gemma/docs/diffusiongemma/model_card"

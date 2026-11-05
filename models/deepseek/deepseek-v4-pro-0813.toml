@@ -32,14 +32,14 @@ url = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 42.7
-metric = "score"
+metric = "accuracy"
 variant = "without tools"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 60
-metric = "score"
+metric = "accuracy"
 variant = "with tools"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 
@@ -73,7 +73,8 @@ name = "DeepSWE"
 score = 62.7
 metric = "score"
 harness = "DeepSeek Harness minimal mode"
-variant = "max effort"
+effort = "max"
+variant = "temperature=1.0; top_p=0.95"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 
 [[benchmarks]]
@@ -108,3 +109,56 @@ score = 67.2
 metric = "score"
 dataset = "internal"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 14.14
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+variant = "avg@3; each run pass@1; three runs; ±1 standard error"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 4.29
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1 single run; retry infrastructure/provider errors only"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 23
+metric = "index score"
+version = "5.0"
+effort = "max"
+source = "https://artificialanalysis.ai/models/deepseek-v4-pro"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 23
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/releases/deepseek-v4-pro"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1066
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+variant = "non-reasoning"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 52.97
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/benchmarks/vals_index"

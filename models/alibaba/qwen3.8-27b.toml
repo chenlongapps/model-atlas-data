@@ -36,8 +36,12 @@ url = "https://huggingface.co/Qwen/Qwen3.8-27B"
 [[benchmarks]]
 name = "SWE-bench Pro"
 score = 61.7
-metric = "resolved"
-source = "https://huggingface.co/Qwen/Qwen3.8-27B"
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "default (V2, 642 tasks)"
+variant = "temperature=1.0; top_p=0.95; context=256K"
+harness = "Claude Code"
+source = "https://huggingface.co/datasets/ScaleAI/SWE-bench_Pro"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -110,7 +114,7 @@ source = "https://huggingface.co/Qwen/Qwen3.8-27B"
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 30.8
-metric = "score"
+metric = "accuracy"
 variant = "without tools; GPT-4o judge"
 source = "https://huggingface.co/Qwen/Qwen3.8-27B"
 

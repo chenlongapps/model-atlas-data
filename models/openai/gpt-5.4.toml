@@ -151,17 +151,17 @@ date = "2026-04-23"
 name = "Humanity's Last Exam"
 score = 39.8
 metric = "accuracy"
+effort = "xhigh"
 variant = "no tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+source = "https://openai.com/index/introducing-gpt-5-4/"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 52.1
 metric = "accuracy"
+effort = "xhigh"
 variant = "with tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+source = "https://openai.com/index/introducing-gpt-5-4/"
 
 [[benchmarks]]
 name = "OSWorld-Verified"
@@ -215,3 +215,43 @@ metric = "accuracy"
 variant = "no tools"
 source = "https://openai.com/index/introducing-gpt-5-5/"
 date = "2026-04-23"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 51.76991150442478
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 runs"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+[[benchmarks]]
+name = "Chartography"
+score = 29.6
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "surgeai/chartography"
+effort = "xHigh"
+variant = "10 runs; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 44
+metric = "accuracy"
+dataset = "Original HLE set (2,500 questions)"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-5-4-vs-gpt-5"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1247
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+effort = "Xhigh"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-5-4-vs-gpt-5"

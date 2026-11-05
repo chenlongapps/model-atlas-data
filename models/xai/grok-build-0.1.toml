@@ -3,7 +3,7 @@ name = "Grok Build 0.1"
 description = "Fast Grok coding model tuned for agentic engineering and iterative edits"
 family = "grok-build"
 open_weights = false
-release_date = "2026-04-16"
+release_date = "2026-05-19"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "application/pdf"]

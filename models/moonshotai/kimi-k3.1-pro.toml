@@ -43,3 +43,88 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 131_072
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 65.7
+metric = "task resolution rate"
+version = "4.0.0"
+effort = "max"
+variant = "Moonshot AI evaluation; temperature=1.0; top_p=0.95"
+harness = "Claude-Code"
+source = "https://www.kimi.com/en/blog/kimi-k3-1-pro"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 67
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 63.64
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "full 66-task set"
+variant = "mean of three pass@1 runs"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 34
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 31.43
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+variant = "pass@1 single run"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Chartography"
+score = 16.7
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "full 100-task released set"
+effort = "Max reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 52
+metric = "accuracy"
+version = "unspecified"
+dataset = "2,158 text-only questions from the 2,500-question May 2025 revision"
+variant = "pass@1"
+source = "https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 46
+metric = "index score"
+version = "5.0"
+source = "https://artificialanalysis.ai/models/kimi-k3-1-pro"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 62.52
+metric = "performance score"
+version = "2.2"
+date = "2026-10-24"
+source = "https://www.vals.ai/models/kimi_kimi-k3.1-pro"

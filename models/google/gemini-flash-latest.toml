@@ -51,3 +51,69 @@ top_k = true
 [limit]
 context = 1_048_576
 output = 65_536
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 65.3
+metric = "pass@1"
+version = "1.1"
+effort = "high"
+variant = "self-computed; LiteLLM 1.96; high thinking"
+harness = "mini-swe-agent"
+source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 65
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "official v1.1 leaderboard; uncertainty ±3 percentage points"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 12.12
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+variant = "avg@3; each run pass@1; 3 runs; ±1 standard error"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 7.14
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "single-run pass@1; infrastructure/provider errors retried"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 30.4
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private set"
+effort = "High"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "Chartography"
+score = 40.4
+metric = "accuracy (mean; Pass@1)"
+dataset = "100-task full task set; 10 runs per task; Gemini 3.5 Flash judge"
+effort = "High reasoning"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 48
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE set"
+effort = "high"
+source = "https://artificialanalysis.ai/models/comparisons/claude-fable-5-1-high-vs-gemini-3-7-flash"

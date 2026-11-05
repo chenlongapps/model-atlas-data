@@ -27,27 +27,67 @@ name = "DeepSWE"
 score = 68.8
 metric = "score"
 version = "1.1"
-variant = "max effort"
+dataset = "113 tasks"
+effort = "max"
 source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
-date = "2026-09-22"
 
 [[benchmarks]]
 name = "AutomationBench"
 score = 33.2
-metric = "score"
+metric = "task_completed_correctly"
 version = "1.0.6"
-variant = "xhigh effort"
-source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
-date = "2026-09-22"
+dataset = "held-out private evaluation set"
+effort = "xhigh"
+variant = "API mode; up to 50 steps per task"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 21.2
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "held-out private evaluation set"
+effort = "low"
+variant = "API mode; up to 50 steps per task"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 26.9
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "held-out private evaluation set"
+effort = "medium"
+variant = "API mode; up to 50 steps per task"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 31.2
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "held-out private evaluation set"
+effort = "high"
+variant = "API mode; up to 50 steps per task"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 32.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "held-out private evaluation set"
+effort = "max"
+variant = "API mode; up to 50 steps per task"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
 
 [[benchmarks]]
 name = "Agents' Last Exam"
 score = 56.4
 metric = "score"
 version = "1"
-variant = "max effort"
+effort = "max"
 source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
-date = "2026-09-22"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -55,6 +95,60 @@ score = 60.5
 metric = "partial reward"
 version = "2.0"
 dataset = "offline v2026.08.08"
-variant = "xhigh effort"
+effort = "xhigh"
 source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
-date = "2026-09-22"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 34.34
+metric = "accuracy"
+version = "4.0"
+effort = "max"
+source = "https://www.vals.ai/models/openai_gpt-6-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 44.44
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3 across three runs; each run pass@1; reported ±3.54"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 31.43
+metric = "accuracy"
+effort = "max"
+source = "https://www.vals.ai/models/openai_gpt-6-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 30.0
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "single-run pass@1; reported ±5.52"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Chartography"
+score = 53.6
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "max"
+variant = "Source metric accuracy/mean; 10 runs per task; Gemini 3.5 Flash judge; Max reasoning"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 44
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/gpt-6-sol"

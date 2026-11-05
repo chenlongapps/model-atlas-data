@@ -56,6 +56,16 @@ dataset = "Qwen refined and corrected task set"
 source = "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
 
 [[benchmarks]]
+name = "Terminal-Bench"
+score = 25.25
+metric = "pass@1"
+version = "4.0"
+dataset = "66 tasks"
+harness = "mini-SWE-agent v2.4.6"
+variant = "mean over 3 repeats per task; 500-step cap; task timeout up to 8 hours"
+source = "https://artificialanalysis.ai/models/qwen3-8-flash-next"
+
+[[benchmarks]]
 name = "SWE-Bench Multilingual"
 score = 81
 metric = "score"
@@ -116,7 +126,7 @@ source = "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
 name = "Humanity's Last Exam"
 score = 35.9
 metric = "score"
-variant = "without tools; GPT-4o judge"
+variant = "GPT-4o judge"
 source = "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
 
 [[benchmarks]]

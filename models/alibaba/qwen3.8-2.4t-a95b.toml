@@ -33,3 +33,22 @@ output = 131_072
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 11
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+variant = "pass@1 averaged over three repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-8-2-4t-a95b-vs-step-3-7-flash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 42
+metric = "accuracy"
+version = "unspecified"
+dataset = "2,158 text-only questions from the original 2,500-question HLE set"
+variant = "single answer; text-only subset"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-8-2-4t-a95b-vs-step-3-7-flash"

@@ -23,3 +23,39 @@ top_k = true
 [limit]
 context = 128_000
 output = 64_000
+
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 1
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-command-a-plus"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 0
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-command-a-plus"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 12
+metric = "accuracy"
+dataset = "May 2025 revision; 2,158 text-only questions"
+variant = "pass@1"
+source = "https://artificialanalysis.ai/models/comparisons/command-a-plus-vs-claude-sonnet-4-6-adaptive"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 6
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/command-a-plus"

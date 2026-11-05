@@ -9,7 +9,8 @@ name = "Qwen-Audio-3.0-TTS Flash"
 description = "Fast hosted text-to-speech model for real-time use"
 family = "qwen"
 open_weights = false
-release_date = "2026-07"
+# Model Studio lifecycle lists this exact API model ID as released on 2026-07-14: https://help.aliyun.com/en/model-studio/newly-released-models
+release_date = "2026-07-14"
 
 [modalities]
 input = ["text"]

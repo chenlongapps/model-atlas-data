@@ -5,7 +5,7 @@ name = "Gemma 4 26B A4B IT"
 description = "Open Gemma instruction model for efficient chat and self-hosted deployments"
 family = "gemma"
 open_weights = true
-release_date = "2026-04-02"
+release_date = "2026-03-31"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
@@ -25,3 +25,17 @@ output = 32_768
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/google/gemma-4-26B-A4B-it"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 8.7
+metric = "accuracy"
+variant = "instruction-tuned; HLE no tools"
+source = "https://ai.google.dev/gemma/docs/core/model_card_4"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 17.2
+metric = "accuracy"
+variant = "instruction-tuned; HLE with search"
+source = "https://ai.google.dev/gemma/docs/core/model_card_4"

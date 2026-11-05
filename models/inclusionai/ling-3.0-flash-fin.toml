@@ -82,6 +82,16 @@ variant = "highest reasoning effort"
 source = "https://huggingface.co/inclusionAI/Ling-3.0-flash-Fin"
 
 [[benchmarks]]
+name = "Terminal-Bench"
+score = 0
+metric = "pass@1"
+version = "4.0"
+dataset = "66 tasks"
+harness = "mini-swe-agent"
+variant = "3 repeats per task"
+source = "https://artificialanalysis.ai/zh/articles/ant-group-releases-finance-focused-ling-3-0-flash-fin"
+
+[[benchmarks]]
 name = "SpreadsheetBench"
 score = 86.5
 metric = "score"

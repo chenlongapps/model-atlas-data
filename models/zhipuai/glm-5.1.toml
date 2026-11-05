@@ -53,3 +53,43 @@ metric = "pass@1"
 harness = "Claude Code"
 version = "2.1"
 source = "https://artificialanalysis.ai/agents/coding-agents"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = "18% ±1%"
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+harness = "mini-swe-agent"
+source = "https://web.archive.org/web/20260615111157/https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "2%"
+metric = "task resolution rate"
+version = "4.0"
+dataset = "Terminal-Bench 4.0 (66 tasks)"
+harness = "mini-swe-agent; Artificial Analysis evaluation"
+source = "https://artificialanalysis.ai/models/comparisons/glm-5-1-vs-gpt-5-1-codex-mini"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 31.0
+variant = "Z.ai model card; HLE without tools"
+source = "https://huggingface.co/zai-org/GLM-5.1"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 52.3
+variant = "Z.ai model card; HLE with tools"
+source = "https://huggingface.co/zai-org/GLM-5.1"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1103
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval-AA v2.1 (220 tasks; 44 occupations)"
+variant = "Reasoning"
+harness = "Artificial Analysis Stirrup; E2B sandbox with web fetch, web search, code execution, and file output tools"
+source = "https://artificialanalysis.ai/models/comparisons/glm-5-1-vs-gpt-5-1-codex-mini"

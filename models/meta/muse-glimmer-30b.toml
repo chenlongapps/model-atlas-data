@@ -113,3 +113,43 @@ score = 78.8
 metric = "accuracy"
 source = "https://huggingface.co/meta-models/Muse-Glimmer-30B"
 date = "2026-08-10"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 1.0
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0 (66 tasks)"
+effort = "high"
+variant = "Artificial Analysis independent run; pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/muse-glimmer-vs-hy3"
+
+[[benchmarks]]
+name = "Chartography"
+score = 17.2
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "xHigh"
+variant = "xHigh reasoning; mean of 10 runs per task"
+harness = "Inspect AI; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 22.0
+metric = "accuracy"
+dataset = "text-only; 2,158 questions"
+effort = "high"
+variant = "no tools; Artificial Analysis result"
+source = "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 793
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks; 44 occupations; 9 industries"
+effort = "high"
+harness = "Artificial Analysis Stirrup; shell and web browsing"
+source = "https://artificialanalysis.ai/models/comparisons/muse-glimmer-vs-hy3"

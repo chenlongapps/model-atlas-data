@@ -72,3 +72,40 @@ score = 70.06
 metric = "success rate"
 source = "https://www.minimax.io/blog/minimax-m3"
 date = "2026-06-01"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "2% (rounded display)"
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "pass@1 averaged over three repeats; Artificial Analysis page displays a rounded integer; exact unrounded score not exposed; 500-step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-minimax-m3"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = "0% (rounded display)"
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1 averaged over three repeats; Artificial Analysis page displays a rounded integer; exact unrounded score not exposed; 1,000-step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-minimax-m3"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 39
+metric = "accuracy"
+dataset = "May 2025 revision; 2,158 text-only questions"
+variant = "pass@1; no tools; GPT-5.6 Luna (medium) equality checker"
+source = "https://artificialanalysis.ai/models/comparisons/minimax-m3-vs-glm-4-6"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 19
+metric = "index score"
+version = "5.0.1"
+dataset = "Nine constituent evaluations in Artificial Analysis Intelligence Index v5.0.1"
+variant = "Reasoning version"
+source = "https://artificialanalysis.ai/models/minimax-m3"

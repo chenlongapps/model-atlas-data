@@ -34,3 +34,19 @@ name = "SWE-Bench Verified"
 score = 77.2
 metric = "resolved"
 source = "https://huggingface.co/Qwen/Qwen3.6-27B"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 24.0
+metric = "accuracy"
+source = "https://huggingface.co/Qwen/Qwen3.6-27B"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 969
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+variant = "Non-reasoning"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

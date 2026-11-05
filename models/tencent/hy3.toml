@@ -265,3 +265,42 @@ score = 73.4
 metric = "score"
 variant = "highest reasoning effort"
 source = "https://huggingface.co/tencent/Hy3"
+
+# Artificial Analysis lists this run under Hy3 in its current model comparison.
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 1
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "pass@1; average of 3 repeats per task; maximum 500 agent steps; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/hy3-non-reasoning-vs-hy3"
+
+[[benchmarks]]
+name = "Chartography"
+score = 1.2
+metric = "accuracy (mean; Pass@1)"
+effort = "High reasoning"
+dataset = "100 tasks"
+variant = "20 trials per task; no tools"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 33
+metric = "accuracy"
+dataset = "May 2025 revision; 2,158 text-only questions from 2,500 total"
+variant = "pass@1; judge=GPT-5.6 Luna (medium)"
+source = "https://artificialanalysis.ai/models/comparisons/hy3-non-reasoning-vs-hy3"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1067
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+variant = "blind pairwise grading; Elo anchored to DeepSeek V4.1 Flash (max)=1600"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/hy3-non-reasoning-vs-hy3"

@@ -6,7 +6,7 @@ name = "Muse Spark 1.1"
 description = "Muse Spark is a natively multimodal reasoning model with support for tool-use, visual chain of thought, and multi-agent orchestration."
 family = "muse"
 open_weights = false
-release_date = "2026-04-08"
+release_date = "2026-07-09"
 last_updated = "2026-07-09"
 
 [modalities]
@@ -29,7 +29,6 @@ name = "SWE-Bench Pro"
 score = 61.5
 metric = "resolve rate"
 source = "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"
-date = "2026-07-09"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -37,15 +36,17 @@ score = 80.0
 metric = "success rate"
 version = "2.1"
 source = "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"
-date = "2026-07-09"
 
 [[benchmarks]]
 name = "DeepSWE"
 score = 53.3
-metric = "resolve rate"
+metric = "pass@1"
 version = "1.1"
-source = "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"
-date = "2026-07-09"
+harness = "mini-swe-agent internal bash-only fork; 64 GB RAM and storage VM"
+variant = "pass@1 averaged over five attempts; internet disabled"
+effort = "xhigh"
+dataset = "113 tasks"
+source = "https://ai.meta.com/static-resource/muse-spark-1-1-evaluation-report"
 
 [[benchmarks]]
 name = "MCP Atlas"
@@ -72,9 +73,11 @@ date = "2026-07-09"
 name = "Humanity's Last Exam"
 score = 62.1
 metric = "accuracy"
-variant = "with tools"
-source = "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"
-date = "2026-07-09"
+variant = "with tools; bash and browser; blocklist huggingface.co, kaggle.com, paperswithcode.com, lmsys.org"
+harness = "Meta Model API; GPT o3-mini judge"
+effort = "xhigh"
+dataset = "full 2,500-question HLE"
+source = "https://ai.meta.com/static-resource/muse-spark-1-1-evaluation-report"
 
 [[benchmarks]]
 name = "OSWorld-Verified"
@@ -104,3 +107,31 @@ score = 76.3
 metric = "accuracy"
 source = "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"
 date = "2026-07-09"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1212
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Xhigh"
+harness = "Artificial Analysis Stirrup; E2B sandbox with shell/code execution and web tools"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-1-vs-gpt-5-4"
+
+[[benchmarks]]
+name = "Chartography"
+score = 24.4
+dataset = "100 tasks"
+variant = "xHigh reasoning"
+harness = "Inspect AI leaderboard configuration; 10 runs per task; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 52.2
+metric = "accuracy"
+dataset = "full 2,500-question HLE"
+effort = "xhigh"
+variant = "no tools"
+harness = "Meta Model API; GPT o3-mini judge"
+source = "https://ai.meta.com/static-resource/muse-spark-1-1-evaluation-report"

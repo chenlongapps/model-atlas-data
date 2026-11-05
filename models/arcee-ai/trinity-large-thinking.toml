@@ -43,3 +43,28 @@ type = "announcement"
 label = "License"
 url = "https://huggingface.co/arcee-ai/Trinity-Large-Thinking/blob/main/LICENSE"
 type = "license"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = "16%"
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE dataset (Artificial Analysis evaluation)"
+source = "https://artificialanalysis.ai/models/comparisons/trinity-large-thinking-vs-claude-sonnet-4-6-adaptive"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 336
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+harness = "Stirrup with shell and web tools"
+source = "https://artificialanalysis.ai/models/comparisons/trinity-large-thinking-vs-claude-sonnet-4-6-adaptive"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "1%"
+metric = "task resolution rate"
+version = "4.0"
+dataset = "Terminal-Bench 4.0 (66 tasks; average of three repeats per task)"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/trinity-large-thinking-vs-claude-sonnet-4-6-adaptive"

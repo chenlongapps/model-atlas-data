@@ -7,7 +7,7 @@ description = "Largest Gemma 4 instruction model for open, self-hosted chat and 
 family = "gemma"
 open_weights = true
 knowledge = "2025-01"
-release_date = "2026-04-02"
+release_date = "2026-03-31"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
@@ -27,3 +27,17 @@ output = 32_768
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/google/gemma-4-31B-it"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 19.5
+metric = "accuracy"
+variant = "instruction-tuned; HLE no tools"
+source = "https://ai.google.dev/gemma/docs/core/model_card_4"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 26.5
+metric = "accuracy"
+variant = "instruction-tuned; HLE with search"
+source = "https://ai.google.dev/gemma/docs/core/model_card_4"

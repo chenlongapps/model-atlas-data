@@ -34,6 +34,8 @@ url = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 42.6
+metric = "accuracy"
+version = "unspecified"
 variant = "without tools"
 dataset = "full set"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
@@ -41,6 +43,8 @@ source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 44.0
+metric = "accuracy"
+version = "unspecified"
 variant = "without tools"
 dataset = "text-only subset"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
@@ -48,14 +52,17 @@ source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 42.3
-version = "4.0"
+metric = "task resolution rate"
+version = "4.0.0"
 harness = "Claude Code"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 
 [[benchmarks]]
 name = "DeepSWE"
 score = 77.0
+metric = "pass@1"
 version = "1.1"
+dataset = "DeepSWE v1.1 (113 tasks)"
 harness = "Mini-SWE-V2"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 
@@ -72,6 +79,7 @@ source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 [[benchmarks]]
 name = "AutomationBench"
 score = 60.5
+metric = "task_completed_correctly"
 version = "1.0.6"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 
@@ -89,6 +97,8 @@ source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 [[benchmarks]]
 name = "Chartography"
 score = 83.0
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
 variant = "with tools"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
 
@@ -105,3 +115,55 @@ metric = "pass@5"
 variant = "with tools"
 dataset = "main"
 source = "https://api-docs.deepseek.com/updates/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 12.9
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "harborframework/terminal-bench-science; terminalbenchscience_0_1 (70 tasks)"
+effort = "Max"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/discussions/40"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 32
+metric = "index score"
+version = "5.0"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/releases/deepseek-v4-1-flash-1017"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 29
+metric = "index score"
+version = "5.0"
+effort = "High"
+source = "https://artificialanalysis.ai/models/releases/deepseek-v4-1-flash-1017"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 19
+metric = "index score"
+version = "5.0"
+variant = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/releases/deepseek-v4-1-flash-1017"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1746
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 GDPval tasks"
+effort = "Max"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 61.26
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash-1017"

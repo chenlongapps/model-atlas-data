@@ -22,3 +22,9 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 131_072
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 30
+metric = "accuracy"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-pro-vs-gemini-2-5-flash-reasoning"

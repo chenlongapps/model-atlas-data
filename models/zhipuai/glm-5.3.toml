@@ -47,10 +47,21 @@ source = "https://huggingface.co/zai-org/GLM-5.3"
 name = "DeepSWE"
 score = 66.9
 metric = "resolved"
-variant = "max effort; 6h timeout; 400K context"
+effort = "max"
+variant = "temperature=0.95; top_p=1.0; 6h timeout; 400K context"
 version = "1.1"
 source = "https://huggingface.co/zai-org/GLM-5.3"
 harness = "mini-swe-agent"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 69.0
+metric = "pass rate"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+variant = "uncertainty ±3 percentage points; leaderboard configuration details not stated"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
 
 [[benchmarks]]
 name = "NL2Repo"
@@ -152,7 +163,8 @@ source = "https://huggingface.co/zai-org/GLM-5.3"
 name = "Humanity's Last Exam"
 score = 62.5
 metric = "accuracy"
-variant = "max effort; with tools"
+effort = "max"
+variant = "with tools; temperature=1.0; top_p=0.95; max generation length=163840; max context length=300000; judge=GPT-5.6-Luna (medium)"
 source = "https://huggingface.co/zai-org/GLM-5.3"
 
 [[benchmarks]]
@@ -162,3 +174,56 @@ metric = "Elo"
 variant = "max effort"
 version = "2"
 source = "https://huggingface.co/zai-org/GLM-5.3"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 41.9
+metric = "pass@1"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "average over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/evaluations/terminalbench-4-0"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 38.89
+metric = "accuracy"
+version = "4.0"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 9.5
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "average over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/evaluations/terminal-bench-science"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 5.71
+metric = "accuracy"
+version = "0.1.0"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 32
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/glm-5-3"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 59.73
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/benchmarks/vals_index"

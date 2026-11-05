@@ -86,3 +86,37 @@ score = 47.2
 harness = "Claude Code"
 source = "https://qwen.ai/blog?id=qwen3.7"
 date = "2026-05-19"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 21.6
+version = "1.1"
+dataset = "113 tasks"
+variant = "Qwen reports the higher score across Claude Code and mini-SWE-agent; temperature=1.0; top_p=0.95; 256K context; selected harness not specified"
+source = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "2% (rounded display)"
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "pass@1 across three repeats; maximum 500 agent steps; rounded integer display"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-8-max-vs-qwen3-7-max"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 53.5
+metric = "accuracy"
+variant = "with tools"
+source = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1128
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-7-max-vs-step-3-5-flash-0202"

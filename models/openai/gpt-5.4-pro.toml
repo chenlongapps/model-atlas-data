@@ -33,17 +33,17 @@ date = "2026-04-23"
 name = "Humanity's Last Exam"
 score = 42.7
 metric = "accuracy"
+effort = "xhigh"
 variant = "no tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+source = "https://openai.com/index/introducing-gpt-5-4/"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 58.7
 metric = "accuracy"
+effort = "xhigh"
 variant = "with tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+source = "https://openai.com/index/introducing-gpt-5-4/"
 
 [[benchmarks]]
 name = "BrowseComp"

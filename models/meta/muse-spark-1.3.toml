@@ -37,7 +37,6 @@ variant = "max effort"
 version = "2"
 harness = "Stirrup"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "JobBench"
@@ -46,7 +45,6 @@ metric = "mean rubric score"
 variant = "max effort"
 harness = "OpenCode"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -57,7 +55,6 @@ version = "2.0"
 dataset = "08.08"
 harness = "Meta internal evaluation framework"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -68,7 +65,6 @@ version = "2.0"
 dataset = "08.08"
 harness = "Meta internal evaluation framework"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "DeepSearchQA"
@@ -77,7 +73,6 @@ metric = "F1"
 variant = "max effort"
 harness = "Meta browser harness"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "Agentic IF Index"
@@ -86,7 +81,6 @@ metric = "score"
 variant = "max effort"
 dataset = "Meta internal"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "AutomationBench"
@@ -95,7 +89,6 @@ metric = "pass@1"
 variant = "max effort"
 dataset = "public v3 task set"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "MRCR"
@@ -105,7 +98,6 @@ variant = "max effort"
 version = "2"
 dataset = "8-needle, 256K-512K"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "MRCR"
@@ -115,7 +107,6 @@ variant = "max effort"
 version = "2"
 dataset = "8-needle, 512K-1M"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "DeepSWE"
@@ -125,7 +116,6 @@ variant = "max effort"
 version = "1.1"
 harness = "mini-swe-agent"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "SWE-Atlas Codebase QnA"
@@ -134,7 +124,6 @@ metric = "pass@1"
 variant = "max effort"
 harness = "mini-swe-agent"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -144,4 +133,132 @@ variant = "max effort"
 version = "2.1"
 harness = "Muse Code"
 source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
-date = "2026-09-02"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 33
+metric = "pass@1"
+version = "4.0"
+dataset = "66 tasks"
+effort = "Max"
+variant = "mean of 3 repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-muse-spark-1-3-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 17
+metric = "pass@1"
+version = "4.0"
+dataset = "66 tasks"
+effort = "Xhigh"
+variant = "mean of 3 repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-muse-spark-1-3-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 11
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "Max"
+variant = "mean of 3 repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-muse-spark-1-3-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 4
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "Xhigh"
+variant = "mean of 3 repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-muse-spark-1-3-xhigh"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 20.7
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out workflows"
+variant = "API mode; 50-step cap"
+source = "https://fireworks.ai/specialized-intelligence-index/benchmarks/workflow-automation/automationbench"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 69.6
+metric = "mean partial score"
+version = "v2.1"
+dataset = "108 tasks"
+effort = "max"
+variant = "batch tool; up to 500 actions"
+source = "https://www.aib.vote/en/benchmarks/osworld-2-1"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 39.3
+metric = "binary task completion rate"
+version = "v2.1"
+dataset = "108 tasks"
+effort = "max"
+variant = "batch tool; up to 500 actions"
+source = "https://www.aib.vote/en/benchmarks/osworld-2-1"
+
+[[benchmarks]]
+name = "Chartography"
+score = 27.6
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 expert-authored tasks"
+effort = "xHigh reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 49
+metric = "accuracy"
+dataset = "original HLE; 2,500 questions"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-gpt-5-6-sol-high"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 47
+metric = "accuracy"
+dataset = "original HLE; 2,500 questions"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-xhigh-vs-inkling"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 37
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/muse-spark-1-3"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1681
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Max"
+variant = "shell and web access; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-vs-gpt-5-6-sol-high"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1627
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Xhigh"
+variant = "shell and web access; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-xhigh-vs-inkling"

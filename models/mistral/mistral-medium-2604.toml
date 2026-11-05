@@ -4,7 +4,7 @@ name = "Mistral Medium 3.5"
 description = "Balanced Mistral model for enterprise assistants, multilingual work, and tools"
 family = "mistral-medium"
 open_weights = true
-release_date = "2026-04-29"
+release_date = "2026-04-28"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
@@ -38,3 +38,39 @@ metric = "accuracy"
 variant = "public preview"
 source = "https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5/"
 date = "2026-05-22"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 0
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/step-5-vs-mistral-medium-3-5"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 0
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-mistral-small-4"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 14
+metric = "accuracy"
+dataset = "2,158 text-only questions from the May 2025 HLE revision (2,500 questions total)"
+variant = "pass@1; GPT-5.6 Luna (medium) equality checker"
+harness = "Artificial Analysis HLE evaluation"
+source = "https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-glm-5-1"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 5
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/mistral-medium-3-5"

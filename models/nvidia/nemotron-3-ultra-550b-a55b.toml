@@ -107,3 +107,20 @@ score = 46.7
 metric = "wins or ties"
 source = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
 date = "2026-06-04"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 12
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/nvidia-nemotron-3-ultra-550b-a55b"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1021
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+variant = "Reasoning; CI -17/+17"
+harness = "Stirrup agentic loop (shell and web browsing)"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

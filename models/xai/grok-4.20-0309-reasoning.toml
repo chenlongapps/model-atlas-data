@@ -19,3 +19,10 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 30_000
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 32
+metric = "accuracy"
+dataset = "Original HLE set (2,500 questions)"
+source = "https://artificialanalysis.ai/models/comparisons/grok-4-20-0309-vs-grok-4"

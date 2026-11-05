@@ -2,7 +2,7 @@
 #   top_k=20 (https://huggingface.co/poolside/Laguna-S-2.1).
 schema = 2
 name = "Laguna S 2.1"
-description = "Agentic coding model from Poolside in the XS size class for local deployment"
+description = "118B Mixture-of-Experts agentic coding model from Poolside"
 family = "laguna"
 open_weights = true
 release_date = "2026-07-21"
@@ -21,3 +21,14 @@ top_k = true
 [limit]
 context = 1_048_576
 output = 32_768
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 40.4
+metric = "pass@1"
+version = "1.1"
+effort = "max thinking"
+variant = "pass@1 averaged over 3 attempts per task"
+harness = "pool"
+source = "https://poolside.ai/blog/introducing-laguna-s-2-1"
+date = "2026-07-21"

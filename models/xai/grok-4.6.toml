@@ -1,4 +1,5 @@
-# Benchmarks use the "Grok 4.6 High" comparison column and Grok 4.6 (high) GDPval chart in the Grok 4.7 announcement.
+# Scores use the Grok 4.6 High column in the Grok 4.7 announcement unless another source is listed.
+# The announcement date is not an evaluation date, so no benchmark date is inferred from it.
 schema = 2
 name = "Grok 4.6"
 description = "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects"
@@ -29,16 +30,16 @@ metric = "score"
 variant = "high effort"
 version = "4.0"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "DeepSWE"
 score = 65.2
-metric = "score"
+metric = "pass@1"
 variant = "high effort"
 version = "1.1"
+dataset = "113 tasks"
+effort = "High"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "EEBench"
@@ -46,7 +47,6 @@ score = 53
 metric = "score"
 variant = "high effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "AA-Briefcase"
@@ -55,16 +55,16 @@ metric = "Elo"
 variant = "high effort"
 version = "1.1"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 20.3
-metric = "score"
+metric = "task resolution rate"
 variant = "high effort"
-version = "4.0"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "High"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "Harvey Legal Agent Benchmark"
@@ -72,7 +72,6 @@ score = 15.8
 metric = "score"
 variant = "high effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "HealthBench"
@@ -80,7 +79,6 @@ score = 48.5
 metric = "score"
 variant = "high effort; professional"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "GDPval"
@@ -88,4 +86,45 @@ score = 1605
 metric = "Elo"
 variant = "high effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67.0
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "leaderboard reports ±2 percentage points"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 11.43
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks across 5 domains"
+variant = "pass@1; single run; infrastructure/provider-error retries only"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Chartography"
+score = 20.5
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "100 tasks"
+effort = "xHigh"
+variant = "10 runs per task; leaderboard mean"
+harness = "Inspect AI; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 43
+metric = "accuracy"
+version = "unspecified"
+dataset = "2,158 text-only questions (Artificial Analysis subset)"
+effort = "High"
+variant = "pass@1"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-medium-vs-grok-4-6"

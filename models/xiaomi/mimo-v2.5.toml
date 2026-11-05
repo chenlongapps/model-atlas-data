@@ -124,3 +124,41 @@ name = "VideoHolmes"
 score = 64
 metric = "score"
 source = "https://huggingface.co/XiaomiMiMo/MiMo-V2.5"
+
+# Reported by Xiaomi coauthors in the CodeSpecWeave paper. DeepSWE 1.1's
+# reported task-success-rate metric differs from this repository's pass@1 mapping.
+[[benchmarks]]
+name = "DeepSWE"
+score = 12.39
+metric = "task success rate"
+version = "1.1"
+dataset = "113 tasks; 3 samples per task"
+variant = "MiMo-V2.5 w/ Vanilla; 512K context; temperature 1.0; top_p 0.95"
+source = "https://arxiv.org/html/2610.40256"
+
+# This is the paper's 731-task SWE-bench Pro configuration, not SWE-bench Pro V2.
+[[benchmarks]]
+name = "SWE-Bench Pro"
+score = 50.11
+metric = "task success rate"
+dataset = "731 public tasks"
+variant = "MiMo-V2.5 w/ Vanilla"
+source = "https://arxiv.org/html/2610.40256"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 27
+metric = "pass@1"
+dataset = "Artificial Analysis text-only subset; 2,158 questions"
+variant = "MiMo-V2.5 (Artificial Analysis legacy HLE evaluation)"
+source = "https://artificialanalysis.ai/models/comparisons/claude-sonnet-4-6-adaptive-vs-mimo-v2-5-0424"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 996
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+variant = "MiMo-V2.5 (Artificial Analysis comparison)"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-5-pro-vs-mimo-v2-5-0424"

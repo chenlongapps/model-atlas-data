@@ -48,9 +48,13 @@ score = 87.8
 source = "https://console.sakana.ai/models"
 
 [[benchmarks]]
-name = "Humanity’s Last Exam"
+name = "Humanity's Last Exam"
 score = 47.2
-source = "https://console.sakana.ai/models"
+metric = "accuracy"
+version = "unspecified"
+dataset = "Full 2,500-sample HLE, including multimodal samples"
+variant = "without tools"
+source = "https://arxiv.org/html/2606.21228v2"
 
 [[benchmarks]]
 name = "CharXiv Reasoning"

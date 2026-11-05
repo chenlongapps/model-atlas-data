@@ -25,3 +25,28 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 131_072
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 57.8
+metric = "pass@1"
+version = "1.1"
+harness = "Claude Code / mini-SWE-agent; highest across both, winning harness undisclosed"
+variant = "temperature=1.0; top_p=0.95; context=256K"
+source = "https://arxiv.org/html/2609.25611"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 36.5
+metric = "accuracy"
+version = "unspecified"
+dataset = "HLE; tested item count/subset not reported"
+variant = "GPT-4o judged"
+source = "https://arxiv.org/html/2609.25611"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 63.3
+harness = "Claude Code"
+variant = "temperature=1.0; top_p=0.95; context=256K; problematic tasks corrected and re-evaluated on refined benchmark; benchmark version/task count not stated"
+source = "https://arxiv.org/html/2609.25611"

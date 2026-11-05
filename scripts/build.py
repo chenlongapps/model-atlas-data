@@ -96,6 +96,12 @@ def validate_definition(data):
     require(SLUG.fullmatch(data["id"]), "id: invalid Benchmark ID")
     require(type(data.get("higher_is_better")) is bool, "higher_is_better: required boolean")
     fields(data, {key: str for key in ("description", "organization", "url", "methodology")}, "benchmark")
+    if "compatible_versions" in data:
+        versions = data["compatible_versions"]
+        require(isinstance(versions, list) and all(text(version) for version in versions),
+                "compatible_versions: expected an array of nonempty strings")
+        require(len(versions) == len(set(versions)) and data["version"] not in versions,
+                "compatible_versions: entries must be unique and differ from version")
     for key in ("min_score", "max_score"):
         if key in data:
             require(number(data[key]), f"{key}: expected a finite number")
@@ -143,17 +149,26 @@ def load_sources(root):
 
 def check_references(models, definitions, locales):
     warnings = []
-    mappings = Counter((d["name"], d["version"], d["metric"]) for d in definitions.values())
+    mappings = Counter(
+        (d["name"], version, d["metric"])
+        for d in definitions.values()
+        for version in (d["version"], *d.get("compatible_versions", []))
+    )
     unmatched = ambiguous = missing_source = 0
     for model in models.values():
         for result in model.get("benchmarks", []):
-            count = mappings[tuple(result.get(k) for k in ("name", "version", "metric"))]
+            key = tuple(result.get(k) for k in ("name", "version", "metric"))
+            if result.get("version") is None:
+                unversioned_key = (result.get("name"), "unspecified", result.get("metric"))
+                if mappings[unversioned_key]:
+                    key = unversioned_key
+            count = mappings[key]
             unmatched += count == 0
             ambiguous += count > 1
             missing_source += "source" not in result
     if unmatched or ambiguous:
         warnings.append(f"Benchmark 定义映射：未匹配 {unmatched} 条，歧义 {ambiguous} 条"
-                        "（要求 name/version/metric 精确匹配，不推断默认值；原始成绩全部保留）。")
+                        "（要求 name/version/metric 匹配或使用定义声明的兼容版本；unspecified 定义允许源记录省略版本；原始成绩全部保留）。")
     if missing_source:
         warnings.append(f"{missing_source} 条成绩未提供 source；原始成绩保留，来源需人工核实。")
     for language, data in locales.items():

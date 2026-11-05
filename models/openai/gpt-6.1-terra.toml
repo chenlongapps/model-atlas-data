@@ -21,3 +21,91 @@ top_k = false
 context = 1_050_000
 input = 922_000
 output = 128_000
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 50.3
+metric = "task resolution rate"
+version = "4.0.0"
+effort = "maximum reasoning effort"
+source = "https://openai.com/index/introducing-gpt-6-1-terra/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 55.6
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "max"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-terra-vs-gpt-6-astra"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 57.6
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "max"
+variant = "pass@1 averaged over three repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-terra-vs-gpt-6-astra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 51
+metric = "index score"
+version = "5.0"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 45
+metric = "index score"
+version = "5.0"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 42
+metric = "index score"
+version = "5.0"
+effort = "High"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 38
+metric = "index score"
+version = "5.0"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 30
+metric = "index score"
+version = "5.0"
+effort = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 29
+metric = "index score"
+version = "5.0"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1286
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+variant = "Non-reasoning"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

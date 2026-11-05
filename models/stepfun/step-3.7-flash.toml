@@ -109,3 +109,12 @@ score = 35.6
 metric = "success rate"
 source = "https://openrouter.ai/stepfun/step-3.7-flash/benchmarks"
 date = "2026-06-15"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 856
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/step-3-7-flash-vs-step-3-5-flash-0202"

@@ -122,3 +122,50 @@ variant = "1M pointwise, 8-needle"
 version = "v2"
 source = "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/"
 date = "2026-07-21"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 0.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Held-out private evaluation tasks (600+ tasks)"
+effort = "Low"
+harness = "API mode"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 3.96
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Held-out private evaluation tasks (600+ tasks)"
+effort = "Medium"
+harness = "API mode"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 3.35
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Held-out private evaluation tasks (600+ tasks)"
+effort = "High"
+harness = "API mode"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "Chartography"
+score = 10.2
+metric = "accuracy (mean; Pass@1)"
+dataset = "SurgeAI Chartography (100 tasks; 20 trials per task)"
+effort = "Minimal reasoning"
+variant = "no tools"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 12
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"

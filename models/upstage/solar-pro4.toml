@@ -27,3 +27,9 @@ top_k = false
 [limit]
 context = 524_288
 output = 131_072
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 29
+metric = "accuracy"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-solarpro4"

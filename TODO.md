@@ -2,4 +2,4 @@
 - [x] JSON 构建脚本
 - [x] github action 自动同步 https://models.dev/ 的数据,只同步新增模型，不修改和删除。
 - [x] github pages 发布脚本
-- [ ] github action 自动化脚本（ci 和 发布）
+- [ ] AA index 由5.0.0 升级到 5.0.1 少数模型分数有变化

@@ -167,3 +167,108 @@ version = "2"
 dataset = "11 subtasks"
 variant = "with tools"
 source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 94.86
+metric = "resolve rate"
+version = "V2"
+dataset = "642-task public split"
+effort = "high"
+variant = "reported ±1.46; web tools disabled; network-locked protocol; uncapped cost; 250-turn limit"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 19.70
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "avg@3; reported ±2.31 standard error; no step or cost limit; 8-hour task timeout"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/models/google_gemini-3.8-flash"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 10.0
+metric = "share of tasks passed (pass@1)"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "High"
+variant = "average of three repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-gemini-3-5-flash-lite"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 8.57
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 upstream tasks"
+variant = "single run per model; infrastructure or provider errors retried only"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 29.7
+metric = "task_completed_correctly"
+version = "1.0.6"
+effort = "Medium"
+source = "https://zapier.com/benchmarks/gemini-carbon-4-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 29.7
+metric = "task_completed_correctly"
+version = "1.0.6"
+effort = "High"
+source = "https://zapier.com/benchmarks/gemini-carbon-4-report"
+
+[[benchmarks]]
+name = "Chartography"
+score = 40.9
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 expert chart tasks"
+effort = "High reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 48
+metric = "accuracy"
+effort = "High"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-hy3"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 31
+metric = "index score"
+version = "5.0.1"
+effort = "high"
+source = "https://artificialanalysis.ai/models/gemini-3-8-flash"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1436
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "High"
+variant = "shell and web browsing; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-hy3"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 55.95
+metric = "performance score"
+version = "2.2"
+dataset = "six private and two public benchmarks"
+effort = "high"
+variant = "reported ±1.14; Google provider; default temperature, top-p, and top-k; 65,536 max output tokens"
+source = "https://www.vals.ai/models/google_gemini-3.8-flash"

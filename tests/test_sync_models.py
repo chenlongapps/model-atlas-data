@@ -282,6 +282,15 @@ class ModelValidationTests(unittest.TestCase):
         self.data["benchmarks"] = [RESULT]
         validate_model(self.data, [DEFINITION])
 
+    def test_matches_only_explicitly_declared_compatible_version(self):
+        definition = {**DEFINITION, "version": "5.0", "compatible_versions": ["5.0.1"]}
+        result = {**RESULT, "version": "5.0.1"}
+        self.data["benchmarks"] = [result]
+        validate_model(self.data, [definition])
+        self.data["benchmarks"] = [{**result, "version": "5.0.2"}]
+        with self.assertRaisesRegex(ValueError, "mapping"):
+            validate_model(self.data, [definition])
+
     def test_does_not_guess_name_metric_or_version(self):
         for field in ("name", "version", "metric"):
             with self.subTest(field=field):

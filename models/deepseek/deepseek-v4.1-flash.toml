@@ -312,3 +312,23 @@ variant = "reasoning_effort=100"
 version = "2.1"
 harness = "DeepSeek Harness PTC mode"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1600
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Max"
+variant = "Artificial Analysis leaderboard anchor"
+harness = "Stirrup shell and web agent loop"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Chartography"
+score = 11.6
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks; 10 runs per task"
+effort = "Max reasoning"
+harness = "Inspect AI; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"

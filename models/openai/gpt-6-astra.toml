@@ -22,11 +22,13 @@ context = 1_050_000
 input = 922_000
 output = 128_000
 
+# Source pages published these scores but did not publish evaluation dates;
+# their 2026-09-03 article date is omitted from benchmark date fields.
+
 [[benchmarks]]
 name = "Agents' Last Exam"
 score = 59.3
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -35,7 +37,16 @@ metric = "partial score"
 dataset = "V2-Offline (v2026.08.08)"
 version = "2.0"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 34.3
+metric = "binary task completion rate"
+version = "osworld-v2.1"
+dataset = "108 real-world workflows"
+effort = "max"
+harness = "Common internal framework"
+source = "https://dev.meta.ai/resources/blog/build-with-muse-wonder"
 
 [[benchmarks]]
 name = "ScreenSpot-Pro"
@@ -43,14 +54,12 @@ score = 92.7
 metric = "accuracy"
 variant = "no tools"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "AutomationBench"
 score = 41.4
 metric = "success rate"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "BenchCAD"
@@ -58,14 +67,12 @@ score = 95.9
 metric = "geometric overlap"
 variant = "with tools"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "BrowseComp"
 score = 91.5
 metric = "accuracy"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -73,7 +80,6 @@ score = 57.9
 metric = "task resolution rate"
 version = "4.0.0"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "DeepSWE"
@@ -81,7 +87,6 @@ score = 74.1
 metric = "pass@1"
 version = "1.1"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "FrontierCode"
@@ -90,7 +95,6 @@ metric = "score"
 dataset = "Extended"
 version = "1.1"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -98,7 +102,6 @@ score = 64.6
 metric = "task resolution rate"
 version = "0.1.0"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "FrontierMath"
@@ -107,14 +110,12 @@ metric = "accuracy"
 dataset = "Tier 4"
 version = "v2"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "GPQA Diamond"
 score = 96.0
 metric = "accuracy"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
@@ -122,7 +123,6 @@ score = 57.2
 metric = "accuracy"
 variant = "with tools"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "ExploitBench"
@@ -130,7 +130,6 @@ score = 100.0
 metric = "success rate"
 variant = "without production safeguards"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "SRE-Bench"
@@ -138,7 +137,6 @@ score = 88.0
 metric = "success rate"
 variant = "single attempt"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "ARC-AGI-3"
@@ -146,7 +144,6 @@ score = 99.9
 metric = "RHAE"
 harness = "Responses API"
 source = "https://openai.com/index/gpt-6-astra/"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
@@ -155,7 +152,6 @@ metric = "index score"
 effort = "max"
 version = "4.1.1"
 source = "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra"
-date = "2026-09-03"
 
 [[benchmarks]]
 name = "Artificial Analysis Coding Agent Index"
@@ -165,7 +161,6 @@ harness = "Codex"
 effort = "max"
 version = "1.4"
 source = "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra"
-date = "2026-09-03"
 
 # Live sources below were checked on 2026-11-03. Evaluation dates are not
 # specified, so date is omitted rather than inferred from the model release.

@@ -124,6 +124,16 @@ source = "https://z.ai/blog/glm-5.2"
 date = "2026-06-16"
 
 [[benchmarks]]
+name = "DeepSWE"
+score = "44% ± 2%"
+metric = "pass rate"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
+[[benchmarks]]
 name = "Program Bench"
 score = 63.7
 metric = "score"

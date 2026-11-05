@@ -23,3 +23,12 @@ top_k = true
 [limit]
 context = 256_000
 output = 32_768
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 17.7
+metric = "accuracy"
+dataset = "HLE text-only split (2,158 examples)"
+variant = "no tool; thinking mode; 128K-token thinking budget"
+harness = "default system prompt with boxed-answer instruction; GPT-OSS-120B for answer extraction and correctness verification"
+source = "https://arxiv.org/html/2603.19220"

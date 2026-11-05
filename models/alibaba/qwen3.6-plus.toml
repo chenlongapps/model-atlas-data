@@ -22,3 +22,10 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 65_536
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = "28%"
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE dataset (Artificial Analysis evaluation)"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-6-plus-vs-gemini-3-1-flash-lite-preview"

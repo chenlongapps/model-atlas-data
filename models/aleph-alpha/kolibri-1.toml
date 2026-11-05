@@ -29,3 +29,13 @@ context = 1_048_576
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/Aleph-Alpha/Kolibri-1"
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 21.5
+metric = "accuracy"
+version = "unspecified"
+dataset = "English text-only questions; denominator and dataset snapshot not stated"
+effort = "high"
+variant = "English"
+harness = "eval-framework"
+source = "https://huggingface.co/Aleph-Alpha/Kolibri-1"

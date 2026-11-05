@@ -36,3 +36,10 @@ output = 262_144
 label = "Model weights"
 url = "https://huggingface.co/Motif-Technologies/Motif-3"
 format = "safetensors"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 37.0
+metric = "accuracy"
+variant = "temperature=1.0; top_p=0.95; max sequence length=262144"
+source = "https://huggingface.co/Motif-Technologies/Motif-3"

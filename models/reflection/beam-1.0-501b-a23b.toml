@@ -72,10 +72,12 @@ type = "docs"
 [[benchmarks]]
 name = "DeepSWE"
 score = 43.3
+metric = "pass@1"
+dataset = "datacurve/deep-swe"
 variant = "BF16"
 version = "1.1"
-source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/Beam-1.0-501B-A23B.yaml"
+date = "2026-10-07"
 
 [[benchmarks]]
 name = "SWE-Bench Pro"
@@ -84,23 +86,24 @@ variant = "BF16"
 dataset = "hard"
 version = "2"
 source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
 
 [[benchmarks]]
 name = "SWE-Bench Pro"
 score = 66.1
+dataset = "ScaleAI/SWE-bench_Pro"
 variant = "BF16"
 version = "1"
-source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/Beam-1.0-501B-A23B.yaml"
+date = "2026-10-07"
 
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 80.1
+dataset = "harborframework/terminal-bench-2.1"
 variant = "BF16"
 version = "2.1"
-source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/Beam-1.0-501B-A23B.yaml"
+date = "2026-10-07"
 
 [[benchmarks]]
 name = "SWE-Atlas Codebase QnA"
@@ -133,16 +136,20 @@ date = "2026-10-16"
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 36.0
+metric = "accuracy"
+dataset = "cais/hle"
 variant = "BF16; no tools"
-source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/Beam-1.0-501B-A23B.yaml"
+date = "2026-10-07"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 51.1
+metric = "accuracy"
+dataset = "cais/hle"
 variant = "BF16; with tools"
-source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/Beam-1.0-501B-A23B.yaml"
+date = "2026-10-07"
 
 [[benchmarks]]
 name = "SciCode"
@@ -178,7 +185,6 @@ score = 39.3
 variant = "BF16"
 dataset = "public"
 source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
-date = "2026-10-16"
 
 [[benchmarks]]
 name = "MCP Atlas"
@@ -238,3 +244,37 @@ variant = "BF16"
 dataset = "public split"
 source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
 date = "2026-10-16"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 3.0
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "harborframework/terminal-bench"
+variant = "pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/terminal-bench-4.0.yaml"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 0.5
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "harborframework/terminal-bench-science"
+variant = "pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/terminal-bench-science.yaml"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 18
+metric = "index score"
+version = "5.0"
+source = "https://artificialanalysis.ai/models/reflection-beam"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 43.42
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/benchmarks/vals_index"

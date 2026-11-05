@@ -27,3 +27,19 @@ top_k = false
 [limit]
 context = 524_288
 output = 131_072
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 1.0
+metric = "task resolution rate"
+version = "4.0.0"
+source = "https://artificialanalysis.ai/articles/korean-ai-lab-upstage-releases-solar-mini-4"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1072
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/articles/korean-ai-lab-upstage-releases-solar-mini-4"

@@ -31,3 +31,115 @@ output = 1_048_576
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/thinkingmachines/Inkling"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 89.88
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "SWE-bench Pro V2 Full public set (642 tasks)"
+effort = "xhigh"
+variant = "reported ±2.10; uncapped cost limit; 250-turn limit"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 1
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0 (66 tasks)"
+effort = "Xhigh"
+variant = "AA independent evaluation; pass@1 averaged over three repeats per task; 500-step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 0.51
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0 (66 tasks)"
+effort = "0.99"
+variant = "Vals AI avg@3; pass@1 per run; reported ±0.51; 8-hour task timeout"
+harness = "Mini-SWE-agent"
+source = "https://vals-ai.com/models/thinkingmachines_inkling"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 0
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "Terminal-Bench-Science 0.1.0 (70 tasks)"
+effort = "Xhigh"
+variant = "AA independent evaluation; pass@1 averaged over three repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 5
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "Xhigh"
+variant = "AA headline score: zero for any guardrail violation, otherwise share of objectives completed; one run per task; 50-turn cap"
+source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
+
+[[benchmarks]]
+name = "Chartography"
+score = 10
+metric = "accuracy (mean; Pass@1)"
+dataset = "Chartography full set (100 tasks)"
+effort = "High reasoning"
+variant = "Official leaderboard entry; run count not reported; paper says 20 trials per task while current harness README says 10 runs"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 32
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "Xhigh"
+variant = "Artificial Analysis independent evaluation; text-only, no tools"
+source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 12
+metric = "index score"
+version = "5.0"
+dataset = "Nine-evaluation composite"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 12
+metric = "index score"
+version = "5.0.1"
+dataset = "Nine-evaluation composite"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/inkling"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1080
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "Xhigh"
+variant = "reported interval −22/+22; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 28.96
+metric = "performance score"
+version = "2.2"
+dataset = "GDP-weighted finance, coding, legal, and tax evaluations"
+effort = "0.99"
+variant = "reported ±1.12; Inkling via Thinking Machines"
+source = "https://vals-ai.com/models/thinkingmachines_inkling"

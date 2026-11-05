@@ -59,3 +59,133 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 65_536
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 77.9
+metric = "pass@1"
+version = "1.1"
+dataset = "DeepSWE v1.1 (113 tasks)"
+effort = "high"
+harness = "mini-swe-agent"
+source = "https://deepmind.google/models/model-cards/gemini-4-argon/"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 99.22
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "SWE-bench Pro V2 Full (642 tasks); reported 99.22 ± 0.45%"
+effort = "high"
+variant = "Full"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 57.58
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0 (66 tasks); reported ±2.31 percentage points"
+effort = "high"
+variant = "avg@3; each run pass@1"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 57.4
+metric = "task resolution rate"
+version = "4.0.0"
+effort = "high"
+variant = "Google self-computed; pass@1; repeat count and harness not specified"
+source = "https://deepmind.google/models/model-cards/gemini-4-argon/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 57.6
+metric = "task resolution rate"
+version = "0.1.0"
+effort = "high"
+variant = "Google self-computed; pass@1; verifier timeout set to 6×; harness not specified"
+source = "https://deepmind.google/models/model-cards/gemini-4-argon/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 53
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "Terminal-Bench-Science v0.1.0 (70 tasks)"
+effort = "high"
+variant = "pass@1 averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-4-argon-vs-gpt-6-astra-high"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 44.29
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "Terminal-Bench-Science v0.1.0 (70 tasks); reported ±5.98 percentage points"
+effort = "high"
+variant = "single pass@1 run; infrastructure or provider errors may be retried"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 51.29
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Zapier 1.0.6 held-out private task set (600+ tasks; 47 apps)"
+effort = "High"
+harness = "Zapier AutomationBench"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 50.08
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Zapier 1.0.6 held-out private task set (600+ tasks; 47 apps)"
+effort = "Medium"
+harness = "Zapier AutomationBench"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 74.7
+metric = "partial score"
+version = "osworld-v2.1"
+dataset = "OSWorld-2.1 offline subset (82 tasks)"
+effort = "high"
+variant = "maximum across 3 single-attempt runs; offline subset"
+harness = "Gemini CUA"
+source = "https://deepmind.google/models/gemini/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 71.6
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+effort = "High reasoning"
+variant = "without tools"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50
+metric = "index score"
+version = "5.0"
+dataset = "Artificial Analysis Intelligence Index V5 composite (9 evaluations)"
+effort = "high"
+source = "https://artificialanalysis.ai/models/gemini-4-argon"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 69.24
+metric = "performance score"
+version = "2.2"
+dataset = "Vals Index composite (finance, coding, legal, tax)"
+effort = "high"
+source = "https://www.vals.ai/benchmarks/vals_index"

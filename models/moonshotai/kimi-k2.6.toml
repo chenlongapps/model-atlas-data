@@ -88,3 +88,27 @@ metric = "pass@1"
 harness = "Claude Code"
 version = "2.1"
 source = "https://artificialanalysis.ai/agents/coding-agents"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 34.7
+metric = "accuracy"
+dataset = "HLE-Full"
+variant = "Thinking mode enabled; no tools; maximum generation length 98,304 tokens"
+source = "https://huggingface.co/moonshotai/Kimi-K2.6/raw/main/README.md"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 54.0
+metric = "accuracy"
+dataset = "HLE-Full"
+variant = "Thinking mode enabled; search, code-interpreter, and web-browsing tools; maximum generation length 262,144 tokens; per-step limit 49,152 tokens; retain only the most recent round of tool-related messages after context threshold"
+source = "https://huggingface.co/moonshotai/Kimi-K2.6/raw/main/README.md"
+
+[[benchmarks]]
+name = "Chartography"
+score = 12.2
+dataset = "Chartography full task set (100 tasks)"
+variant = "Thinking on"
+harness = "Inspect AI Chartography harness; leaderboard configuration: 10 runs per task, Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"

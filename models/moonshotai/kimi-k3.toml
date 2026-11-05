@@ -51,7 +51,7 @@ output = 131_072
 [[benchmarks]]
 name = "DeepSWE"
 score = 67.5
-metric = "resolve rate"
+metric = "pass@1"
 variant = "max effort"
 harness = "Kimi Code"
 version = "1.1"
@@ -163,3 +163,87 @@ metric = "pass@5"
 variant = "max effort, with tools"
 source = "https://www.kimi.com/blog/kimi-k3"
 date = "2026-07-16"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 97.7
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "V2 public set (642 tasks)"
+effort = "max"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67.3
+metric = "pass@1"
+version = "1.1"
+effort = "max"
+harness = "mini-SWE-agent"
+source = "https://www.kimi.com/en/blog/kimi-k3"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 69
+metric = "pass@1"
+version = "1.1"
+effort = "max"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 17.17
+metric = "task resolution rate"
+version = "4.0.0"
+effort = "max"
+variant = "avg@3; pass@1 per run; mean of three runs"
+harness = "Mini-SWE-agent"
+source = "https://vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 1.43
+metric = "task resolution rate"
+version = "0.1.0"
+effort = "max"
+variant = "pass@1 single run; infrastructure/provider errors retried"
+harness = "Mini-SWE-agent"
+source = "https://vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Chartography"
+score = 26.6
+metric = "accuracy (mean; Pass@1)"
+dataset = "100-task Chartography set"
+effort = "Max reasoning"
+variant = "20 trials per task; no tools"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 43.5
+metric = "accuracy"
+dataset = "HLE-Full"
+effort = "max"
+variant = "without tools"
+source = "https://arxiv.org/pdf/2607.24653"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 56.0
+metric = "accuracy"
+dataset = "HLE-Full"
+effort = "max"
+variant = "with general tools"
+source = "https://arxiv.org/pdf/2607.24653"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 52.95
+metric = "performance score"
+version = "2.2"
+effort = "max"
+source = "https://vals.ai/models/kimi_kimi-k3"

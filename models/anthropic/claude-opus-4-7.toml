@@ -157,17 +157,21 @@ date = "2026-04-23"
 name = "Humanity's Last Exam"
 score = 46.9
 metric = "accuracy"
-variant = "no tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+dataset = "HLE full set (2,500 questions)"
+effort = "max"
+variant = "no tools; thinking=auto; 1M total-token cap across contexts; no context compaction"
+harness = "Reasoning-only; Claude Opus 4.6 grader"
+source = "https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 54.7
 metric = "accuracy"
-variant = "with tools"
-source = "https://openai.com/index/introducing-gpt-5-5/"
-date = "2026-04-23"
+dataset = "HLE full set (2,500 questions)"
+effort = "max"
+variant = "with web search, web fetch, programmatic tool calling, and code execution; thinking=auto; 1M total-token cap across contexts; no context compaction"
+harness = "Claude Opus 4.6 grader"
+source = "https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf"
 
 [[benchmarks]]
 name = "OSWorld-Verified"
@@ -175,3 +179,11 @@ score = 78.0
 metric = "success rate"
 source = "https://openai.com/index/introducing-gpt-5-5/"
 date = "2026-04-23"
+
+[[benchmarks]]
+name = "Chartography"
+score = 16.5
+dataset = "Chartography full task set (100 tasks)"
+variant = "Adaptive/Max"
+harness = "Inspect AI Chartography harness; leaderboard configuration: 10 runs per task, Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"

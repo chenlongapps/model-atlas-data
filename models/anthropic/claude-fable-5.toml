@@ -87,3 +87,88 @@ score = 17.4
 metric = "success rate"
 source = "https://www.anthropic.com/news/claude-fable-5-mythos-5"
 date = "2026-06-09"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = "70% ± 3%"
+metric = "pass rate"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "2,260 trials started; 73 did not complete"
+harness = "Pier / mini-swe-agent on Modal"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "44.5% ± 3.8%"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 42.0
+metric = "accuracy"
+version = "4.0"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 21.4
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "3 independent trials per task"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-science-0-1"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 24.7
+metric = "accuracy"
+version = "0.1"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 17.1
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 57.8
+metric = "accuracy"
+variant = "no tools"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 63.8
+metric = "accuracy"
+variant = "with tools"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = "1618 (CI -16/+16)"
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Max"
+variant = "Opus 4.8 Fallback"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Chartography"
+score = 34.8
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "full 100-task released set"
+effort = "Adaptive/Max"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"

@@ -21,3 +21,36 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 262_144
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 61.7
+version = "1.1"
+variant = "public preview"
+source = "https://mistral.ai/news/mistral-large-4/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 28.3
+metric = "task resolution rate"
+version = "4.0.0"
+variant = "public preview"
+source = "https://mistral.ai/news/mistral-large-4/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "27.78 ± 1.82"
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "avg@3 (3 runs; pass@1 each)"
+harness = "Mini-SWE-agent"
+source = "https://vals-ai.com/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 25
+metric = "index score"
+version = "5.0"
+variant = "public preview"
+source = "https://artificialanalysis.ai/models/mistral-large-4-preview"

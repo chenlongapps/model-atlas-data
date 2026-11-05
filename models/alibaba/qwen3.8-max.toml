@@ -62,9 +62,11 @@ source = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
 [[benchmarks]]
 name = "DeepSWE"
 score = 56.6
-metric = "score"
+metric = "pass@1"
 version = "1.1"
+dataset = "113 tasks"
 harness = "Claude Code"
+variant = "temperature=1.0; top_p=0.95; context=256K"
 source = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
 
 [[benchmarks]]
@@ -268,3 +270,52 @@ score = 66.3
 metric = "score"
 version = "2"
 source = "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 19
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "three repeats; per-task pass@1; averaged result"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-8-max-vs-qwen3-8-max-0803"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 34.34
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "single run; per-task pass@1; infrastructure/provider errors retried; 8h task limit"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/models/alibaba_qwen3.8-max"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 12.86
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks; upstream v0.1.0"
+variant = "single run; pass@1; infrastructure/provider errors retried; 8h task limit"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/models/alibaba_qwen3.8-max"
+
+[[benchmarks]]
+name = "Chartography"
+score = 29.1
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "xHigh"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1604
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-qwen3-8-max-0803"

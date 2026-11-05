@@ -26,3 +26,42 @@ top_k = false
 [limit]
 context = 262_144
 output = 131_072
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 70.0
+metric = "score (%)"
+version = "1.1"
+dataset = "30-task slice; not the full 113-task v1.1 set"
+variant = "Pareto 26.9; preliminary Unbiased run"
+source = "https://unbiased.ai/model-card/"
+date = "2026-09-20"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 69.9
+metric = "score (%)"
+version = "1.1"
+dataset = "task denominator not reported"
+variant = "Pareto 26.10 preview; preliminary October 1 run"
+source = "https://unbiased.ai/blog/pareto-26-10-preview/"
+date = "2026-10-01"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 50.8
+metric = "task resolution rate"
+version = "4.0.0"
+variant = "Pareto 26.10 preview; preliminary October 1 run"
+source = "https://unbiased.ai/blog/pareto-26-10-preview/"
+date = "2026-10-01"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 49.9
+metric = "accuracy"
+version = "unspecified"
+dataset = "HLE text-only; item count not reported"
+variant = "Pareto 26.10 preview; preliminary October 1 run"
+source = "https://unbiased.ai/blog/pareto-26-10-preview/"
+date = "2026-10-01"

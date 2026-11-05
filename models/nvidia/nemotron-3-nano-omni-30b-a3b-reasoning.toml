@@ -23,3 +23,12 @@ top_k = true
 [limit]
 context = 256_000
 output = 65_536
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 237
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 major industries"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

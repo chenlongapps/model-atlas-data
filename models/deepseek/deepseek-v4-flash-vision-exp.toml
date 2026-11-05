@@ -111,3 +111,23 @@ name = "ZeroBench"
 score = 35
 metric = "pass@5"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp"
+
+[[benchmarks]]
+name = "Chartography"
+score = 11.2
+metric = "accuracy (mean; Pass@1)"
+dataset = "Chartography full task set"
+effort = "Max reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1554
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval (220 tasks)"
+effort = "Max"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

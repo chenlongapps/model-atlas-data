@@ -30,3 +30,11 @@ output = 131_072
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/openbmb/MiniCPM5-2B"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 8.9
+metric = "accuracy"
+dataset = "2,158 text-only questions from the 2,500-question HLE dataset"
+variant = "pass@1; GPT-5.6 Luna (medium) equality checker"
+source = "https://huggingface.co/openbmb/MiniCPM5-2B"

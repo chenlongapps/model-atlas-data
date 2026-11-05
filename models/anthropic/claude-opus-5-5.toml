@@ -25,13 +25,32 @@ context = 1_000_000
 output = 128_000
 
 [[benchmarks]]
+name = "DeepSWE"
+score = 74.2
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+variant = "mean of 5 trials"
+source = "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf"
+
+[[benchmarks]]
 name = "Terminal-Bench"
-score = 66.4
-metric = "score"
-variant = "xhigh effort; production safeguards with fallback"
+score = 66.36
+metric = "task resolution rate"
+version = "4.0.0"
+effort = "xhigh"
+variant = "production safeguards with fallback; 5 trials per task (330 runs)"
+harness = "Claude Code --bare"
+source = "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 65.15
+metric = "accuracy"
 version = "4.0"
-source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
 
 [[benchmarks]]
 name = "FrontierCode"
@@ -41,7 +60,6 @@ variant = "max effort; production safeguards with fallback"
 version = "1.1"
 dataset = "Main"
 source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
 
 [[benchmarks]]
 name = "CursorBench"
@@ -50,55 +68,261 @@ metric = "score"
 variant = "max effort; production safeguards with fallback"
 version = "4.0"
 source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
-
-[[benchmarks]]
-name = "GDPval-AA"
-score = 1846
-metric = "Elo"
-variant = "max effort; production safeguards with fallback"
-version = "2.1"
-source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
 
 [[benchmarks]]
 name = "AutomationBench"
-score = 40
-metric = "pass rate"
-variant = "max effort; production safeguards; no fallback"
-source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
+score = 23.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Low"
+variant = "without fallbacks; strict all-assertions scoring; refusals included"
+harness = "Zapier API; 50-step cap"
+source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+date = "2026-09-17 to 2026-09-18"
 
 [[benchmarks]]
-name = "Humanity's Last Exam"
-score = 67.7
-metric = "score"
-variant = "max effort; with tools; production safeguards with fallback"
-source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
+name = "AutomationBench"
+score = 28.6
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Medium"
+variant = "without fallbacks; strict all-assertions scoring; refusals included"
+harness = "Zapier API; 50-step cap"
+source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+date = "2026-09-17 to 2026-09-18"
 
 [[benchmarks]]
-name = "Terminal-Bench-Science"
-score = 58.7
-metric = "score"
-variant = "max effort; production safeguards with fallback"
-version = "0.1"
-source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
+name = "AutomationBench"
+score = 32.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "High"
+variant = "without fallbacks; strict all-assertions scoring; refusals included"
+harness = "Zapier API; 50-step cap"
+source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+date = "2026-09-17 to 2026-09-18"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 34.4
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "XHigh"
+variant = "without fallbacks; strict all-assertions scoring; refusals included"
+harness = "Zapier API; 50-step cap"
+source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+date = "2026-09-17 to 2026-09-18"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 40.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Max"
+variant = "without fallbacks; strict all-assertions scoring; refusals included"
+harness = "Zapier API; 50-step cap"
+source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+date = "2026-09-17 to 2026-09-18"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 42.47
+metric = "task_completed_correctly"
+version = "1.0.6"
+effort = "Max"
+variant = "Anthropic default fallback routing"
+source = "https://zapier.com/benchmarks"
 
 [[benchmarks]]
 name = "OSWorld"
 score = 81.8
 metric = "partial score"
-variant = "max effort; production safeguards with fallback"
-version = "2.0"
+effort = "max"
+variant = "production safeguards with fallback"
+version = "2.1"
 source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
 
 [[benchmarks]]
 name = "Chartography"
 score = 89
 metric = "score"
-variant = "max effort; with tools; production safeguards with fallback"
+effort = "max"
+variant = "with tools; production safeguards"
 source = "https://www.anthropic.com/claude-opus-5-5"
-date = "2026-09-22"
+
+[[benchmarks]]
+name = "Chartography"
+score = 66.3
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "Adaptive/Max"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 67.7
+metric = "score"
+effort = "max"
+variant = "with tools; production safeguards"
+source = "https://www.anthropic.com/claude-opus-5-5"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 61.4
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original 2,500-question HLE set"
+effort = "Max"
+variant = "Pass@1; Default Fallback"
+source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 58
+metric = "index score"
+version = "5.0"
+effort = "max"
+source = "https://artificialanalysis.ai/es/articles/artificial-analysis-intelligence-index-v5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 59
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-opus-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 57
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 52
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-opus-5-5-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 48
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-opus-5-5-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 35
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-opus-5-5-low"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1846
+metric = "Elo rating"
+effort = "max"
+variant = "production safeguards"
+version = "2.1"
+source = "https://www.anthropic.com/claude-opus-5-5"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1866
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+effort = "Max"
+variant = "Default Fallback; E2B sandbox; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1835
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+effort = "Xhigh"
+variant = "Default Fallback; E2B sandbox; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1714
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+effort = "High"
+variant = "Default Fallback; E2B sandbox; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1593
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+effort = "Medium"
+variant = "Default Fallback; E2B sandbox; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1240
+metric = "Elo rating"
+version = "2.1"
+dataset = "OpenAI GDPval (220 tasks)"
+effort = "Low"
+variant = "Default Fallback; E2B sandbox; blind pairwise comparisons"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 70.18
+metric = "performance score"
+version = "2.2"
+dataset = "Vals Index composite (finance, coding, legal, tax)"
+effort = "max"
+variant = "Anthropic default provider; 2.68% fallback rate"
+source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 58.7
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "production safeguards with fallback; 10 trials per task (700 runs)"
+harness = "Claude Code --bare"
+source = "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 47.14
+metric = "accuracy"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"

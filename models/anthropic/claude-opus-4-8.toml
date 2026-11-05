@@ -48,16 +48,14 @@ name = "Humanity's Last Exam"
 score = 49.8
 metric = "accuracy"
 variant = "no tools"
-source = "https://www.anthropic.com/news/claude-fable-5-mythos-5"
-date = "2026-06-09"
+source = "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 57.9
 metric = "accuracy"
 variant = "with tools"
-source = "https://www.anthropic.com/news/claude-fable-5-mythos-5"
-date = "2026-06-09"
+source = "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf"
 
 [[benchmarks]]
 name = "OSWorld-Verified"
@@ -74,3 +72,55 @@ variant = "high effort"
 dataset = "Diamond"
 source = "https://www.anthropic.com/news/claude-fable-5-mythos-5"
 date = "2026-06-09"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = "59% ± 2%"
+metric = "pass rate"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+variant = "leaderboard uncertainty display; interval semantics not specified"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "23.6% ± 3.6%"
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?filters=%7B%22sets%22:%7B%22agent_display%22:%5B%22Claude+Code%22%5D%7D%7D"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "22% (rounded display)"
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "pass@1 averaged across three repeats; 500-step limit; rounded integer display"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/claude-opus-4-8-vs-claude-opus-4-7"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 10.5
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "three independent trials per task"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-science-0-1"
+
+[[benchmarks]]
+name = "Chartography"
+score = 15.9
+metric = "accuracy (mean; Pass@1)"
+effort = "Adaptive/Max"
+dataset = "full task set"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"

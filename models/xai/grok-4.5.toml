@@ -3,7 +3,8 @@ name = "Grok 4.5"
 description = "xAI's Grok model for chat, coding, agentic tools, and lower hallucination risk"
 family = "grok"
 open_weights = false
-release_date = "2026-07-08"
+# Official launch announcement: https://x.ai/news/grok-4-5 (2026-07-16).
+release_date = "2026-07-16"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
@@ -65,3 +66,44 @@ score = 29.0
 metric = "pass@1"
 source = "https://x.ai/news/grok-4-5"
 date = "2026-07-08"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 12.4
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "High"
+variant = "95% CI: 9.8%–15.0%"
+harness = "Grok Build"
+source = "https://www.tbench.ai/?efforts=all&version=4.0"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 42.7
+metric = "accuracy"
+dataset = "May 2025; text-only; 2,158 questions"
+effort = "high"
+variant = "no tools; pass@1; reasoning=true"
+harness = "Artificial Analysis"
+source = "https://modelcap.ai/model/x-ai-grok-4-5"
+
+[[benchmarks]]
+name = "Chartography"
+score = 17.3
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "default"
+variant = "20 trials per task; no tools; 95% CI ±1.1 percentage points; frozen launch snapshot July 2026"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"
+
+[[benchmarks]]
+name = "Chartography"
+score = 16.7
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "high reasoning"
+variant = "20 trials per task; no tools; 95% CI ±1.1 percentage points; frozen launch snapshot July 2026"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"

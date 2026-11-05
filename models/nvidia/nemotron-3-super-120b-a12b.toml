@@ -24,3 +24,17 @@ top_k = true
 [limit]
 context = 262_144
 output = 262_144
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 18.26
+metric = "accuracy"
+variant = "no tools"
+source = "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 22.82
+metric = "accuracy"
+variant = "with tools"
+source = "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf"

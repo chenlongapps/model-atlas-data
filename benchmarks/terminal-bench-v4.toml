@@ -1,6 +1,7 @@
 id = "terminal-bench-v4"
 name = "Terminal-Bench"
 version = "4.0.0"
+compatible_versions = ["4.0"]
 category = "coding"
 description = "Evaluates agents' ability to perform tasks such as software development, scientific computing, security, and system administration in a sandboxed terminal; this version changes the task set, environments, and resource configurations."
 

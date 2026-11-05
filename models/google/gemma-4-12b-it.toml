@@ -1,3 +1,4 @@
+# Release date: https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/ (2026-06-03)
 # Input MIME types: Google serves this model on neither the Gemini API nor Vertex MaaS. The Gemma docs name JPEG and PNG
 # for images (https://ai.google.dev/gemma/docs/capabilities/vision) and MP3 and WAV for audio
 # (https://ai.google.dev/gemma/docs/capabilities/audio); other formats depend on the inference framework.
@@ -6,7 +7,7 @@ name = "Gemma 4 12B IT"
 description = "Compact Gemma 4 instruction model for open, self-hosted chat and reasoning"
 family = "gemma"
 open_weights = true
-release_date = "2026-06-09"
+release_date = "2026-06-03"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
@@ -26,3 +27,9 @@ output = 32_768
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/google/gemma-4-12B-it"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 5.2
+variant = "no tools"
+source = "https://ai.google.dev/gemma/docs/core/model_card_4"

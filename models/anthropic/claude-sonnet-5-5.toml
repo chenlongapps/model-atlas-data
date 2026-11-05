@@ -27,10 +27,9 @@ output = 128_000
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 70.6
-metric = "score"
-version = "4.0"
+metric = "task resolution rate"
+version = "4.0.0"
 source = "https://www.anthropic.com/claude-sonnet-5-5"
-date = "2026-09-28"
 
 [[benchmarks]]
 name = "FrontierCode"
@@ -53,18 +52,17 @@ date = "2026-09-28"
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1844
-metric = "Elo"
+metric = "Elo rating"
 version = "2.1"
+variant = "pre-release Claude Platform deployment; Anthropic reports a structured-output issue"
 source = "https://www.anthropic.com/claude-sonnet-5-5"
-date = "2026-09-28"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 64.5
-metric = "score"
+metric = "accuracy"
 variant = "with tools"
 source = "https://www.anthropic.com/claude-sonnet-5-5"
-date = "2026-09-28"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -72,4 +70,174 @@ score = 80.1
 metric = "partial score"
 version = "2.1"
 source = "https://www.anthropic.com/claude-sonnet-5-5"
-date = "2026-09-28"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = "95.79 ± 1.30"
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "V2 Full; 642 tasks across 11 repositories"
+effort = "xhigh"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 64.14
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+variant = "avg@3 (three runs, each pass@1)"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 47.14
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1; single run"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 18.6
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Between tools"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 18.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Low"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 23.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Medium"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 29.4
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "High"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 36.8
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "XHigh"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks/claude-sonnet5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 44.75
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Max"
+variant = "strict scoring; Anthropic default fallbacks"
+harness = "Zapier API; 50-step cap"
+date = "2026-09-25"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "Chartography"
+score = 61.6
+metric = "accuracy (mean; Pass@1)"
+variant = "no tools"
+source = "https://www.anthropic.com/claude-sonnet-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 55
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 42
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 31
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 26
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1838
+metric = "Elo rating"
+version = "2.1"
+effort = "Max"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 70.85
+metric = "performance score"
+version = "2.2"
+effort = "max"
+source = "https://www.vals.ai/benchmarks/vals_index"

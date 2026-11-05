@@ -96,3 +96,34 @@ score = 46.9
 harness = "Kimi Code CLI"
 source = "https://huggingface.co/moonshotai/Kimi-K2.7-Code"
 date = "2026-06-12"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 31.0
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "maximum reasoning effort"
+harness = "mini-swe-agent"
+source = "https://arxiv.org/abs/2610.00890"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 0.0
+metric = "pass@1"
+version = "4.0"
+dataset = "66 tasks"
+effort = "maximum reasoning effort"
+harness = "mini-swe-agent"
+source = "https://arxiv.org/abs/2610.00890"
+
+[[benchmarks]]
+name = "Chartography"
+score = 0.0
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "full 100-task released set"
+effort = "Max reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"

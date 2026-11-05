@@ -46,3 +46,27 @@ score = 17.4
 metric = "success rate"
 source = "https://openrouter.ai/mistralai/mistral-small-2603/benchmarks"
 date = "2026-06-01"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 10
+metric = "accuracy"
+dataset = "Original HLE 2,500-question set"
+variant = "Reasoning"
+source = "https://artificialanalysis.ai/models/comparisons/mistral-small-4-vs-gpt-5-codex"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 4
+metric = "accuracy"
+dataset = "Original HLE 2,500-question set"
+variant = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/comparisons/mistral-small-4-non-reasoning-vs-qwen3-5-397b-a17b"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 4
+metric = "index score"
+version = "5.0.1"
+variant = "Reasoning"
+source = "https://artificialanalysis.ai/models/mistral-small-4"

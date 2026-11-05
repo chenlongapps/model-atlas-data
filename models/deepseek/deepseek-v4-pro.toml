@@ -217,3 +217,13 @@ score = 51.8
 metric = "pass@1"
 variant = "preview checkpoint; max effort"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1166
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 major industries"
+effort = "Max"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

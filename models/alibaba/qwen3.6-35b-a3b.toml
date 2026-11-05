@@ -34,3 +34,28 @@ name = "SWE-Bench Verified"
 score = 73.4
 metric = "resolved"
 source = "https://huggingface.co/Qwen/Qwen3.6-35B-A3B"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 21.4
+source = "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/raw/main/README.md"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = "899 ± 18"
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+variant = "Reasoning"
+harness = "Stirrup agent loop; shell and web browsing"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = "854 ± 24"
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+variant = "Non-reasoning"
+harness = "Stirrup agent loop; shell and web browsing"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

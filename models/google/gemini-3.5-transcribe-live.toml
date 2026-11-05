@@ -1,5 +1,8 @@
 # Source: https://vercel.com/ai-gateway/models/gemini-3.5-transcribe-live
-# Live transcription has no token context/output window; zero denotes not applicable.
+# Sources:
+# - https://deepmind.google/models/model-cards/gemini-3-5-audio/ (Transcribe Live: up to 96K context, 32K text output)
+# - https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe (Live API capabilities and 10-minute session limit)
+# The Live API session duration is separate from its token context and output limits.
 # temperature = true: Google's own entry (providers/google/models/gemini-3.5-transcribe-live.toml)
 # reads topP/topK from https://generativelanguage.googleapis.com/v1beta/models.
 # Audio input is raw PCM, like every Live API model (https://ai.google.dev/gemini-api/docs/live-api/capabilities).
@@ -23,5 +26,5 @@ top_p = true
 top_k = true
 
 [limit]
-context = 0
-output = 0
+context = 98_304
+output = 32_768

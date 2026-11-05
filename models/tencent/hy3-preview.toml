@@ -31,3 +31,9 @@ name = "SWE-Bench Verified"
 score = 74.4
 metric = "resolved"
 source = "https://huggingface.co/tencent/Hy3-preview"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = "30*"
+dataset = "cais/hle"
+source = "https://huggingface.co/tencent/Hy3-preview"

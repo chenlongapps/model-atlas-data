@@ -27,10 +27,9 @@ output = 128_000
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1620
-metric = "Elo"
+metric = "Elo rating"
 version = "2.1"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
 
 [[benchmarks]]
 name = "AA-Briefcase"
@@ -47,7 +46,6 @@ metric = "partial score"
 variant = "offline subset"
 version = "2.1"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
@@ -55,7 +53,6 @@ score = 45.9
 metric = "score"
 variant = "no tools"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
@@ -63,7 +60,6 @@ score = 57.4
 metric = "score"
 variant = "with tools"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -71,7 +67,6 @@ score = 39.2
 metric = "score"
 version = "4.0"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
 
 [[benchmarks]]
 name = "FrontierCode"
@@ -88,4 +83,144 @@ score = 46.4
 metric = "score"
 variant = "no tools"
 source = "https://www.anthropic.com/claude-haiku-5-5"
-date = "2026-10-07"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = "87.23 ± 2.36"
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "V2 Full; 642 tasks across 11 repositories"
+effort = "high"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 6.1
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 tasks per effort"
+effort = "Low"
+variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-step cap"
+date = "2026-10-05"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 8.5
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 tasks per effort"
+effort = "Medium"
+variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-step cap"
+date = "2026-10-05"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 10.5
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 tasks per effort"
+effort = "High"
+variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-step cap"
+date = "2026-10-05"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 9.9
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 tasks per effort"
+effort = "XHigh"
+variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-step cap"
+date = "2026-10-05"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 12.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 tasks per effort"
+effort = "Max"
+variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-step cap"
+date = "2026-10-05"
+source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "36.36 ± 2.31"
+metric = "task resolution rate"
+version = "4.0.0"
+harness = "Mini-SWE-agent"
+source = "https://vals-ai.com/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = "10.00 ± 3.61"
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "single pass@1 run per model"
+harness = "Mini-SWE-agent"
+source = "https://vals-ai.com/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 36
+metric = "index score"
+version = "5.0"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 34
+metric = "index score"
+version = "5.0"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 30
+metric = "index score"
+version = "5.0"
+effort = "High"
+source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 25
+metric = "index score"
+version = "5.0"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 19
+metric = "index score"
+version = "5.0"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = "1283 (-20/+20)"
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Medium"
+harness = "Stirrup shell+web"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = "58.73 ± 1.28"
+metric = "performance score"
+version = "2.2"
+effort = "Max"
+source = "https://www.vals.ai/models/anthropic_claude-haiku-5-5"

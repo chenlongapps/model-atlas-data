@@ -152,9 +152,12 @@ def validate_model(data, definitions):
         require(identity not in seen, f"{result['name']}: duplicate or conflicting benchmark record")
         seen.add(identity)
         # No aliases, version normalization, or inferred metrics/default versions.
+        # A definition may explicitly list compatible source versions.
         matches = [definition for definition in definitions
-                   if all(result.get(key) is not None and result[key] == definition.get(key)
-                          for key in ("name", "version", "metric"))]
+                   if result.get("name") == definition.get("name")
+                   and result.get("metric") == definition.get("metric")
+                   and result.get("version") in
+                       (definition.get("version"), *definition.get("compatible_versions", []))]
         require(len(matches) == 1,
                 f"{result['name']}: benchmark definition mapping is missing or ambiguous "
                 "(exact name, explicit version and metric required)")

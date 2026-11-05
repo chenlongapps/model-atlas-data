@@ -21,3 +21,57 @@ top_k = true
 [limit]
 context = 1_024_000
 output = 64_000
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 8.08
+metric = "accuracy"
+version = "4.0.0"
+dataset = "Full (66 tasks)"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 1.43
+metric = "accuracy"
+version = "0.1.0"
+dataset = "Full (70 tasks)"
+variant = "single pass@1 run; infrastructure/provider errors retried; 8-hour task limit"
+harness = "Terminus 2"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Chartography"
+score = 1.6
+metric = "accuracy (mean; Pass@1)"
+version = "unspecified"
+dataset = "100 expert tasks"
+effort = "High reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 43.4
+metric = "accuracy"
+dataset = "Text-only"
+variant = "no tools"
+source = "https://huggingface.co/tencent/Hy4-preview"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 55.4
+metric = "accuracy"
+dataset = "Text-only"
+variant = "with tools"
+source = "https://huggingface.co/tencent/Hy4-preview"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 53.21
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/benchmarks/vals_index"

@@ -29,7 +29,6 @@ metric = "score"
 variant = "xhigh effort"
 version = "4.0"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "DeepSWE"
@@ -38,7 +37,6 @@ metric = "score"
 variant = "high effort"
 version = "1.1"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "EEBench"
@@ -46,7 +44,6 @@ score = 64
 metric = "score"
 variant = "xhigh effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "AA-Briefcase"
@@ -55,7 +52,6 @@ metric = "Elo"
 variant = "xhigh effort"
 version = "1.1"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -64,7 +60,6 @@ metric = "score"
 variant = "xhigh effort"
 version = "4.0"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "Harvey Legal Agent Benchmark"
@@ -72,7 +67,6 @@ score = 19.6
 metric = "score"
 variant = "xhigh effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "HealthBench"
@@ -80,7 +74,6 @@ score = 56.7
 metric = "score"
 variant = "xhigh effort; professional"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
 
 [[benchmarks]]
 name = "GDPval"
@@ -88,4 +81,74 @@ score = 1695
 metric = "Elo"
 variant = "xhigh effort"
 source = "https://x.ai/news/grok-4-7"
-date = "2026-09-21"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 26
+metric = "pass@1"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "Xhigh"
+variant = "averaged over 3 repeats"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/grok-4-7-vs-grok-4-6"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 11
+metric = "pass@1"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "Xhigh"
+variant = "averaged over 3 repeats per task"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/grok-4-7-vs-grok-4-6"
+
+[[benchmarks]]
+name = "Chartography"
+score = 14.7
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "xHigh"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 35
+metric = "index score"
+version = "5.0.1"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/grok-4-7"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1718
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Xhigh"
+variant = "shell and web access; blind pairwise Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1716
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "High"
+variant = "shell and web access; blind pairwise Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 58.56
+metric = "performance score"
+version = "2.2"
+dataset = "GDP-weighted finance, coding, legal, and tax"
+effort = "xhigh"
+source = "https://www.vals.ai/models/grok_grok-4.7"

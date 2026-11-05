@@ -21,3 +21,206 @@ top_k = false
 context = 1_050_000
 input = 922_000
 output = 128_000
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 96.11
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "V2 Full (642 tasks)"
+effort = "xhigh"
+harness = "mini-swe-agent"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 58.2
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Codex"
+source = "https://www.tbench.ai/?efforts=all&version=4.0"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 55.05
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+variant = "avg@3; three full runs, each run scored pass@1"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 56
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "Max"
+variant = "pass@1 averaged over three repeats; 500 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 54
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "Xhigh"
+variant = "pass@1 averaged over three repeats; 500 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-xhigh-vs-gpt-6-sol-low"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 52
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "High"
+variant = "pass@1 averaged over three repeats; 500 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-1-sol-low"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 48
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "Medium"
+variant = "pass@1 averaged over three repeats; 500 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-medium-vs-gpt-6-sol-medium"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 31
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "all 66 tasks"
+effort = "Low"
+variant = "pass@1 averaged over three repeats; 500 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 52.86
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+variant = "single run per model; pass@1"
+harness = "mini-swe-agent"
+source = "https://vals-ai.com/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 58
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "Max"
+variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 50
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "Xhigh"
+variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-xhigh-vs-gpt-6-sol-low"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 46
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "High"
+variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-1-sol-low"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 37
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "Medium"
+variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-medium-vs-gpt-6-sol-medium"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 11
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "all 70 tasks"
+effort = "Low"
+variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 55
+metric = "index score"
+version = "5.0"
+dataset = "V5 composite (9 evaluations)"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-sol"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 52
+metric = "index score"
+version = "5.0"
+dataset = "V5 composite (9 evaluations)"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-xhigh-vs-gpt-6-sol-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50
+metric = "index score"
+version = "5.0"
+dataset = "V5 composite (9 evaluations)"
+effort = "High"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-luna-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 46
+metric = "index score"
+version = "5.0"
+dataset = "V5 composite (9 evaluations)"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-medium-vs-gpt-6-sol-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 35
+metric = "index score"
+version = "5.0"
+dataset = "V5 composite (9 evaluations)"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 63.94
+metric = "performance score"
+version = "2.2"
+dataset = "finance, coding, legal, and tax tasks"
+source = "https://www.vals.ai/models/openai_gpt-6.1-sol"

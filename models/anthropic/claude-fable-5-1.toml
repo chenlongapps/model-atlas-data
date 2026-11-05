@@ -27,20 +27,24 @@ output = 128_000
 [[benchmarks]]
 name = "Terminal-Bench-Science"
 score = 52.6
-metric = "score"
+metric = "accuracy"
 variant = "production safeguards with fallback"
 version = "0.1"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
+dataset = "70 tasks"
+effort = "max"
+harness = "Claude Code --bare"
 
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 55.8
-metric = "score"
+metric = "accuracy"
 variant = "production safeguards with fallback"
 version = "4.0"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
+dataset = "66 tasks"
+effort = "max"
+harness = "Claude Code --bare"
 
 [[benchmarks]]
 name = "GDPval-AA"
@@ -49,7 +53,6 @@ metric = "Elo"
 variant = "production safeguards with fallback"
 version = "2"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 
 [[benchmarks]]
 name = "OSWorld"
@@ -58,7 +61,6 @@ metric = "partial score"
 variant = "production safeguards; interventions score zero; no fallback"
 version = "2.0"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 dataset = "August 2026 task release"
 
 [[benchmarks]]
@@ -68,32 +70,30 @@ metric = "strict success rate"
 variant = "production safeguards; interventions score zero; no fallback"
 version = "2.0"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 dataset = "August 2026 task release"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 60.9
-metric = "score"
+metric = "accuracy"
 variant = "without tools; production safeguards with fallback"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 65
-metric = "score"
+metric = "accuracy"
 variant = "with tools; production safeguards with fallback"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 
 [[benchmarks]]
 name = "AutomationBench"
 score = 31.4
-metric = "pass rate"
-variant = "production safeguards with fallback"
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 private held-out tasks"
+variant = "with Opus 5 fallback on about 260 of 657 tasks; fallback completions count toward score"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
 
 [[benchmarks]]
 name = "CursorBench"
@@ -102,4 +102,256 @@ metric = "score"
 variant = "max effort; production safeguards with fallback"
 version = "3.2.0"
 source = "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-date = "2026-09-01"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67.4
+metric = "pass@1"
+version = "1.1"
+dataset = "113 long-horizon coding tasks"
+effort = "max"
+variant = "adaptive thinking; average over 5 trials; default sampling settings"
+source = "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = "99.10 ± 0.50"
+metric = "resolve rate"
+version = "V2"
+dataset = "Full public split: 642 tasks across 11 repositories"
+effort = "high"
+harness = "Claude Code"
+source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "57.9 ± 3.8"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "57.9 ± 3.4"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "54.5 ± 3.4"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "53.9 ± 3.4"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "medium"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "43.3 ± 3.6"
+metric = "resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "low"
+variant = "95% confidence interval"
+harness = "Claude Code"
+source = "https://www.tbench.ai/?version=4.0&efforts=all"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = "58.08 ± 3.31"
+metric = "accuracy"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3; per-task pass@1"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = "40.00 ± 5.90"
+metric = "accuracy"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "single pass@1"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 22.37
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 private held-out tasks"
+effort = "Max"
+variant = "no fallback; API mode; 50-step cap"
+source = "https://fireworks.ai/specialized-intelligence-index/benchmarks/workflow-automation/automationbench"
+
+[[benchmarks]]
+name = "Chartography"
+score = 46.2
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "Adaptive/Max"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+harness = "Inspect AI"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Chartography"
+score = 42.6
+metric = "accuracy"
+dataset = "100 tasks"
+effort = "max"
+variant = "without tools; adaptive thinking; mean of 5 runs; Sonnet 4.6 judge"
+source = "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf"
+
+[[benchmarks]]
+name = "Chartography"
+score = 86.2
+metric = "accuracy"
+dataset = "100 tasks"
+effort = "max"
+variant = "with tools (container and image crop); adaptive thinking; mean of 5 runs; Sonnet 4.6 judge"
+source = "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf"
+
+[[benchmarks]]
+name = "Chartography"
+score = 44.8
+metric = "accuracy"
+dataset = "100 tasks"
+effort = "max"
+variant = "without tools; adaptive thinking; mean of 5 runs; Gemini 3.5 Flash judge"
+source = "https://www.anthropic.com/claude-opus-5-5-system-card"
+
+[[benchmarks]]
+name = "Chartography"
+score = 88.4
+metric = "accuracy"
+dataset = "100 tasks"
+effort = "max"
+variant = "with tools; adaptive thinking; mean of 5 runs; Gemini 3.5 Flash judge"
+source = "https://www.anthropic.com/claude-opus-5-5-system-card"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 59.1
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE set"
+effort = "Max"
+variant = "Default Fallback; Pass@1; GPT-5.6 Luna medium judge"
+source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 58.7
+metric = "accuracy"
+dataset = "2,158 text-only questions from the original HLE set"
+effort = "Xhigh"
+variant = "Default Fallback; Pass@1; GPT-5.6 Luna medium judge"
+source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 49
+metric = "index score"
+version = "5.0"
+effort = "Max"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-fable-5-1?trk=article-ssr-frontend-pulse_little-text-block"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 49
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-fable-5-1"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/comparisons/claude-fable-5-1-xhigh-vs-claude-fable-5-1"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1763
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Max"
+variant = "Default Fallback; 95% CI -19/+19"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1740
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Xhigh"
+variant = "Default Fallback; 95% CI -19/+19"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1644
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "High"
+variant = "Default Fallback; 95% CI -18/+18"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1554
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Medium"
+variant = "Default Fallback; 95% CI -18/+18"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1477
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations and 9 industries"
+effort = "Low"
+variant = "Default Fallback; 95% CI -18/+18"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

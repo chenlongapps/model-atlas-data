@@ -115,3 +115,84 @@ variant = "max"
 version = "1.1"
 source = "https://artificialanalysis.ai/articles/gpt-5-6-has-landed"
 date = "2026-07-09"
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 67
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+harness = "Pier; mini-swe-agent on Modal"
+source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 17.3
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "95% CI ±2.8 percentage points"
+harness = "Codex"
+source = "https://www.tbench.ai/?efforts=all&version=4.0"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 3.3
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "3 trials per task"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-science-0-1"
+
+[[benchmarks]]
+name = "Chartography"
+score = 31.4
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "max reasoning"
+variant = "20 trials per task; no tools; 95% CI ±1.2 percentage points"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"
+
+[[benchmarks]]
+name = "Chartography"
+score = 21.4
+metric = "accuracy (mean; Pass@1)"
+dataset = "100 tasks"
+effort = "default"
+variant = "20 trials per task; no tools; 95% CI ±1.2 percentage points"
+harness = "Inspect AI; judge=Gemini 3.5 Flash"
+source = "https://arxiv.org/abs/2608.10677"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 37
+metric = "accuracy"
+dataset = "May 2025 HLE revision; 2,158 text-only questions"
+effort = "Xhigh"
+variant = "pass@1"
+harness = "GPT-5.6 Luna (medium) equality checker"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-xhigh-vs-gpt-5-6-luna-xhigh"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 33
+metric = "accuracy"
+dataset = "May 2025 HLE revision; 2,158 text-only questions"
+effort = "High"
+variant = "pass@1"
+harness = "GPT-5.6 Luna (medium) equality checker"
+source = "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-xhigh-vs-gpt-5-6-luna-high"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 928
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks across 44 occupations"
+effort = "Non-reasoning"
+harness = "Stirrup; shell and web browsing"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"

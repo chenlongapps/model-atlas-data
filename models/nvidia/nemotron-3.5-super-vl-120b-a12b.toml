@@ -23,3 +23,56 @@ top_k = true
 [limit]
 context = 1_048_576
 output = 8_192
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 29.20
+metric = "accuracy"
+version = "unspecified"
+dataset = "HLE full set, 2,500 questions, 1 sample per question"
+variant = "BF16"
+source = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b/modelcard"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 29.00
+metric = "accuracy"
+version = "unspecified"
+dataset = "HLE full set, 2,500 questions, 1 sample per question"
+variant = "NVFP4"
+source = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b/modelcard"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 14
+metric = "index score"
+version = "5.0"
+source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 0.0
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0, 66 tasks"
+variant = "Vals AI Baseten-hosted evaluation; reported ±0.00"
+harness = "Mini-SWE-agent"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 0
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+variant = "pass@1 averaged over 3 repeats; AA comparison displays rounded integer percent"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/comparisons/nemotron-3-5-super-vl-vs-gpt-6-1-sol"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 29.76
+metric = "performance score"
+version = "2.2"
+variant = "Baseten-hosted model page; tested checkpoint precision not specified"
+source = "https://www.vals.ai/models/baseten_nemotron-3.5-super-vl-120b-a12b"

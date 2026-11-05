@@ -297,6 +297,26 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(code, 0, stderr)
         self.assertIn("未匹配 0 条，歧义 1 条", stderr)
 
+    def test_missing_version_matches_only_an_unspecified_version_definition(self):
+        content = MODEL + RESULT.replace('version = "1.0"\n', '')
+        definition = DEFINITION.replace('version = "1.0"', 'version = "unspecified"')
+        self.write("models/lab/example.toml", content)
+        self.write("benchmarks/filename-need-not-match-id.toml", definition)
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        self.assertNotIn("Benchmark 定义映射", stderr)
+        result = self.read_json("models.json")["lab/example"]["benchmarks"][0]
+        self.assertNotIn("version", result)
+
+    def test_declared_compatible_version_is_counted_as_a_mapping(self):
+        result = RESULT.replace('version = "1.0"', 'version = "5.0.1"')
+        definition = DEFINITION.replace('version = "1.0"', 'version = "5.0"\ncompatible_versions = ["5.0.1"]')
+        self.write("models/lab/example.toml", MODEL + result)
+        self.write("benchmarks/filename-need-not-match-id.toml", definition)
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        self.assertEqual(stderr, "")
+
     def test_absent_optional_source_and_translation_warn_without_filling(self):
         self.write("models/lab/example.toml", MODEL + RESULT.replace('source = "https://example.com/results"\n', ''))
         self.write("i18n/zh-CN.toml", "[model.descriptions]\n[benchmark.description]\n")

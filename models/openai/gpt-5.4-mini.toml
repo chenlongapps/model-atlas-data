@@ -75,17 +75,27 @@ date = "2026-03-17"
 name = "Humanity's Last Exam"
 score = 41.5
 metric = "accuracy"
+effort = "xhigh"
 variant = "with tools"
 source = "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
-date = "2026-03-17"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"
 score = 28.2
 metric = "accuracy"
+effort = "xhigh"
 variant = "without tools"
 source = "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
-date = "2026-03-17"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 597
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval: 220 tasks across 44 occupations and 9 industries"
+variant = "Non-reasoning"
+harness = "Stirrup shell and web browsing; blind pairwise comparisons aggregated as Elo"
+source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 
 [[benchmarks]]
 name = "OSWorld-Verified"

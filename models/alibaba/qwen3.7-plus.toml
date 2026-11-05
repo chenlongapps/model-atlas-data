@@ -22,3 +22,30 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 64_000
+
+[[benchmarks]]
+name = "Chartography"
+score = 15.8
+metric = "accuracy (mean; Pass@1)"
+dataset = "100-task Chartography set"
+variant = "Thinking on; 10 runs per task"
+harness = "Inspect AI; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 36
+metric = "accuracy"
+dataset = "May 2025 revision; 2,158 text-only questions"
+variant = "Reasoning version; pass@1; no tools"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-7-plus-vs-glm-5-1"
+
+[[benchmarks]]
+name = "GDPval-AA"
+score = 768
+metric = "Elo rating"
+version = "2.1"
+dataset = "220 tasks; 44 occupations; 9 industries"
+variant = "Reasoning version"
+harness = "Artificial Analysis Stirrup; shell access and web browsing"
+source = "https://artificialanalysis.ai/models/comparisons/qwen3-7-plus-vs-glm-5-1"

@@ -22,3 +22,25 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 131_072
+
+[[benchmarks]]
+name = "DeepSWE"
+score = 58.7
+metric = "score"
+version = "1.1"
+source = "https://docs.qwencloud.com/developer-guides/getting-started/latest-model"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 62.5
+metric = "score"
+source = "https://docs.qwencloud.com/developer-guides/getting-started/latest-model"
+
+[[benchmarks]]
+name = "Chartography"
+score = 17.4
+metric = "accuracy/mean"
+dataset = "100 tasks"
+effort = "xHigh reasoning"
+variant = "10 runs per task; Gemini 3.5 Flash judge"
+source = "https://surgehq.ai/benchmarks/chartography"
