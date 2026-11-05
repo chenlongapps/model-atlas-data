@@ -1,5 +1,6 @@
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -8,7 +9,8 @@ import tomllib
 import unittest
 from unittest.mock import patch
 
-from scripts.sync_models import ROOT, check_staged, main, sync_models, validate_model
+from scripts.sync_models import (ROOT, baseline_sha, benchmark_bytes, check_staged, main,
+                                sync_models, update_content, validate_model)
 
 
 MODEL = b'''# Keep upstream comments and formatting.
@@ -36,6 +38,15 @@ output = 8_192
 RESULT = {"name": "Example Bench", "score": 42.10, "metric": "accuracy",
           "version": "1.0", "source": "https://example.com/results"}
 DEFINITION = {"id": "example-bench-v1", "name": "Example Bench", "version": "1.0", "metric": "accuracy"}
+LOCAL_RESULTS = b'''
+# Locally verified evaluation conditions; retain this comment.
+[[benchmarks]] # Keep result formatting too.
+name = "Local Bench"
+score = 42.10
+effort = "Adaptive/Max"
+variant = "without tools"
+# No definition or source: existing records must not be revalidated by sync.
+'''
 
 
 class SyncTests(unittest.TestCase):
@@ -67,6 +78,18 @@ class SyncTests(unittest.TestCase):
         self.git("add", ".")
         self.git("commit", "-m", "Initial files")
 
+    def upstream_git(self, *args):
+        return subprocess.check_output(["git", "-C", str(self.upstream), *args], stderr=subprocess.STDOUT)
+
+    def create_baseline(self, content=MODEL, path="models/lab/existing.toml"):
+        self.write(self.upstream, path, content)
+        self.upstream_git("init", "--initial-branch=dev")
+        self.upstream_git("config", "user.name", "Test")
+        self.upstream_git("config", "user.email", "test@example.com")
+        self.upstream_git("add", ".")
+        self.upstream_git("commit", "-m", "Upstream baseline")
+        return self.upstream_git("rev-parse", "HEAD").decode().strip()
+
     def test_adds_only_models_and_preserves_bytes(self):
         self.write(self.upstream, "models/lab/New-Model.toml")
         self.write(self.upstream, "providers/provider/models/offering.toml")
@@ -80,7 +103,7 @@ class SyncTests(unittest.TestCase):
         self.assertFalse((self.root / "i18n").exists())
         self.assertEqual(report["skipped"], {})
 
-    def test_existing_files_are_never_parsed_or_modified(self):
+    def test_invalid_existing_candidates_are_reported_without_modification(self):
         local = b"# Locally verified benchmarks and comments\nlocal = true\n"
         target = self.write(self.root, "models/lab/existing.toml", local)
         self.write(self.upstream, "models/lab/existing.toml", b"invalid = [")
@@ -90,8 +113,161 @@ class SyncTests(unittest.TestCase):
 
         self.assertEqual(report["existing"], 1)
         self.assertEqual(report["added"], {})
+        self.assertEqual(report["updated"], {})
+        self.assertIn("models/lab/existing.toml", report["skipped"])
         self.assertEqual(target.read_bytes(), local)
         self.assertEqual(target.stat().st_mtime_ns, before)
+
+    def test_updates_existing_information_but_preserves_local_results_verbatim(self):
+        baseline = self.create_baseline()
+        local = MODEL + LOCAL_RESULTS
+        target = self.write(self.root, "models/lab/existing.toml", local)
+        incoming = MODEL.replace(b'context = 128_000', b'context = 256_000')
+        incoming = incoming.replace(b'name = "Example"', b'name = "Example Updated"')
+        self.write(self.upstream, "models/lab/existing.toml", incoming + b'\n[[benchmarks]]\nscore = true\n')
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+
+        self.assertEqual(report["added"], {})
+        self.assertEqual(report["skipped"], {})
+        self.assertEqual(report["conflicts"], {})
+        self.assertEqual(tomllib.loads(target.read_text()), tomllib.loads((incoming + LOCAL_RESULTS).decode()))
+        self.assertIn(LOCAL_RESULTS, target.read_bytes())
+        update = report["updated"]["models/lab/existing.toml"]
+        self.assertEqual(set(update["fields"]), {"name", "limit.context"})
+        self.assertEqual(update["before"], hashlib.sha256(local).hexdigest())
+        self.assertEqual(update["after"], hashlib.sha256(target.read_bytes()).hexdigest())
+
+    def test_existing_model_without_benchmarks_never_imports_upstream_results(self):
+        baseline = self.create_baseline()
+        target = self.write(self.root, "models/lab/existing.toml")
+        incoming = MODEL.replace(b'output = 8_192', b'output = 16_384')
+        self.write(self.upstream, "models/lab/existing.toml", incoming + LOCAL_RESULTS)
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+
+        self.assertEqual(tomllib.loads(target.read_text()), tomllib.loads(incoming.decode()))
+        self.assertNotIn("benchmarks", tomllib.loads(target.read_text()))
+        self.assertEqual(len(report["updated"]), 1)
+
+    def test_benchmark_only_changes_are_a_no_op_and_keep_mtime(self):
+        baseline = self.create_baseline()
+        target = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        before = target.stat().st_mtime_ns
+        self.write(self.upstream, "models/lab/existing.toml", b'benchmarks = "Ignored"\n' + MODEL)
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+        self.assertEqual(report["updated"], {})
+        self.assertEqual(report["skipped"], {})
+        self.assertEqual(target.read_bytes(), MODEL + LOCAL_RESULTS)
+        self.assertEqual(target.stat().st_mtime_ns, before)
+
+    def test_conflicting_local_values_and_upstream_missing_fields_are_preserved(self):
+        baseline = self.create_baseline()
+        local = MODEL.replace(b'context = 128_000', b'context = 512_000 # Verified locally')
+        local = local.replace(b'[limit]', b'[limit]\ninput = 100_000')
+        target = self.write(self.root, "models/lab/existing.toml", local + LOCAL_RESULTS)
+        incoming = MODEL.replace(b'context = 128_000', b'context = 256_000')
+        incoming = incoming.replace(b'output = 8_192', b'output = 16_384')
+        self.write(self.upstream, "models/lab/existing.toml", incoming)
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+
+        expected = local.replace(b'output = 8_192', b'output = 16_384') + LOCAL_RESULTS
+        self.assertEqual(tomllib.loads(target.read_text()), tomllib.loads(expected.decode()))
+        self.assertIn(b'context = 512_000 # Verified locally', target.read_bytes())
+        self.assertIn(LOCAL_RESULTS, target.read_bytes())
+        self.assertIn("limit.context", report["conflicts"]["models/lab/existing.toml"])
+        self.assertEqual(report["updated"]["models/lab/existing.toml"]["fields"], ["limit.output"])
+
+    def test_no_baseline_adds_missing_fields_but_reports_different_existing_values(self):
+        local = MODEL + LOCAL_RESULTS
+        target = self.write(self.root, "models/lab/existing.toml", local)
+        incoming = MODEL.replace(b'[limit]', b'[limit]\ninput = 100_000')
+        incoming = incoming.replace(b'context = 128_000', b'context = 256_000')
+        self.write(self.upstream, "models/lab/existing.toml", incoming)
+
+        report = sync_models(self.upstream, self.root)
+
+        data = tomllib.loads(target.read_text())
+        self.assertEqual(data["limit"]["input"], 100_000)
+        self.assertEqual(data["limit"]["context"], 128_000)
+        self.assertIn(LOCAL_RESULTS, target.read_bytes())
+        self.assertIn("limit.context", report["conflicts"]["models/lab/existing.toml"])
+
+    def test_translated_description_is_protected_while_other_fields_update(self):
+        baseline = self.create_baseline()
+        target = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        translations = b'[model.descriptions]\n"lab/existing" = "Translated description"\n'
+        locale = self.write(self.root, "i18n/zh-CN.toml", translations)
+        incoming = MODEL.replace(b'"Example model"', b'"Updated description"')
+        incoming = incoming.replace(b'output = 8_192', b'output = 16_384')
+        self.write(self.upstream, "models/lab/existing.toml", incoming)
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+
+        expected = (MODEL + LOCAL_RESULTS).replace(b'output = 8_192', b'output = 16_384')
+        self.assertEqual(tomllib.loads(target.read_text()), tomllib.loads(expected.decode()))
+        self.assertIn(LOCAL_RESULTS, target.read_bytes())
+        self.assertIn("translations", report["conflicts"]["models/lab/existing.toml"]["description"])
+        self.assertEqual(locale.read_bytes(), translations)
+
+    def test_dry_run_updates_have_same_hashes_without_writing(self):
+        baseline = self.create_baseline()
+        target = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        before = target.stat().st_mtime_ns
+        self.write(self.upstream, "models/lab/existing.toml", MODEL.replace(b'output = 8_192', b'output = 16_384'))
+
+        preview = sync_models(self.upstream, self.root, dry_run=True, baseline=baseline)
+
+        self.assertEqual(target.read_bytes(), MODEL + LOCAL_RESULTS)
+        self.assertEqual(target.stat().st_mtime_ns, before)
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+        self.assertEqual(preview["updated"], report["updated"])
+        repeated = sync_models(self.upstream, self.root, baseline=baseline)
+        self.assertEqual(repeated["updated"], {})
+
+    def test_missing_baseline_model_does_not_allow_overwriting_local_values(self):
+        baseline = self.create_baseline(path="models/lab/other.toml")
+        target = self.write(self.root, "models/lab/existing.toml")
+        self.write(self.upstream, "models/lab/existing.toml", MODEL.replace(b'output = 8_192', b'output = 16_384'))
+
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+
+        self.assertEqual(target.read_bytes(), MODEL)
+        self.assertIn("limit.output", report["conflicts"]["models/lab/existing.toml"])
+
+    def test_baseline_sha_is_discovered_from_source_commit(self):
+        self.init_git()
+        sha = "a" * 40
+        self.git("commit", "--allow-empty", "-m", "chore: sync Models.dev models", "-m",
+                 f"Source: https://github.com/anomalyco/models.dev/tree/{sha}/models")
+        self.git("commit", "--allow-empty", "-m", "Unrelated local changes")
+        self.assertEqual(baseline_sha(self.root), sha)
+        with redirect_stdout(StringIO()) as stdout:
+            code = main(["--root", str(self.root), "baseline-sha"])
+        self.assertEqual(code, 0)
+        self.assertEqual(stdout.getvalue(), sha + "\n")
+
+    def test_missing_baseline_history_returns_empty_sha(self):
+        self.init_git()
+        self.assertEqual(baseline_sha(self.root), "")
+
+    def test_existing_update_does_not_overwrite_a_racing_local_change(self):
+        baseline = self.create_baseline()
+        target = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        self.write(self.upstream, "models/lab/existing.toml", MODEL.replace(b'output = 8_192', b'output = 16_384'))
+        original_open = Path.open
+
+        def race(path, mode="r", *args, **kwargs):
+            if path == target and mode == "r+b":
+                with original_open(path, "wb") as stream:
+                    stream.write(b"racing local changes")
+            return original_open(path, mode, *args, **kwargs)
+
+        with patch.object(Path, "open", race), self.assertRaisesRegex(ValueError, "changed during sync"):
+            sync_models(self.upstream, self.root, baseline=baseline)
+        self.assertEqual(target.read_bytes(), b"racing local changes")
 
     def test_upstream_deletion_and_rename_keep_local_files(self):
         self.write(self.root, "models/lab/deleted.toml", b"# local deleted upstream\n")
@@ -211,18 +387,18 @@ source = "https://example.com/results"
         report = self.stage_new_model()
         self.write(self.root, "models/lab/existing.toml", b"# changed\n")
         self.git("add", "models/")
-        with self.assertRaisesRegex(ValueError, "non-additive"):
+        with self.assertRaisesRegex(ValueError, "unexpected staged"):
             check_staged(self.root, report)
         (self.root / "models/lab/existing.toml").unlink()
         self.git("add", "models/")
-        with self.assertRaisesRegex(ValueError, "non-additive"):
+        with self.assertRaisesRegex(ValueError, "unsupported staged"):
             check_staged(self.root, report)
 
     def test_staged_guard_rejects_extra_files(self):
         report = self.stage_new_model()
         self.write(self.root, "extra.txt", b"extra")
         self.git("add", "extra.txt")
-        with self.assertRaisesRegex(ValueError, "non-additive"):
+        with self.assertRaisesRegex(ValueError, "unsupported staged"):
             check_staged(self.root, report)
 
     def test_staged_guard_rejects_changed_content_or_missing_additions(self):
@@ -249,6 +425,41 @@ source = "https://example.com/results"
         with self.assertRaisesRegex(ValueError, "file mode"):
             check_staged(self.root, report)
 
+    def stage_information_update(self):
+        baseline = self.create_baseline()
+        self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        self.init_git()
+        self.write(self.upstream, "models/lab/existing.toml", MODEL.replace(b'output = 8_192', b'output = 16_384'))
+        report = sync_models(self.upstream, self.root, baseline=baseline)
+        self.git("add", "models/")
+        return report
+
+    def test_staged_guard_accepts_information_updates_and_checks_before_hash(self):
+        report = self.stage_information_update()
+        check_staged(self.root, report)
+        report["updated"]["models/lab/existing.toml"]["before"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "changed since comparison"):
+            check_staged(self.root, report)
+
+    def test_staged_guard_rejects_benchmark_edits_even_with_matching_after_hash(self):
+        report = self.stage_information_update()
+        target = self.root / "models/lab/existing.toml"
+        for content in (target.read_bytes().replace(b"42.10", b"43.10"),
+                        target.read_bytes().replace(b"42.10", b"42.1"),
+                        target.read_bytes().replace(b"# Keep result formatting too.", b"# Changed comment.")):
+            with self.subTest(content=content):
+                target.write_bytes(content)
+                self.git("add", "models/")
+                report["updated"]["models/lab/existing.toml"]["after"] = hashlib.sha256(content).hexdigest()
+                with self.assertRaisesRegex(ValueError, "benchmarks changed"):
+                    check_staged(self.root, report)
+
+    def test_staged_guard_rejects_missing_reported_update(self):
+        report = self.stage_information_update()
+        self.git("restore", "--staged", "models/lab/existing.toml")
+        with self.assertRaisesRegex(ValueError, "do not match"):
+            check_staged(self.root, report)
+
     def test_cli_writes_report_and_summary_and_checks_staged_changes(self):
         self.init_git()
         self.write(self.upstream, "models/lab/new.toml")
@@ -272,6 +483,76 @@ source = "https://example.com/results"
             code = main(["--root", str(self.root), "check-staged", "--report", str(self.base / "missing.json")])
         self.assertEqual(code, 1)
         self.assertIn("Sync failed", stderr.getvalue())
+
+
+class InformationUpdateTests(unittest.TestCase):
+    def update(self, local, upstream, baseline=MODEL):
+        return update_content(local, tomllib.loads(upstream.decode()), tomllib.loads(baseline.decode()))
+
+    def test_multiline_strings_and_interleaved_tables_preserve_benchmark_text(self):
+        description = b'''description = """Description with header-like text:
+[[benchmarks]]
+[limit]
+"""'''
+        local = MODEL.replace(b'description = "Example model"', description)
+        local += LOCAL_RESULTS + b'\n[metadata]\nnote = "Keep"\n' + LOCAL_RESULTS
+        incoming = MODEL.replace(b'"Example model"', b'"Updated model description"')
+        updated, fields, conflicts = self.update(local, incoming, baseline=local)
+        expected = tomllib.loads(local.decode())
+        expected["description"] = "Updated model description"
+        self.assertEqual(tomllib.loads(updated.decode()), expected)
+        self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local))
+        self.assertEqual(fields, ["description"])
+        self.assertEqual(conflicts, {})
+
+    def test_inline_results_remain_at_root_when_adding_new_fields(self):
+        local = b'benchmarks = [{ name = "Local", score = 42.10 }] # Keep\n' + MODEL
+        incoming = b'family = "Example family"\n' + MODEL
+        updated, fields, conflicts = self.update(local, incoming)
+        self.assertIn(b'benchmarks = [{ name = "Local", score = 42.10 }] # Keep\n', updated)
+        self.assertEqual(tomllib.loads(updated.decode())["family"], "Example family")
+        self.assertEqual(fields, ["family"])
+        self.assertEqual(conflicts, {})
+
+    def test_local_field_deletions_and_upstream_omissions_are_retained(self):
+        baseline = MODEL.replace(b'[limit]', b'[limit]\ninput = 100_000')
+        incoming = baseline.replace(b'output = 8_192\n', b'')
+        updated, fields, conflicts = self.update(MODEL, incoming, baseline)
+        self.assertEqual(updated, MODEL)
+        self.assertEqual(fields, [])
+        self.assertIn("limit.input", conflicts)
+
+    def test_unknown_upstream_basic_fields_are_rejected_not_silently_dropped(self):
+        with self.assertRaisesRegex(ValueError, "unsupported fields"):
+            self.update(MODEL, b'unknown = true\n' + MODEL)
+
+    def test_updating_inline_tables_and_arrays_preserves_local_comments(self):
+        local = MODEL.replace(b'tools = { supported = false }', b'tools = { supported = false } # Keep support note')
+        local += b'\n[[links]]\nurl = "https://example.com/old" # Keep link note\n' + LOCAL_RESULTS
+        incoming = local.replace(b'tools = { supported = false }', b'tools = { supported = true, strict = true }')
+        incoming = incoming.replace(b'https://example.com/old', b'https://example.com/new')
+        updated, fields, conflicts = self.update(local, incoming, local)
+        self.assertIn(b'# Keep support note', updated)
+        self.assertIn(b'# Keep link note', updated)
+        self.assertIn(LOCAL_RESULTS, updated)
+        self.assertEqual(tomllib.loads(updated.decode())["links"][0]["url"], "https://example.com/new")
+        self.assertEqual(set(fields), {"capabilities.tools.supported", "capabilities.tools.strict", "links"})
+        self.assertEqual(conflicts, {})
+
+    def test_crlf_benchmarks_and_missing_final_newline_remain_verbatim(self):
+        for newline in (b"\n", b"\r\n"):
+            for final_newline in (True, False):
+                with self.subTest(newline=newline, final_newline=final_newline):
+                    local = (MODEL + LOCAL_RESULTS).replace(b"\n", newline)
+                    if not final_newline:
+                        local = local.rstrip(b"\r\n")
+                    incoming = MODEL.replace(b'output = 8_192', b'output = 16_384')
+                    updated, fields, conflicts = self.update(local, incoming)
+                    self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local))
+                    self.assertTrue(updated.endswith(LOCAL_RESULTS.replace(b"\n", newline).rstrip(b"\r\n")
+                                                    + (newline if final_newline else b"")))
+                    self.assertEqual(fields, ["limit.output"])
+                    self.assertEqual(conflicts, {})
 
 
 class ModelValidationTests(unittest.TestCase):

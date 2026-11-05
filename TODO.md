@@ -1,6 +1,6 @@
 - [x] 数据校验脚本。主要检查 TOML 语法。
 - [x] JSON 构建脚本
-- [x] github action 自动同步 https://models.dev/ 的数据,只同步新增模型，不修改和删除。
+- [x] github action 自动同步 https://models.dev/ 的数据：新模型完整导入，已有模型对比更新基本信息、保留本地 Benchmark，不删除模型。
 - [x] github pages 发布脚本
 - [x] AA index 由5.0.0 升级到 5.0.1 少数模型分数有变化
 - [x] #/benchmarks/xxx 页面中 成绩越好排名越前
