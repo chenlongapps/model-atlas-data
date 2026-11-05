@@ -191,7 +191,7 @@ test('descriptions follow the selected language and preserve fallback', () => {
   assert.equal(description(descriptionLocale('zh-CN', {}), 'model', 'lab/a', 'original'), 'original');
 });
 
-test('benchmark detail renders best scores first and effort in its own column without duplicating conditions', async () => {
+test('detail tables sort results, show effort separately and hide only unmatched labels', async () => {
   class Element {
     constructor(tag = '') { this.tag = tag; this.children = []; this.attributes = {}; this.dataset = {}; this.handlers = {}; this.classList = { toggle() {} }; }
     setAttribute(name, value) { this.attributes[name] = value; }
@@ -211,10 +211,18 @@ test('benchmark detail renders best scores first and effort in its own column wi
   let rendered;
   const ready = new Promise(resolve => { rendered = resolve; });
   select('.page-scroll').scrollTo = rendered;
-  const defs = { b1: { ...definition, higher_is_better: true } };
+  const ambiguousDefinition = { ...definition, name: 'Ambiguous bench' };
+  const defs = { b1: { ...definition, higher_is_better: true }, b2: ambiguousDefinition, b3: { ...ambiguousDefinition }, b4: { ...definition, name: 'Matched bench' } };
   const fixture = {
     'lab/a': { name: 'Alpha', benchmarks: [{ ...result, score: 10 }] },
     'lab/b': { name: 'Beta', benchmarks: [{ ...result, score: 20, effort: 'Adaptive/Max', harness: 'H', future: { budget: 2 } }] },
+    'lab/c': { name: 'Gamma', benchmarks: [
+      { ...result, name: 'Zulu', score: 99 },
+      { ...result, name: 'Matched bench', score: 2, effort: 'xhigh' },
+      { ...result, name: 'Alpha', score: 1 },
+      { ...result, name: 'Matched bench', score: 3, effort: 'Adaptive/Max' },
+      { ...result, name: 'Ambiguous bench', score: 4 },
+    ] },
   };
   const globals = {
     Node: Element,
@@ -258,8 +266,9 @@ test('benchmark detail renders best scores first and effort in its own column wi
 
     globals.location.hash = '#/models/lab%2Fb';
     handlers.hashchange();
-    assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Benchmark', 'Score', 'Metric', 'Version', 'Test conditions', 'Source']);
-    assert.match(cells(find(resultTable(), 'tbody').children[0])[4], /effort: Adaptive\/Max/);
+    assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Benchmark', 'Score', 'Effort', 'Metric', 'Version', 'Test conditions', 'Source']);
+    assert.equal(cells(find(resultTable(), 'tbody').children[0])[2], 'Adaptive/Max');
+    assert.doesNotMatch(cells(find(resultTable(), 'tbody').children[0])[5], /effort|Adaptive\/Max/);
     assert.ok(select('#main').textContent.includes(messages.en.resultNote));
     for (const [score, displayed] of [[42, '42.0'], [42.16, '42.2'], [0, '0.0'], [-1.26, '-1.3']]) {
       fixture['lab/b'].benchmarks[0].score = score;
@@ -267,6 +276,29 @@ test('benchmark detail renders best scores first and effort in its own column wi
       assert.equal(cells(find(resultTable(), 'tbody').children[0])[1], displayed);
       assert.equal(fixture['lab/b'].benchmarks[0].score, score);
     }
+
+    const originalResults = structuredClone(fixture['lab/c'].benchmarks);
+    globals.location.hash = '#/models/lab%2Fc';
+    handlers.hashchange();
+    const modelRows = find(resultTable(), 'tbody').children;
+    assert.deepEqual(modelRows.map(row => cells(row).slice(0, 3)), [
+      ['Alpha', '1.0', '—'],
+      [`Ambiguous bench ${messages.en.ambiguous}`, '4.0', '—'],
+      ['Matched bench', '2.0', 'xhigh'],
+      ['Matched bench', '3.0', 'Adaptive/Max'],
+      ['Zulu', '99.0', '—'],
+    ]);
+    assert.doesNotMatch(resultTable().textContent, /Unmatched/);
+    assert.equal(find(modelRows[0].children[0], 'a'), undefined);
+    assert.equal(find(modelRows[1].children[0], 'a'), undefined);
+    assert.equal(find(modelRows[2].children[0], 'a').attributes.href, '#/benchmarks/b4');
+    for (const row of modelRows) assert.doesNotMatch(cells(row)[5], /effort|xhigh|Adaptive\/Max/);
+    assert.deepEqual(fixture['lab/c'].benchmarks, originalResults);
+    globals.location.hash = '#/models/lab%2Fa';
+    handlers.hashchange();
+    globals.location.hash = '#/models/lab%2Fc';
+    handlers.hashchange();
+    assert.deepEqual(find(resultTable(), 'tbody').children.map(cells), modelRows.map(cells));
   } finally {
     for (const [key, descriptor] of previous) {
       if (descriptor) Object.defineProperty(globalThis, key, descriptor); else delete globalThis[key];

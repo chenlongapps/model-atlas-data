@@ -131,13 +131,13 @@ function resultTable(entries, forModel) {
   if (!entries.length) return el('p', { class: 'state' }, T.noResults);
   const rows = entries.map(entry => {
     const r = entry.result;
-    const name = forModel ? (entry.status === 'matched' ? internal('benchmarks', entry.benchmarkId, r.name, 'primary') : el('span', {}, r.name, ' ', el('span', { class: 'pill' }, entry.status === 'ambiguous' ? T.ambiguous : T.unmatched))) : internal('models', entry.modelId, data.models[entry.modelId]?.name || entry.modelId, 'primary');
+    const name = forModel ? (entry.status === 'matched' ? internal('benchmarks', entry.benchmarkId, r.name, 'primary') : el('span', {}, r.name, entry.status === 'ambiguous' ? [' ', el('span', { class: 'pill' }, T.ambiguous)] : [])) : internal('models', entry.modelId, data.models[entry.modelId]?.name || entry.modelId, 'primary');
     // Keep every present/future result field, including nested test conditions.
-    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'metric', 'version', 'source', ...(!forModel ? ['effort'] : [])].includes(key));
+    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'effort', 'metric', 'version', 'source'].includes(key));
     const conditions = el('div', { class: 'conditions' }, extra.length ? extra.map(([key, value]) => el('span', { class: 'condition' }, el('b', {}, `${key}: `), text(value))) : '—');
-    return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, ...(!forModel ? [r.effort] : []), r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
+    return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, r.effort, r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
   });
-  return table([forModel ? T.benchmark : T.model, T.score, ...(!forModel ? [T.effort] : []), T.metric, T.version, T.conditions, T.source], rows, 'result-table');
+  return table([forModel ? T.benchmark : T.model, T.score, T.effort, T.metric, T.version, T.conditions, T.source], rows, 'result-table');
 }
 function detailHeader(kind, id, title, desc) {
   const copy = el('button', { class: 'copy-button', type: 'button', 'aria-label': T.copyId, onclick: async () => {
@@ -155,7 +155,7 @@ function modelDetail(id) {
   const modalities = Object.entries(m.modalities || {}).map(([key, value]) => [T.modalities(key), Array.isArray(value) ? value.join(', ') : text(value)]);
   const limitNames = { context: T.contextWindow, input: T.maxInput, output: T.maxOutput, request_bytes: T.requestBytes };
   const limits = Object.entries(m.limit || {}).map(([key, value]) => [limitNames[key] || key, compact(value)]);
-  const entries = data.index.byModel.get(id) || [];
+  const entries = [...(data.index.byModel.get(id) || [])].sort((a, b) => a.result.name.localeCompare(b.result.name, undefined, { numeric: true, sensitivity: 'base' }));
   main.replaceChildren(detailHeader('models', id, m.name, description(descriptionLocale(language, data.locale), 'model', id, m.description)),
     section(T.overview, facts([[T.modelId, id], [T.organization, labLabel(id)], [T.family, m.family], [T.release, m.release_date], [T.weights, badge(m.open_weights)], [T.license, m.license]])),
     section(T.sourcesLinks, links.length ? el('div', { class: 'external-links' }, links) : el('p', {}, T.noLinks)),
