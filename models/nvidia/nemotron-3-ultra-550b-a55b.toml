@@ -110,9 +110,10 @@ date = "2026-06-04"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 12
+score = 11.7592726308177
 metric = "index score"
 version = "5.0.1"
+variant = "Reasoning"
 source = "https://artificialanalysis.ai/models/nvidia-nemotron-3-ultra-550b-a55b"
 
 [[benchmarks]]

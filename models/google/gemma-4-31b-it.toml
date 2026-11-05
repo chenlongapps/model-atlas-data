@@ -41,3 +41,11 @@ score = 26.5
 metric = "accuracy"
 variant = "instruction-tuned; HLE with search"
 source = "https://ai.google.dev/gemma/docs/core/model_card_4"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 4.38438284215374
+metric = "index score"
+version = "5.0.1"
+variant = "Reasoning"
+source = "https://artificialanalysis.ai/models/gemma-4-31b"

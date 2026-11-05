@@ -103,7 +103,7 @@ source = "https://artificialanalysis.ai/models/comparisons/minimax-m3-vs-glm-4-6
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 19
+score = 18.8789083859255
 metric = "index score"
 version = "5.0.1"
 dataset = "Nine constituent evaluations in Artificial Analysis Intelligence Index v5.0.1"

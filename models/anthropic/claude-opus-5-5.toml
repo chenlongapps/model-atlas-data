@@ -192,7 +192,7 @@ source = "https://artificialanalysis.ai/es/articles/artificial-analysis-intellig
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 59
+score = 59.1060336078904
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -201,7 +201,7 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 57
+score = 57.4447060170507
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -210,7 +210,7 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 52
+score = 51.8359958227294
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -219,7 +219,7 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-high"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 48
+score = 48.2081024960691
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -228,7 +228,7 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-medium"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 35
+score = 34.752785007759
 metric = "index score"
 version = "5.0.1"
 effort = "Low"

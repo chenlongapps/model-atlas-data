@@ -153,3 +153,11 @@ dataset = "220 tasks; 44 occupations; 9 industries"
 effort = "high"
 harness = "Artificial Analysis Stirrup; shell and web browsing"
 source = "https://artificialanalysis.ai/models/comparisons/muse-glimmer-vs-hy3"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 6.34128724913462
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/muse-glimmer"

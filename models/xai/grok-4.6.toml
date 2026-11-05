@@ -128,3 +128,11 @@ dataset = "2,158 text-only questions (Artificial Analysis subset)"
 effort = "High"
 variant = "pass@1"
 source = "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-medium-vs-grok-4-6"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 31.028795176621
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/grok-4-6-xhigh"

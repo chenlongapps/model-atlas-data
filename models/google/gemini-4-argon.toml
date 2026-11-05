@@ -189,3 +189,11 @@ version = "2.2"
 dataset = "Vals Index composite (finance, coding, legal, tax)"
 effort = "high"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50.4121935905389
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/gemini-4-argon"

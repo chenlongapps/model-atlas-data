@@ -140,10 +140,10 @@ source = "https://artificialanalysis.ai/models/deepseek-v4-pro"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 23
+score = 23.0632981493003
 metric = "index score"
 version = "5.0.1"
-effort = "max"
+effort = "Max"
 source = "https://artificialanalysis.ai/models/releases/deepseek-v4-pro"
 
 [[benchmarks]]
@@ -162,3 +162,11 @@ score = 52.97
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 12.5675939779921
+metric = "index score"
+version = "5.0.1"
+variant = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"

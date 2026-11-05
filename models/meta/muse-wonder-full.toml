@@ -199,3 +199,11 @@ dataset = "Vals Index composite (finance, coding, legal, tax)"
 effort = "max"
 variant = "model profile reports ±1.07"
 source = "https://www.vals.ai/models/meta_muse-wonder-full"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50.0772123627021
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/muse-wonder-full"

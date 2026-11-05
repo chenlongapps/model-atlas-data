@@ -116,10 +116,10 @@ source = "https://surgehq.ai/benchmarks/chartography"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 35
+score = 35.4850117067196
 metric = "index score"
 version = "5.0.1"
-effort = "xhigh"
+effort = "Xhigh"
 source = "https://artificialanalysis.ai/models/grok-4-7"
 
 [[benchmarks]]
@@ -152,3 +152,19 @@ version = "2.2"
 dataset = "GDP-weighted finance, coding, legal, and tax"
 effort = "xhigh"
 source = "https://www.vals.ai/models/grok_grok-4.7"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 31.132077602567
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/grok-4-7-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 35.2122962959703
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/grok-4-7-high"

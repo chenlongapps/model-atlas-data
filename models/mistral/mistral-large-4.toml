@@ -54,3 +54,27 @@ metric = "index score"
 version = "5.0"
 variant = "public preview"
 source = "https://artificialanalysis.ai/models/mistral-large-4-preview"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 23.1277321742266
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/mistral-large-4-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 25.336451488165
+metric = "index score"
+version = "5.0.1"
+variant = "public preview"
+source = "https://artificialanalysis.ai/models/mistral-large-4-preview"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 26.1249946754784
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/mistral-large-4"

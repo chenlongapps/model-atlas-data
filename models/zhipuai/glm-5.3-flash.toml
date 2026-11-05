@@ -123,3 +123,11 @@ score = 50.86
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 27.803889160883
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/glm-5-3-flash"

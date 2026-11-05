@@ -169,3 +169,11 @@ score = 12
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 11.6563462044212
+metric = "index score"
+version = "5.0.1"
+effort = "high"
+source = "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"

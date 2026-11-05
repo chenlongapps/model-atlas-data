@@ -101,7 +101,7 @@ source = "https://surgehq.ai/benchmarks/chartography"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 28
+score = 27.8552004938153
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -109,7 +109,7 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna/"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 23
+score = 23.4508728089378
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -117,7 +117,7 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-xhigh"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 21
+score = 21.4290170864582
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -125,7 +125,7 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-high"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 18
+score = 18.4542156192416
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -133,7 +133,7 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-medium"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 10
+score = 9.66610812336462
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -141,7 +141,7 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-low"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 9
+score = 9.44244373619813
 metric = "index score"
 version = "5.0.1"
 variant = "Non-reasoning"

@@ -181,7 +181,7 @@ source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-gpt-
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 30
+score = 29.8897833093321
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/mimo-v2-6-pro"

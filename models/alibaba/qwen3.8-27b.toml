@@ -241,3 +241,35 @@ score = 91.1
 metric = "score"
 version = "1.5"
 source = "https://huggingface.co/Qwen/Qwen3.8-27B"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 10.0316676028892
+metric = "index score"
+version = "5.0.1"
+variant = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/qwen3-8-27b-non-reasoning"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 17.4831648632067
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/qwen3-8-27b-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 15.6850612405479
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/qwen3-8-27b-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 20.1068756031705
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/qwen3-8-27b"

@@ -285,7 +285,7 @@ source = "https://artificialanalysis.ai/models/claude-fable-5-1?trk=article-ssr-
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 49
+score = 49.1602124158081
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -294,7 +294,7 @@ source = "https://artificialanalysis.ai/models/claude-fable-5-1"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 50
+score = 50.0216384248632
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -355,3 +355,30 @@ effort = "Low"
 variant = "Default Fallback; 95% CI -18/+18"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 38.683648810734
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-fable-5-1-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 43.171597828284
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-fable-5-1-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 47.174988245604
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+variant = "Default Fallback"
+source = "https://artificialanalysis.ai/models/claude-fable-5-1-high"

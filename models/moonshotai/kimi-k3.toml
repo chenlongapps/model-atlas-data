@@ -247,3 +247,11 @@ metric = "performance score"
 version = "2.2"
 effort = "max"
 source = "https://vals.ai/models/kimi_kimi-k3"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 17.4191985300887
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/kimi-k3-low"

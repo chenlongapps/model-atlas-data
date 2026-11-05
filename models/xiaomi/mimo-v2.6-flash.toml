@@ -157,7 +157,7 @@ source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-flash-vs-st
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 27
+score = 26.7276981444568
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/mimo-v2-6-flash"

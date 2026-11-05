@@ -224,3 +224,43 @@ metric = "performance score"
 version = "2.2"
 effort = "Max"
 source = "https://www.vals.ai/models/anthropic_claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 29.874315467743
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 34.6387759486628
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 18.6180055310996
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 36.4845435880142
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 24.6013254343023
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5-medium"

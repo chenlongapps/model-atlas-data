@@ -173,6 +173,7 @@ metric = "score"
 variant = "max effort"
 source = "https://www.anthropic.com/claude-opus-5-system-card"
 date = "2026-07-24"
+
 [[benchmarks]]
 name = "DeepSWE"
 score = 74.0
@@ -183,6 +184,7 @@ effort = "max"
 variant = "reported uncertainty ±4 percentage points"
 harness = "mini-SWE-agent"
 source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+
 [[benchmarks]]
 name = "SWE-bench Pro"
 score = 99.4
@@ -192,6 +194,7 @@ dataset = "642 tasks (638/642; reported uncertainty ±0.40 percentage points)"
 effort = "xhigh"
 harness = "Claude Code"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
+
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 53.53
@@ -201,6 +204,7 @@ dataset = "66 tasks"
 variant = "avg@3; each run pass@1"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
 [[benchmarks]]
 name = "Terminal-Bench-Science"
 score = 27.14
@@ -210,6 +214,7 @@ dataset = "70 tasks"
 variant = "single run; pass@1; retries for provider infrastructure errors"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
 [[benchmarks]]
 name = "AutomationBench"
 score = 26.9
@@ -219,6 +224,7 @@ dataset = "657 tasks"
 effort = "Max"
 date = "2026-09-17 to 2026-09-18"
 source = "https://zapier.com/benchmarks/claude-opus5_5-report"
+
 [[benchmarks]]
 name = "OSWorld"
 score = 44.33
@@ -228,6 +234,7 @@ dataset = "108 tasks"
 effort = "Max"
 variant = "batch tool; 500-step budget"
 source = "https://osworld-v2.xlang.ai/"
+
 [[benchmarks]]
 name = "Chartography"
 score = 27.3
@@ -237,6 +244,7 @@ effort = "Adaptive/Max"
 variant = "10 runs per task"
 harness = "Inspect AI"
 source = "https://surgehq.ai/benchmarks/chartography"
+
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1730
@@ -246,3 +254,11 @@ dataset = "220 tasks"
 effort = "Max"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 44.1646231569372
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/claude-opus-5"

@@ -278,3 +278,10 @@ score = 43.42
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 17.7307282547205
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/reflection-beam"

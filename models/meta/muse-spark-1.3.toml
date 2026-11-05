@@ -235,7 +235,7 @@ source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-xhigh-
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 37
+score = 36.6172039139368
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

@@ -210,6 +210,7 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 
 # Zapier's official private leaderboard, not AutomationBench-AA or the public
 # research task set. The launch score above has no verified benchmark version.
+
 [[benchmarks]]
 name = "AutomationBench"
 score = 41.40
@@ -240,6 +241,7 @@ source = "https://zapier.com/benchmarks"
 # Scorer and leaderboard configuration:
 # https://github.com/surge-ai/chartography#leaderboard-configuration
 # The Astra leaderboard row specifies max reasoning but not tool availability.
+
 [[benchmarks]]
 name = "Chartography"
 score = 71
@@ -254,6 +256,7 @@ source = "https://surgehq.ai/benchmarks/chartography"
 # rounding. Four full-benchmark passes, 113 tasks and 452 scored attempts per
 # effort level. Provider/verifier/network errors are excluded by the source.
 # These are pass@1 aggregates, not the separately published pass@4 metric.
+
 [[benchmarks]]
 name = "DeepSWE"
 score = 73.23008849557522
@@ -312,6 +315,7 @@ source = "https://deepswe.datacurve.ai/"
 # v2.1 Elo scale: DeepSeek V4.1 Flash (max) anchored at 1600.
 # Exact Elo values are also embedded in the release page's evaluationScores:
 # https://artificialanalysis.ai/models/releases/gpt-6-astra
+
 [[benchmarks]]
 name = "GDPval-AA"
 score = 1583.69
@@ -364,6 +368,7 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 
 # Scale's Full tab (642 tasks), not the default HARD-51 tab (90.20%).
 # V2 protocol: offline agent phase and fresh-sandbox re-grading.
+
 [[benchmarks]]
 name = "SWE-bench Pro"
 score = 96.9
@@ -383,6 +388,7 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2"
 # the evaluation pages do not expose every effort level in their initial view.
 # The common mini-swe-agent harness does not make these runs equivalent to
 # Vals' or OpenAI's runs; source, limits and repeat counts remain separate.
+
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 59.0909090909091
@@ -496,6 +502,7 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 # Vals model defaults: max effort, 128,000 output tokens; individual benchmarks
 # may override defaults, so no row-specific effort is inferred here.
 # https://www.vals.ai/models/openai_gpt-6-astra
+
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 59.60
@@ -508,6 +515,7 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-4"
 
 # Single pass@1 run; only ungraded infrastructure/provider errors were retried.
 # This is not the three-repeat protocol used by Artificial Analysis.
+
 [[benchmarks]]
 name = "Terminal-Bench-Science"
 score = 62.86
@@ -524,3 +532,43 @@ score = 65.02
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 55.3057468569681
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 56.8538559596797
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/gpt-6-astra"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 43.3349823228524
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/gpt-6-astra-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 54.849838322506
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/gpt-6-astra-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 51.5548393864113
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/gpt-6-astra-medium"

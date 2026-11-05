@@ -89,3 +89,10 @@ metric = "performance score"
 version = "2.2"
 variant = "reported ±1.16 percentage points"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 28.5283090216016
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/step-5"

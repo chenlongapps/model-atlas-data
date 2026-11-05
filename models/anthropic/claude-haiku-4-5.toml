@@ -27,3 +27,11 @@ score = 39.45
 metric = "resolve rate"
 dataset = "public"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 7.43033851624488
+metric = "index score"
+version = "5.0.1"
+variant = "Reasoning"
+source = "https://artificialanalysis.ai/models/claude-4-5-haiku-reasoning"

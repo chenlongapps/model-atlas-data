@@ -246,10 +246,10 @@ source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-h
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 31
+score = 30.8468119957291
 metric = "index score"
 version = "5.0.1"
-effort = "high"
+effort = "High"
 source = "https://artificialanalysis.ai/models/gemini-3-8-flash"
 
 [[benchmarks]]
@@ -272,3 +272,19 @@ dataset = "six private and two public benchmarks"
 effort = "high"
 variant = "reported ±1.14; Google provider; default temperature, top-p, and top-k; 65,536 max output tokens"
 source = "https://www.vals.ai/models/google_gemini-3.8-flash"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 30.078569475636
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/gemini-3-8-flash-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 22.548302237854
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/gemini-3-8-flash-low"

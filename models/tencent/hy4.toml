@@ -20,3 +20,10 @@ top_k = true
 context = 1_048_576
 input = 983_010
 output = 65_536
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 34.5552385392508
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/tencent-hy4"

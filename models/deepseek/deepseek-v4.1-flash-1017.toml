@@ -167,3 +167,27 @@ score = 61.26
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash-1017"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 18.5131594039446
+metric = "index score"
+version = "5.0.1"
+variant = "Non-reasoning"
+source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017-non-reasoning"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 28.6437391540402
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 32.5896393532027
+metric = "index score"
+version = "5.0.1"
+effort = "Max"
+source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017"

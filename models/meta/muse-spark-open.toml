@@ -270,3 +270,11 @@ variant = "xhigh effort"
 version = "2"
 source = "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
 date = "2026-10-15"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 24.8815868992913
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+source = "https://artificialanalysis.ai/models/muse-spark-open"

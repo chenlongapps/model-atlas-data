@@ -92,3 +92,11 @@ version = "2.2"
 dataset = "Six private and two public benchmarks"
 variant = "Default provider: Alibaba; temperature=0.7; top-p/top-k default; max output 128000"
 source = "https://www.vals.ai/models/alibaba_qwen3.8-max-0902"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 33.6545627367888
+metric = "index score"
+version = "5.0.1"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/qwen3-8-max"

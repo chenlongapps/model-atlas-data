@@ -55,7 +55,7 @@ source = "https://artificialanalysis.ai/models/comparisons/command-a-plus-vs-cla
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 6
+score = 6.24120025576958
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/command-a-plus"

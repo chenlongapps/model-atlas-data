@@ -128,3 +128,11 @@ metric = "performance score"
 version = "2.2"
 date = "2026-10-24"
 source = "https://www.vals.ai/models/kimi_kimi-k3.1-pro"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 46.4526236744189
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/kimi-k3-1-pro"

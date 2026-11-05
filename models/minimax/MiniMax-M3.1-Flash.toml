@@ -105,3 +105,11 @@ effort = "max"
 variant = "Official MiniMax API; temperature=1; top_p=0.95; max output=262,144 tokens"
 source = "https://www.vals.ai/models/minimax_MiniMax-M3.1-flash"
 date = "2026-10-20"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 29.0595214290458
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+source = "https://artificialanalysis.ai/models/minimax-m3-1-flash"

@@ -70,7 +70,7 @@ source = "https://thinkingmachines.ai/news/inkling-small/"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 13
+score = 12.9101620926084
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/inkling-small/"

@@ -147,8 +147,8 @@ source = "https://surgehq.ai/benchmarks/chartography"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 44
+score = 44.1555010304265
 metric = "index score"
 version = "5.0.1"
-effort = "max"
+effort = "Max"
 source = "https://artificialanalysis.ai/models/gpt-6-sol"
