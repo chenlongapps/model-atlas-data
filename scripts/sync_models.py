@@ -23,7 +23,6 @@ MODEL_FIELDS = set("schema v2_only type name description family open_weights kno
                    "release_date last_updated modalities capabilities limit license links "
                    "weights benchmarks metadata".split())
 BENCHMARK_FIELDS = set("name score metric version dataset effort variant harness source date".split())
-SOURCE = re.compile(r"^Source: https://github.com/anomalyco/models\.dev/tree/([0-9a-f]{40})/models$", re.MULTILINE)
 
 
 def require(condition, message):
@@ -229,35 +228,29 @@ def information(data):
     return {key: value for key, value in data.items() if key != "benchmarks"}
 
 
-def merge_information(local, upstream, baseline, translated=False):
-    """Three-way merge; absent upstream fields and conflicting local values survive."""
+def merge_information(local, upstream, translated=False):
+    """Follow explicit upstream values, retaining fields absent upstream."""
     merged = deepcopy(local)
     changes, conflicts = [], {}
 
-    def merge(target, incoming, base, prefix=()):
+    def merge(target, incoming, prefix=()):
         for key, value in incoming.items():
             path = (*prefix, key)
             label = ".".join(path)
             if key not in target:
-                if key in base:
-                    conflicts[label] = "local field deletion retained"
-                else:
-                    target[key] = deepcopy(value)
-                    changes.append(path)
+                target[key] = deepcopy(value)
+                changes.append(path)
             elif isinstance(target[key], dict) and isinstance(value, dict):
-                old = base.get(key, {})
-                merge(target[key], value, old if isinstance(old, dict) else {}, path)
+                merge(target[key], value, path)
             elif target[key] == value:
                 continue
             elif path == ("description",) and translated:
                 conflicts[label] = "description has local translations; update them manually first"
-            elif key in base and target[key] == base[key]:
+            else:
                 target[key] = deepcopy(value)
                 changes.append(path)
-            else:
-                conflicts[label] = "local value differs from the upstream baseline, or no baseline is available"
 
-    merge(merged, upstream, baseline)
+    merge(merged, upstream)
     return merged, changes, conflicts
 
 
@@ -279,12 +272,12 @@ def edit_value(target, key, value):
     target[key] = deepcopy(value)
 
 
-def update_content(content, incoming, baseline, translated=False):
+def update_content(content, incoming, translated=False):
     data = tomllib.loads(content.decode("utf-8"))
     validate_model(information(data), [])
     validate_model(information(incoming), [])
     merged, changes, conflicts = merge_information(
-        information(data), information(incoming), information(baseline), translated)
+        information(data), information(incoming), translated)
     validate_model(merged, [])
     if not changes:
         return content, [], conflicts
@@ -305,32 +298,12 @@ def update_content(content, incoming, baseline, translated=False):
     return updated, [".".join(path) for path in changes], conflicts
 
 
-def baseline_sha(root):
-    message = git(root, "log", "-1", "--format=%B",
-                  "--grep=^Source: https://github.com/anomalyco/models.dev/tree/").decode("utf-8")
-    match = SOURCE.search(message)
-    return match[1] if match else ""
-
-
-def baseline_model(upstream, sha, relative):
-    if not sha:
-        return {}
-    entry = git(upstream, "ls-tree", "-z", sha, "--", relative.as_posix())
-    if not entry:
-        return {}
-    require(entry.split()[0] == b"100644", f"baseline file is not a regular model: {relative}")
-    return tomllib.loads(git(upstream, "show", f"{sha}:{relative.as_posix()}").decode("utf-8"))
-
-
-def sync_models(upstream, root, dry_run=False, baseline=None):
+def sync_models(upstream, root, dry_run=False):
     require((upstream / "LICENSE").read_bytes() == (root / "LICENSE.models-dev").read_bytes(),
             "upstream LICENSE changed; review the license before syncing")
     no_symlinks(upstream, Path("models"))
     no_symlinks(root, Path("models"))
     require((upstream / "models").is_dir(), "upstream models/ directory is missing")
-    if baseline:
-        require(re.fullmatch(r"[0-9a-f]{40}", baseline), "invalid baseline commit SHA")
-        git(upstream, "cat-file", "-e", f"{baseline}^{{commit}}")
     definitions = []
     for path in sorted((root / "benchmarks").rglob("*.toml")):
         with path.open("rb") as source:
@@ -341,7 +314,7 @@ def sync_models(upstream, root, dry_run=False, baseline=None):
         data = tomllib.loads(path.read_text(encoding="utf-8"))
         translated.update(data.get("model", {}).get("descriptions", {}))
     report = {"added": {}, "updated": {}, "existing": 0, "conflicts": {},
-              "skipped": {}, "dry_run": dry_run, "baseline_sha": baseline}
+              "skipped": {}, "dry_run": dry_run}
     for source in sorted((upstream / "models").rglob("*.toml")):
         relative = source.relative_to(upstream)
         name = relative.as_posix()
@@ -358,8 +331,7 @@ def sync_models(upstream, root, dry_run=False, baseline=None):
             if existing:
                 previous = target.read_bytes()
                 content, fields, conflicts = update_content(
-                    previous, incoming, baseline_model(upstream, baseline, relative),
-                    "/".join(relative.with_suffix("").parts[1:]) in translated)
+                    previous, incoming, translated="/".join(relative.with_suffix("").parts[1:]) in translated)
                 if conflicts:
                     report["conflicts"][name] = conflicts
                 if content == previous:
@@ -432,10 +404,10 @@ def check_staged(root, report):
 def summary(report):
     lines = ["## Models.dev sync", "", f"Upstream commit: `{report['upstream_sha']}`",
              f"Dry run: {report['dry_run']}",
-             f"Baseline: `{report.get('baseline_sha') or 'unavailable; conflicting local values are retained'}`",
              f"Added: {len(report['added'])}; updated: {len(report.get('updated', {}))}; "
              f"existing: {report['existing']}; skipped: {len(report['skipped'])}",
              "", "New models include upstream benchmarks. Existing models keep their benchmark data and text unchanged.",
+             "Existing model information follows explicit upstream values; fields absent upstream are retained.",
              "Translations are deferred for new models. Existing translated descriptions are protected.",
              "No source authenticity or full upstream schema validation is performed."]
     for name in report["added"]:
@@ -463,21 +435,17 @@ def main(argv=None):
     sync.add_argument("--report", type=Path, required=True, help="JSON report outside the repository")
     sync.add_argument("--summary", type=Path)
     sync.add_argument("--dry-run", action="store_true")
-    sync.add_argument("--baseline-sha", help="previous upstream commit, already fetched into --upstream")
-    commands.add_parser("baseline-sha", help="print the last upstream Source commit from local Git history")
     check = commands.add_parser("check-staged")
     check.add_argument("--report", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve()
-        if args.command == "baseline-sha":
-            print(baseline_sha(root))
-        elif args.command == "check-staged":
+        if args.command == "check-staged":
             check_staged(root, json.loads(args.report.read_text(encoding="utf-8")))
         else:
             upstream = args.upstream.resolve()
             sha = git(upstream, "rev-parse", "HEAD").decode().strip()
-            report = sync_models(upstream, root, args.dry_run, args.baseline_sha or None)
+            report = sync_models(upstream, root, args.dry_run)
             report["upstream_sha"] = sha
             args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             output = summary(report)
