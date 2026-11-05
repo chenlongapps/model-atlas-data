@@ -1,6 +1,5 @@
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
-import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -9,7 +8,7 @@ import tomllib
 import unittest
 from unittest.mock import patch
 
-from scripts.sync_models import ROOT, check_staged, main, sync_models, validate_model, without_benchmarks
+from scripts.sync_models import ROOT, check_staged, main, sync_models, validate_model
 
 
 MODEL = b'''# Keep upstream comments and formatting.
@@ -166,17 +165,20 @@ class SyncTests(unittest.TestCase):
             sync_models(self.upstream, self.root)
         self.assertEqual((self.root / "models/lab/new.toml").read_bytes(), b"racing writer")
 
-    def test_sync_imports_model_without_unmapped_benchmark(self):
+    def test_sync_skips_model_with_unmapped_benchmark(self):
         content = MODEL + b'\n[[benchmarks]]\nname = "Unknown"\nscore = 42\nsource = "https://example.com"\n'
         self.write(self.upstream, "models/lab/new.toml", content)
         report = sync_models(self.upstream, self.root)
-        self.assertEqual(report["skipped"], {})
-        filtered = (self.root / "models/lab/new.toml").read_bytes()
-        self.assertEqual(tomllib.loads(filtered.decode()), tomllib.loads(MODEL.decode()))
-        self.assertNotIn("benchmarks", tomllib.loads(filtered.decode()))
-        self.assertEqual(report["added"]["models/lab/new.toml"], hashlib.sha256(filtered).hexdigest())
+        self.assertIn("mapping is missing", report["skipped"]["models/lab/new.toml"])
+        self.assertEqual(report["added"], {})
 
-    def test_sync_excludes_all_benchmark_conditions(self):
+    def test_sync_preserves_optional_effort_without_changing_source_bytes(self):
+        definition = b'''id = "example-bench-v1"
+name = "Example Bench"
+version = "1.0"
+metric = "accuracy"
+'''
+        self.write(self.root, "benchmarks/example.toml", definition)
         result = b'''
 [[benchmarks]]
 name = "Example Bench"
@@ -191,46 +193,7 @@ source = "https://example.com/results"
         report = sync_models(self.upstream, self.root)
         self.assertEqual(report["skipped"], {})
         self.assertEqual(list(report["added"]), ["models/lab/new.toml"])
-        self.assertEqual((self.root / "models/lab/new.toml").read_bytes(), MODEL + b"\n")
-
-    def test_sync_does_not_validate_excluded_results_or_load_definitions(self):
-        self.write(self.root, "benchmarks/unrelated.toml", b"invalid = [")
-        for index, result in enumerate((
-            b'[[benchmarks]]\nname = "Unknown"\nscore = 42\n',  # No source or mapping.
-            b'[[benchmarks]]\nscore = true\nextra = "unsupported"\n',
-            b'[[benchmarks]]\nname = "Duplicate"\nscore = 1\n' * 2,
-            b'[benchmarks]\nunsupported = true\n',
-        )):
-            self.write(self.upstream, f"models/lab/new-{index}.toml", MODEL + result)
-
-        report = sync_models(self.upstream, self.root)
-
-        self.assertEqual(len(report["added"]), 4)
-        self.assertEqual(report["skipped"], {})
-        for name in report["added"]:
-            self.assertEqual((self.root / name).read_bytes(), MODEL)
-
-    def test_sync_still_rejects_invalid_basic_information_and_toml(self):
-        result = b'\n[[benchmarks]]\nname = "Unknown"\nscore = 42\n'
-        self.write(self.upstream, "models/lab/bad-schema.toml", MODEL.replace(b"schema = 2", b"schema = 1") + result)
-        self.write(self.upstream, "models/lab/bad-toml.toml", MODEL + result + b"invalid = [")
-
-        report = sync_models(self.upstream, self.root)
-
-        self.assertEqual(report["added"], {})
-        self.assertEqual(len(report["skipped"]), 2)
-
-    def test_filtered_dry_run_hash_matches_written_and_staged_content(self):
-        self.init_git()
-        self.write(self.upstream, "models/lab/new.toml", MODEL + b'\n[[benchmarks]]\nscore = 42\n')
-        preview = sync_models(self.upstream, self.root, dry_run=True)
-        self.assertFalse((self.root / "models").exists())
-
-        report = sync_models(self.upstream, self.root)
-
-        self.assertEqual(preview["added"], report["added"])
-        self.git("add", "models/")
-        check_staged(self.root, report)
+        self.assertEqual((self.root / "models/lab/new.toml").read_bytes(), content)
 
     def stage_new_model(self):
         self.init_git()
@@ -301,7 +264,6 @@ source = "https://example.com/results"
         report = json.loads(report_path.read_text())
         self.assertRegex(report["upstream_sha"], r"^[0-9a-f]{40}$")
         self.assertIn(report["upstream_sha"], summary_path.read_text())
-        self.assertIn("upstream benchmarks are excluded", summary_path.read_text())
         self.git("add", "models/")
         self.assertEqual(main(["--root", str(self.root), "check-staged", "--report", str(report_path)]), 0)
 
@@ -310,58 +272,6 @@ source = "https://example.com/results"
             code = main(["--root", str(self.root), "check-staged", "--report", str(self.base / "missing.json")])
         self.assertEqual(code, 1)
         self.assertIn("Sync failed", stderr.getvalue())
-
-
-class BenchmarkFilteringTests(unittest.TestCase):
-    def test_preserves_bytes_when_benchmarks_are_absent(self):
-        self.assertEqual(without_benchmarks(MODEL), MODEL)
-
-    def test_removes_inline_empty_and_dotted_benchmark_fields(self):
-        for result in (b'benchmarks = []\n', b'benchmarks = [{ name = "Unknown", score = 42 }]\n',
-                       b'"benchmarks" = [\n{ score = 42 },\n]\n',
-                       b'benchmarks.name = "Unknown"\nbenchmarks.score = 42\n'):
-            with self.subTest(result=result):
-                self.assertEqual(without_benchmarks(result + MODEL), MODEL)
-
-    def test_removes_interleaved_quoted_and_nested_benchmark_tables(self):
-        first = b'[[ "benchmarks" ]] # Source result\nscore = 42\n'
-        second = b"[['benchmarks']]\nscore = 43\n[benchmarks.conditions]\ntools = true\n"
-        links = b'[[links]]\nurl = "https://example.com/model"\n'
-        weights = b'[[weights]]\nurl = "https://example.com/weights"\n'
-        content = MODEL + first + links + second + weights
-        self.assertEqual(without_benchmarks(content), MODEL + links + weights)
-
-    def test_preserves_header_like_text_and_nested_metadata_benchmarks(self):
-        description = b'''description = """Model description:
-[[benchmarks]]
-score = 99
-[metadata]
-"""'''
-        model = MODEL.replace(b'description = "Example model"', description)
-        metadata = b"""[metadata]
-notes = '''Literal text:
-[[benchmarks]]
-[links]
-'''
-benchmarks = "Not a top-level result"
-[metadata.details.benchmarks]
-note = "Keep this nested field"
-"""
-        result = b'''[[benchmarks]]
-name = """Result with header-like text:
-[links]
-"""
-score = 42
-'''
-        self.assertEqual(without_benchmarks(model + result + metadata), model + metadata)
-
-    def test_preserves_crlf_and_no_final_newline(self):
-        for newline in (b"\n", b"\r\n"):
-            with self.subTest(newline=newline):
-                model = MODEL.replace(b"\n", newline)
-                result = b'[[benchmarks]]\nscore = 42\n'.replace(b"\n", newline)
-                metadata = b'[metadata]\nnote = "Keep"'.replace(b"\n", newline)
-                self.assertEqual(without_benchmarks(model + result + metadata), model + metadata)
 
 
 class ModelValidationTests(unittest.TestCase):
