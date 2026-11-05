@@ -35,7 +35,7 @@ jobs:
           git clone --depth=1 --branch=dev --filter=blob:none --sparse https://github.com/anomalyco/models.dev.git "$RUNNER_TEMP/models-dev"
           git -C "$RUNNER_TEMP/models-dev" sparse-checkout set models
 
-      - name: Add new models only
+      - name: Add new model information only (exclude benchmarks)
         run: |
           python3 scripts/sync_models.py sync --upstream "$RUNNER_TEMP/models-dev" --report "$RUNNER_TEMP/models-dev-sync.json" --summary "$GITHUB_STEP_SUMMARY"
 

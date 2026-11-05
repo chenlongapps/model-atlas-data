@@ -1,4 +1,4 @@
-"""Add Models.dev lab files without changing any existing model (Python 3.11+)."""
+"""Add Models.dev model information without benchmarks or changing existing models (Python 3.11+)."""
 
 import argparse
 from datetime import date
@@ -163,16 +163,45 @@ def validate_model(data, definitions):
                 "(exact name, explicit version and metric required)")
 
 
+def without_benchmarks(content):
+    """Remove only the top-level benchmarks field, preserving other TOML text."""
+    source = content.decode("utf-8")
+    data = tomllib.loads(source)
+    if "benchmarks" not in data:
+        return content
+
+    kept, pending = [], []
+    root = True
+    benchmark_section = False
+    for line in source.splitlines(keepends=True):
+        pending.append(line)
+        statement = "".join(pending)
+        try:
+            # Let TOML parsing find complete statements, including multiline
+            # strings/arrays. Header-like text inside a string is not a header.
+            parsed = tomllib.loads(statement)
+        except tomllib.TOMLDecodeError:
+            continue
+        if statement.lstrip().startswith("["):
+            root = False
+            benchmark_section = "benchmarks" in parsed
+        if not benchmark_section and not (root and "benchmarks" in parsed):
+            kept.append(statement)
+        pending.clear()
+
+    filtered = "".join(kept)
+    expected = {key: value for key, value in data.items() if key != "benchmarks"}
+    require(not pending and tomllib.loads(filtered) == expected,
+            "cannot remove benchmarks without changing other model information")
+    return filtered.encode("utf-8")
+
+
 def sync_models(upstream, root, dry_run=False):
     require((upstream / "LICENSE").read_bytes() == (root / "LICENSE.models-dev").read_bytes(),
             "upstream LICENSE changed; review the license before syncing")
     no_symlinks(upstream, Path("models"))
     no_symlinks(root, Path("models"))
     require((upstream / "models").is_dir(), "upstream models/ directory is missing")
-    definitions = []
-    for path in sorted((root / "benchmarks").rglob("*.toml")):
-        with path.open("rb") as source:
-            definitions.append(tomllib.load(source))
     report = {"added": {}, "existing": 0, "skipped": {}, "dry_run": dry_run}
     for source in sorted((upstream / "models").rglob("*.toml")):
         relative = source.relative_to(upstream)
@@ -185,8 +214,8 @@ def sync_models(upstream, root, dry_run=False):
             if target.exists():
                 report["existing"] += 1
                 continue
-            content = source.read_bytes()
-            validate_model(tomllib.loads(content.decode("utf-8")), definitions)
+            content = without_benchmarks(source.read_bytes())
+            validate_model(tomllib.loads(content.decode("utf-8")), [])
         except (ValueError, TypeError, OverflowError) as error:
             report["skipped"][name] = str(error)
             continue
@@ -226,7 +255,8 @@ def summary(report):
     lines = ["## Models.dev sync", "", f"Upstream commit: `{report['upstream_sha']}`",
              f"Dry run: {report['dry_run']}",
              f"Added: {len(report['added'])}; existing: {report['existing']}; skipped: {len(report['skipped'])}",
-             "", "Translations are intentionally deferred. No source authenticity or full upstream schema validation is performed."]
+             "", "Only model information is imported; upstream benchmarks are excluded. Existing models are unchanged.",
+             "Translations are intentionally deferred. No source authenticity or full upstream schema validation is performed."]
     for name in report["added"]:
         lines.append(f"- Added: `{name}`")
     for name, reason in report["skipped"].items():
