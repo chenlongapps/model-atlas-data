@@ -22,7 +22,9 @@ SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 MODEL_FIELDS = set("schema v2_only type name description family open_weights knowledge "
                    "release_date last_updated modalities capabilities limit license links "
                    "weights benchmarks metadata".split())
-BENCHMARK_FIELDS = set("name score metric version dataset effort variant harness source date".split())
+BENCHMARK_FIELDS = set("name score metric version dataset effort variant harness source date "
+                       "cost cost_unit cost_source".split())
+BENCHMARK_COST_FIELDS = {"cost", "cost_unit", "cost_source"}
 
 
 def require(condition, message):
@@ -145,14 +147,23 @@ def validate_model(data, definitions):
         require(text(result.get("name")), "benchmark.name: required")
         score = result.get("score")
         require(number(score) or text(score), "benchmark.score: expected a finite number or nonempty string")
-        for key in BENCHMARK_FIELDS - {"score"}:
+        for key in BENCHMARK_FIELDS - {"score", "cost"}:
             if key in result:
                 require(text(result[key]), f"benchmark.{key}: expected a nonempty string")
         require(url(result.get("source")), f"{result['name']}: verifiable HTTP(S) source required")
         if "date" in result:
             require(calendar_date(result["date"]), "benchmark.date: invalid date")
+        require(("cost" in result) == ("cost_unit" in result),
+                "benchmark.cost: cost and cost_unit must be supplied together")
+        if "cost" in result:
+            require(number(result["cost"]) and result["cost"] >= 0,
+                    "benchmark.cost: expected a finite nonnegative number")
+        if "cost_source" in result:
+            require("cost" in result and url(result["cost_source"]),
+                    "benchmark.cost_source: expected an HTTP(S) URL and cost")
         # Exact conditions include effort; omitted values are not default effort.
-        identity = tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"}))
+        # Costs and their provenance are observations, not distinct conditions.
+        identity = tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"} - BENCHMARK_COST_FIELDS))
         require(identity not in seen, f"{result['name']}: duplicate or conflicting benchmark record")
         seen.add(identity)
         # No aliases, version normalization, or inferred metrics/default versions.

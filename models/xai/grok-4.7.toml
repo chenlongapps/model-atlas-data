@@ -85,6 +85,9 @@ source = "https://x.ai/news/grok-4-7"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 26
+cost = 12.426062537369734
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/grok-4-7"
 metric = "pass@1"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -117,6 +120,8 @@ source = "https://surgehq.ai/benchmarks/chartography"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 35.4850117067196
+cost = 7.771539401587139
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -147,6 +152,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = 58.56
+cost = 11.625468
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 dataset = "GDP-weighted finance, coding, legal, and tax"
@@ -156,6 +164,8 @@ source = "https://www.vals.ai/models/grok_grok-4.7"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 31.132077602567
+cost = 2.9222013011913153
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -164,6 +174,8 @@ source = "https://artificialanalysis.ai/models/grok-4-7-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 35.2122962959703
+cost = 6.18359556537658
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"

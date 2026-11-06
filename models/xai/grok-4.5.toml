@@ -70,6 +70,10 @@ date = "2026-07-08"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 12.4
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 2094.11
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"

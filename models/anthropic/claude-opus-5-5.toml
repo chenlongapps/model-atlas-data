@@ -47,6 +47,9 @@ source = "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 65.15
+cost = 13.198632
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 harness = "Mini-SWE-agent"
@@ -185,6 +188,8 @@ source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 59.1060336078904
+cost = 10.036409719512749
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -194,6 +199,8 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 57.4447060170507
+cost = 6.047194490848774
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -203,6 +210,8 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 51.8359958227294
+cost = 3.4646622820973185
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -212,6 +221,8 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 48.2081024960691
+cost = 2.4510894376611723
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -221,6 +232,8 @@ source = "https://artificialanalysis.ai/models/claude-opus-5-5-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 34.752785007759
+cost = 0.9755293224458845
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -294,6 +307,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = 70.18
+cost = 28.122421
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 dataset = "Vals Index composite (finance, coding, legal, tax)"

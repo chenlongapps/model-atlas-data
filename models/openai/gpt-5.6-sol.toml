@@ -140,6 +140,10 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 37.3
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 2541.7
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"

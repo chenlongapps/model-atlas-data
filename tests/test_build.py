@@ -178,6 +178,52 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(list(self.base.glob(".model-atlas-build-*")), [])
         self.assertEqual(list(self.root.glob(".model-atlas-build-*")), [])
 
+    def test_optional_cost_round_trips_without_defaults_or_unit_conversion(self):
+        content = MODEL + RESULT
+        for index, (cost, unit) in enumerate(((0, "USD/task"), (3.6589264906126227, "USD/weighted task"),
+                                             (4718.65, "USD/evaluation"), (18.70, "USD/test"))):
+            content += RESULT + f'effort = "Tier {index}"\ncost = {cost!r}\ncost_unit = "{unit}"\n'
+            if index == 1:
+                content += 'cost_source = "https://example.com/costs"\n'
+        self.write("models/lab/example.toml", content)
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        results = self.read_json("models.json")["lab/example"]["benchmarks"]
+        self.assertEqual(results, tomllib.loads(content)["benchmarks"])
+        self.assertNotIn("cost", results[0])
+        self.assertNotIn("cost_unit", results[0])
+        self.assertNotIn("cost_source", results[1])
+
+    def test_cost_requires_a_nonnegative_number_unit_and_verifiable_source(self):
+        for extra in ('cost = -1\ncost_unit = "USD/task"',
+                      'cost = true\ncost_unit = "USD/task"',
+                      'cost = "1.20"\ncost_unit = "USD/task"',
+                      'cost = nan\ncost_unit = "USD/task"',
+                      'cost = inf\ncost_unit = "USD/task"',
+                      'cost = -inf\ncost_unit = "USD/task"',
+                      'cost = 1.2', 'cost_unit = "USD/task"',
+                      'cost = 1.2\ncost_unit = "   "', 'cost = 1.2\ncost_unit = 42',
+                      'cost = 1.2\ncost_unit = "USD/task"\ncost_source = "file:///costs"',
+                      'cost_source = "https://example.com/costs"'):
+            with self.subTest(extra=extra):
+                self.write("models/lab/example.toml", MODEL + RESULT + extra + '\n')
+                self.assert_failure(".cost")
+        result = RESULT.replace('source = "https://example.com/results"\n', '')
+        self.write("models/lab/example.toml", MODEL + result + 'cost = 1.2\ncost_unit = "USD/task"\n')
+        self.assert_failure("cost requires an HTTP(S)")
+        self.write("models/lab/example.toml", MODEL + result + 'cost = 1.2\ncost_unit = "USD/task"\n'
+                   'cost_source = "https://example.com/costs"\n')
+        self.assertEqual(self.run_build()[0], 0)
+
+    def test_cost_metadata_cannot_hide_duplicate_or_conflicting_scores(self):
+        for score in ("42.10", "99.0"):
+            for first_cost in ('', 'cost = 1.0\ncost_unit = "USD/task"\n'):
+                with self.subTest(score=score, first_cost=first_cost):
+                    second = RESULT.replace("42.10", score) + 'cost = 2.0\ncost_unit = "USD/test"\n'
+                    second += 'cost_source = "https://example.com/other-costs"\n'
+                    self.write("models/lab/example.toml", MODEL + RESULT + first_cost + second)
+                    self.assert_failure("duplicate or conflicting benchmark record")
+
     def test_sorts_map_keys_but_not_source_arrays(self):
         self.write("models/aaa/z.toml", MODEL)
         self.assertEqual(self.run_build()[0], 0)

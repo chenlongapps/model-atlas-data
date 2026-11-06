@@ -137,6 +137,9 @@ source = "https://research.meta.ai/blog/introducing-muse-spark-1-3"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 33
+cost = 5.583529694146059
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/muse-spark-1-3"
 metric = "pass@1"
 version = "4.0"
 dataset = "66 tasks"
@@ -236,6 +239,8 @@ source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-xhigh-
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 36.6172039139368
+cost = 2.3857813858107244
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

@@ -121,6 +121,9 @@ source = "https://deepmind.google/models/model-cards/gemini-3-5-flash/"
 [[benchmarks]]
 name = "DeepSWE"
 score = "36%±4%"
+cost = 3.4467114588691796
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"

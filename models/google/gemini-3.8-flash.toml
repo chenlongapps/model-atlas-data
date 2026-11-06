@@ -182,6 +182,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 19.70
+cost = 8.64749
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 dataset = "66 tasks"
@@ -247,6 +250,8 @@ source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-h
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 30.8468119957291
+cost = 7.766006178152514
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -266,6 +271,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-h
 [[benchmarks]]
 name = "Vals Index"
 score = 55.95
+cost = 5.025617
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 dataset = "six private and two public benchmarks"
@@ -276,6 +284,8 @@ source = "https://www.vals.ai/models/google_gemini-3.8-flash"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 30.078569475636
+cost = 6.258586089480771
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"

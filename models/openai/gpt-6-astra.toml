@@ -224,6 +224,10 @@ metric = "pass@1"
 dataset = "113 tasks"
 harness = "mini-swe-agent"
 effort = "max"
+# Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.
+cost = 7.497827996681416
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 variant = "4 whole-benchmark passes; 452 scored attempts; errors excluded"
 version = "1.1"
 source = "https://deepswe.datacurve.ai/"
@@ -231,6 +235,10 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "DeepSWE"
 score = 74.11504424778761
+# Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.
+cost = 4.429117203539823
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 dataset = "113 tasks"
 harness = "mini-swe-agent"
@@ -246,6 +254,10 @@ metric = "pass@1"
 dataset = "113 tasks"
 harness = "mini-swe-agent"
 effort = "high"
+# Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.
+cost = 3.9237237909292038
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 variant = "4 whole-benchmark passes; 452 scored attempts; errors excluded"
 version = "1.1"
 source = "https://deepswe.datacurve.ai/"
@@ -253,6 +265,10 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "DeepSWE"
 score = 72.78761061946902
+# Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.
+cost = 3.0754742975663714
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 dataset = "113 tasks"
 harness = "mini-swe-agent"
@@ -264,6 +280,10 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "DeepSWE"
 score = 67.03539823008849
+# Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.
+cost = 1.595223439159292
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 dataset = "113 tasks"
 harness = "mini-swe-agent"
@@ -352,6 +372,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 59.0909090909091
+cost = 8.498119471851334
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-astra"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -363,6 +386,9 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 59.5959595959596
+cost = 5.855482520522051
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -374,6 +400,9 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 54.040404040404
+cost = 4.0469926217499435
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-astra-high"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -385,6 +414,9 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 49.4949494949495
+cost = 4.430107637760555
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-astra-medium"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -396,6 +428,9 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 41.9191919191919
+cost = 2.2485580260976215
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-astra-low"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -466,6 +501,9 @@ source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 59.60
+cost = 9.584259
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 dataset = "Full (66 tasks)"
 harness = "mini-swe-agent"
@@ -489,6 +527,9 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-science"
 [[benchmarks]]
 name = "Vals Index"
 score = 65.02
+cost = 21.277828
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
@@ -496,6 +537,8 @@ source = "https://www.vals.ai/benchmarks/vals_index"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 55.3057468569681
+cost = 3.6589264906126227
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -504,6 +547,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 56.8538559596797
+cost = 6.244666943602518
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -512,6 +557,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-astra"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 43.3349823228524
+cost = 1.4237229635663595
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -520,6 +567,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-astra-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 54.849838322506
+cost = 3.2385719685518306
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -528,6 +577,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-astra-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 51.5548393864113
+cost = 2.732438933013427
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"

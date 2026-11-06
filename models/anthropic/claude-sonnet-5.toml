@@ -77,6 +77,9 @@ date = "2026-06-30"
 [[benchmarks]]
 name = "DeepSWE"
 score = 54
+cost = 26.399858950791852
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"

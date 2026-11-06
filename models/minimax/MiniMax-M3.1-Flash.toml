@@ -92,6 +92,9 @@ source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
 [[benchmarks]]
 name = "Vals Index"
 score = 53.78
+cost = 0.659684
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 effort = "max"
@@ -102,6 +105,8 @@ date = "2026-10-20"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 29.0595214290458
+cost = 0.49097067348453205
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "max"

@@ -76,6 +76,9 @@ date = "2026-06-01"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "2% (rounded display)"
+cost = 3.0398771584794297
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/minimax-m3"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -104,6 +107,8 @@ source = "https://artificialanalysis.ai/models/comparisons/minimax-m3-vs-glm-4-6
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 18.8789083859255
+cost = 1.2850974407373852
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 dataset = "Nine constituent evaluations in Artificial Analysis Intelligence Index v5.0.1"

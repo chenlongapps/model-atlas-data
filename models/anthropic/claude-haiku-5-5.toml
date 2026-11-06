@@ -180,6 +180,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = "58.73 ± 1.28"
+cost = 3.17475
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 effort = "Max"
@@ -188,6 +191,8 @@ source = "https://www.vals.ai/models/anthropic_claude-haiku-5-5"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 29.874315467743
+cost = 0.15856031956679498
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -196,6 +201,8 @@ source = "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 34.6387759486628
+cost = 0.24836110126596478
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -204,6 +211,8 @@ source = "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 18.6180055310996
+cost = 0.043757686381988486
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -212,6 +221,8 @@ source = "https://artificialanalysis.ai/models/claude-haiku-5-5-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 36.4845435880142
+cost = 0.41100741536816304
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -220,6 +231,8 @@ source = "https://artificialanalysis.ai/models/claude-haiku-5-5"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 24.6013254343023
+cost = 0.0917645584066771
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"

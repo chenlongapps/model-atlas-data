@@ -61,6 +61,8 @@ source = "https://artificialanalysis.ai/models/comparisons/gemini-3-5-flash-mini
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 6.15684082814488
+cost = 0.19445134743611814
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "high"

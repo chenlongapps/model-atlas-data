@@ -84,6 +84,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 64.14
+cost = 16.513006
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -183,6 +186,9 @@ source = "https://www.anthropic.com/claude-sonnet-5-5"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 54.54133407109
+cost = 10.020621343395753
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-sonnet-5-5"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -192,6 +198,9 @@ source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 49.9240327787242
+cost = 4.091984916321919
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -201,6 +210,9 @@ source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 41.515109087048
+cost = 1.6361294399784785
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-sonnet-5-5-high"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -210,6 +222,9 @@ source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 30.8195522148431
+cost = 0.7806560352024481
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-sonnet-5-5-medium"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -219,6 +234,9 @@ source = "https://artificialanalysis.ai/models/releases/claude-sonnet-5-5/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 25.649704549789
+cost = 0.5113424463897498
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-sonnet-5-5-low"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -237,6 +255,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = 70.85
+cost = 18.69955
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 effort = "max"

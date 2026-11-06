@@ -129,6 +129,10 @@ source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 17.3
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 346.67
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -200,6 +204,8 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 23.7902433286348
+cost = 0.3312633263840317
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

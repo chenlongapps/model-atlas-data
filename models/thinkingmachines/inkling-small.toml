@@ -34,6 +34,9 @@ url = "https://huggingface.co/thinkingmachines/Inkling-Small"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 0.0
+cost = 0.321679
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -71,6 +74,8 @@ source = "https://thinkingmachines.ai/news/inkling-small/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 12.9101620926084
+cost = 0.20316116043899832
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/inkling-small/"
@@ -78,6 +83,9 @@ source = "https://artificialanalysis.ai/models/inkling-small/"
 [[benchmarks]]
 name = "Vals Index"
 score = 27.59
+cost = 0.401307
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"

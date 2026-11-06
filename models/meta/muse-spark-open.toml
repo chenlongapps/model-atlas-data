@@ -177,6 +177,9 @@ source = "https://www.vals-ai.com/benchmarks/terminal-bench-4"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 8
+cost = 4.656965702348483
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/muse-spark-open"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0 (Artificial Analysis evaluation)"
@@ -199,6 +202,9 @@ source = "https://artificialanalysis.ai/models/comparisons/muse-spark-open-vs-gp
 [[benchmarks]]
 name = "Vals Index"
 score = 48.57
+cost = 4.71792
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/models/meta_muse-spark-open"
@@ -266,6 +272,8 @@ date = "2026-10-15"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 24.8815868992913
+cost = 2.0176680435839316
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"

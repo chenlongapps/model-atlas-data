@@ -275,6 +275,8 @@ source = "https://www.vals.ai/benchmarks/vals_index"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 17.7307282547205
+cost = 0.28440671352465285
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/reflection-beam"

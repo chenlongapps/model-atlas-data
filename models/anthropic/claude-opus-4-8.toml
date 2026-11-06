@@ -76,6 +76,9 @@ date = "2026-06-09"
 [[benchmarks]]
 name = "DeepSWE"
 score = "59% ± 2%"
+cost = 13.222583593240094
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass rate"
 version = "1.1"
 dataset = "113 tasks"
@@ -87,6 +90,10 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "23.6% ± 3.6%"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 6481.26
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"

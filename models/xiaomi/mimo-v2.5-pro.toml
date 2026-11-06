@@ -218,6 +218,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 0.51
+cost = 0.23303
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 dataset = "66 tasks; 3 runs per task (avg@3)"

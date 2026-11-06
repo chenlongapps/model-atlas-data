@@ -158,6 +158,8 @@ source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-flash-vs-st
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 26.7276981444568
+cost = 0.12852987084014672
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/mimo-v2-6-flash"

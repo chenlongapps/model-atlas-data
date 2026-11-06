@@ -45,6 +45,9 @@ source = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b/modelc
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 0.0
+cost = 0.862751
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0, 66 tasks"
@@ -73,6 +76,8 @@ source = "https://www.vals.ai/models/baseten_nemotron-3.5-super-vl-120b-a12b"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 13.6203422723141
+cost = 0.5382257339551116
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "high"

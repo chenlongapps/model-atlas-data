@@ -165,6 +165,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 49.49
+cost = 14.657694
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0 (66 tasks); reported ±2.20 percentage points"
@@ -208,6 +211,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = 64.88
+cost = 10.647504
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 dataset = "Vals Index composite (finance, coding, legal, tax)"
@@ -226,6 +232,8 @@ source = "https://artificialanalysis.ai/models/muse-wonder-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 43.5748225998431
+cost = 6.9520364786062245
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

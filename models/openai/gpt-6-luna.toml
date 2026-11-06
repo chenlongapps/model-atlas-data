@@ -34,6 +34,9 @@ source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "13.64 ± 1.51"
+cost = 0.354726
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 dataset = "66 tasks"
@@ -102,6 +105,8 @@ source = "https://surgehq.ai/benchmarks/chartography"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 27.8552004938153
+cost = 0.15195575732105837
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -110,6 +115,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna/"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 23.4508728089378
+cost = 0.10409320921120957
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -118,6 +125,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 21.4290170864582
+cost = 0.07294776473194697
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -126,6 +135,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 18.4542156192416
+cost = 0.042201836106537785
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -134,6 +145,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 9.66610812336462
+cost = 0.005115255188520391
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -142,6 +155,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-luna-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 9.44244373619813
+cost = 0.07141741932294249
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Non-reasoning"
@@ -160,6 +175,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = "52.32 ± 1.12"
+cost = 0.450147
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 effort = "max"

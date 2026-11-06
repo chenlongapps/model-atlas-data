@@ -32,6 +32,9 @@ output = 131_072
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 3.03
+cost = 0.421803
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0 (66 tasks), Vals AI evaluation"
@@ -42,6 +45,9 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-4"
 [[benchmarks]]
 name = "Vals Index"
 score = 43.66
+cost = 0.477863
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/models/inception_mercury-3"

@@ -28,6 +28,8 @@ output = 117_964
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 5.09826495217051
+cost = 0.0404628507686443
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/granite-4-2-8b/"

@@ -27,6 +27,9 @@ output = 209_715
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 0
+cost = 1.7048494182799918
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/mistral-medium-3-5"
 metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -63,6 +66,8 @@ source = "https://artificialanalysis.ai/models/mistral-medium-3-5"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 4.64508756526957
+cost = 1.0390849688366068
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "high"

@@ -47,6 +47,9 @@ source = "https://fireworks.ai/specialized-intelligence-index/benchmarks/code-ge
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "20.71 ± 3.64"
+cost = 19.484094
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 dataset = "66 tasks"

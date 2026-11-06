@@ -46,6 +46,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 1
+cost = 2.5820625258588943
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/inkling"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0 (66 tasks)"
@@ -108,6 +111,8 @@ source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-so
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 12.4781698715401
+cost = 1.3519575079737436
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 dataset = "Nine-evaluation composite"

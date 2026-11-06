@@ -111,6 +111,8 @@ date = "2026-06-04"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 11.7592726308177
+cost = 2.2257365504312134
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Reasoning"

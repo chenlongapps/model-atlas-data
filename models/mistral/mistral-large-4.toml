@@ -50,6 +50,8 @@ source = "https://vals-ai.com/benchmarks/terminal-bench-4"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 23.1277321742266
+cost = 1.4119376739255958
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -58,6 +60,8 @@ source = "https://artificialanalysis.ai/models/mistral-large-4-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 25.336451488165
+cost = 4.208903290646695
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "public preview"
@@ -66,6 +70,8 @@ source = "https://artificialanalysis.ai/models/mistral-large-4-preview"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 26.1249946754784
+cost = 2.061496607384404
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"

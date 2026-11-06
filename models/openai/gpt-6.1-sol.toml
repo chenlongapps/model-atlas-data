@@ -35,6 +35,10 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 58.2
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 634.24
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -45,6 +49,9 @@ source = "https://www.tbench.ai/?efforts=all&version=4.0"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 55.05
+cost = 1.72496
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -55,6 +62,9 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-4"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 56
+cost = 1.8227634618325743
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-sol"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -66,6 +76,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 54
+cost = 1.0259491542428139
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -77,6 +90,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-xhigh-vs-
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 52
+cost = 0.8281767981765117
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -88,6 +104,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-g
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 48
+cost = 0.6137554705459501
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-sol-medium"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -99,6 +118,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-medium-vs
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 31
+cost = 0.3829418451399688
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-sol-low"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -175,6 +197,9 @@ source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gp
 [[benchmarks]]
 name = "Vals Index"
 score = 63.94
+cost = 3.614054
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 dataset = "finance, coding, legal, and tax tasks"
@@ -183,6 +208,8 @@ source = "https://www.vals.ai/models/openai_gpt-6.1-sol"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 52.458219253291
+cost = 0.7639949356156494
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -191,6 +218,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 50.3291231936536
+cost = 0.5909853515780825
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -199,6 +228,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 46.3468797067114
+cost = 0.3593898648025732
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -207,6 +238,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-sol-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 54.6087338138148
+cost = 1.2720632679446995
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -215,6 +248,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-sol"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 34.8029244314559
+cost = 0.16147357831822573
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"

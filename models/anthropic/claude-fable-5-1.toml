@@ -126,6 +126,10 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "57.9 ± 3.8"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 6243.5
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -137,6 +141,10 @@ source = "https://www.tbench.ai/?version=4.0&efforts=all"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "57.9 ± 3.4"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 4872.04
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -148,6 +156,10 @@ source = "https://www.tbench.ai/?version=4.0&efforts=all"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "54.5 ± 3.4"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 3985.38
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -159,6 +171,10 @@ source = "https://www.tbench.ai/?version=4.0&efforts=all"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "53.9 ± 3.4"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 2832.9
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -170,6 +186,10 @@ source = "https://www.tbench.ai/?version=4.0&efforts=all"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "43.3 ± 3.6"
+# Total for 330 trials across 66 tasks; not per-task cost.
+cost = 2358.72
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 metric = "resolution rate"
 version = "4.0"
 dataset = "66 tasks"
@@ -181,6 +201,9 @@ source = "https://www.tbench.ai/?version=4.0&efforts=all"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = "58.08 ± 3.31"
+cost = 17.175337
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0"
 dataset = "66 tasks"
@@ -277,6 +300,8 @@ source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 49.1602124158081
+cost = 12.993997201178466
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -286,6 +311,9 @@ source = "https://artificialanalysis.ai/models/claude-fable-5-1"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 50.0216384248632
+cost = 10.847474706140272
+cost_unit = "USD/weighted task"
+cost_source = "https://artificialanalysis.ai/models/claude-fable-5-1-xhigh"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -350,6 +378,8 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 38.683648810734
+cost = 4.471135894646431
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -359,6 +389,8 @@ source = "https://artificialanalysis.ai/models/claude-fable-5-1-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 43.171597828284
+cost = 5.564264690221474
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -368,6 +400,8 @@ source = "https://artificialanalysis.ai/models/claude-fable-5-1-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 47.174988245604
+cost = 7.539956160226559
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"

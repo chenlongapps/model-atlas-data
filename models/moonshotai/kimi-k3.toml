@@ -186,6 +186,9 @@ source = "https://www.kimi.com/en/blog/kimi-k3"
 [[benchmarks]]
 name = "DeepSWE"
 score = 69
+cost = 4.654682129933482
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 version = "1.1"
 effort = "max"
@@ -195,6 +198,9 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 17.17
+cost = 12.478176
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 effort = "max"
@@ -243,6 +249,9 @@ source = "https://arxiv.org/pdf/2607.24653"
 [[benchmarks]]
 name = "Vals Index"
 score = 52.95
+cost = 7.169465
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 effort = "max"
@@ -251,6 +260,8 @@ source = "https://vals.ai/models/kimi_kimi-k3"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 17.4191985300887
+cost = 2.368773852349091
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"

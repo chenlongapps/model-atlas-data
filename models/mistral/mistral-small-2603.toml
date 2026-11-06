@@ -66,6 +66,8 @@ source = "https://artificialanalysis.ai/models/comparisons/mistral-small-4-non-r
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 4.29716249600478
+cost = 0.03990856296103761
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Reasoning"

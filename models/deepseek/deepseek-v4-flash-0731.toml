@@ -119,6 +119,9 @@ source = "https://deepswe.datacurve.ai/"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 18.69
+cost = 0.766472
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"

@@ -140,6 +140,8 @@ source = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 5.5346663903388
+cost = 0.28980699398265014
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/nemotron-3-5-lightning"

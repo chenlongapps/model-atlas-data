@@ -46,6 +46,14 @@ function compact(value) {
   const result = new Intl.NumberFormat(language, { notation: 'compact', maximumFractionDigits: 1 }).format(value);
   return el('span', { title: value.toLocaleString(language), 'aria-label': value.toLocaleString(language) }, result);
 }
+function benchmarkCost(result) {
+  const currency = result.cost_unit.split('/')[0].trim();
+  const symbols = { USD: '$', CNY: '¥', JPY: '¥', EUR: '€', GBP: '£', KRW: '₩', INR: '₹' };
+  const prefix = Object.hasOwn(symbols, currency) ? symbols[currency] : `${currency} `;
+  const label = `${prefix}${result.cost.toFixed(2)}`;
+  const original = `${result.cost} ${result.cost_unit}`;
+  return el('span', { title: original, 'aria-label': original }, external(result.cost_source ?? result.source, label) || label);
+}
 function internal(kind, id, name, className = '') {
   return el('a', { href: routeFor(kind, id), class: className }, name);
 }
@@ -129,15 +137,18 @@ function listing(kind) {
 }
 function resultTable(entries, forModel) {
   if (!entries.length) return el('p', { class: 'state' }, T.noResults);
+  const hasCost = r => Number.isFinite(r.cost) && r.cost >= 0 && typeof r.cost_unit === 'string' && r.cost_unit.trim() !== '';
+  const showCost = !forModel && entries.some(entry => hasCost(entry.result));
   const rows = entries.map(entry => {
     const r = entry.result;
     const name = forModel ? (entry.status === 'matched' ? internal('benchmarks', entry.benchmarkId, r.name, 'primary') : el('span', {}, r.name, entry.status === 'ambiguous' ? [' ', el('span', { class: 'pill' }, T.ambiguous)] : [])) : internal('models', entry.modelId, data.models[entry.modelId]?.name || entry.modelId, 'primary');
     // Keep every present/future result field, including nested test conditions.
-    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'effort', 'metric', 'version', 'source'].includes(key));
+    const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'effort', 'metric', 'version', 'source', ...(showCost ? ['cost', 'cost_unit', 'cost_source'] : [])].includes(key));
     const conditions = el('div', { class: 'conditions' }, extra.length ? extra.map(([key, value]) => el('span', { class: 'condition' }, el('b', {}, `${key}: `), text(value))) : '—');
-    return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, r.effort, r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
+    const cost = showCost && hasCost(r) ? benchmarkCost(r) : '—';
+    return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, ...(showCost ? [cost] : []), r.effort, r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
   });
-  return table([forModel ? T.benchmark : T.model, T.score, T.effort, T.metric, T.version, T.conditions, T.source], rows, 'result-table');
+  return table([forModel ? T.benchmark : T.model, T.score, ...(showCost ? [T.cost] : []), T.effort, T.metric, T.version, T.conditions, T.source], rows, 'result-table');
 }
 function detailHeader(kind, id, title, desc) {
   const copy = el('button', { class: 'copy-button', type: 'button', 'aria-label': T.copyId, onclick: async () => {

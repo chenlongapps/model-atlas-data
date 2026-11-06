@@ -177,6 +177,9 @@ date = "2026-07-24"
 [[benchmarks]]
 name = "DeepSWE"
 score = 74.0
+cost = 11.837583271396396
+cost_unit = "USD/task"
+cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
@@ -198,6 +201,9 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 53.53
+cost = 18.596913
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "accuracy"
 version = "4.0.0"
 dataset = "66 tasks"
@@ -258,6 +264,8 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 44.1646231569372
+cost = 11.821495652976125
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

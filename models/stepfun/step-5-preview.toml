@@ -54,6 +54,9 @@ source = "https://huggingface.co/datasets/harborframework/terminal-bench?eval_re
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 31.82
+cost = 3.113224
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -85,6 +88,9 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-science"
 [[benchmarks]]
 name = "Vals Index"
 score = 54.76
+cost = 2.73409
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 variant = "reported ±1.16 percentage points"
@@ -93,6 +99,8 @@ source = "https://www.vals.ai/benchmarks/vals_index"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 28.5283090216016
+cost = 2.3452525606205166
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/step-5"

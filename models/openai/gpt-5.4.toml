@@ -219,6 +219,8 @@ date = "2026-04-23"
 [[benchmarks]]
 name = "DeepSWE"
 score = 51.76991150442478
+cost = 5.6524577245575225
+cost_unit = "USD/task"
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"

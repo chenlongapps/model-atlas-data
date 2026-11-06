@@ -140,6 +140,9 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Vals Index"
 score = 61.26
+cost = 0.65747
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash-1017"
@@ -147,6 +150,8 @@ source = "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash-1017"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 18.5131594039446
+cost = 0.4254202455035728
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Non-reasoning"
@@ -155,6 +160,8 @@ source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017-non-reas
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 28.6437391540402
+cost = 0.45619449806633267
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
@@ -163,6 +170,8 @@ source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017-high"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 32.5896393532027
+cost = 0.60210514783598
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"

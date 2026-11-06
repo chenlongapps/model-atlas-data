@@ -31,6 +31,8 @@ source = "https://labs.scale.com/leaderboard/swe_bench_pro_public"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 7.43033851624488
+cost = 0.5317769104171033
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Reasoning"

@@ -191,7 +191,7 @@ test('descriptions follow the selected language and preserve fallback', () => {
   assert.equal(description(descriptionLocale('zh-CN', {}), 'model', 'lab/a', 'original'), 'original');
 });
 
-test('detail tables sort results, show effort separately and hide only unmatched labels', async () => {
+test('detail tables sort results, show effort and optional benchmark prices separately and hide only unmatched labels', async () => {
   class Element {
     constructor(tag = '') { this.tag = tag; this.children = []; this.attributes = {}; this.dataset = {}; this.handlers = {}; this.classList = { toggle() {} }; }
     setAttribute(name, value) { this.attributes[name] = value; }
@@ -263,6 +263,74 @@ test('detail tables sort results, show effort separately and hide only unmatched
     assert.deepEqual(find(resultTable(), 'tbody').children.map(row => cells(row).slice(0, 2)), [['Beta', '10.1'], ['Alpha', '10.1']]);
     assert.equal(fixture['lab/a'].benchmarks[0].score, 10.11);
     assert.equal(fixture['lab/b'].benchmarks[0].score, 10.14);
+
+    const pricedResult = fixture['lab/b'].benchmarks[0];
+    Object.assign(pricedResult, { cost: 0.28440671352465285, cost_unit: 'USD/weighted task', cost_source: 'https://example.com/cost' });
+    const originalPricedResult = structuredClone(pricedResult);
+    handlers.hashchange();
+    assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Model', 'Score', 'Price', 'Effort', 'Metric', 'Version', 'Test conditions', 'Source']);
+    let pricedRows = find(resultTable(), 'tbody').children;
+    assert.deepEqual(pricedRows.map(row => cells(row).slice(0, 2)), [['Beta', '10.1'], ['Alpha', '10.1']]);
+    assert.ok(cells(pricedRows[0])[2].startsWith('$0.28'));
+    assert.doesNotMatch(cells(pricedRows[0])[2], /USD|weighted task|0\.2844/);
+    const priceDisplay = find(pricedRows[0].children[2], 'span');
+    assert.equal(priceDisplay.attributes.title, '0.28440671352465285 USD/weighted task');
+    assert.equal(priceDisplay.attributes['aria-label'], priceDisplay.attributes.title);
+    assert.equal(find(pricedRows[0].children[2], 'a').attributes.href, pricedResult.cost_source);
+    assert.equal(cells(pricedRows[1])[2], '—');
+    assert.doesNotMatch(cells(pricedRows[0])[6], /cost|USD\/weighted task/);
+    assert.match(cells(pricedRows[0])[6], /variant: no tools/);
+    assert.match(cells(pricedRows[0])[6], /future: \{"budget":2\}/);
+    assert.deepEqual(pricedResult, originalPricedResult);
+
+    delete pricedResult.cost_source;
+    pricedResult.cost = 0;
+    pricedResult.cost_unit = 'USD/test';
+    pricedResult.source = 'https://example.com/result';
+    handlers.hashchange();
+    pricedRows = find(resultTable(), 'tbody').children;
+    assert.ok(cells(pricedRows[0])[2].startsWith('$0.00'));
+    assert.doesNotMatch(cells(pricedRows[0])[2], /USD|\/test/);
+    assert.equal(find(pricedRows[0].children[2], 'a').attributes.href, pricedResult.source);
+    assert.equal(find(pricedRows[0].children[7], 'a').attributes.href, pricedResult.source);
+
+    pricedResult.cost_source = 'javascript:alert(1)';
+    handlers.hashchange();
+    const unlinkedCost = find(resultTable(), 'tbody').children[0].children[2];
+    assert.equal(unlinkedCost.textContent, '$0.00');
+    assert.equal(find(unlinkedCost, 'a'), undefined);
+    assert.equal(find(unlinkedCost, 'span').attributes.title, '0 USD/test');
+
+    for (const [cost, unit, expected] of [
+      [12, 'CNY/task', '¥12.00'],
+      [12.346, 'USD/evaluation', '$12.35'],
+      [0.001, 'USD/test', '$0.00'],
+      [12.3, 'JPY/task', '¥12.30'],
+      [12.3, 'EUR/task', '€12.30'],
+      [12.3, 'GBP/task', '£12.30'],
+      [12.3, 'KRW/task', '₩12.30'],
+      [12.3, 'INR/task', '₹12.30'],
+      [12.3, 'XYZ/task', 'XYZ 12.30'],
+    ]) {
+      pricedResult.cost = cost;
+      pricedResult.cost_unit = unit;
+      const original = structuredClone(pricedResult);
+      handlers.hashchange();
+      const cell = find(resultTable(), 'tbody').children[0].children[2];
+      assert.equal(cell.textContent, expected);
+      assert.equal(find(cell, 'span').attributes.title, `${cost} ${unit}`);
+      assert.deepEqual(pricedResult, original);
+    }
+
+    globals.location.hash = '#/benchmarks/b4';
+    handlers.hashchange();
+    assert.ok(!cells(find(resultTable(), 'thead').children[0]).includes('Price'));
+    globals.location.hash = '#/benchmarks/b1';
+    delete pricedResult.cost;
+    delete pricedResult.cost_unit;
+    delete pricedResult.cost_source;
+    handlers.hashchange();
+    assert.ok(!cells(find(resultTable(), 'thead').children[0]).includes('Price'));
 
     globals.location.hash = '#/models/lab%2Fb';
     handlers.hashchange();

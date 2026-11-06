@@ -33,6 +33,9 @@ source = "https://openai.com/index/introducing-gpt-6-1-terra/"
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 55.6
+cost = 1.4853125323157166
+cost_unit = "USD/task"
+cost_source = "https://artificialanalysis.ai/models/gpt-6-1-terra"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
@@ -65,6 +68,8 @@ source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 30.515898867357
+cost = 0.22589585897456366
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 variant = "Non-reasoning"
@@ -73,6 +78,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-terra-non-reasoning"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 51.3265188577015
+cost = 0.961108031081634
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Max"
@@ -81,6 +88,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-terra"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 38.1652076677975
+cost = 0.16880458238389412
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Medium"
@@ -89,6 +98,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-terra-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 29.4169280792131
+cost = 0.07133756205169729
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Low"
@@ -97,6 +108,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-terra-low"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 45.250051789066
+cost = 0.40068900166662513
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
@@ -105,6 +118,8 @@ source = "https://artificialanalysis.ai/models/gpt-6-1-terra-xhigh"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 42.4344508712563
+cost = 0.2592796466169722
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"

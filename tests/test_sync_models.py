@@ -45,7 +45,10 @@ name = "Local Bench"
 score = 42.10
 effort = "Adaptive/Max"
 variant = "without tools"
-# No definition or source: existing records must not be revalidated by sync.
+cost = 3.6589264906126227
+cost_unit = "USD/weighted task"
+cost_source = "https://example.com/costs"
+# No definition or score source: existing records must not be revalidated by sync.
 '''
 
 
@@ -354,6 +357,8 @@ variant = "without tools"
 source = "https://example.com/results"
 '''
         content = MODEL + result + result + b'effort = "Adaptive/Max"\n'
+        content += b'cost = 3.6589264906126227\ncost_unit = "USD/weighted task"\n'
+        content += b'cost_source = "https://example.com/costs"\n'
         self.write(self.upstream, "models/lab/new.toml", content)
         report = sync_models(self.upstream, self.root)
         self.assertEqual(report["skipped"], {})
@@ -639,6 +644,34 @@ class ModelValidationTests(unittest.TestCase):
                 data = {**self.data, field: value}
                 with self.assertRaises(ValueError):
                     validate_model(data, [])
+
+    def test_optional_cost_validation_and_preservation(self):
+        for cost, unit in ((0, "USD/task"), (3.6589264906126227, "USD/weighted task"),
+                           (4718.65, "USD/evaluation"), (18.70, "USD/test")):
+            self.data["benchmarks"] = [{**RESULT, "cost": cost, "cost_unit": unit,
+                                        "cost_source": "https://example.com/costs"}]
+            before = json.dumps(self.data, sort_keys=True)
+            validate_model(self.data, [DEFINITION])
+            self.assertEqual(json.dumps(self.data, sort_keys=True), before)
+        for changes in ({"cost": 1}, {"cost_unit": "USD/task"},
+                        {"cost_source": "https://example.com/costs"},
+                        *({"cost": cost, "cost_unit": "USD/task"}
+                          for cost in (-1, True, "1.2", float("nan"), float("inf"), -float("inf"))),
+                        {"cost": 1, "cost_unit": ""}, {"cost": 1, "cost_unit": 42},
+                        {"cost": 1, "cost_unit": "USD/task", "cost_source": "file:///costs"}):
+            with self.subTest(changes=changes):
+                self.data["benchmarks"] = [{**RESULT, **changes}]
+                with self.assertRaisesRegex(ValueError, r"benchmark\.cost"):
+                    validate_model(self.data, [DEFINITION])
+
+    def test_cost_metadata_cannot_hide_duplicate_or_conflicting_scores(self):
+        for score in (42.10, 43):
+            for first in (RESULT, {**RESULT, "cost": 1, "cost_unit": "USD/task"}):
+                self.data["benchmarks"] = [first, {**RESULT, "score": score, "cost": 2,
+                                                  "cost_unit": "USD/test",
+                                                  "cost_source": "https://example.com/costs"}]
+                with self.assertRaisesRegex(ValueError, "duplicate or conflicting"):
+                    validate_model(self.data, [DEFINITION])
 
     def test_bad_benchmark_values_and_missing_source(self):
         for changes in ({"score": True}, {"score": float("nan")}, {"source": "not a URL"},
