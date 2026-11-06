@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2024-03-15"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.567755777
+sources = ["https://huggingface.co/api/models/BAAI/bge-reranker-v2-m3"]
+notes = "Hub-published F32 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["reranking"]

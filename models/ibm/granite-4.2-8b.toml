@@ -10,6 +10,10 @@ family = "granite"
 open_weights = true
 release_date = "2026-08-25"
 
+[metadata.modelatlas.parameters]
+total_billion = 8
+sources = ["https://huggingface.co/ibm-granite/granite-4.2-8b"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

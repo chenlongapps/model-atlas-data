@@ -13,6 +13,11 @@ open_weights = true
 release_date = "2025-04-29"
 license = "Llama 4 Community License"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.278810882
+sources = ["https://huggingface.co/api/models/meta-llama/Llama-Prompt-Guard-2-86M"]
+notes = "Hub-published F32 count for the single complete unquantized checkpoint. Uses the full stored-weight count, not the nominal 86M size designation."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -8,6 +8,11 @@ open_weights = true
 knowledge = "2024-06-30"
 release_date = "2024-07-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 27.22712832
+sources = ["https://huggingface.co/api/models/google/gemma-2-27b-it"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -6,6 +6,10 @@ open_weights = true
 knowledge = "2025-05"
 release_date = "2025-07-10"
 
+[metadata.modelatlas.parameters]
+total_billion = 24
+sources = ["https://huggingface.co/mistralai/Devstral-Small-2507"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

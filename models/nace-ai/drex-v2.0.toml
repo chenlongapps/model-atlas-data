@@ -15,6 +15,11 @@ release_date = "2026-10-06"
 last_updated = "2026-10-12"
 license = "Nace.AI Open RAIL-M"
 
+[metadata.modelatlas.parameters]
+total_billion = 35.107181936
+sources = ["https://huggingface.co/api/models/nace-ai/drex-v2.0"]
+notes = "Hub-published BF16 count for the complete checkpoint. No active count inherited from the backbone."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

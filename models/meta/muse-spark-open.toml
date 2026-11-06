@@ -22,6 +22,11 @@ knowledge = "2026-01-04"
 release_date = "2026-10-15"
 license = "Muse Model License"
 
+[metadata.modelatlas.parameters]
+total_billion = 822.036529664
+sources = ["https://huggingface.co/api/models/meta-models/Muse-Spark-Open-816B-A42B"]
+notes = "Hub-published total for the complete unquantized BF16/F32 multimodal checkpoint; not the nominal 816B language-model designation."
+
 [modalities]
 input = ["text", "image", "video", "audio/wav", "audio/mpeg"]
 output = ["text"]

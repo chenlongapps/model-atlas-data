@@ -8,6 +8,11 @@ open_weights = true
 release_date = "2026-04-28"
 last_updated = "2026-06-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 33
+active_billion = 3
+sources = ["https://huggingface.co/poolside/Laguna-XS.2"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -11,6 +11,11 @@ description = "Semantic search embedding model trained on 215M question-answer p
 open_weights = true
 release_date = "2021-08-23"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.109486464
+sources = ["https://huggingface.co/api/models/sentence-transformers/multi-qa-mpnet-base-dot-v1"]
+notes = "Hub-published F32 parameter count for the complete checkpoint; excludes separately reported integer tensors."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

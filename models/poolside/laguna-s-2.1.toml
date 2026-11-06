@@ -7,6 +7,12 @@ family = "laguna"
 open_weights = true
 release_date = "2026-07-21"
 
+[metadata.modelatlas.parameters]
+total_billion = 118
+active_billion = 8
+sources = ["https://huggingface.co/poolside/Laguna-S-2.1"]
+notes = "Per-token active count is approximate in the official specification."
+
 [modalities]
 input = ["text"]
 output = ["text"]

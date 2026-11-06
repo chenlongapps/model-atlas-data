@@ -8,6 +8,11 @@ knowledge = "2024-11"
 release_date = "2024-11-01"
 last_updated = "2024-11-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 124
+sources = ["https://huggingface.co/mistralai/Pixtral-Large-Instruct-2411"]
+notes = "Official complete multimodal count, including the vision encoder; not the 123B decoder-only count."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

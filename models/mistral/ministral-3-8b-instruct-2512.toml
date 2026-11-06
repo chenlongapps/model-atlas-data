@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2025-12-02"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.91802624
+sources = ["https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512-BF16", "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-BF16"]
+notes = "Complete multimodal count from the official BF16 release, whose card explicitly links the no-loss FP8 edition; not the nominal 8B designation or a component sum."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

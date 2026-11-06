@@ -12,6 +12,10 @@ knowledge = "2024-07"
 release_date = "2025-08-20"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 36
+sources = ["https://huggingface.co/ByteDance-Seed/Seed-OSS-36B-Instruct"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

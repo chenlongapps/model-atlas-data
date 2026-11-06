@@ -13,6 +13,12 @@ knowledge = "2026-06"
 release_date = "2026-10-21"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 39.8
+active_billion = 2.5
+sources = ["https://huggingface.co/RecursiveSI/flint"]
+notes = "Approximately 2.5B active including the output head and excluding the full input embedding matrix; active body alone is approximately 2.2B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

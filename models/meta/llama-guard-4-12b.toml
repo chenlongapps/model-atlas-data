@@ -12,6 +12,10 @@ open_weights = true
 release_date = "2025-04-29"
 license = "Llama 4 Community License"
 
+[metadata.modelatlas.parameters]
+total_billion = 12
+sources = ["https://huggingface.co/meta-llama/Llama-Guard-4-12B"]
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

@@ -8,6 +8,10 @@ open_weights = true
 knowledge = "2024-06-01"
 release_date = "2025-08-21"
 
+[metadata.modelatlas.parameters]
+total_billion = 111
+sources = ["https://huggingface.co/CohereLabs/command-a-reasoning-08-2025"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

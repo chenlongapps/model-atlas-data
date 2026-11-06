@@ -5,6 +5,11 @@ family = "gpt-oss"
 open_weights = true
 release_date = "2025-10-29"
 
+[metadata.modelatlas.parameters]
+total_billion = 117
+active_billion = 5.1
+sources = ["https://huggingface.co/openai/gpt-oss-safeguard-120b"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

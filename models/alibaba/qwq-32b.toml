@@ -7,6 +7,10 @@ open_weights = true
 knowledge = "2024-04"
 release_date = "2025-03-05"
 
+[metadata.modelatlas.parameters]
+total_billion = 32.5
+sources = ["https://huggingface.co/Qwen/QwQ-32B"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

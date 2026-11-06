@@ -9,6 +9,11 @@ knowledge = "2025-04-01"
 release_date = "2026-05-20"
 last_updated = "2026-06-09"
 
+[metadata.modelatlas.parameters]
+total_billion = 218
+active_billion = 25
+sources = ["https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

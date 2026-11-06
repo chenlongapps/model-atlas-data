@@ -13,6 +13,11 @@ open_weights = true
 knowledge = "2024-08-31"
 release_date = "2025-08-26"
 
+[metadata.modelatlas.parameters]
+total_billion = 405.8533888
+sources = ["https://huggingface.co/api/models/NousResearch/Hermes-4-405B"]
+notes = "Hub-published BF16 parameter count for this complete fine-tuned checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

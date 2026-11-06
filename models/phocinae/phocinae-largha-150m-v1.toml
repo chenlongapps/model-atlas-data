@@ -10,6 +10,11 @@ release_date = "2026-10-08"
 last_updated = "2026-10-09"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.14429287
+sources = ["https://huggingface.co/Phocinae/Phocinae-Largha-150M-v1"]
+notes = "The author explicitly reports 144,292,870 parameters in the model card, rounded there to 144.3M."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

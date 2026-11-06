@@ -6,6 +6,11 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-04-15"
 
+[metadata.modelatlas.parameters]
+total_billion = 70.553706496
+sources = ["https://huggingface.co/api/models/nvidia/Llama-3.1-Nemotron-70B-Instruct-HF", "https://huggingface.co/nvidia/Llama-3.1-Nemotron-70B-Instruct"]
+notes = "Hub-published BF16 count from NVIDIA's own Transformers conversion, explicitly linked by the original model card."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -12,6 +12,11 @@ family = "glm-flash"
 open_weights = true
 release_date = "2026-08-26"
 
+[metadata.modelatlas.parameters]
+total_billion = 320
+active_billion = 18
+sources = ["https://huggingface.co/zai-org/GLM-5.3-Flash"]
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "video/mp4", "video/x-matroska", "video/quicktime", "application/pdf"]
 output = ["text"]

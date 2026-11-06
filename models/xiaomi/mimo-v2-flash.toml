@@ -10,6 +10,11 @@ knowledge = "2024-12-01"
 release_date = "2025-12-16"
 last_updated = "2026-02-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 309
+active_billion = 15
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2-Flash"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

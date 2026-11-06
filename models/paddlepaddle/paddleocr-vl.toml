@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2025-10-16"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.9
+sources = ["https://huggingface.co/PaddlePaddle/PaddleOCR-VL"]
+notes = "Official full vision-language model size, not the 0.3B language component."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

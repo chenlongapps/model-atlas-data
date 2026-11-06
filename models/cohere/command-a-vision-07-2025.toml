@@ -10,6 +10,10 @@ open_weights = true
 knowledge = "2024-06-01"
 release_date = "2025-07-31"
 
+[metadata.modelatlas.parameters]
+total_billion = 112
+sources = ["https://huggingface.co/CohereLabs/command-a-vision-07-2025"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

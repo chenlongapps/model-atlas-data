@@ -7,6 +7,11 @@ open_weights = true
 release_date = "2025-10-16"
 license = "nvidia-open-model-license"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.2358144
+sources = ["https://huggingface.co/api/models/nvidia/llama-nemotron-embed-1b-v2"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

@@ -20,6 +20,11 @@ release_date = "2026-10-05"
 last_updated = "2026-10-16"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 501.3
+active_billion = 23.4
+sources = ["https://huggingface.co/reflection/Beam-1.0-501B-A23B"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

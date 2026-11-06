@@ -7,6 +7,11 @@ knowledge = "2023-12"
 release_date = "2024-09-25"
 license = "Llama 3.2 Community License"
 
+[metadata.modelatlas.parameters]
+total_billion = 3.212749824
+sources = ["https://huggingface.co/api/models/meta-llama/Llama-3.2-3B"]
+notes = "Hub-published BF16 count for this complete base checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

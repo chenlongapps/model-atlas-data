@@ -8,6 +8,11 @@ open_weights = true
 release_date = "2026-04-28"
 last_updated = "2026-06-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 225
+active_billion = 23
+sources = ["https://huggingface.co/poolside/Laguna-M.1"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

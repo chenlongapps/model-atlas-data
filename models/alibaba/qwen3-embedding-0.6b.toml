@@ -10,6 +10,10 @@ open_weights = true
 release_date = "2025-06-05"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.6
+sources = ["https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"]
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

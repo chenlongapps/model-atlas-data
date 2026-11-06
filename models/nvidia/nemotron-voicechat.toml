@@ -7,6 +7,10 @@ family = "nemotron"
 open_weights = true
 release_date = "2026-03-16"
 
+[metadata.modelatlas.parameters]
+total_billion = 12
+sources = ["https://build.nvidia.com/nvidia/nemotron-voicechat/modelcard"]
+
 [modalities]
 input = ["text", "audio/wav"]
 output = ["text"]

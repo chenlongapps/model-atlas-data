@@ -13,6 +13,11 @@ knowledge = "2024-06"
 release_date = "2025-06-26"
 license = "Gemma Terms of Use"
 
+[metadata.modelatlas.parameters]
+total_billion = 6
+sources = ["https://huggingface.co/google/gemma-3n-E2B-it"]
+notes = "Official card's raw parameter count, not the effective 2B memory-footprint designation. Effective parameters are not treated as per-token active parameters."
+
 [modalities]
 input = ["text", "image", "audio"]
 output = ["text"]

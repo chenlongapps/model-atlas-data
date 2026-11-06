@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2024-03"
 release_date = "2024-10-16"
 
+[metadata.modelatlas.parameters]
+total_billion = 3
+sources = ["https://openrouter.ai/mistralai/ministral-3b", "https://docs.mistral.ai/models/ministral-3b-24-1.md"]
+notes = "OpenRouter explicitly describes the October 2024 Ministral 3B as a 3B-parameter model. Mistral's documentation identifies the retired ministral-3b-2410 version and distinguishes its December 2025 replacement. This is a rounded published specification, not a count inherited from Ministral 3 3B Instruct 2512. Public availability of the 2024 checkpoint is not established by this parameter source."
+
 [modalities]
 input = ["text"]
 output = ["text"]

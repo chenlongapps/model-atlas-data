@@ -12,6 +12,12 @@ family = "nemotron"
 open_weights = true
 release_date = "2026-10-15"
 
+[metadata.modelatlas.parameters]
+total_billion = 120
+active_billion = 12
+sources = ["https://developer.nvidia.com/nemotron", "https://docs.perplexity.ai/docs/agent-api/models.md"]
+notes = "NVIDIA's official Nemotron page explicitly describes Nemotron 3.5 Super as a 120B-parameter MoE with 12B active per token. Perplexity independently identifies its exact perplexity/nemotron-3.5-super-120b-a12b entry as Nemotron 3.5 Super with text-only input. These are the named model's published architecture counts, not a measured endpoint inventory or evidence of a distinct pruned text-only checkpoint. No VL encoder size is subtracted."
+
 [modalities]
 input = ["text"]
 output = ["text"]

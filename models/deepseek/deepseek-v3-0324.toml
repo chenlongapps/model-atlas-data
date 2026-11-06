@@ -5,6 +5,11 @@ family = "deepseek"
 open_weights = true
 release_date = "2025-03-24"
 
+[metadata.modelatlas.parameters]
+total_billion = 685
+sources = ["https://openrouter.ai/api/v1/models", "https://huggingface.co/deepseek-ai/DeepSeek-V3-0324"]
+notes = "OpenRouter explicitly maps its version-specific deepseek/deepseek-chat-v3-0324 entry to this checkpoint and reports 685B parameters. Component inclusion is unspecified; no active count inferred."
+
 [modalities]
 input = ["text"]
 output = ["text"]

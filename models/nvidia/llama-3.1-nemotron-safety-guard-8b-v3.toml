@@ -6,6 +6,10 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-10-28"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.03
+sources = ["https://huggingface.co/nvidia/Llama-3.1-Nemotron-Safety-Guard-8B-v3"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

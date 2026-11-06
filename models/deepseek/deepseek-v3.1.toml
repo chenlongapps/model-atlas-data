@@ -6,6 +6,11 @@ open_weights = true
 release_date = "2025-08-21"
 license = "MIT License"
 
+[metadata.modelatlas.parameters]
+total_billion = 671
+active_billion = 37
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V3.1"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2026-07-30"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 276
+active_billion = 12
+sources = ["https://huggingface.co/thinkingmachines/Inkling-Small"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "audio/wav"]
 output = ["text"]

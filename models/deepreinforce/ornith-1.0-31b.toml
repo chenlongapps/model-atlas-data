@@ -15,6 +15,11 @@ open_weights = true
 release_date = "2026-06-25"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 31
+sources = ["https://github.com/ornith-ai/Ornith-1/blob/d196d60faa9ee1b1daa811e8b552b4ee203b1272/README.md", "https://ornith.ai/ornith_1_0.html"]
+notes = "Author-reported rounded architecture size, not an independently counted checkpoint: the original June 25, 2026 Ornith-1.0 README explicitly lists the available model scales and architectures as 9B-Dense, 31B-Dense, 35B-MoE and 397B-MoE, also stated in the official launch post. This records the author's 31B dense-model specification, not a number parsed from the local model ID or inherited from Gemma/Qwen. No accessible 31B checkpoint or exact serialized total has been verified; the repository's serving table lists only 9B, 35B and 397B releases."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

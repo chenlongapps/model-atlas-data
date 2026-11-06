@@ -11,6 +11,11 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-12-18"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.7
+sources = ["https://huggingface.co/nvidia/llama-nemotron-embed-vl-1b-v2"]
+notes = "Approximately 1.7B for the complete vision-language encoder, not just the Llama language component."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg"]
 output = ["embedding"]

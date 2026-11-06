@@ -7,6 +7,12 @@ knowledge = "2025-05"
 release_date = "2026-07-31"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 284
+active_billion = 13
+sources = ["https://openrouter.ai/api/v1/models", "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731"]
+notes = "Explicit total and active counts in OpenRouter's deepseek/deepseek-v4-flash-0731 description, linked there to this exact July checkpoint."
+
 [modalities]
 input = ["text"]
 output = ["text"]

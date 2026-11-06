@@ -9,6 +9,11 @@ family = "gemma"
 open_weights = true
 release_date = "2026-06-09"
 
+[metadata.modelatlas.parameters]
+total_billion = 11.95
+sources = ["https://huggingface.co/google/gemma-4-12B-it"]
+notes = "12B Unified column of the official total-parameter table; encoder-free multimodal architecture."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
 output = ["text"]

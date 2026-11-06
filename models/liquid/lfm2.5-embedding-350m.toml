@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2026-06-18"
 license = "LFM Open License v1.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.354483968
+sources = ["https://huggingface.co/api/models/LiquidAI/LFM2.5-Embedding-350M"]
+notes = "Hub-published BF16 count for the complete bi-encoder checkpoint, consistent with the card's approximate 354M count."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

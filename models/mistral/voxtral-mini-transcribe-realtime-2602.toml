@@ -15,6 +15,10 @@ open_weights = true
 license = "Apache-2.0"
 release_date = "2026-02-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 4
+sources = ["https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602"]
+
 [modalities]
 input = ["audio/pcm", "audio/pcmu", "audio/pcma"]
 output = ["text"]

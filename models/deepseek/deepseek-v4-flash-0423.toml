@@ -10,6 +10,12 @@ knowledge = "2025-05"
 release_date = "2026-04-23"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 284
+active_billion = 13
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash"]
+notes = "Initial April 2026 checkpoint linked by this version-specific local entry."
+
 [modalities]
 input = ["text"]
 output = ["text"]

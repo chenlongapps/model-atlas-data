@@ -13,6 +13,49 @@ ModelAtlas Data 是 [ModelAtlas Android](https://github.com/chenlongapps/model-a
 - **数据分发**：将 TOML 源数据转换为 JSON，供 ModelAtlas Android 使用。
 - **可追溯性**：保留成绩来源及评测条件，便于核实和后续维护。
 
+## 模型参数量
+
+参数量使用上游允许的 `metadata` 扩展点，不新增顶层字段、不改变 `schema = 2`：
+
+```toml
+[metadata.modelatlas.parameters]
+total_billion = 671
+active_billion = 37
+sources = ["https://github.com/deepseek-ai/DeepSeek-R1"]
+```
+
+- `total_billion`：完整模型总参数量；`active_billion`：来源明确披露的每 token 激活参数量。单位均为十亿（B），必须为有限正数；二者同时存在时必须口径一致，激活量不超过总量。没有完整模型数值时可以仅提供下述组件记录。
+- `sources`：支持数值及统计口径的非空 HTTP(S) URL 数组，不重复；`notes`：可选非空字符串，说明近似精度、统计范围或其他关键限制。
+- 只采用与该模型版本对应的模型卡、论文、官方技术资料等可靠依据；不从名称、文件体积、量化位宽或专家数推算。350M 可以仅换算单位记为 `0.35`，不补造数值精度。
+- 未知值省略，不填零；稠密模型不自动补激活量。多模态模型仅披露语言骨干或生成主干时，不冒充完整模型总量；不同组件、有效参数量与每 token 激活量也不混用。近似值须在 `notes` 中注明。
+- 模型卡未披露完整总量时，可核对对应未量化完整检查点的 Hugging Face 公共 API `safetensors.parameters` / `safetensors.total`，仅换算已发布的数值，并在 `notes` 明示为 Hub 权重统计。须检查版本、完整性、数据类型及统计自洽性；不将量化打包后的元素数、仅骨干或仅适配器的统计当作完整总量，不汇总不同格式、检查点或组件。整数位置索引等非参数张量不计入参数量；API 统计互相矛盾时，不直接采用任意一项。
+- 可独立核验固定 commit 的实际张量描述元数据，按真实浮点权重形状逐项计数，并检查全部分片与索引一一对应；这不是从层数、名称、字节数或量化位宽估算。`notes` 必须说明为独立检查点计数及范围，`sources` 指向固定版本的文件或分片索引。仅明确核实的组件也可采用此方法，但仍只能写入组件。PyTorch ZIP 仅用受限、惰性的描述解析器，不运行任意 pickle 对象、不调用不受限的 `torch.load`；无法安全解析、存在未解释的共享存储、缓冲区或分片缺失时跳过并报告。复核方法及 API 冲突处理见[核验报告](docs/model-parameters.md)。
+- 官方架构统计、名义规模和序列化权重统计可能采用不同口径；保留来源精度和已知条件，不强制统一或据此生成参数量排名。独立发布的可选草稿模型、适配器或其他格式不与目标检查点相加。推理阶段不同的激活量须在 `notes` 中说明，不能将预填充和解码混为一个无条件数值。
+- 此表整体可省略，旧记录保持有效；存在此表时，须提供至少一个有来源的完整模型数值或组件数值，不允许只用说明文字凑覆盖率。开放权重范围以源文件的 `open_weights = true` 为准，不因参数量缺失而改动该标记，也不替未确认版本填值。
+- 这是 ModelAtlas 的 metadata 语义约定，不是上游标准参数字段；上游 Schema 接受 JSON metadata，本仓库的构建和同步额外校验上述约定。JSON 原样保留数值及字段缺失状态；上游未提供的本地 metadata 在同步时保留，若上游明确提供同路径字段，仍按基本信息同步规则处理，不作永久锁定。
+- 本次来源核验与未补全项见 [`docs/model-parameters.md`](docs/model-parameters.md)。参数量不影响模型描述，未修改描述时无需调整本地化。
+
+### 组件参数量及兼容策略
+
+`components` 是参数表的可选表数组，每项记录一个明确命名、范围已核实的组件。每项 `name` 为来源中的非空组件名称（同一模型内不可重复），`total_billion` / `active_billion` 至少一个，正数及单位规则与完整模型相同；每项必须有自己的 `sources`，可选 `notes` 说明口径。组件不允许嵌套。不自动将组件相加、从整模型数值倒推出组件大小，或将未知部分视为零；组件可能重叠，也可能只是整条管线的一部分。只有组件记录时，父表不必重复 `sources`，但不能补出父表总量。
+
+```toml
+[metadata.modelatlas.parameters]
+notes = "Only component counts are disclosed; complete total is unknown."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Multimodal Decoder"
+total_billion = 12
+sources = ["https://huggingface.co/mistralai/Pixtral-12B-2409"]
+
+[[metadata.modelatlas.parameters.components]]
+name = "Vision Encoder"
+total_billion = 0.4
+sources = ["https://huggingface.co/mistralai/Pixtral-12B-2409"]
+```
+
+这是增量 metadata 扩展：原有完整总量、激活量及缺失状态的语义不变，旧记录无需迁移。只读取父表数值的旧消费者仍会得到“完整总量未知”，不得以首个组件或组件之和作为回退。支持组件的新消费者应单独展示组件名称、数值及范围，不与整模型总量混排。JSON 构建原样保留数组顺序和来源；自动同步在上游未明确提供该路径时保留本地组件数组。严格的 ModelAtlas 消费者需显式支持新字段；Models.dev 的通用 JSON metadata 扩展点无需改变。
+
 ## Benchmark 成绩的推理档位
 
 模型文件的 `[[benchmarks]]` 支持 ModelAtlas 扩展字段 `effort`：

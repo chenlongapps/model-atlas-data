@@ -11,6 +11,11 @@ open_weights = true
 knowledge = "2024-08"
 release_date = "2025-03-12"
 
+[metadata.modelatlas.parameters]
+total_billion = 27.43240664
+sources = ["https://huggingface.co/api/models/google/gemma-3-27b-it"]
+notes = "Hub-published BF16 count for the complete multimodal checkpoint."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
 output = ["text"]

@@ -6,6 +6,11 @@ family = "glm"
 open_weights = true
 release_date = "2026-08-14"
 
+[metadata.modelatlas.parameters]
+total_billion = 753.32994048
+sources = ["https://huggingface.co/api/models/zai-org/GLM-5.3-BF16", "https://huggingface.co/zai-org/GLM-5.3"]
+notes = "Hub-published BF16/F32 count from the official full-precision release of GLM-5.3; not inferred from the quantized checkpoint."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -11,6 +11,11 @@ open_weights = true
 knowledge = "2023-12-31"
 release_date = "2025-02-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.030261248
+sources = ["https://huggingface.co/api/models/aion-labs/Aion-RP-Llama-3.1-8B"]
+notes = "Hub-published F32 count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2026-06-25"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 35
+sources = ["https://deep-reinforce.com/ornith_1_0.html"]
+notes = "Official announcement explicitly states 35B parameters. Uses the author's rounded specification, not the inconsistent Hub API total/dtype statistics."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

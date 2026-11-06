@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2023-06-30"
 release_date = "2023-07-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 13.01586432
+sources = ["https://huggingface.co/undi95/ReMM-SLERP-L2-13B/blob/9cf491450795628e28b8fd73f411977f7908c623/pytorch_model.bin.index.json"]
+notes = "13,015,864,320 F32 weight values independently counted from ZIP data.pkl tensor descriptors across all three indexed shards. All 363 tensor names match the index; no weight payloads were loaded. This is a direct checkpoint count, not the historical leaderboard's rounded 13B size class."
+
 [modalities]
 input = ["text"]
 output = ["text"]

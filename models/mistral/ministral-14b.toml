@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-12-02"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 13.94503168
+sources = ["https://huggingface.co/api/models/mistralai/Ministral-3-14B-Instruct-2512-BF16", "https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512-BF16"]
+notes = "Complete multimodal count from Mistral's official BF16 release; its card explicitly links the no-loss FP8 checkpoint referenced by this local entry. Not a sum of rounded language and vision sizes."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

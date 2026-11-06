@@ -8,6 +8,11 @@ open_weights = true
 knowledge = "2024-01-31"
 release_date = "2024-04-17"
 
+[metadata.modelatlas.parameters]
+total_billion = 141
+active_billion = 39
+sources = ["https://mistral.ai/news/mixtral-8x22b"]
+
 [modalities]
 input = ["text", "application/pdf"]
 output = ["text"]

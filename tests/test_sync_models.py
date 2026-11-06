@@ -484,6 +484,48 @@ class InformationUpdateTests(unittest.TestCase):
     def update(self, local, upstream):
         return update_content(local, tomllib.loads(upstream.decode()))
 
+    def test_local_parameters_survive_upstream_metadata_and_information_updates(self):
+        local = MODEL + LOCAL_RESULTS + b'''
+[metadata.modelatlas.parameters]
+total_billion = 0.35 # Keep reported precision and provenance.
+sources = ["https://example.com/card"]
+'''
+        for extra in (b'', b'\n[metadata]\nupstream_note = "New"\n',
+                      b'\n[metadata.modelatlas]\nfuture = true\n'):
+            with self.subTest(extra=extra):
+                upstream = MODEL.replace(b'output = 8_192', b'output = 16_384') + extra
+                updated, fields, conflicts = self.update(local, upstream)
+                before, after = (tomllib.loads(v.decode()) for v in (local, updated))
+                self.assertEqual(after["metadata"]["modelatlas"]["parameters"],
+                                 before["metadata"]["modelatlas"]["parameters"])
+                self.assertIn(b'# Keep reported precision and provenance.', updated)
+                self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local))
+                self.assertIn("limit.output", fields)
+                self.assertEqual(conflicts, {})
+
+    def test_invalid_parameter_metadata_is_rejected_during_sync(self):
+        invalid = MODEL + b'\n[metadata.modelatlas.parameters]\ntotal_billion = true\n'
+        with self.assertRaisesRegex(ValueError, "parameters.total_billion"):
+            self.update(MODEL, invalid)
+
+    def test_component_only_parameters_survive_sync_with_all_provenance(self):
+        local = MODEL + LOCAL_RESULTS + b'''
+[metadata.modelatlas.parameters]
+notes = "Complete total is unknown."
+[[metadata.modelatlas.parameters.components]]
+name = "Transformer"
+total_billion = 7
+sources = ["https://example.com/transformer"] # Keep source.
+'''
+        upstream = MODEL.replace(b'output = 8_192', b'output = 16_384') + b'\n[metadata]\nupstream = true\n'
+        updated, fields, conflicts = self.update(local, upstream)
+        before, after = (tomllib.loads(v.decode()) for v in (local, updated))
+        self.assertEqual(before["metadata"]["modelatlas"], after["metadata"]["modelatlas"])
+        self.assertNotIn("total_billion", after["metadata"]["modelatlas"]["parameters"])
+        self.assertIn(b'# Keep source.', updated)
+        self.assertEqual(benchmark_bytes(local), benchmark_bytes(updated))
+        self.assertEqual(conflicts, {})
+
     def test_boolean_values_follow_upstream_in_both_directions(self):
         for previous, incoming in ((b"false", b"true"), (b"true", b"false")):
             with self.subTest(previous=previous, incoming=incoming):

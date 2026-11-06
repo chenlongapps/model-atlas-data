@@ -13,6 +13,11 @@ open_weights = true
 release_date = "2026-09-16"
 last_updated = "2026-09-20"
 
+[metadata.modelatlas.parameters]
+total_billion = 600
+active_billion = 27
+sources = ["https://huggingface.co/stepfun-ai/Step-5-Preview"]
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "video/mp4", "video/quicktime", "video/x-matroska"]
 output = ["text"]

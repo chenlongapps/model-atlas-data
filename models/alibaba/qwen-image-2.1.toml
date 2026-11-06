@@ -19,6 +19,15 @@ release_date = "2026-09-14"
 last_updated = "2026-09-21"
 license = "qwen-research"
 
+[metadata.modelatlas.parameters]
+notes = "Only the visual generation component's size is disclosed; no complete pipeline total inferred."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Visual generation component"
+total_billion = 7
+sources = ["https://huggingface.co/Qwen/Qwen-Image-2.1"]
+notes = "Official 32-layer Single-Stream DiT specification; excludes the text encoder and other pipeline components."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/tiff", "image/webp", "image/gif"]
 output = ["image/png"]

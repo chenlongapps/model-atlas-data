@@ -11,6 +11,11 @@ knowledge = "2025-05"
 release_date = "2026-09-10"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+active_billion = 16
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"]
+notes = "Decode-stage active count only; the official card separately reports 8B per token during prefill. Complete total omitted: 552B is explicitly backbone-only and the card additionally describes Engram memory and visual modules."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
 output = ["text"]

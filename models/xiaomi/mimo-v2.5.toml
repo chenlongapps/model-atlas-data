@@ -14,6 +14,12 @@ open_weights = true
 knowledge = "2024-12"
 release_date = "2026-04-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 310
+active_billion = 15
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.5"]
+notes = "Official architecture section's rounded total and active counts; vision and audio encoder details are listed separately. No component sum inferred."
+
 [modalities]
 input = [
   "text",

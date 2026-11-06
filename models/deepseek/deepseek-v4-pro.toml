@@ -7,6 +7,12 @@ open_weights = true
 knowledge = "2025-05"
 release_date = "2026-04-24"
 
+[metadata.modelatlas.parameters]
+total_billion = 1600
+active_billion = 49
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"]
+notes = "Official total reported as 1.6T, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

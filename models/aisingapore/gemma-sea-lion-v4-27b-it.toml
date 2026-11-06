@@ -13,6 +13,11 @@ family = "gemma"
 open_weights = true
 release_date = "2025-09-23"
 
+[metadata.modelatlas.parameters]
+total_billion = 27.43240664
+sources = ["https://huggingface.co/api/models/aisingapore/Gemma-SEA-LION-v4-27B-IT"]
+notes = "Hub-published BF16 parameter count for the complete multimodal checkpoint, converted to B."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

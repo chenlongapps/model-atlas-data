@@ -8,6 +8,11 @@ open_weights = true
 knowledge = "2024-07-31"
 release_date = "2025-03-24"
 
+[metadata.modelatlas.parameters]
+total_billion = 685
+sources = ["https://openrouter.ai/api/v1/models", "https://huggingface.co/deepseek-ai/DeepSeek-V3-0324"]
+notes = "OpenRouter's explicitly published size for deepseek/deepseek-chat-v3-0324, linked to DeepSeek-V3-0324. Its component-inclusion convention is not specified; no active count or 671B base-model total is substituted."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -7,6 +7,11 @@ description = "ALLaM-2-7b instruction tuned model by SDAIA"
 open_weights = true
 release_date = "2025-01-23"
 
+[metadata.modelatlas.parameters]
+total_billion = 7
+sources = ["https://console.groq.com/docs/model/allam-2-7b"]
+notes = "Groq's model card for the exact allam-2-7b identifier explicitly describes an autoregressive transformer with 7 billion parameters. This is its published rounded architecture specification, not inferred from the name or substituted from the separately named ALLaM-7B-Instruct-preview checkpoint. The existing Hugging Face weight URL remains unverified."
+
 [modalities]
 input = ["text"]
 output = ["text"]

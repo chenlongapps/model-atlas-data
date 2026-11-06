@@ -12,6 +12,12 @@ family = "mimo"
 open_weights = true
 release_date = "2026-09-21"
 
+[metadata.modelatlas.parameters]
+total_billion = 1020
+active_billion = 42
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"]
+notes = "Target checkpoint linked by this local speed-tier entry. Official rounded architecture counts, with 1.02T converted to B; no draft-model sum inferred."
+
 [modalities]
 input = [
   "text",

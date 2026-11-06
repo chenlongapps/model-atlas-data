@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2024-07-31"
 license = "Gemma Terms of Use"
 
+[metadata.modelatlas.parameters]
+total_billion = 2.614341888
+sources = ["https://huggingface.co/api/models/google/gemma-2-2b-it"]
+notes = "Hub-published BF16 count for the complete unquantized checkpoint, not the nominal 2B designation."
+
 [modalities]
 input = ["text"]
 output = ["text"]

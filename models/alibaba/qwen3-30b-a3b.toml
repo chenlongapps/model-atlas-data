@@ -6,6 +6,11 @@ family = "qwen"
 open_weights = true
 release_date = "2025-04-28"
 
+[metadata.modelatlas.parameters]
+total_billion = 30.5
+active_billion = 3.3
+sources = ["https://huggingface.co/Qwen/Qwen3-30B-A3B"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

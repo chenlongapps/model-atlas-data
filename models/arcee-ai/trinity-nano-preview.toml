@@ -9,6 +9,12 @@ release_date = "2025-12-01"
 last_updated = "2026-05-28"
 license = "OpenMDW-1.1"
 
+[metadata.modelatlas.parameters]
+total_billion = 6
+active_billion = 1
+sources = ["https://huggingface.co/arcee-ai/Trinity-Nano-Preview"]
+notes = "Uses the inclusive 1B active count; the separate 800M figure excludes embeddings."
+
 [modalities]
 input = ["text"]
 output = ["text"]

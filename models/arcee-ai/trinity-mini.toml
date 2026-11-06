@@ -9,6 +9,11 @@ release_date = "2025-12-01"
 last_updated = "2026-05-28"
 license = "OpenMDW-1.1"
 
+[metadata.modelatlas.parameters]
+total_billion = 26
+active_billion = 3
+sources = ["https://huggingface.co/arcee-ai/Trinity-Mini"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -15,6 +15,12 @@ open_weights = true
 release_date = "2026-10-29"
 license = "Mistral Ecosystem Open-Weight License"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 52
+sources = ["https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"]
+notes = "Approximate counts. Active count includes embeddings and output layers; the card's 49B figure excludes them. Total reported as ~1T."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

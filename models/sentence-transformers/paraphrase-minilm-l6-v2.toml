@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2021-05-19"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.022713216
+sources = ["https://huggingface.co/api/models/sentence-transformers/paraphrase-MiniLM-L6-v2"]
+notes = "Hub-published F32 parameter count for the complete checkpoint; excludes separately reported integer tensors."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

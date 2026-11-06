@@ -7,6 +7,10 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-04-07"
 
+[metadata.modelatlas.parameters]
+total_billion = 253
+sources = ["https://huggingface.co/nvidia/Llama-3_1-Nemotron-Ultra-253B-v1"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

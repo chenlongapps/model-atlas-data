@@ -6,6 +6,11 @@ open_weights = true
 knowledge = "2023-12"
 release_date = "2024-07-23"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.030261248
+sources = ["https://huggingface.co/api/models/meta-llama/Llama-Guard-3-8B"]
+notes = "Hub-published BF16 count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

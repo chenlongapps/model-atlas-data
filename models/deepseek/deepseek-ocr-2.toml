@@ -9,6 +9,11 @@ description = "High-accuracy OCR model for extracting text from documents, scree
 open_weights = true
 release_date = "2026-01-27"
 
+[metadata.modelatlas.parameters]
+total_billion = 3.38911936
+sources = ["https://huggingface.co/api/models/deepseek-ai/DeepSeek-OCR-2"]
+notes = "Hub-published BF16 count for the complete OCR checkpoint, including visual components."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

@@ -9,6 +9,12 @@ family = "Hy"
 open_weights = true
 release_date = "2026-07-06"
 
+[metadata.modelatlas.parameters]
+total_billion = 295
+active_billion = 21
+sources = ["https://huggingface.co/tencent/Hy3"]
+notes = "Official table's total and active counts; the card lists 3.8B MTP parameters separately. No extra component sum inferred."
+
 [modalities]
 input = ["text"]
 output = ["text"]

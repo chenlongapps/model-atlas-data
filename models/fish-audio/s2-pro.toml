@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-03"
 license = "Fish Audio Research License"
 
+[metadata.modelatlas.parameters]
+total_billion = 4.561852416
+sources = ["https://huggingface.co/api/models/fishaudio/s2-pro"]
+notes = "Hub-published BF16 count for the complete dual-AR checkpoint, rather than inferring a sum from rounded component sizes."
+
 [modalities]
 input = ["text"]
 output = ["audio/mpeg", "audio/wav", "audio/pcm", "audio/opus"]

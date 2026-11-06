@@ -12,6 +12,11 @@ family = "glm-flash"
 open_weights = true
 release_date = "2025-12-08"
 
+[metadata.modelatlas.parameters]
+total_billion = 10.292777472
+sources = ["https://huggingface.co/api/models/zai-org/GLM-4.6V-Flash"]
+notes = "Hub-published BF16 count for the complete multimodal checkpoint, not the nominal 9B backbone designation."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "video/mp4", "video/x-matroska", "video/quicktime"]
 output = ["text"]

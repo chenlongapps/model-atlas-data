@@ -15,6 +15,12 @@ open_weights = true
 knowledge = "2025-01"
 release_date = "2026-06-12"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 32
+sources = ["https://huggingface.co/moonshotai/Kimi-K2.7-Code"]
+notes = "The checkpoint linked by this local speed-tier entry. Uses the official architecture table's 1T total and 32B active, without inferring component sums."
+
 [modalities]
 input = [
   "text",

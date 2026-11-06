@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2026-02-26"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.59604992
+sources = ["https://huggingface.co/api/models/perplexity-ai/pplx-embed-context-v1-0.6b"]
+notes = "Hub-published F32 parameter count for this complete contextual embedding checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

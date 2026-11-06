@@ -11,6 +11,12 @@ open_weights = true
 release_date = "2023-12-11"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 46.702792704
+active_billion = 12.9
+sources = ["https://huggingface.co/api/models/mistralai/Mixtral-8x7B-Instruct-v0.1", "https://mistral.ai/news/mixtral-of-experts"]
+notes = "Total is the Hub-published BF16 count for the complete checkpoint; per-token active count is explicitly reported by Mistral, not calculated from expert counts."
+
 [modalities]
 input = ["text"]
 output = ["text"]

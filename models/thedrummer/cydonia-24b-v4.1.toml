@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2024-04-30"
 release_date = "2025-09-27"
 
+[metadata.modelatlas.parameters]
+total_billion = 23.5724032
+sources = ["https://huggingface.co/api/models/TheDrummer/Cydonia-24B-v4.1"]
+notes = "Hub-published BF16 count for the complete version-specific unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

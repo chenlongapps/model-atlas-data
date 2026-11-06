@@ -7,6 +7,10 @@ open_weights = true
 knowledge = "2024-06"
 release_date = "2025-03-17"
 
+[metadata.modelatlas.parameters]
+total_billion = 24
+sources = ["https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

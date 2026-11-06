@@ -8,6 +8,11 @@ open_weights = true
 knowledge = "2024-06-01"
 release_date = "2025-02-27"
 
+[metadata.modelatlas.parameters]
+total_billion = 8
+sources = ["https://huggingface.co/CohereLabs/c4ai-command-r7b-arabic-02-2025"]
+notes = "Approximately 8B including embeddings, as explicitly reported by the card; the 7B designation covers transformer parameters only."
+
 [modalities]
 input = ["text"]
 output = ["text"]

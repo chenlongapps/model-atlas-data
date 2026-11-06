@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2024-09"
 release_date = "2025-08-18"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.888227328
+sources = ["https://huggingface.co/api/models/nvidia/NVIDIA-Nemotron-Nano-9B-v2"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -7,6 +7,10 @@ open_weights = true
 release_date = "2026-02-17"
 license = "CC-BY-NC-4.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 3.35
+sources = ["https://huggingface.co/CohereLabs/tiny-aya-fire"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

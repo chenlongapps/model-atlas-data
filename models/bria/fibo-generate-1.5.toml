@@ -8,6 +8,15 @@ description = "Text-to-image model driven by structured JSON prompts, trained on
 open_weights = true
 release_date = "2026-08-24"
 
+[metadata.modelatlas.parameters]
+notes = "Only the DiT architecture count is used; the text encoder and VAE are separate components with no complete total inferred."
+
+[[metadata.modelatlas.parameters.components]]
+name = "DiT"
+total_billion = 8
+sources = ["https://huggingface.co/briaai/Fibo-1.5"]
+notes = "Official few-step release retains the base FIBO DiT architecture; not a full-pipeline parameter count."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp"]
 output = ["image/png", "image/jpeg"]

@@ -10,6 +10,12 @@ release_date = "2026-08-13"
 last_updated = "2026-08-22"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 1600
+active_billion = 49
+sources = ["https://artificialanalysis.ai/models/deepseek-v4-pro", "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"]
+notes = "Artificial Analysis explicitly identifies this page as DeepSeek V4 Pro 0813 (Max), released August 2026, and reports 1.6T total and 49B active. These are its published target-model architecture counts, not an inferred sum including the separately described DSpark decoding module."
+
 [modalities]
 input = ["text"]
 output = ["text"]

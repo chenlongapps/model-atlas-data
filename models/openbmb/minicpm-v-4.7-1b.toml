@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2026-10-06"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.554476272
+sources = ["https://huggingface.co/api/models/openbmb/MiniCPM-V-4.7-1B"]
+notes = "Hub-published BF16 count for the complete multimodal checkpoint, not just the language backbone."
+
 [modalities]
 input = ["text", "image", "video"]
 output = ["text"]

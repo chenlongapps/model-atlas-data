@@ -7,6 +7,12 @@ family = "minimax"
 open_weights = true
 release_date = "2026-02-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 230
+active_billion = 10
+sources = ["https://artificialanalysis.ai/models/minimax-m2-5", "https://huggingface.co/MiniMaxAI/MiniMax-M2.5"]
+notes = "Counts for the M2.5 checkpoint linked by this local speed-tier entry; no distinct architecture is assumed from the API speed tier."
+
 [modalities]
 input = ["text"]
 output = ["text"]

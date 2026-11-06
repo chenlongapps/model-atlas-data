@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-12-10"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 10.292777472
+sources = ["https://huggingface.co/zai-org/AutoGLM-Phone-9B-Multilingual/blob/832ab5e014b965268dafd944e64cbc8e4bade892/model.safetensors.index.json", "https://huggingface.co/zai-org/AutoGLM-Phone-9B-Multilingual"]
+notes = "Complete multimodal checkpoint: 10,292,777,472 BF16 weight/bias values independently counted from all five shard headers at the pinned commit. The Hub API's inconsistent total of 934,400 is not used. The official card identifies the GLM-4.1V-9B-Thinking architecture; no count is inferred from its name."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
 output = ["text"]

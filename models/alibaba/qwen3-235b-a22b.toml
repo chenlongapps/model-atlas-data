@@ -8,6 +8,11 @@ open_weights = true
 knowledge = "2025-04"
 release_date = "2025-04-28"
 
+[metadata.modelatlas.parameters]
+total_billion = 235
+active_billion = 22
+sources = ["https://huggingface.co/Qwen/Qwen3-235B-A22B"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -11,6 +11,14 @@ open_weights = true
 release_date = "2026-01-15"
 license = "apache-2.0"
 
+[metadata.modelatlas.parameters]
+notes = "Transformer count only; separate text encoder and autoencoder sizes are not added to invent a total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Rectified flow transformer"
+total_billion = 4
+sources = ["https://huggingface.co/black-forest-labs/FLUX.2-klein-4B"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["image/jpeg", "image/png", "image/webp"]

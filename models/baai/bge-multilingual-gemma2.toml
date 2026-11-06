@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2024-07-25"
 license = "Gemma"
 
+[metadata.modelatlas.parameters]
+total_billion = 9.241713152
+sources = ["https://huggingface.co/api/models/BAAI/bge-multilingual-gemma2"]
+notes = "Hub-published F32 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

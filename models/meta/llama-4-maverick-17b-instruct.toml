@@ -10,6 +10,12 @@ open_weights = true
 knowledge = "2024-08"
 release_date = "2025-04-05"
 
+[metadata.modelatlas.parameters]
+total_billion = 400
+active_billion = 17
+sources = ["https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct"]
+notes = "Official Model Information table's rounded total, not the 17B activated-parameter designation."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
 output = ["text"]

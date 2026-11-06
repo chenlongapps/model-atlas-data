@@ -18,6 +18,11 @@ release_date = "2026-06-09"
 last_updated = "2026-07-15"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+active_billion = 3.8
+sources = ["https://huggingface.co/google/diffusiongemma-26B-A4B-it"]
+notes = "Official per-token active count. Complete total omitted: the table separately lists the vision encoder, and the Hub's safetensors total disagrees with its dtype parameter count."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
 output = ["text"]

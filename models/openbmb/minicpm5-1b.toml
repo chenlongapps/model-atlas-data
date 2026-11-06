@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-05-19"
 license = "apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.080632832
+sources = ["https://huggingface.co/openbmb/MiniCPM5-1B"]
+notes = "Exact count explicitly reported in the card, including embeddings, converted to billions."
+
 [modalities]
 input = ["text"]
 output = ["text"]

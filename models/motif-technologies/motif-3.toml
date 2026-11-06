@@ -17,6 +17,12 @@ open_weights = true
 release_date = "2026-08-07"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 314
+active_billion = 13.2
+sources = ["https://huggingface.co/Motif-Technologies/Motif-3"]
+notes = "Approximate counts as marked in the official architecture table."
+
 [modalities]
 input = ["text"]
 output = ["text"]

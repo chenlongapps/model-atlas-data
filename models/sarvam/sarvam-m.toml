@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2025-05-20"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 23.5724032
+sources = ["https://huggingface.co/api/models/sarvamai/sarvam-m"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

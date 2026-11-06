@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-10-04"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 31.070754032
+sources = ["https://huggingface.co/api/models/Qwen/Qwen3-VL-30B-A3B-Instruct"]
+notes = "Hub-published BF16 count for the complete multimodal checkpoint. Active count not inferred from the name."
+
 [modalities]
 input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic", "video/mp4", "video/x-msvideo", "video/x-matroska", "video/quicktime", "video/x-flv", "video/x-ms-wmv"]
 output = ["text"]

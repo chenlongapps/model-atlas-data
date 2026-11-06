@@ -8,6 +8,11 @@ family = "ling"
 open_weights = true
 release_date = "2026-09-29"
 
+[metadata.modelatlas.parameters]
+total_billion = 560
+active_billion = 25
+sources = ["https://huggingface.co/inclusionAI/Ling-3.1-flash"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

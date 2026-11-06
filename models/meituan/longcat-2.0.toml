@@ -9,6 +9,12 @@ family = "longcat"
 open_weights = true
 release_date = "2026-06-30"
 
+[metadata.modelatlas.parameters]
+total_billion = 1600
+active_billion = 48
+sources = ["https://huggingface.co/meituan-longcat/LongCat-2.0"]
+notes = "Official card reports 1.6T total and approximately 48B activated per token. Retains the author's architecture-count convention rather than inferring a larger total from serialized auxiliary modules."
+
 [modalities]
 input = ["text"]
 output = ["text"]

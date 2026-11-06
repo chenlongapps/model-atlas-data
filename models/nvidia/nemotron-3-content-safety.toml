@@ -7,6 +7,10 @@ family = "nemotron"
 open_weights = true
 release_date = "2026-03-16"
 
+[metadata.modelatlas.parameters]
+total_billion = 4
+sources = ["https://huggingface.co/nvidia/Nemotron-3-Content-Safety"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

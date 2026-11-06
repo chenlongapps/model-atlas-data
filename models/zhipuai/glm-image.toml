@@ -15,6 +15,21 @@ open_weights = true
 release_date = "2026-01-14"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+notes = "Official component counts are recorded separately; no total is invented for the autoregressive, diffusion and encoding pipeline."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Autoregressive generator"
+total_billion = 9
+sources = ["https://huggingface.co/zai-org/GLM-Image"]
+notes = "Official generator specification with vocabulary expanded for visual tokens; not an estimate from the base model's name."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Diffusion Decoder"
+total_billion = 7
+sources = ["https://huggingface.co/zai-org/GLM-Image"]
+notes = "Official single-stream DiT decoder specification; other pipeline components are not assumed to be zero."
+
 [modalities]
 input = ["text", "image"]
 output = ["image"]

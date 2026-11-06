@@ -20,6 +20,15 @@ release_date = "2026-07-31"
 last_updated = "2026-10-04"
 license = "MiniMax H3 Community License Agreement"
 
+[metadata.modelatlas.parameters]
+notes = "Omni-transformer statistic only; separate H3-Encoder and visual/audio VAEs are not included in an inferred full-model total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "H3-Omni-Transformer"
+total_billion = 33
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-H3"]
+notes = "Includes the AdaLN-related branches in the released transformer. Their precomputable inference outputs do not turn them into a per-token active count."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "image/heic", "image/heif", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]
 output = ["video/mp4", "audio"]

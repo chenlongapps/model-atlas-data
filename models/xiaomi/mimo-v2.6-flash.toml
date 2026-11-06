@@ -13,6 +13,12 @@ family = "mimo"
 open_weights = true
 release_date = "2026-09-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 309
+active_billion = 15
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"]
+notes = "Official architecture section's rounded total and active counts; no draft-model or encoder sum inferred."
+
 [modalities]
 input = [
   "text",

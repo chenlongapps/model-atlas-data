@@ -11,6 +11,11 @@ open_weights = true
 knowledge = "2023-12-31"
 release_date = "2024-08-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.030261248
+sources = ["https://huggingface.co/api/models/Sao10K/L3-8B-Lunaris-v1"]
+notes = "Hub-published BF16 parameter count for this complete merged checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

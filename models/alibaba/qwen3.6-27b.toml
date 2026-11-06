@@ -10,6 +10,10 @@ family = "qwen"
 open_weights = true
 release_date = "2026-04-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 27
+sources = ["https://huggingface.co/Qwen/Qwen3.6-27B"]
+
 [modalities]
 input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic", "video/mp4", "video/x-msvideo", "video/x-matroska", "video/quicktime", "video/x-flv", "video/x-ms-wmv"]
 output = ["text"]

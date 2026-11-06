@@ -9,6 +9,14 @@ description = "8-step distilled Krea 2 Medium image model for fast iteration"
 open_weights = true
 release_date = "2026-06-03"
 
+[metadata.modelatlas.parameters]
+notes = "Only the explicitly disclosed diffusion transformer count is recorded; complete pipeline total is unknown."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Diffusion Transformer"
+total_billion = 12
+sources = ["https://huggingface.co/krea/Krea-2-Turbo"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["image/png"]

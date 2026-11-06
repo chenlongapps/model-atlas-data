@@ -15,6 +15,12 @@ open_weights = true
 release_date = "2026-08-12"
 license = "qwen3.8-max"
 
+[metadata.modelatlas.parameters]
+total_billion = 2400
+active_billion = 95
+sources = ["https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"]
+notes = "The official total is 2.4T, converted to B without adding precision."
+
 [modalities]
 input = ["text"]
 output = ["text"]

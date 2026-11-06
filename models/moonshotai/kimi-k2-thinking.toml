@@ -6,6 +6,12 @@ open_weights = true
 knowledge = "2024-08"
 release_date = "2025-11-06"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 32
+sources = ["https://huggingface.co/moonshotai/Kimi-K2-Thinking"]
+notes = "Official total reported as 1T, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

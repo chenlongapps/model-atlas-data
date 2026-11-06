@@ -11,6 +11,10 @@ open_weights = true
 release_date = "2025-08"
 license = "CC-BY-4.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.6
+sources = ["https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3"]
+
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]
 output = ["text"]

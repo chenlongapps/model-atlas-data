@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2024-06-30"
 release_date = "2025-03-10"
 
+[metadata.modelatlas.parameters]
+total_billion = 36.91053568
+sources = ["https://huggingface.co/api/models/TheDrummer/Skyfall-36B-v2"]
+notes = "Hub-published BF16 count for the complete version-specific unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2023-07"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.335141888
+sources = ["https://huggingface.co/api/models/thenlper/gte-large"]
+notes = "Hub-published F16 parameter count for the complete checkpoint; excludes separately reported integer tensors."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

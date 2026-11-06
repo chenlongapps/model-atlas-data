@@ -17,6 +17,10 @@ family = "reka"
 open_weights = true
 release_date = "2026-03-11"
 
+[metadata.modelatlas.parameters]
+total_billion = 7
+sources = ["https://huggingface.co/RekaAI/reka-edge-2603"]
+
 [modalities]
 input = ["image", "text", "video"]
 output = ["text"]

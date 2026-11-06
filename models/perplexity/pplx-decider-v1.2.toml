@@ -12,6 +12,21 @@ open_weights = true
 release_date = "2026-10-15"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+notes = "Main checkpoint and required readout are scoped separately; no complete total is inferred by adding components."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Main checkpoint (without readout)"
+total_billion = 26.08533016
+sources = ["https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/model.safetensors.index.json", "https://huggingface.co/api/models/perplexity-ai/pplx-decider-v1.2"]
+notes = "Hub BF16 count independently verified against all eleven main shard headers."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Readout"
+total_billion = 0.0013056
+sources = ["https://huggingface.co/perplexity-ai/pplx-decider-v1.2/blob/cce0f3f80033e9d89d80831d5281fd72124aacce/readout.safetensors"]
+notes = "Stored BF16 weight count verified from this separate head's tensor header."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["decision"]

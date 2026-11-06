@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2025-12-04"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.3
+sources = ["https://huggingface.co/EssentialAI/rnj-1-instruct"]
+notes = "Uses the architecture table's 8.3B total, rather than the introductory 8B size designation."
+
 [modalities]
 input = ["text"]
 output = ["text"]

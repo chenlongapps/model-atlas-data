@@ -9,6 +9,12 @@ release_date = "2026-04-01"
 last_updated = "2026-05-28"
 license = "OpenMDW-1.1"
 
+[metadata.modelatlas.parameters]
+total_billion = 398
+active_billion = 13
+sources = ["https://huggingface.co/arcee-ai/Trinity-Large-Thinking"]
+notes = "Approximate total and per-token active counts in the architecture table."
+
 [modalities]
 input = ["text"]
 output = ["text"]

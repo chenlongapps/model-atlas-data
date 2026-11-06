@@ -48,6 +48,55 @@ def http_url(value):
     return parsed.scheme in ("http", "https") and bool(parsed.netloc)
 
 
+def validate_parameter_metadata(data):
+    """Validate only our parameter convention; other metadata stays open."""
+    metadata = data.get("metadata", {})
+    require(isinstance(metadata, dict), "metadata: expected a table")
+    if "modelatlas" not in metadata:
+        return
+    atlas = metadata["modelatlas"]
+    require(isinstance(atlas, dict), "metadata.modelatlas: expected a table")
+    if "parameters" not in atlas:
+        return
+    params = atlas["parameters"]
+    label = "metadata.modelatlas.parameters"
+    require(isinstance(params, dict), f"{label}: expected a table")
+    counts = {"total_billion", "active_billion"}
+
+    def observation(entry, where, allowed):
+        require(isinstance(entry, dict), f"{where}: expected a table")
+        require(not entry.keys() - allowed, f"{where}: unsupported fields")
+        for key in counts & entry.keys():
+            require(number(entry[key]) and entry[key] > 0,
+                    f"{where}.{key}: expected a finite positive number")
+        if counts <= entry.keys():
+            require(entry["active_billion"] <= entry["total_billion"],
+                    f"{where}: active_billion exceeds total_billion")
+        if counts & entry.keys() or "sources" in entry:
+            sources = entry.get("sources")
+            require(isinstance(sources, list) and bool(sources) and all(http_url(v) for v in sources),
+                    f"{where}.sources: expected a nonempty array of HTTP(S) URLs")
+            require(len(sources) == len(set(sources)), f"{where}.sources: duplicate URLs")
+        if "notes" in entry:
+            require(text(entry["notes"]), f"{where}.notes: expected a nonempty string")
+
+    observation(params, label, counts | {"sources", "notes", "components"})
+    components = params.get("components", [])
+    if "components" in params:
+        require(isinstance(components, list) and bool(components),
+                f"{label}.components: expected a nonempty array of tables")
+    require(bool(params.keys() & counts) or bool(components),
+            f"{label}: at least one model or component parameter count is required")
+    seen = set()
+    for index, component in enumerate(components):
+        where = f"{label}.components[{index}]"
+        observation(component, where, counts | {"name", "sources", "notes"})
+        require(text(component.get("name")), f"{where}.name: required nonempty string")
+        require(bool(component.keys() & counts), f"{where}: at least one parameter count is required")
+        require(component["name"] not in seen, f"{where}.name: duplicate component name")
+        seen.add(component["name"])
+
+
 def validate_model(data):
     """Basic structure checks only; preserve unknown JSON-compatible fields."""
     require(type(data.get("schema")) is int and data["schema"] == 2, "expected schema = 2")
@@ -57,6 +106,7 @@ def validate_model(data):
                   "open_weights": bool, "v2_only": bool, "modalities": dict,
                   "capabilities": dict, "limit": dict, "metadata": dict,
                   "links": list, "weights": list, "benchmarks": list}, "model")
+    validate_parameter_metadata(data)
     for key, values in data.get("modalities", {}).items():
         if key in ("input", "output"):
             require(isinstance(values, list) and all(text(v) for v in values),

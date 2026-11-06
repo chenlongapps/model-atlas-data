@@ -142,6 +142,76 @@ class BuildTests(unittest.TestCase):
         self.assertEqual([r["effort"] for r in results[1:]], list(efforts))
         self.assertTrue(all(r["variant"] == "without tools" for r in results[1:]))
 
+    def test_parameter_metadata_round_trips_without_filling_missing_counts(self):
+        for values in ('total_billion = 0.35', 'active_billion = 3',
+                       'total_billion = 671\nactive_billion = 37\nnotes = "Reported precision"'):
+            with self.subTest(values=values):
+                content = MODEL + RESULT + '\n[metadata.modelatlas.parameters]\n' + values
+                content += '\nsources = ["https://example.com/model-card"]\n'
+                self.write("models/lab/example.toml", content)
+                self.assertEqual(self.run_build()[0], 0)
+                self.assertEqual(self.read_json("models.json")["lab/example"], tomllib.loads(content))
+
+    def test_parameter_metadata_rejects_invalid_counts_sources_and_shapes(self):
+        from scripts.build import validate_parameter_metadata
+        valid = {"total_billion": 8, "sources": ["https://example.com/card"]}
+        invalid = [None, [], {}, {"sources": valid["sources"]},
+                   *({**valid, "total_billion": v} for v in
+                     (True, "8", 0, -1, float("nan"), float("inf"), float("-inf"))),
+                   {**valid, "active_billion": 9}, {**valid, "active_billion": False},
+                   *({**valid, "sources": v} for v in (None, [], "https://example.com", [42],
+                     ["file:///card"], ["https://example.com/card"] * 2)),
+                   *({**valid, "notes": v} for v in ("", "   ", 42)),
+                   {**valid, "total": 8}]
+        for params in invalid:
+            with self.subTest(params=params), self.assertRaisesRegex(ValueError, "parameters"):
+                validate_parameter_metadata({"metadata": {"modelatlas": {"parameters": params}}})
+        with self.assertRaisesRegex(ValueError, "modelatlas"):
+            validate_parameter_metadata({"metadata": {"modelatlas": "invalid"}})
+        validate_parameter_metadata({"metadata": {"unrelated": [1, 2], "modelatlas": {"future": True}}})
+
+    def test_invalid_parameters_fail_build_before_replacing_artifacts(self):
+        self.write("models/lab/example.toml", MODEL + RESULT
+                   + '\n[metadata.modelatlas.parameters]\ntotal_billion = 0\nsources = ["https://example.com"]\n')
+        self.assert_failure("parameters.total_billion")
+
+    def test_components_round_trip_without_inventing_a_complete_total(self):
+        for prefix in ('', 'total_billion = 20\nsources = ["https://example.com/full"]\n'):
+            content = MODEL + RESULT + '\n[metadata.modelatlas.parameters]\n' + prefix + '''
+notes = "Only independently sourced observations; never sum components."
+[[metadata.modelatlas.parameters.components]]
+name = "Vision Encoder"
+total_billion = 0.4
+sources = ["https://example.com/vision"]
+[[metadata.modelatlas.parameters.components]]
+name = "Language Model"
+total_billion = 12
+active_billion = 3
+sources = ["https://example.com/language"]
+'''
+            with self.subTest(prefix=prefix):
+                self.write("models/lab/example.toml", content)
+                self.assertEqual(self.run_build()[0], 0)
+                actual = self.read_json("models.json")["lab/example"]
+                self.assertEqual(actual, tomllib.loads(content))
+                if not prefix:
+                    self.assertNotIn("total_billion", actual["metadata"]["modelatlas"]["parameters"])
+                    self.assertNotIn("sources", actual["metadata"]["modelatlas"]["parameters"])
+
+    def test_components_reject_invalid_values_and_unverifiable_observations(self):
+        from scripts.build import validate_parameter_metadata
+        valid = {"name": "Transformer", "total_billion": 7, "sources": ["https://example.com/card"]}
+        invalid = [None, "invalid", {}, [], [None], [valid, valid],
+                   *([{**valid, "name": v}] for v in (None, "", "   ", 42)),
+                   [{"name": "Transformer", "sources": valid["sources"]}],
+                   [{"name": "Transformer", "total_billion": 7}],
+                   *([{**valid, "total_billion": v}] for v in (True, 0, -1, "7", float("nan"))),
+                   [{**valid, "active_billion": 8}], [{**valid, "sources": []}],
+                   [{**valid, "components": [valid]}], [{**valid, "notes": ""}]]
+        for components in invalid:
+            with self.subTest(components=components), self.assertRaisesRegex(ValueError, "parameters"):
+                validate_parameter_metadata({"metadata": {"modelatlas": {"parameters": {"components": components}}}})
+
     def test_effort_must_be_a_nonempty_string(self):
         for value in ('42', 'true', '[]', '{}', '""', '"   "'):
             with self.subTest(value=value):

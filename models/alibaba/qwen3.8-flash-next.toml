@@ -20,6 +20,11 @@ open_weights = true
 release_date = "2026-08-27"
 license = "qwen-community-1.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 179.999981424
+sources = ["https://huggingface.co/api/models/Qwen/Qwen3.8-Flash-Next", "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"]
+notes = "Hub-published BF16 count for the complete checkpoint, excluding separately reported integer tensors. The card's 125B backbone excludes 51B n-gram embeddings and 4B MTP; its 6B active backbone count is not used as a whole-model active count."
+
 [modalities]
 input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic", "video/mp4", "video/x-msvideo", "video/x-matroska", "video/quicktime", "video/x-flv", "video/x-ms-wmv"]
 output = ["text"]

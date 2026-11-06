@@ -12,6 +12,15 @@ open_weights = true
 release_date = "2023-12-06"
 license = "CreativeML Open RAIL-M"
 
+[metadata.modelatlas.parameters]
+notes = "U-Net statistic only; text encoder, VAE and alternate serialization formats are not added into a model total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "U-Net"
+total_billion = 0.859520964
+sources = ["https://huggingface.co/Lykon/dreamshaper-8-lcm/blob/4645d8bc6a8e6b106d21606d63e8460cdad4f1a6/unet/diffusion_pytorch_model.safetensors"]
+notes = "Exact stored F32 weight count verified from the component's actual tensor header, not from checkpoint file size."
+
 [modalities]
 input = ["text"]
 output = ["image"]

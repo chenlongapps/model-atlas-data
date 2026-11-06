@@ -10,6 +10,21 @@ release_date = "2026-08-21"
 last_updated = "2026-09-01"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+notes = "Only the unquantized vision encoder and aligner are counted. Quantized language tensors and DSpark weights are not used to infer a full multimodal total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Vision encoder"
+total_billion = 0.41184256
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp/blob/6821d6ad3681a4b137b066b76094fa82ebd0a380/model-00001-of-00048.safetensors", "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp/blob/6821d6ad3681a4b137b066b76094fa82ebd0a380/model.safetensors.index.json"]
+notes = "411,842,560 BF16 weight/bias values across all 259 vision.* tensors, independently verified from the shard header and checked against the full index."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Vision-language aligner"
+total_billion = 0.054534144
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp/blob/6821d6ad3681a4b137b066b76094fa82ebd0a380/model-00001-of-00048.safetensors", "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-Vision-Exp/blob/6821d6ad3681a4b137b066b76094fa82ebd0a380/model.safetensors.index.json"]
+notes = "54,534,144 BF16 weight/bias values across all four aligner.* tensors, independently verified from the shard header and checked against the full index."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
 output = ["text"]

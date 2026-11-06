@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2026-06-25"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 396.802360816
+sources = ["https://huggingface.co/api/models/deepreinforce-ai/Ornith-1.0-397B"]
+notes = "Hub-published BF16 count for the complete unquantized checkpoint. Active count not inferred from the base model."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

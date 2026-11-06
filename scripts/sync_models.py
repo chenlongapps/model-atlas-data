@@ -16,6 +16,11 @@ from urllib.parse import urlsplit
 import tomlkit
 from tomlkit.exceptions import TOMLKitError
 
+if __package__:
+    from .build import validate_parameter_metadata
+else:
+    from build import validate_parameter_metadata
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
@@ -139,6 +144,7 @@ def validate_model(data, definitions):
     if "metadata" in data:
         require(isinstance(data["metadata"], dict), "metadata: expected a table")
         json.dumps(data["metadata"], allow_nan=False)
+    validate_parameter_metadata(data)
     results = data.get("benchmarks", [])
     require(isinstance(results, list), "benchmarks: expected an array")
     seen = set()

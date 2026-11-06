@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2025-06-30"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 300
+active_billion = 47
+sources = ["https://huggingface.co/baidu/ERNIE-4.5-300B-A47B-Paddle"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

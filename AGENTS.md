@@ -18,6 +18,7 @@ ModelAtlas Data 是 [ModelAtlas Android](https://github.com/chenlongapps/model-a
 - 不得擅自修改上游字段的名称、类型或语义；新增 ModelAtlas 专有字段前须明确设计和兼容策略。
 - 所有资料必须有可靠依据。缺失的可选字段直接省略，不得编造或根据模型名称推测参数，也不得根据上下文窗口推算最大输入长度。
 - 区分模型固有属性与 Provider 特有的能力、价格、缓存和推理档位。
+- 参数量使用 `[metadata.modelatlas.parameters]`：完整模型 `total_billion`、`active_billion` 为有限正数，单位 B，有数值时 `sources` 为非空 HTTP(S) URL 数组，可选 `notes`。可选 `components` 表数组单独记录组件，每项 `name` 非空且唯一，至少一个同名数值字段及独立 `sources`，可选 `notes`，不嵌套。参数表至少包含一个可核实的整模型或组件数值；不从名称推断、不将组件或有效参数量冒充完整总量或激活量，不汇总组件填父表；详见 README 的口径及兼容策略。
 - 新增模型时先检查 Models.dev，确认研发机构和规范 ID；合法复用时优先采用上游结构。不同模型版本不得合并，名称相似不代表同一模型。
 
 ## Benchmark 成绩

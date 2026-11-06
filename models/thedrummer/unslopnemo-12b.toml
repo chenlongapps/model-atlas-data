@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2024-04-30"
 release_date = "2024-11-08"
 
+[metadata.modelatlas.parameters]
+total_billion = 12.2477824
+sources = ["https://huggingface.co/api/models/TheDrummer/UnslopNemo-12B-v4.1", "https://openrouter.ai/api/v1/models"]
+notes = "OpenRouter explicitly maps thedrummer/unslopnemo-12b to version v4.1. Uses that complete BF16 checkpoint's published count, not the distinct v1 checkpoint."
+
 [modalities]
 input = ["text"]
 output = ["text"]

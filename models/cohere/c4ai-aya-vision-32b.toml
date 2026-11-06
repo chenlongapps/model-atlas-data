@@ -9,6 +9,11 @@ release_date = "2025-03-04"
 last_updated = "2025-05-14"
 license = "CC-BY-NC-4.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 33.137896688
+sources = ["https://huggingface.co/api/models/CohereLabs/aya-vision-32b"]
+notes = "Hub-published F16 count for the complete multimodal checkpoint, not the card's rounded 32B size designation."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

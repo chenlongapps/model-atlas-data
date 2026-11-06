@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2026-03-23"
 license = "CC-BY-NC-4.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 4
+sources = ["https://mistral.ai/news/voxtral-tts"]
+notes = "Official complete TTS model size, not the separately reported 3.4B transformer decoder backbone."
+
 [modalities]
 input = ["text"]
 output = ["audio/pcm", "audio/wav", "audio/mpeg", "audio/flac", "audio/opus"]

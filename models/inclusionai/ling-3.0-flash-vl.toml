@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2026-09-10"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 124
+active_billion = 5.5
+sources = ["https://huggingface.co/inclusionAI/Ling-3.0-flash-VL"]
+
 [modalities]
 input = ["text", "image", "video"]
 output = ["text"]

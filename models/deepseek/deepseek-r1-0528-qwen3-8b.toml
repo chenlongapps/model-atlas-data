@@ -7,6 +7,11 @@ open_weights = true
 release_date = "2025-05-29"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.19073536
+sources = ["https://huggingface.co/api/models/deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"]
+notes = "Hub-published BF16 count for this complete distilled checkpoint, not the R1 teacher."
+
 [modalities]
 input = ["text"]
 output = ["text"]

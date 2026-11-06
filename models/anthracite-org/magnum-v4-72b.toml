@@ -10,6 +10,11 @@ open_weights = true
 knowledge = "2024-06-30"
 release_date = "2024-10-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 72.706203648
+sources = ["https://huggingface.co/api/models/anthracite-org/magnum-v4-72b"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

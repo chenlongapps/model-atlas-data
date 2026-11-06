@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2025-08-13"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 32.763876352
+sources = ["https://huggingface.co/api/models/baichuan-inc/Baichuan-M2-32B"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

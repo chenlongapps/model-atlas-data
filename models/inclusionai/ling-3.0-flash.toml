@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-07-23"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 124
+active_billion = 5.1
+sources = ["https://huggingface.co/inclusionAI/Ling-3.0-flash"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

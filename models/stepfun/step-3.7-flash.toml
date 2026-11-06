@@ -10,6 +10,12 @@ open_weights = true
 knowledge = "2026-03-01"
 release_date = "2026-05-29"
 
+[metadata.modelatlas.parameters]
+total_billion = 198
+active_billion = 11
+sources = ["https://huggingface.co/stepfun-ai/Step-3.7-Flash"]
+notes = "Official rounded 198B full vision-language model size, not the 196B language backbone alone; active count is approximately 11B per token."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "video/mp4", "video/quicktime", "video/x-matroska"]
 output = ["text"]

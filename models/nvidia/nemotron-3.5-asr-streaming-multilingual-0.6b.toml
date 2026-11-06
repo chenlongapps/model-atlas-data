@@ -11,6 +11,11 @@ family = "nemotron"
 open_weights = true
 release_date = "2026-08"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.6
+sources = ["https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b"]
+notes = "Official multilingual Nemotron 3.5 streaming ASR card explicitly reports 600M parameters."
+
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]
 output = ["text"]

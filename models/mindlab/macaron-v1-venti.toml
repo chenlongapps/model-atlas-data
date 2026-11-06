@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-07-21"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 748
+sources = ["https://huggingface.co/mindlab-research/Macaron-V1-Venti"]
+notes = "Author-reported full Mixture-of-LoRA release footprint, including the base and all four specialists; not a per-request active count."
+
 [modalities]
 input = ["text"]
 output = ["text"]

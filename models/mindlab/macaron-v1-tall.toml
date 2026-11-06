@@ -13,6 +13,33 @@ open_weights = true
 release_date = "2026-07-21"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+notes = "The card's nominal release footprint is not treated as an inclusive exact total. Only independently disclosed specialist weight counts are recorded; they are not summed."
+
+[[metadata.modelatlas.parameters.components]]
+name = "L0 Chat LoRA specialist"
+total_billion = 3.77565184
+sources = ["https://huggingface.co/mindlab-research/Macaron-V1-Tall"]
+notes = "Author explicitly reports 3,775,651,840 stored values per adapter; L0 is BF16. Not a per-request active count."
+
+[[metadata.modelatlas.parameters.components]]
+name = "L1 Agent LoRA specialist"
+total_billion = 3.77565184
+sources = ["https://huggingface.co/mindlab-research/Macaron-V1-Tall"]
+notes = "Author-reported stored values per adapter; L1 is BF16."
+
+[[metadata.modelatlas.parameters.components]]
+name = "L2 Coding LoRA specialist"
+total_billion = 3.77565184
+sources = ["https://huggingface.co/mindlab-research/Macaron-V1-Tall"]
+notes = "Author-reported stored values per adapter; L2 is F32."
+
+[[metadata.modelatlas.parameters.components]]
+name = "L3 GenUI LoRA specialist"
+total_billion = 3.77565184
+sources = ["https://huggingface.co/mindlab-research/Macaron-V1-Tall"]
+notes = "Author-reported stored values per adapter; L3 is BF16."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

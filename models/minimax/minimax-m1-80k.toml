@@ -9,6 +9,11 @@ open_weights = true
 release_date = "2025-06-17"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 456
+active_billion = 45.9
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-M1-80k"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

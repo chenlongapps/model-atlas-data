@@ -6,6 +6,11 @@ open_weights = true
 release_date = "2024-10-16"
 license = "Mistral Research License"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.019808256
+sources = ["https://huggingface.co/mistralai/Ministral-8B-Instruct-2410"]
+notes = "Exact count of 8,019,808,256 explicitly reported in the model card, converted to billions."
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -13,6 +13,11 @@ open_weights = true
 release_date = "2026-08-24"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 35.951822704
+sources = ["https://huggingface.co/api/models/apodex/Apodex-1.1-mini"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

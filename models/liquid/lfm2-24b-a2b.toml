@@ -11,6 +11,12 @@ open_weights = true
 release_date = "2026-02-24"
 license = "LFM Open License v1.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 24
+active_billion = 2.3
+sources = ["https://huggingface.co/LiquidAI/LFM2-24B-A2B"]
+notes = "Uses the architecture table's 2.3B active count, rather than the rounded 2B designation."
+
 [modalities]
 input = ["text"]
 output = ["text"]

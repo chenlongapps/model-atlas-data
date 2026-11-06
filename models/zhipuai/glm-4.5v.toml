@@ -10,6 +10,12 @@ open_weights = true
 knowledge = "2025-04"
 release_date = "2025-08-11"
 
+[metadata.modelatlas.parameters]
+total_billion = 107.71093312
+active_billion = 12
+sources = ["https://huggingface.co/api/models/zai-org/GLM-4.5V", "https://docs.z.ai/guides/vlm/glm-4.5v.md"]
+notes = "Total is the Hub-published BF16/F32 count for the complete multimodal checkpoint; active count is explicitly reported by Z.ai. No vision-component sum inferred."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "video/mp4", "video/x-matroska", "video/quicktime"]
 output = ["text"]

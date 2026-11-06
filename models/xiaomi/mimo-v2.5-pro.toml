@@ -10,6 +10,12 @@ open_weights = true
 knowledge = "2024-12"
 release_date = "2026-04-22"
 
+[metadata.modelatlas.parameters]
+total_billion = 1020
+active_billion = 42
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro"]
+notes = "Official model-zoo and architecture table counts, with 1.02T converted to B. Uses the author's rounded architecture convention, not serialized auxiliary tensors."
+
 [modalities]
 input = ["text"]
 output = ["text"]

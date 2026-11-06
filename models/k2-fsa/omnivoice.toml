@@ -9,6 +9,21 @@ description = "Massively multilingual zero-shot text-to-speech model with preset
 open_weights = true
 release_date = "2026-03-30"
 
+[metadata.modelatlas.parameters]
+notes = "The speech generation checkpoint and audio tokenizer are separate observations; no complete pipeline total is inferred."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Speech generation checkpoint"
+total_billion = 0.61257728
+sources = ["https://huggingface.co/k2-fsa/OmniVoice/blob/c5fdb5ccb189668d56333f77ba2629f4cd7535f4/model.safetensors"]
+notes = "F32 tensor-header weight count; excludes the eight I64 codebook offsets and the separate audio tokenizer."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Audio tokenizer"
+total_billion = 0.201400553
+sources = ["https://huggingface.co/k2-fsa/OmniVoice/blob/c5fdb5ccb189668d56333f77ba2629f4cd7535f4/audio_tokenizer/model.safetensors"]
+notes = "Stored F32 weight count verified from the tokenizer's actual tensor header."
+
 [modalities]
 input = ["text"]
 output = ["audio"]

@@ -8,6 +8,12 @@ open_weights = true
 knowledge = "2024-11"
 release_date = "2025-12-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 675
+active_billion = 41
+sources = ["https://huggingface.co/mistralai/Mistral-Large-3-675B-Instruct-2512"]
+notes = "Full multimodal model; the card separately reports 673B total and 39B active for the language component only."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

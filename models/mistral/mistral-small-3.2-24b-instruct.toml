@@ -9,6 +9,11 @@ open_weights = true
 knowledge = "2023-10-31"
 release_date = "2025-06-20"
 
+[metadata.modelatlas.parameters]
+total_billion = 24
+sources = ["https://docs.mistral.ai/models/mistral-small-3-2-25-06.md"]
+notes = "Official documentation's rounded parameter count for the Small 3.2 June 2025 release."
+
 [modalities]
 input = ["image/png", "image/jpeg", "image/webp", "image/gif", "text"]
 output = ["text"]

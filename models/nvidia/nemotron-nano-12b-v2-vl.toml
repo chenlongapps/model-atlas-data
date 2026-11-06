@@ -8,6 +8,10 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-10-28"
 
+[metadata.modelatlas.parameters]
+total_billion = 12.6
+sources = ["https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-BF16"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "video/mp4", "video/x-matroska", "video/x-flv", "video/3gpp"]
 output = ["text"]

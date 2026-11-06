@@ -7,6 +7,12 @@ open_weights = true
 release_date = "2025-09-05"
 license = "Modified MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 32
+sources = ["https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905"]
+notes = "Official total reported as 1T, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

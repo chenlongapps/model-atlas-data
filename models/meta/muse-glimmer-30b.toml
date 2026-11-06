@@ -14,6 +14,11 @@ knowledge = "2026-01-04"
 release_date = "2026-08-10"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 29.6
+sources = ["https://huggingface.co/meta-models/Muse-Glimmer-30B"]
+notes = "Approximately 29.6B including the vision encoder, as explicitly specified in the model card."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

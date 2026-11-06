@@ -18,6 +18,11 @@ release_date = "2026-02-19"
 last_updated = "2026-02-20"
 license = "Gemma"
 
+[metadata.modelatlas.parameters]
+total_billion = 12
+sources = ["https://huggingface.co/Trendyol/Trendyol-LLM-Asure-12B"]
+notes = "Official model card's rounded multimodal model size."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

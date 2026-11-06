@@ -10,6 +10,11 @@ release_date = "2026-10-08"
 last_updated = "2026-10-14"
 license = "apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.85298592
+sources = ["https://huggingface.co/api/models/lightonai/LightOnOCR-3-0.8B"]
+notes = "Hub-published BF16 count for the complete multimodal OCR checkpoint."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

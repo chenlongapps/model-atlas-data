@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2025-07-28"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 30.5
+active_billion = 3.3
+sources = ["https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

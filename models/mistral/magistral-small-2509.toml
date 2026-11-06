@@ -11,6 +11,10 @@ open_weights = true
 release_date = "2025-09-18"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 24
+sources = ["https://huggingface.co/mistralai/Magistral-Small-2509"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2024-05-22"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 7.248023552
+sources = ["https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.3"]
+notes = "Hub-published BF16 count for the Transformers checkpoint; alternate consolidated-format files are not summed."
+
 [modalities]
 input = ["text"]
 output = ["text"]

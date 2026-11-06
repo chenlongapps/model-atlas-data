@@ -11,6 +11,12 @@ knowledge = "2025-01"
 release_date = "2026-01-29"
 last_updated = "2026-02-13"
 
+[metadata.modelatlas.parameters]
+total_billion = 196.81
+active_billion = 11
+sources = ["https://huggingface.co/stepfun-ai/Step-3.5-Flash"]
+notes = "Full architecture table's 196.81B total includes the 0.81B head; per-token active count is approximate (~11B)."
+
 [modalities]
 input = ["text"]
 output = ["text"]

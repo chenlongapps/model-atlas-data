@@ -8,6 +8,11 @@ open_weights = true
 release_date = "2024-04-15"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 140.620634112
+sources = ["https://huggingface.co/api/models/alpindale/WizardLM-2-8x22B"]
+notes = "Hub-published BF16 count for the complete unquantized checkpoint in the third-party re-upload already linked by this local entry; not an original Microsoft weight host."
+
 [modalities]
 input = ["text"]
 output = ["text"]

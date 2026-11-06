@@ -16,6 +16,11 @@ open_weights = true
 release_date = "2026-09-28"
 license = "Nace.AI Open RAIL-M"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.95
+sources = ["https://huggingface.co/nace-ai/drex-v1.5"]
+notes = "Approximate parameter count explicitly reported in the model card."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

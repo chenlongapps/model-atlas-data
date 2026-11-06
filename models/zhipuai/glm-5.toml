@@ -5,6 +5,11 @@ family = "glm"
 open_weights = true
 release_date = "2026-02-12"
 
+[metadata.modelatlas.parameters]
+total_billion = 744
+active_billion = 40
+sources = ["https://huggingface.co/zai-org/GLM-5"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -13,6 +13,11 @@ knowledge = "2025-09"
 release_date = "2025-09-02"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.053338176
+sources = ["https://huggingface.co/api/models/swiss-ai/Apertus-8B-Instruct-2509"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

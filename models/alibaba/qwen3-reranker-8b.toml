@@ -9,6 +9,10 @@ open_weights = true
 release_date = "2025-06-05"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 8
+sources = ["https://huggingface.co/Qwen/Qwen3-Reranker-8B"]
+
 [modalities]
 input = ["text"]
 output = ["reranking"]

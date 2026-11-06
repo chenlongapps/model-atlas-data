@@ -8,6 +8,11 @@ family = "nemotron"
 open_weights = true
 release_date = "2025-03-18"
 
+[metadata.modelatlas.parameters]
+total_billion = 49.867145216
+sources = ["https://huggingface.co/api/models/nvidia/Llama-3_3-Nemotron-Super-49B-v1"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

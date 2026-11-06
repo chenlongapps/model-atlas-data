@@ -12,6 +12,12 @@ knowledge = "2026-06-18"
 release_date = "2026-10-03"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 78.10307456
+active_billion = 3.45757312
+sources = ["https://huggingface.co/Aleph-Alpha/Kolibri-1"]
+notes = "Exact counts explicitly reported in the model card, converted to billions."
+
 [modalities]
 input = ["text"]
 output = ["text"]

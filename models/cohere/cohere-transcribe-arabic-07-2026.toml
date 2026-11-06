@@ -16,6 +16,10 @@ open_weights = true
 release_date = "2026-07-07"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 2
+sources = ["https://huggingface.co/CohereLabs/cohere-transcribe-arabic-07-2026"]
+
 [modalities]
 input = ["audio/flac", "audio/mpeg", "audio/ogg", "audio/wav"]
 output = ["text"]

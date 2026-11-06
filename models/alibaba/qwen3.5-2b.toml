@@ -15,6 +15,10 @@ open_weights = true
 release_date = "2026-03-02"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 2
+sources = ["https://huggingface.co/Qwen/Qwen3.5-2B"]
+
 [modalities]
 input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic", "video/mp4", "video/x-msvideo", "video/x-matroska", "video/quicktime", "video/x-flv", "video/x-ms-wmv"]
 output = ["text"]

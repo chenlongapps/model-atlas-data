@@ -7,6 +7,11 @@ family = "minimax"
 open_weights = true
 release_date = "2025-10-27"
 
+[metadata.modelatlas.parameters]
+total_billion = 230
+active_billion = 10
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-M2"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

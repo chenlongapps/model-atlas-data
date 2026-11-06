@@ -12,6 +12,11 @@ open_weights = true
 knowledge = "2023-12-31"
 release_date = "2024-08-28"
 
+[metadata.modelatlas.parameters]
+total_billion = 70.553706496
+sources = ["https://huggingface.co/Sao10K/L3.1-70B-Euryale-v2.2/blob/62b47ff8c2c24d326a7b960773b9c853400150b6/pytorch_model.bin.index.json"]
+notes = "70,553,706,496 F16 weight values independently counted from ZIP data.pkl tensor descriptors across all thirty indexed shards. All 723 tensor names match the index; no weight payloads were loaded. This is the v2.2 checkpoint, not the different v2.1 or v2.3 release."
+
 [modalities]
 input = ["text"]
 output = ["text"]

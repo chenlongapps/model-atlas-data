@@ -7,6 +7,12 @@ open_weights = true
 release_date = "2025-05-28"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 671
+active_billion = 37
+sources = ["https://openrouter.ai/api/v1/models", "https://huggingface.co/deepseek-ai/DeepSeek-R1-0528"]
+notes = "Explicit size and active count in OpenRouter's deepseek/deepseek-r1-0528 description, linked there to this exact checkpoint. Retains its reported architecture convention rather than inferring from FP8 storage."
+
 [modalities]
 input = ["text"]
 output = ["text"]

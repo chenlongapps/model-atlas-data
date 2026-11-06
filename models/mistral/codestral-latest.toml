@@ -7,6 +7,11 @@ knowledge = "2024-10"
 release_date = "2024-05-29"
 last_updated = "2025-01-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 22.247282688
+sources = ["https://huggingface.co/api/models/mistralai/Codestral-22B-v0.1"]
+notes = "The Codestral-22B-v0.1 checkpoint linked by this local entry, not a guarantee for future API alias targets. Hub-published BF16 count; alternate formats not summed."
+
 [modalities]
 input = ["text"]
 output = ["text"]

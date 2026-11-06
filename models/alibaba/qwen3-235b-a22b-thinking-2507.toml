@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2025-07-25"
 license = "Apache 2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 235
+active_billion = 22
+sources = ["https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

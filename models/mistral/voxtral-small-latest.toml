@@ -16,6 +16,11 @@ family = "voxtral"
 open_weights = true
 release_date = "2025-07-15"
 
+[metadata.modelatlas.parameters]
+total_billion = 24.26180096
+sources = ["https://huggingface.co/api/models/mistralai/Voxtral-Small-24B-2507"]
+notes = "The July 2025 checkpoint identified by this local entry. Hub-published BF16/F32 count for the complete audio-language checkpoint; alternate formats not summed."
+
 [modalities]
 input = ["text", "audio/wav", "audio/mpeg"]
 output = ["text"]

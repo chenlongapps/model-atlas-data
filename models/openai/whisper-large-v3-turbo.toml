@@ -9,6 +9,11 @@ family = "whisper"
 open_weights = true
 release_date = "2024-10-01"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.809
+sources = ["https://github.com/openai/whisper/blob/main/README.md"]
+notes = "Official model table reports 809M for turbo and identifies it as the optimized large-v3 model. Rounded published count retained."
+
 [modalities]
 input = ["audio/flac", "audio/mpeg", "audio/mp4", "audio/ogg", "audio/wav", "audio/webm"]
 output = ["text"]

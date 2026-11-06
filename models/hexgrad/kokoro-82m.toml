@@ -10,6 +10,10 @@ open_weights = true
 release_date = "2024-12"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.082
+sources = ["https://huggingface.co/hexgrad/Kokoro-82M"]
+
 [modalities]
 input = ["text"]
 output = ["audio/mpeg", "audio/pcm"]

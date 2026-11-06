@@ -10,6 +10,15 @@ family = "qwen"
 open_weights = true
 release_date = "2026-10-09"
 
+[metadata.modelatlas.parameters]
+notes = "Complete pipeline total is unknown; the Turbo card explicitly specifies the same visual generation architecture."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Visual generation component"
+total_billion = 7
+sources = ["https://huggingface.co/Qwen/Qwen-Image-2.1-Turbo"]
+notes = "Official visual generation architecture count, not the complete pipeline."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/tiff", "image/webp", "image/gif"]
 output = ["image/png"]

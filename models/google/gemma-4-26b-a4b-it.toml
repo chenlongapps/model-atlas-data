@@ -7,6 +7,12 @@ family = "gemma"
 open_weights = true
 release_date = "2026-04-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 25.805936206
+active_billion = 3.8
+sources = ["https://huggingface.co/api/models/google/gemma-4-26B-A4B-it", "https://huggingface.co/google/gemma-4-26B-A4B-it"]
+notes = "Total is the Hub-published BF16 count for the complete multimodal checkpoint, not the table's 25.2B language component. Per-token active count is explicitly reported in the official model card."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
 output = ["text"]

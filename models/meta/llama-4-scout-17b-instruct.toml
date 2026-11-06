@@ -11,6 +11,11 @@ open_weights = true
 knowledge = "2024-08"
 release_date = "2025-04-05"
 
+[metadata.modelatlas.parameters]
+total_billion = 109
+active_billion = 17
+sources = ["https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct"]
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
 output = ["text"]

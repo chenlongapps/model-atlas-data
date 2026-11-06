@@ -17,6 +17,12 @@ family = "minimax"
 open_weights = true
 release_date = "2026-10-19"
 
+[metadata.modelatlas.parameters]
+total_billion = 428
+active_billion = 23
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"]
+notes = "Approximate official architecture counts; verified against the now-published model card on 2026-11-06."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "video/mp4", "video/x-msvideo", "video/quicktime", "video/x-matroska"]
 output = ["text"]

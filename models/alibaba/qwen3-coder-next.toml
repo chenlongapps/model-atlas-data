@@ -10,6 +10,11 @@ open_weights = true
 knowledge = "2025-09"
 release_date = "2026-02-03"
 
+[metadata.modelatlas.parameters]
+total_billion = 80
+active_billion = 3
+sources = ["https://huggingface.co/Qwen/Qwen3-Coder-Next"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

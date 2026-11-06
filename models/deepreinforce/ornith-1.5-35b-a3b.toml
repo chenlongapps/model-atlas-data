@@ -11,6 +11,12 @@ release_date = "2026-08-18"
 last_updated = "2026-08-23"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 35
+active_billion = 3
+sources = ["https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"]
+notes = "Both counts are approximate in the model card's deployment section."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

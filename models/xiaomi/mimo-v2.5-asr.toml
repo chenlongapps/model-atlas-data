@@ -16,6 +16,15 @@ open_weights = true
 release_date = "2026-04-23"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+notes = "The ASR checkpoint requires a separately downloaded Audio Tokenizer; its weight count is not a complete pipeline total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "ASR checkpoint (without Audio Tokenizer)"
+total_billion = 8.018587648
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.5-ASR/blob/227ce4c5e64e356007ad948781f0e8b55a1beba0/model.safetensors.index.json", "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-ASR"]
+notes = "8,018,587,648 F32 weight/bias values independently counted from all seven pinned shard headers. Config declares untied word embeddings. The inconsistent Hub API total of 7,622,619,136 is not used, and the separate Audio Tokenizer is excluded."
+
 [modalities]
 input = ["audio/wav", "audio/mpeg"]
 output = ["text"]

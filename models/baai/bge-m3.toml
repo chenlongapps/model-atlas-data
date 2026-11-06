@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2024-01-30"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.569
+sources = ["https://bge-model.com/bge/bge_m3.html"]
+notes = "Official BGE documentation's 569M parameter specification, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

@@ -6,6 +6,10 @@ family = "mistral-medium"
 open_weights = true
 release_date = "2026-04-29"
 
+[metadata.modelatlas.parameters]
+total_billion = 128
+sources = ["https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"]
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

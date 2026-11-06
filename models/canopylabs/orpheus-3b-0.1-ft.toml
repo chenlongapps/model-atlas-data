@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2025-03"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 3.782986752
+sources = ["https://huggingface.co/api/models/canopylabs/orpheus-3b-0.1-ft"]
+notes = "Hub-published F32 count for the complete TTS checkpoint, not the nominal 3B designation."
+
 [modalities]
 input = ["text"]
 output = ["audio/mpeg", "audio/pcm"]

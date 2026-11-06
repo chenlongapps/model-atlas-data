@@ -12,6 +12,11 @@ knowledge = "2025-05"
 release_date = "2026-10-17"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+active_billion = 16
+sources = ["https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017", "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"]
+notes = "Artificial Analysis reports 16B active for this exact snapshot, without a separate prefill count. Complete total omitted: the family's 552B figure is backbone-only, not an inclusive model total."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]
 output = ["text"]

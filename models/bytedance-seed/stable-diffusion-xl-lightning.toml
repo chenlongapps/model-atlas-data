@@ -12,6 +12,33 @@ open_weights = true
 release_date = "2024-02-21"
 license = "CreativeML Open RAIL++-M"
 
+[metadata.modelatlas.parameters]
+notes = "Alternative step-specific U-Net checkpoints, not additive modules. No default step count or complete SDXL pipeline total is selected."
+
+[[metadata.modelatlas.parameters.components]]
+name = "1-step U-Net (x0)"
+total_billion = 2.567463684
+sources = ["https://huggingface.co/ByteDance/SDXL-Lightning/blob/c9a24f48e1c025556787b0c58dd67a091ece2e44/sdxl_lightning_1step_unet_x0.safetensors", "https://huggingface.co/ByteDance/SDXL-Lightning"]
+notes = "Exact stored F16 weight count verified from this file's tensor header; no model weight data downloaded."
+
+[[metadata.modelatlas.parameters.components]]
+name = "2-step U-Net"
+total_billion = 2.567463684
+sources = ["https://huggingface.co/ByteDance/SDXL-Lightning/blob/c9a24f48e1c025556787b0c58dd67a091ece2e44/sdxl_lightning_2step_unet.safetensors"]
+notes = "Exact stored F16 weight count verified from this alternative checkpoint's tensor header."
+
+[[metadata.modelatlas.parameters.components]]
+name = "4-step U-Net"
+total_billion = 2.567463684
+sources = ["https://huggingface.co/ByteDance/SDXL-Lightning/blob/c9a24f48e1c025556787b0c58dd67a091ece2e44/sdxl_lightning_4step_unet.safetensors"]
+notes = "Exact stored F16 weight count verified from this alternative checkpoint's tensor header."
+
+[[metadata.modelatlas.parameters.components]]
+name = "8-step U-Net"
+total_billion = 2.567463684
+sources = ["https://huggingface.co/ByteDance/SDXL-Lightning/blob/c9a24f48e1c025556787b0c58dd67a091ece2e44/sdxl_lightning_8step_unet.safetensors"]
+notes = "Exact stored F16 weight count verified from this alternative checkpoint's tensor header."
+
 [modalities]
 input = ["text"]
 output = ["image"]

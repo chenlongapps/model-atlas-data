@@ -11,6 +11,11 @@ family = "sarvam"
 open_weights = true
 release_date = "2026-02-18"
 
+[metadata.modelatlas.parameters]
+total_billion = 32.152650368
+sources = ["https://huggingface.co/api/models/sarvamai/sarvam-30b"]
+notes = "Hub-published F32 count for the complete checkpoint. The model card's 2.4B active count excludes embeddings and is not treated as a full per-token count."
+
 [modalities]
 input = ["text"]
 output = ["text"]

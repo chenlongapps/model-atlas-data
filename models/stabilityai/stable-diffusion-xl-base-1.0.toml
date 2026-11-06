@@ -13,6 +13,15 @@ open_weights = true
 release_date = "2023-07-26"
 license = "CreativeML Open RAIL++-M"
 
+[metadata.modelatlas.parameters]
+notes = "U-Net statistic only; separate text encoders, VAE and duplicate weight formats are not added into a complete model total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "U-Net"
+total_billion = 2.567463684
+sources = ["https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/462165984030d82259a11f4367a4eed129e94a7b/unet/diffusion_pytorch_model.safetensors"]
+notes = "Exact stored F32 weight count verified from the component's actual tensor header."
+
 [modalities]
 input = ["text", "image"]
 output = ["image"]

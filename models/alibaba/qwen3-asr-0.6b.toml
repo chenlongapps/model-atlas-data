@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2026-01"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.938008576
+sources = ["https://huggingface.co/api/models/Qwen/Qwen3-ASR-0.6B"]
+notes = "Hub-published BF16 count for the complete ASR checkpoint, not the nominal 0.6B designation."
+
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]
 output = ["text"]

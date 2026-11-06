@@ -14,6 +14,11 @@ open_weights = true
 release_date = "2026-10-10"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 26.09
+sources = ["https://huggingface.co/vllm-sr/d3"]
+notes = "Includes the 0.46B vision encoder, as explicitly reported in the model card."
+
 [modalities]
 input = ["text", "image", "video"]
 output = ["decision"]

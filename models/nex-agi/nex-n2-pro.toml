@@ -9,6 +9,11 @@ description = "Open agentic MoE model (397B total, 17B active) for coding, tool 
 open_weights = true
 release_date = "2026-06-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 396.802360816
+sources = ["https://huggingface.co/api/models/nex-agi/Nex-N2-Pro"]
+notes = "Hub-published BF16 count for the complete checkpoint. No active count inherited from the backbone."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

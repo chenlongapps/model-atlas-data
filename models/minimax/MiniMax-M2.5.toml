@@ -7,6 +7,12 @@ family = "minimax"
 open_weights = true
 release_date = "2026-02-12"
 
+[metadata.modelatlas.parameters]
+total_billion = 230
+active_billion = 10
+sources = ["https://artificialanalysis.ai/models/minimax-m2-5"]
+notes = "Explicit total and active counts published by Artificial Analysis for M2.5, not inferred from another M2 version or quantized tensor storage."
+
 [modalities]
 input = ["text"]
 output = ["text"]

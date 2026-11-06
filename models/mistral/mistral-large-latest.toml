@@ -8,6 +8,12 @@ knowledge = "2024-11"
 release_date = "2024-11-01"
 last_updated = "2025-12-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 675
+active_billion = 41
+sources = ["https://huggingface.co/mistralai/Mistral-Large-3-675B-Instruct-2512"]
+notes = "The checkpoint linked by this local alias. Full multimodal count, not the language-only 673B total / 39B active."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

@@ -11,6 +11,11 @@ open_weights = true
 knowledge = "2024-04-30"
 release_date = "2025-07-09"
 
+[metadata.modelatlas.parameters]
+total_billion = 24.01136128
+sources = ["https://huggingface.co/api/models/cognitivecomputations/Dolphin-Mistral-24B-Venice-Edition"]
+notes = "Hub-published BF16 parameter count for the complete unquantized checkpoint, converted to B."
+
 [modalities]
 input = ["text"]
 output = ["text"]

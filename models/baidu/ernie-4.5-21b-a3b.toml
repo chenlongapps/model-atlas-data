@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-06-30"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 21
+active_billion = 3
+sources = ["https://huggingface.co/baidu/ERNIE-4.5-21B-A3B-PT"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

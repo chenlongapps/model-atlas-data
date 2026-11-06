@@ -8,6 +8,11 @@ family = "gemma"
 open_weights = true
 release_date = "2026-04-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 5.1
+sources = ["https://huggingface.co/google/gemma-4-E2B-it"]
+notes = "Official total with embeddings, not the 2.3B effective count. Vision and audio encoders are listed separately; no component sum inferred."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "audio/mpeg", "audio/wav"]
 output = ["text"]

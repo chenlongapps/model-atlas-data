@@ -10,6 +10,12 @@ knowledge = "2024-12"
 release_date = "2026-06-08"
 last_updated = "2026-06-09"
 
+[metadata.modelatlas.parameters]
+total_billion = 1020
+active_billion = 42
+sources = ["https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro-FP4-DFlash"]
+notes = "Official table's target-model counts, with 1.02T converted to B. Excludes the separately listed DFlash draft model; not inferred from FP4 storage."
+
 [modalities]
 input = ["text"]
 output = ["text"]

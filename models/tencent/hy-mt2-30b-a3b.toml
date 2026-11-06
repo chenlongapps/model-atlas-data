@@ -11,6 +11,11 @@ family = "Hy"
 open_weights = true
 release_date = "2026-05-21"
 
+[metadata.modelatlas.parameters]
+total_billion = 30.064725888
+sources = ["https://huggingface.co/api/models/tencent/Hy-MT2-30B-A3B"]
+notes = "Hub-published BF16/F32 count for the complete unquantized checkpoint. Active count not inferred from the model-name designation."
+
 [modalities]
 input = ["text"]
 output = ["text"]

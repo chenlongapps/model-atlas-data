@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2024-04-30"
 license = "Llama 3 Community License"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.030523392
+sources = ["https://huggingface.co/api/models/NousResearch/Hermes-2-Pro-Llama-3-8B", "https://huggingface.co/NousResearch/Hermes-2-Pro-Llama-3-8B"]
+notes = "Hub-published F16 count for the complete main checkpoint used by the card's direct Transformers example; the separately hosted DPO adapter is not summed."
+
 [modalities]
 input = ["text"]
 output = ["text"]

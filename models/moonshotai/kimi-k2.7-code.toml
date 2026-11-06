@@ -15,6 +15,12 @@ open_weights = true
 knowledge = "2025-01"
 release_date = "2026-06-12"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 32
+sources = ["https://huggingface.co/moonshotai/Kimi-K2.7-Code"]
+notes = "Official architecture table's total, reported as 1T; the card also lists a 400M vision encoder separately. No extra component sum inferred."
+
 [modalities]
 input = [
   "text",

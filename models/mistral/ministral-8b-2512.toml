@@ -8,6 +8,11 @@ family = "ministral"
 open_weights = true
 release_date = "2025-12-02"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.91802624
+sources = ["https://huggingface.co/api/models/mistralai/Ministral-3-8B-Instruct-2512-BF16", "https://docs.mistral.ai/models/ministral-3-8b-25-12.md"]
+notes = "Complete multimodal BF16 checkpoint count; official documentation and OpenRouter identify this API entry as the December 2025 Ministral 3 8B Instruct model."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

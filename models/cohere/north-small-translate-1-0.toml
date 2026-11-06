@@ -8,6 +8,11 @@ open_weights = true
 release_date = "2026-09-09"
 license = "CC-BY-NC-4.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 218
+active_billion = 25
+sources = ["https://huggingface.co/CohereLabs/North-Small-Translate-1.0"]
+
 [modalities]
 input = ["text"]
 output = ["text"]

@@ -14,6 +14,11 @@ open_weights = true
 release_date = "2026-09-21"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 25.805936206
+sources = ["https://huggingface.co/api/models/surogate/rune-26b-a4b-GGUF"]
+notes = "Hub-published BF16 count for the complete model.safetensors checkpoint also hosted in this repository, not inferred from GGUF file sizes or quantized tensor storage."
+
 [modalities]
 input = ["text"]
 output = ["decision"]
