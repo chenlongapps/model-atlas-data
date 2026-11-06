@@ -1,15 +1,30 @@
 # Sources:
 # - Release and availability (2026-10-23): https://www.kimi.com/en/blog/kimi-k3-1-pro
 # - API guide: https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart
-# - Announced as an open-weight model; full weights are scheduled for 2026-11-04. Keep open_weights=false until the weights and a real link are available.
+# - Public weights verified 2026-11-07: https://huggingface.co/moonshotai/Kimi-K3.1-Pro
+# - Parameters and quantization: https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/README.md
+# - Custom license with commercial-use conditions: https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/LICENSE
 # - Input formats: https://platform.kimi.ai/docs/guide/use-kimi-vision-model#supported-image-and-video-formats
 # Sampling is fixed at temperature=1.0 and top_p=0.95; top_k is not documented.
 schema = 2
 name = "Kimi K3.1 Pro"
 description = "Multimodal Kimi model with 1M context and always-on reasoning for coding, 3D creation, financial research, and agentic work"
 family = "kimi-k3"
-open_weights = false
+open_weights = true
 release_date = "2026-10-23"
+license = "Kimi K3.1-Pro License"
+
+[metadata.modelatlas.parameters]
+total_billion = 2800
+active_billion = 104
+sources = ["https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/README.md"]
+notes = "Official MoE architecture specifications: 2.8T total (converted to B) and 104B activated, not exact serialized tensor counts. The separately listed vision encoder is not added to the reported total."
+
+[[metadata.modelatlas.parameters.components]]
+name = "MoonViT-V2"
+total_billion = 0.401
+sources = ["https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/README.md"]
+notes = "Vision encoder only; official 401M converted to B."
 
 [modalities]
 input = [
@@ -43,6 +58,26 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 131_072
+
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+format = "safetensors"
+# Official model card: MXFP4 weights / MXFP8 activations (quantization-aware training).
+# Selected tensors are excluded from weight quantization in the fixed config:
+# https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/config.json
+# MXFP8 is activation precision, not another published weight format.
+quantization = "mxfp4"
+
+[[links]]
+label = "Model card"
+url = "https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/README.md"
+type = "model_card"
+
+[[links]]
+label = "License"
+url = "https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/LICENSE"
+type = "license"
 
 [[benchmarks]]
 name = "Terminal-Bench"
