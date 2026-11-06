@@ -90,13 +90,6 @@ variant = "without tools"
 source = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 29
-metric = "index score"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/minimax-m3-1-flash"
-
-[[benchmarks]]
 name = "Vals Index"
 score = 53.78
 metric = "performance score"

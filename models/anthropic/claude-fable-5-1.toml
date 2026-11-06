@@ -276,15 +276,6 @@ source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 49
-metric = "index score"
-version = "5.0"
-effort = "Max"
-variant = "Default Fallback"
-source = "https://artificialanalysis.ai/models/claude-fable-5-1?trk=article-ssr-frontend-pulse_little-text-block"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
 score = 49.1602124158081
 metric = "index score"
 version = "5.0.1"

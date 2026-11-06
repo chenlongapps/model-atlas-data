@@ -49,14 +49,6 @@ source = "https://vals-ai.com/benchmarks/terminal-bench-4"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 25
-metric = "index score"
-version = "5.0"
-variant = "public preview"
-source = "https://artificialanalysis.ai/models/mistral-large-4-preview"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
 score = 23.1277321742266
 metric = "index score"
 version = "5.0.1"

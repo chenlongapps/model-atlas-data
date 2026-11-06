@@ -43,13 +43,6 @@ variant = "NVFP4"
 source = "https://build.nvidia.com/nvidia/nemotron-3.5-super-vl-120b-a12b/modelcard"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 14
-metric = "index score"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"
-
-[[benchmarks]]
 name = "Terminal-Bench"
 score = 0.0
 metric = "task resolution rate"

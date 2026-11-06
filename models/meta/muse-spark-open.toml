@@ -155,14 +155,6 @@ harness = "Muse Code"
 source = "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 25
-metric = "index score"
-version = "5.0"
-effort = "xhigh"
-source = "https://artificialanalysis.ai/models/muse-spark-open"
-
-[[benchmarks]]
 name = "SWE-bench Pro"
 score = 95.02
 metric = "task resolution rate"

@@ -115,13 +115,6 @@ variant = "pass@1"
 source = "https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 46
-metric = "index score"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/kimi-k3-1-pro"
-
-[[benchmarks]]
 name = "Vals Index"
 score = 62.52
 metric = "performance score"

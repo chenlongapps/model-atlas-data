@@ -53,54 +53,6 @@ harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-terra-vs-gpt-6-astra"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 51
-metric = "index score"
-version = "5.0"
-effort = "Max"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 45
-metric = "index score"
-version = "5.0"
-effort = "Xhigh"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 42
-metric = "index score"
-version = "5.0"
-effort = "High"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 38
-metric = "index score"
-version = "5.0"
-effort = "Medium"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 30
-metric = "index score"
-version = "5.0"
-effort = "Non-reasoning"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 29
-metric = "index score"
-version = "5.0"
-effort = "Low"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-1-terra"
-
-[[benchmarks]]
 name = "GDPval-AA"
 score = 1286
 metric = "Elo rating"

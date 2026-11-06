@@ -196,15 +196,6 @@ harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/models/meta_muse-wonder"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 43
-metric = "index score"
-version = "5.0"
-dataset = "Artificial Analysis Intelligence Index V5 composite (9 evaluations)"
-effort = "max"
-source = "https://artificialanalysis.ai/models/muse-wonder"
-
-[[benchmarks]]
 name = "GDPval-AA"
 score = 1770
 metric = "Elo rating"

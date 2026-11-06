@@ -168,46 +168,6 @@ source = "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra"
 # initialModels data. Fractions are expressed as percentages (x100) where the
 # Benchmark definition uses percent; this does not change the scoring metric.
 
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 56.8538559596797
-metric = "index score"
-effort = "max"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 55.2557468569681
-metric = "index score"
-effort = "xhigh"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 54.849838322506
-metric = "index score"
-effort = "high"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 51.4548393864113
-metric = "index score"
-effort = "medium"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 43.0349823228524
-metric = "index score"
-effort = "low"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
-
 # Zapier's official private leaderboard, not AutomationBench-AA or the public
 # research task set. The launch score above has no verified benchmark version.
 

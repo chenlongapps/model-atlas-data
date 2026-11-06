@@ -168,46 +168,6 @@ harness = "Mini-SWE-agent"
 source = "https://vals-ai.com/benchmarks/terminal-bench-science"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 36
-metric = "index score"
-version = "5.0"
-effort = "Max"
-source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 34
-metric = "index score"
-version = "5.0"
-effort = "Xhigh"
-source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 30
-metric = "index score"
-version = "5.0"
-effort = "High"
-source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 25
-metric = "index score"
-version = "5.0"
-effort = "Medium"
-source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 19
-metric = "index score"
-version = "5.0"
-effort = "Low"
-source = "https://artificialanalysis.ai/models/releases/claude-haiku-5-5"
-
-[[benchmarks]]
 name = "GDPval-AA"
 score = "1283 (-20/+20)"
 metric = "Elo rating"

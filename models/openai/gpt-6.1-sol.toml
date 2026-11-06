@@ -173,51 +173,6 @@ harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 55
-metric = "index score"
-version = "5.0"
-dataset = "V5 composite (9 evaluations)"
-effort = "Max"
-source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-sol"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 52
-metric = "index score"
-version = "5.0"
-dataset = "V5 composite (9 evaluations)"
-effort = "Xhigh"
-source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-xhigh-vs-gpt-6-sol-low"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 50
-metric = "index score"
-version = "5.0"
-dataset = "V5 composite (9 evaluations)"
-effort = "High"
-source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-luna-high"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 46
-metric = "index score"
-version = "5.0"
-dataset = "V5 composite (9 evaluations)"
-effort = "Medium"
-source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-medium-vs-gpt-6-sol-medium"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 35
-metric = "index score"
-version = "5.0"
-dataset = "V5 composite (9 evaluations)"
-effort = "Low"
-source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
-
-[[benchmarks]]
 name = "Vals Index"
 score = 63.94
 metric = "performance score"

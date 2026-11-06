@@ -184,14 +184,6 @@ source = "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 58
-metric = "index score"
-version = "5.0"
-effort = "max"
-source = "https://artificialanalysis.ai/es/articles/artificial-analysis-intelligence-index-v5"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
 score = 59.1060336078904
 metric = "index score"
 version = "5.0.1"

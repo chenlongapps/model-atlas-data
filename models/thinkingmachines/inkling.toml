@@ -107,15 +107,6 @@ source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-so
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 12
-metric = "index score"
-version = "5.0"
-dataset = "Nine-evaluation composite"
-effort = "Xhigh"
-source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
 score = 12.4781698715401
 metric = "index score"
 version = "5.0.1"

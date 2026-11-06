@@ -132,14 +132,6 @@ source = "https://www.vals.ai/benchmarks/terminal-bench-science"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
-score = 23
-metric = "index score"
-version = "5.0"
-effort = "max"
-source = "https://artificialanalysis.ai/models/deepseek-v4-pro"
-
-[[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
 score = 23.0632981493003
 metric = "index score"
 version = "5.0.1"

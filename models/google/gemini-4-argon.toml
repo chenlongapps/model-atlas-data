@@ -173,15 +173,6 @@ variant = "without tools"
 source = "https://surgehq.ai/benchmarks/chartography"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 50
-metric = "index score"
-version = "5.0"
-dataset = "Artificial Analysis Intelligence Index V5 composite (9 evaluations)"
-effort = "high"
-source = "https://artificialanalysis.ai/models/gemini-4-argon"
-
-[[benchmarks]]
 name = "Vals Index"
 score = 69.24
 metric = "performance score"

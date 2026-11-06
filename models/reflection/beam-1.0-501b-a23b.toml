@@ -266,13 +266,6 @@ harness = "mini-swe-agent"
 source = "https://huggingface.co/reflection/Beam-1.0-501B-A23B/blob/main/.eval_results/terminal-bench-science.yaml"
 
 [[benchmarks]]
-name = "Artificial Analysis Intelligence Index"
-score = 18
-metric = "index score"
-version = "5.0"
-source = "https://artificialanalysis.ai/models/reflection-beam"
-
-[[benchmarks]]
 name = "Vals Index"
 score = 43.42
 metric = "performance score"
