@@ -215,13 +215,15 @@ variant = "MiMo-V2.5-Pro (Reasoning; current Artificial Analysis leaderboard)"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 
+# Vals overall JSON checked 2026-11-06; model = "xiaomi/mimo-v2.5-pro"; stderr = 0.505 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 128000; provider = "Xiaomi".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 0.51
+score = 0.505
 cost = 0.23303
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks; 3 runs per task (avg@3)"
 variant = "Vals AI; pass@1; temperature 1; top_p 0.95; top_k default; max output 128,000"

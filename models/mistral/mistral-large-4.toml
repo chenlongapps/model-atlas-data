@@ -37,15 +37,22 @@ version = "4.0.0"
 variant = "public preview"
 source = "https://mistral.ai/news/mistral-large-4/"
 
+# Vals overall JSON checked 2026-11-06; model = "mistralai/mistral-large-4"; stderr = 1.821 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 256000; reasoning_effort = "high"; provider = "Mistral AI".
+# Previous rounded display: 27.78 ± 1.82.
 [[benchmarks]]
 name = "Terminal-Bench"
-score = "27.78 ± 1.82"
+score = 27.778
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"
 variant = "avg@3 (3 runs; pass@1 each)"
 harness = "Mini-SWE-agent"
 source = "https://vals-ai.com/benchmarks/terminal-bench-4"
+effort = "high"
+cost = 5.180898
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"

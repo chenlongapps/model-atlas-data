@@ -108,3 +108,18 @@ score = 78.5
 metric = "success rate"
 source = "https://www.anthropic.com/news/claude-sonnet-5"
 date = "2026-06-30"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_sonnet_4_6_high".
+# 95% run-to-run CI (fraction): [0.2584133988380421, 0.34025622422182483]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 29.933481152993346
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 5.5223517987804875
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

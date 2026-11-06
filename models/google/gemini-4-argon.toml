@@ -81,9 +81,11 @@ variant = "Full"
 harness = "mini-swe-agent"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 
+# Vals overall JSON checked 2026-11-06; model = "google/gemini-4-argon"; stderr = 2.314 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 262144; reasoning_effort = "high"; provider = "Google".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 57.58
+score = 57.576
 cost = 17.63994
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

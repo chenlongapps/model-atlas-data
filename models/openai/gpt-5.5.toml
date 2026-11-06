@@ -266,18 +266,21 @@ variant = "original prompts"
 source = "https://openai.com/index/introducing-gpt-5-5/"
 date = "2026-04-23"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_5_xhigh".
+# 95% run-to-run CI (fraction): [0.6056975188917963, 0.7350104457099735]. Cost: JSON mean per scored attempt.
 [[benchmarks]]
 name = "DeepSWE"
-score = 67
+score = 67.03539823008849
 cost = 7.226236674778761
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
-metric = "pass rate"
+metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "xhigh"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
 
 [[benchmarks]]
 name = "Chartography"
@@ -287,3 +290,48 @@ dataset = "100 tasks"
 effort = "xHigh"
 harness = "Inspect AI"
 source = "https://surgehq.ai/benchmarks/chartography"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_5_high".
+# 95% run-to-run CI (fraction): [0.6126368832394585, 0.6749737362295679]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 64.38053097345132
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 5.100437004424779
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_5_medium".
+# 95% run-to-run CI (fraction): [0.5142921338966476, 0.5653538838024673]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 53.98230088495575
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.749342734513274
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_5_low".
+# 95% run-to-run CI (fraction): [0.24696647220470694, 0.29285653664485056]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 26.991150442477874
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "low"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 1.2002025442477877
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

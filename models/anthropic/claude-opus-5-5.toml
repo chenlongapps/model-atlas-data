@@ -44,16 +44,21 @@ variant = "production safeguards with fallback; 5 trials per task (330 runs)"
 harness = "Claude Code --bare"
 source = "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf"
 
+# Vals overall JSON checked 2026-11-06; model = "anthropic/claude-opus-5-5"; stderr = 0.0 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 128000; compute_effort = "max"; provider = "Anthropic".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 65.15
+score = 65.152
 cost = 13.198632
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
+dataset = "66 tasks"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
 
 [[benchmarks]]
 name = "FrontierCode"

@@ -116,15 +116,21 @@ version = "1.1"
 source = "https://artificialanalysis.ai/articles/gpt-5-6-has-landed"
 date = "2026-07-09"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_6_luna_max".
+# 95% run-to-run CI (fraction): [0.6319549876432895, 0.7117950123567105].
+# Original execution context: Pier; mini-swe-agent on Modal.
+# Cost conflict: JSON 3.028116810267857 vs homepage 0.6056233620535714 USD/task; omitted (repricing unverified).
+# Raw score source: https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json
 [[benchmarks]]
 name = "DeepSWE"
-score = 67
+score = 67.1875
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "max"
-harness = "Pier; mini-swe-agent on Modal"
+harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 448 scored attempts; provider/verifier/network errors excluded"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -210,3 +216,74 @@ metric = "index score"
 version = "5.0.1"
 effort = "Max"
 source = "https://artificialanalysis.ai/models/gpt-5-6-luna"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_6_luna_xhigh".
+# 95% run-to-run CI (fraction): [0.5469030532683623, 0.5902650883245582].
+# Cost conflict: JSON 1.5356192685840708 vs homepage 0.30712385371681417 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 56.85840707964602
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_6_luna_high".
+# 95% run-to-run CI (fraction): [0.4132822036270294, 0.47167354858536004].
+# Cost conflict: JSON 0.7779007499999999 vs homepage 0.15558014999999997 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 44.24778761061947
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_6_luna_medium".
+# 95% run-to-run CI (fraction): [0.10452866084502313, 0.12113505596913615].
+# Cost conflict: JSON 0.21630978982300886 vs homepage 0.04326195796460178 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 11.283185840707964
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gpt_5_6_luna_low".
+# 95% run-to-run CI (fraction): [0.0071835281016603, 0.023789923225773328].
+# Cost conflict: JSON 0.07240623938053097 vs homepage 0.014481247876106192 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 1.5486725663716814
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "low"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# Vals overall JSON checked 2026-11-06; model = "openai/gpt-5.6-luna"; stderr = 1.01 percentage points.
+# Row settings: max_output_tokens = 128000; reasoning_effort = "max"; provider = "OpenAI".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 11.616
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 0.731646
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

@@ -106,6 +106,9 @@ dataset = "internal"
 source = "https://api-docs.deepseek.com/updates/"
 date = "2026-07-31"
 
+# Checkpoint attribution needs review: the current DeepSWE JSON model ID is
+# "deepseek-v4-flash", without "0731". Do not overwrite or copy it to either
+# release until the evaluated checkpoint is verified.
 [[benchmarks]]
 name = "DeepSWE"
 score = "53% ±4%"
@@ -116,9 +119,11 @@ effort = "max"
 harness = "Mini-SWE-agent"
 source = "https://deepswe.datacurve.ai/"
 
+# Vals overall JSON checked 2026-11-06; model = "deepseek/deepseek-v4-flash-0731"; stderr = 3.535 percentage points.
+# Row settings: max_output_tokens = 384000; reasoning_effort = "high"; provider = "DeepSeek".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 18.69
+score = 18.687
 cost = 0.766472
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -128,6 +133,7 @@ dataset = "66 tasks"
 variant = "average@3; per-run pass@1"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "high"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

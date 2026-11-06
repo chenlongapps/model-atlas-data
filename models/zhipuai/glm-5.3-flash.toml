@@ -80,18 +80,21 @@ variant = "max effort"
 version = "2"
 source = "https://huggingface.co/zai-org/GLM-5.3-Flash"
 
+# Vals overall JSON checked 2026-11-06; model = "zai/glm-5.3-flash"; stderr = 2.672 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 131072; reasoning_effort = "max"; provider = "Fireworks AI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 37.37
+score = 37.374
 cost = 1.219907
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 variant = "avg@3; each run pass@1"
 harness = "mini-swe-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -143,3 +146,17 @@ metric = "index score"
 version = "5.0.1"
 effort = "max"
 source = "https://artificialanalysis.ai/models/glm-5-3-flash"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_glm_5_3_flash_max".
+# 95% run-to-run CI (fraction): [0.590148863911635, 0.6777082789455078].
+# Cost conflict: JSON 0.48196371245535713 vs homepage 0.24098185622767856 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 63.39285714285714
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "max"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 448 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

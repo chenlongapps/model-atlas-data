@@ -195,3 +195,33 @@ effort = "xHigh"
 variant = "10 runs per task; Gemini 3.5 Flash judge"
 harness = "Inspect AI"
 source = "https://surgehq.ai/benchmarks/chartography"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_muse_spark_1_2_xhigh".
+# 95% run-to-run CI (fraction): [0.5274295943524101, 0.5699155383909527]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 54.86725663716814
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 3.6955048180309733
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# Vals overall JSON checked 2026-11-06; model = "meta/muse_spark_1_2"; stderr = 1.515 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 131072; reasoning_effort = "xhigh"; provider = "Meta".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 6.061
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 4.135537
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

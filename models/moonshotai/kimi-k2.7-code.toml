@@ -127,3 +127,17 @@ effort = "Max reasoning"
 variant = "10 runs per task; Gemini 3.5 Flash judge"
 harness = "Inspect AI"
 source = "https://surgehq.ai/benchmarks/chartography"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_kimi_k2_7_code_default".
+# 95% run-to-run CI (fraction): [0.3003027179908134, 0.31031675103573525]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 30.53097345132743
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.815536243274336
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

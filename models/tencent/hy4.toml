@@ -306,3 +306,17 @@ cost_unit = "USD/test"
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
+
+# Vals overall JSON checked 2026-11-06; model = "tencent/hy4"; stderr = 0.875 percentage points.
+# Row settings: temperature = 0.9; top_p = 1; max_output_tokens = 65536; provider = "Tencent".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 39.394
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 1.280113
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

@@ -198,13 +198,16 @@ variant = "95% confidence interval"
 harness = "Claude Code"
 source = "https://www.tbench.ai/?version=4.0&efforts=all"
 
+# Vals overall JSON checked 2026-11-06; model = "anthropic/claude-fable-5-1"; stderr = 3.312 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 128000; compute_effort = "max"; provider = "Anthropic".
+# Previous rounded display: 58.08 ± 3.31.
 [[benchmarks]]
 name = "Terminal-Bench"
-score = "58.08 ± 3.31"
+score = 58.081
 cost = 17.175337
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 effort = "max"

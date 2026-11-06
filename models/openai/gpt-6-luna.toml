@@ -31,13 +31,16 @@ dataset = "113 tasks"
 effort = "max"
 source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
 
+# Vals overall JSON checked 2026-11-06; model = "openai/gpt-6-luna"; stderr = 1.515 percentage points.
+# Row settings: max_output_tokens = 128000; reasoning_effort = "max"; provider = "OpenAI".
+# Previous rounded display: 13.64 ± 1.51.
 [[benchmarks]]
 name = "Terminal-Bench"
-score = "13.64 ± 1.51"
+score = 13.636
 cost = 0.354726
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 effort = "max"

@@ -98,6 +98,8 @@ dataset = "offline v2026.08.08"
 effort = "xhigh"
 source = "https://openai.com/index/introducing-gpt-6-sol-and-luna/"
 
+# Historical Vals profile observation; current overall JSON reports 44.444.
+# Experiment identity/revision is unconfirmed, so this older record is retained.
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 34.34
@@ -106,13 +108,15 @@ version = "4.0"
 effort = "max"
 source = "https://www.vals.ai/models/openai_gpt-6-sol"
 
+# Vals overall JSON checked 2026-11-06; model = "openai/gpt-6-sol"; stderr = 3.535 percentage points.
+# Row settings: max_output_tokens = 128000; reasoning_effort = "max"; provider = "OpenAI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 44.44
+score = 44.444
 cost = 5.79322
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 effort = "max"

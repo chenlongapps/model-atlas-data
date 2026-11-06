@@ -267,3 +267,33 @@ effort = "Xhigh"
 variant = "shell and web access; blind pairwise comparisons"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/models/comparisons/muse-spark-1-3-xhigh-vs-inkling"
+
+# Vals overall JSON checked 2026-11-06; model = "meta/muse_spark_1_3_max"; stderr = 0.505 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 131072; reasoning_effort = "max"; provider = "Meta".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 24.747
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 6.654565
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+# Vals overall JSON checked 2026-11-06; model = "meta/muse_spark_1_3"; stderr = 1.75 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 131072; reasoning_effort = "xhigh"; provider = "Meta".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 10.606
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 7.036467
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

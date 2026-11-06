@@ -31,18 +31,21 @@ output = 1_048_576
 label = "Hugging Face"
 url = "https://huggingface.co/thinkingmachines/Inkling-Small"
 
+# Vals overall JSON checked 2026-11-06; model = "thinkingmachines/inkling-small"; stderr = 0.0 percentage points.
+# Row settings: temperature = 1; top_p = 1; max_output_tokens = 262000; reasoning_effort = "0.99"; provider = "Thinkingmachines".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 0.0
+score = 0
 cost = 0.321679
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0.0"
 dataset = "66 tasks"
 variant = "avg@3; per-run pass@1"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "0.99"
 
 [[benchmarks]]
 name = "Chartography"

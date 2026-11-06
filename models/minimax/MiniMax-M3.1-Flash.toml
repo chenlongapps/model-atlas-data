@@ -114,3 +114,18 @@ metric = "index score"
 version = "5.0.1"
 effort = "max"
 source = "https://artificialanalysis.ai/models/minimax-m3-1-flash"
+
+# Vals overall JSON checked 2026-11-06; model = "minimax/MiniMax-M3.1-flash"; stderr = 1.01 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 262144; compute_effort = "max"; provider = "MiniMax".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 25.253
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 0.734722
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

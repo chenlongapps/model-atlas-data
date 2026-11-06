@@ -73,17 +73,20 @@ dataset = "Diamond"
 source = "https://www.anthropic.com/news/claude-fable-5-mythos-5"
 date = "2026-06-09"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_opus_4_8_max".
+# 95% run-to-run CI (fraction): [0.5720954362692973, 0.6073917432178823]. Cost: JSON mean per scored attempt.
+# Previous display/notes: leaderboard uncertainty display; interval semantics not specified
 [[benchmarks]]
 name = "DeepSWE"
-score = "59% ± 2%"
+score = 58.97435897435898
 cost = 13.222583593240094
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
-metric = "pass rate"
+metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "max"
-variant = "leaderboard uncertainty display; interval semantics not specified"
+variant = "4 whole-benchmark passes; 111 tasks attempted; 429 scored attempts; provider/verifier/network errors excluded"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/"
 
@@ -131,3 +134,78 @@ effort = "Adaptive/Max"
 dataset = "full task set"
 variant = "10 runs per task; Gemini 3.5 Flash judge"
 source = "https://surgehq.ai/benchmarks/chartography"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_opus_4_8_xhigh".
+# 95% run-to-run CI (fraction): [0.5064898547928808, 0.5807584673547702]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 54.36241610738255
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 447 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 8.006355704138702
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_opus_4_8_high".
+# 95% run-to-run CI (fraction): [0.4720830235866894, 0.5633152065018062]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 51.76991150442478
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 4.281940017699115
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_opus_4_8_medium".
+# 95% run-to-run CI (fraction): [0.4643336050994396, 0.5091177223341886]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 48.672566371681414
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 3.4438571028761062
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_claude_opus_4_8_low".
+# 95% run-to-run CI (fraction): [0.3933464140551067, 0.42261810922648974]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 40.79822616407982
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "low"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.293369216740577
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# Vals overall JSON checked 2026-11-06; model = "anthropic/claude-opus-4-8"; stderr = 1.336 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 128000; compute_effort = "max"; provider = "Anthropic".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 23.232
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 17.140717
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

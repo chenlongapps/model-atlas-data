@@ -51,9 +51,11 @@ version = "4.0.0"
 dataset = "all 66 tasks"
 source = "https://huggingface.co/datasets/harborframework/terminal-bench?eval_result=stepfun-ai/Step-5-Preview&leaderboard_task_id=terminalbench_4"
 
+# Vals overall JSON checked 2026-11-06; model = "stepfun/step-5-preview"; stderr = 2.624 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 1024000; provider = "Stepfun".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 31.82
+score = 31.818
 cost = 3.113224
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

@@ -135,3 +135,18 @@ effort = "xhigh"
 variant = "no tools"
 harness = "Meta Model API; GPT o3-mini judge"
 source = "https://ai.meta.com/static-resource/muse-spark-1-1-evaluation-report"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_muse_spark_1_1_xhigh".
+# 95% run-to-run CI (fraction): [0.5028324161686275, 0.5635392652473017]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 53.31858407079646
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.361142644469026
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

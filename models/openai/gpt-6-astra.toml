@@ -494,13 +494,15 @@ variant = "pass@1 averaged over 3 repeats; 1000-step limit"
 version = "0.1.0"
 source = "https://artificialanalysis.ai/models/releases/gpt-6-astra"
 
-# Vals model defaults: max effort, 128,000 output tokens; individual benchmarks
-# may override defaults, so no row-specific effort is inferred here.
+# Vals profile defaults are not used to infer benchmark settings.
+# Terminal-Bench effort below is explicitly reported by the overall JSON.
 # https://www.vals.ai/models/openai_gpt-6-astra
 
+# Vals overall JSON checked 2026-11-06; model = "openai/gpt-6-astra"; stderr = 4.403 percentage points.
+# Row settings: max_output_tokens = 128000; reasoning_effort = "max"; provider = "OpenAI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 59.60
+score = 59.596
 cost = 9.584259
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -510,10 +512,10 @@ harness = "mini-swe-agent"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
 version = "4.0.0"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
 
 # Single pass@1 run; only ungraded infrastructure/provider errors were retried.
 # This is not the three-repeat protocol used by Artificial Analysis.
-
 [[benchmarks]]
 name = "Terminal-Bench-Science"
 score = 62.86

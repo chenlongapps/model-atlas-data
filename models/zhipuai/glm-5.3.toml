@@ -53,18 +53,22 @@ version = "1.1"
 source = "https://huggingface.co/zai-org/GLM-5.3"
 harness = "mini-swe-agent"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_glm_5_3_max".
+# 95% run-to-run CI (fraction): [0.6593922012533708, 0.7197652266845449]. Cost: JSON mean per scored attempt.
+# Previous display/notes: uncertainty ±3 percentage points; leaderboard configuration details not stated
 [[benchmarks]]
 name = "DeepSWE"
-score = 69.0
+score = 68.95787139689579
 cost = 3.9933584893126386
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
-metric = "pass rate"
+metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "max"
-variant = "uncertainty ±3 percentage points; leaderboard configuration details not stated"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
 source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+harness = "mini-swe-agent"
 
 [[benchmarks]]
 name = "NL2Repo"
@@ -189,16 +193,21 @@ variant = "average over three repeats"
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/evaluations/terminalbench-4-0"
 
+# Vals overall JSON checked 2026-11-06; model = "zai/glm-5.3"; stderr = 1.821 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 128000; reasoning_effort = "max"; provider = "Zhipu AI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 38.89
+score = 38.889
 cost = 9.37436
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
+dataset = "66 tasks"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

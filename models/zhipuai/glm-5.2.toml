@@ -123,18 +123,21 @@ metric = "resolve rate"
 source = "https://z.ai/blog/glm-5.2"
 date = "2026-06-16"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_glm_5_2_max".
+# 95% run-to-run CI (fraction): [0.42052148157196967, 0.45503407398358586]. Cost: JSON mean per scored attempt.
 [[benchmarks]]
 name = "DeepSWE"
-score = "44% ± 2%"
+score = 43.777777777777777
 cost = 3.9199075743111114
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
-metric = "pass rate"
+metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "max"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 450 scored attempts; provider/verifier/network errors excluded"
 
 [[benchmarks]]
 name = "Program Bench"
@@ -180,3 +183,18 @@ score = 48.2
 metric = "score"
 source = "https://z.ai/blog/glm-5.2"
 date = "2026-06-16"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_glm_5_2_high".
+# 95% run-to-run CI (fraction): [0.3153311289278631, 0.41033258788629623]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 36.283185840707965
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.8355164725663715
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

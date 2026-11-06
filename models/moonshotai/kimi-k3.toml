@@ -183,9 +183,11 @@ effort = "max"
 harness = "mini-SWE-agent"
 source = "https://www.kimi.com/en/blog/kimi-k3"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_kimi_k3_max".
+# 95% run-to-run CI (fraction): [0.6397739833756912, 0.7305142649613376]. Cost: JSON mean per scored attempt.
 [[benchmarks]]
 name = "DeepSWE"
-score = 69
+score = 68.51441241685144
 cost = 4.654682129933482
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
@@ -194,10 +196,14 @@ version = "1.1"
 effort = "max"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/"
+dataset = "113 tasks"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
 
+# Vals overall JSON checked 2026-11-06; model = "kimi/kimi-k3"; stderr = 0.505 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 262144; reasoning_effort = "max"; provider = "Moonshot AI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 17.17
+score = 17.172
 cost = 12.478176
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -207,6 +213,7 @@ effort = "max"
 variant = "avg@3; pass@1 per run; mean of three runs"
 harness = "Mini-SWE-agent"
 source = "https://vals.ai/benchmarks/terminal-bench-4"
+dataset = "66 tasks"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

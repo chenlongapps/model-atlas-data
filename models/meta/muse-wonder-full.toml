@@ -151,9 +151,11 @@ variant = "max effort"
 version = "4.3"
 source = "https://research.meta.ai/static/muse-wonder-model-card"
 
+# Vals overall JSON checked 2026-11-06; model = "meta/muse-wonder-full"; stderr = 3.312 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 131072; reasoning_effort = "max"; provider = "Meta".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 58.08
+score = 58.081
 cost = 10.528007
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -163,6 +165,7 @@ dataset = "Terminal-Bench 4.0 (66 tasks); reported ±3.31 percentage points"
 variant = "Vals AI independent run; source labels score accuracy; avg@3 (each run pass@1)"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/models/meta_muse-wonder-full"
+effort = "max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

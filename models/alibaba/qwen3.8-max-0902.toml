@@ -44,13 +44,15 @@ variant = "Mean of three pass@1 runs; 500 agent-step limit; upstream task timeou
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/comparisons/qwen3-8-max-vs-qwen3-8-max-0803"
 
+# Vals overall JSON checked 2026-11-06; model = "alibaba/qwen3.8-max-internal"; stderr = 1.336 percentage points.
+# Row settings: temperature = 0.7; max_output_tokens = 128000; provider = "Alibaba".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 38.89
+score = 38.889
 cost = 12.146852
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Full (66 tasks)"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"

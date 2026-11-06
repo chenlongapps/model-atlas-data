@@ -179,13 +179,15 @@ variant = "reported ±1.46; web tools disabled; network-locked protocol; uncappe
 harness = "mini-swe-agent"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 
+# Vals overall JSON checked 2026-11-06; model = "google/gemini-3.8-flash"; stderr = 2.314 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 65536; reasoning_effort = "high"; provider = "Google".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 19.70
+score = 19.697
 cost = 8.64749
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 effort = "high"
@@ -301,3 +303,33 @@ metric = "index score"
 version = "5.0.1"
 effort = "Low"
 source = "https://artificialanalysis.ai/models/gemini-3-8-flash-low"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_8_flash_high".
+# 95% run-to-run CI (fraction): [0.7240819014906883, 0.7524281656234058]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 73.8255033557047
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 447 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.362349413758389
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_8_flash_medium".
+# 95% run-to-run CI (fraction): [0.6873689454216633, 0.7329850368792218]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 71.01769911504425
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "medium"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 1.9671024789823006
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

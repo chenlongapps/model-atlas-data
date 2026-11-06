@@ -149,13 +149,22 @@ variant = "strict scoring; default fallbacks enabled with no fallback calls; 50-
 date = "2026-10-05"
 source = "https://zapier.com/benchmarks/claude-haiku5_5-report"
 
+# Vals overall JSON checked 2026-11-06; model = "anthropic/claude-haiku-5-5"; stderr = 2.314 percentage points.
+# Row settings: max_output_tokens = 128000; compute_effort = "max"; provider = "Anthropic".
+# Previous rounded display: 36.36 ± 2.31.
 [[benchmarks]]
 name = "Terminal-Bench"
-score = "36.36 ± 2.31"
+score = 36.364
 metric = "task resolution rate"
 version = "4.0.0"
 harness = "Mini-SWE-agent"
 source = "https://vals-ai.com/benchmarks/terminal-bench-4"
+effort = "max"
+cost = 3.117464
+cost_unit = "USD/test"
+dataset = "66 tasks"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

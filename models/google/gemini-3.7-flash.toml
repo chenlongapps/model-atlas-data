@@ -68,9 +68,12 @@ variant = "self-computed; LiteLLM 1.96; high thinking"
 harness = "mini-swe-agent"
 source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_7_flash_medium".
+# 95% run-to-run CI (fraction): [0.624001933873013, 0.6857325794013234]. Cost: JSON mean per scored attempt.
+# Previous display/notes: official v1.1 leaderboard; uncertainty ±3 percentage points
 [[benchmarks]]
 name = "DeepSWE"
-score = 65
+score = 65.48672566371682
 cost = 2.0251351826880533
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
@@ -78,8 +81,9 @@ metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "medium"
-variant = "official v1.1 leaderboard; uncertainty ±3 percentage points"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
 source = "https://deepswe.datacurve.ai/blog/deepswe-v1-1"
+harness = "mini-swe-agent"
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -88,18 +92,21 @@ metric = "accuracy"
 version = "2.1"
 source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
 
+# Vals overall JSON checked 2026-11-06; model = "google/gemini-3.7-flash"; stderr = 3.03 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 65536; reasoning_effort = "high"; provider = "Google".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 12.12
+score = 12.121
 cost = 8.705677
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 variant = "avg@3; each run pass@1; 3 runs; ±1 standard error"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "high"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -150,3 +157,33 @@ metric = "accuracy"
 variant = "128k average, 8-needle"
 version = "v2"
 source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_7_flash_high".
+# 95% run-to-run CI (fraction): [0.6347762421887939, 0.6705334923244803]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 65.26548672566371
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 2.1762860351216813
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_7_flash_low".
+# 95% run-to-run CI (fraction): [0.5117141286507079, 0.5635071102873452]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 53.76106194690266
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "low"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 1.8322645629424779
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

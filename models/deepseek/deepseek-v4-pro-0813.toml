@@ -110,18 +110,21 @@ metric = "score"
 dataset = "internal"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 
+# Vals overall JSON checked 2026-11-06; model = "deepseek/deepseek-v4-pro-0813"; stderr = 2.02 percentage points.
+# Row settings: max_output_tokens = 384000; reasoning_effort = "max"; provider = "DeepSeek".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 14.14
+score = 14.141
 cost = 3.311817
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
-metric = "accuracy"
+metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
 variant = "avg@3; each run pass@1; three runs; ±1 standard error"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

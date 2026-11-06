@@ -162,9 +162,11 @@ variant = "Full"
 harness = "mini-swe-agent"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 
+# Vals overall JSON checked 2026-11-06; model = "meta/muse-wonder"; stderr = 2.201 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 131072; reasoning_effort = "max"; provider = "Meta".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 49.49
+score = 49.495
 cost = 14.657694
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"

@@ -169,3 +169,17 @@ dataset = "Terminal-Bench Science v0.1.0 (70 tasks)"
 variant = "pass@1; single run"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_gemini_3_6_flash_high".
+# 95% run-to-run CI (fraction): [0.4297656202995626, 0.5038626982845081].
+# Cost conflict: JSON 4.419013277333334 vs homepage 2.209506638666667 USD/task; omitted (repricing unverified).
+[[benchmarks]]
+name = "DeepSWE"
+score = 46.68141592920354
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

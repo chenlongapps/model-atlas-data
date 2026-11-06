@@ -64,9 +64,11 @@ variant = "pass@1 averaged over three repeats"
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks"
 
+# Vals overall JSON checked 2026-11-06; model = "kimi/kimi-k3.1-pro"; stderr = 1.75 percentage points.
+# Row settings: temperature = 1; top_p = 0.95; max_output_tokens = 262144; reasoning_effort = "max"; provider = "Moonshot AI".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 63.64
+score = 63.636
 cost = 4.56894
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -76,6 +78,7 @@ dataset = "full 66-task set"
 variant = "mean of three pass@1 runs"
 harness = "mini-swe-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

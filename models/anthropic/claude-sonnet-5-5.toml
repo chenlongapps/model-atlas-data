@@ -81,9 +81,11 @@ effort = "xhigh"
 harness = "mini-swe-agent"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"
 
+# Vals overall JSON checked 2026-11-06; model = "anthropic/claude-sonnet-5-5"; stderr = 1.01 percentage points.
+# Row settings: temperature = 1; max_output_tokens = 128000; compute_effort = "max"; provider = "Anthropic".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 64.14
+score = 64.141
 cost = 16.513006
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
@@ -93,6 +95,7 @@ dataset = "66 tasks"
 variant = "avg@3 (three runs, each pass@1)"
 harness = "mini-swe-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+effort = "max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

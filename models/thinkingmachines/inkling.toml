@@ -57,9 +57,11 @@ variant = "AA independent evaluation; pass@1 averaged over three repeats per tas
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/comparisons/inkling-vs-gpt-5-6-sol-xhigh"
 
+# Vals overall JSON checked 2026-11-06; model = "thinkingmachines/inkling"; stderr = 0.505 percentage points.
+# Row settings: temperature = 1; top_p = 1; max_output_tokens = 256000; reasoning_effort = "0.99"; provider = "Thinkingmachines".
 [[benchmarks]]
 name = "Terminal-Bench"
-score = 0.51
+score = 0.505
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "Terminal-Bench 4.0 (66 tasks)"
@@ -67,6 +69,9 @@ effort = "0.99"
 variant = "Vals AI avg@3; pass@1 per run; reported ±0.51; 8-hour task timeout"
 harness = "Mini-SWE-agent"
 source = "https://vals-ai.com/models/thinkingmachines_inkling"
+cost = 2.495998
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

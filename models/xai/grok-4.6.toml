@@ -87,9 +87,12 @@ metric = "Elo"
 variant = "high effort"
 source = "https://x.ai/news/grok-4-7"
 
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_grok_4_6_medium".
+# 95% run-to-run CI (fraction): [0.6519707153331677, 0.697586806790726]. Cost: JSON mean per scored attempt.
+# Previous display/notes: leaderboard reports ±2 percentage points
 [[benchmarks]]
 name = "DeepSWE"
-score = 67.0
+score = 67.47787610619469
 cost = 3.4489837522123894
 cost_unit = "USD/task"
 cost_source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
@@ -97,7 +100,7 @@ metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
 effort = "medium"
-variant = "leaderboard reports ±2 percentage points"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/"
 
@@ -141,3 +144,63 @@ metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
 source = "https://artificialanalysis.ai/models/grok-4-6-xhigh"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_grok_4_6_xhigh".
+# 95% run-to-run CI (fraction): [0.64564892272269, 0.689162607210791]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 66.74057649667405
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "xhigh"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 5.497668745011087
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_grok_4_6_high".
+# 95% run-to-run CI (fraction): [0.6365486924786155, 0.6672207088517614]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 65.18847006651884
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "high"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 451 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 4.3848732239467845
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_grok_4_6_low".
+# 95% run-to-run CI (fraction): [0.3932945513980172, 0.43966758668661526]. Cost: JSON mean per scored attempt.
+[[benchmarks]]
+name = "DeepSWE"
+score = 41.648106904231624
+metric = "pass@1"
+version = "1.1"
+dataset = "113 tasks"
+effort = "low"
+variant = "4 whole-benchmark passes; 113 tasks attempted; 449 scored attempts; provider/verifier/network errors excluded"
+harness = "mini-swe-agent"
+cost = 1.0423604231625836
+cost_unit = "USD/task"
+source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+# Vals overall JSON checked 2026-11-06; model = "grok/grok-4.6"; stderr = 1.336 percentage points.
+# Row settings: temperature = 0.7; top_p = 0.95; reasoning_effort = "high"; provider = "SpaceXAI".
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 17.172
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 5.062449
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
