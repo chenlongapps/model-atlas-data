@@ -191,14 +191,17 @@ test('descriptions follow the selected language and preserve fallback', () => {
   assert.equal(description(descriptionLocale('zh-CN', {}), 'model', 'lab/a', 'original'), 'original');
 });
 
-test('detail tables sort results, show effort and optional benchmark prices separately and hide only unmatched labels', async () => {
+test('detail pages preserve results, optional prices and parameter provenance', async t => {
   class Element {
     constructor(tag = '') { this.tag = tag; this.children = []; this.attributes = {}; this.dataset = {}; this.handlers = {}; this.classList = { toggle() {} }; }
     setAttribute(name, value) { this.attributes[name] = value; }
+    removeAttribute(name) { delete this.attributes[name]; }
     append(...children) { this.children.push(...children); }
     replaceChildren(...children) { this.children = children; }
     addEventListener(name, handler) { this.handlers[name] = handler; }
     querySelectorAll() { return []; }
+    querySelector(tag) { return this.children.filter(child => child instanceof Element).map(child => child.tag === tag ? child : child.querySelector(tag)).find(Boolean); }
+    focus() {}
     set textContent(value) { this.children = [String(value)]; }
     get textContent() { return this.children.map(child => child instanceof Element ? child.textContent : String(child)).join(''); }
   }
@@ -367,6 +370,102 @@ test('detail tables sort results, show effort and optional benchmark prices sepa
     globals.location.hash = '#/models/lab%2Fc';
     handlers.hashchange();
     assert.deepEqual(find(resultTable(), 'tbody').children.map(cells), modelRows.map(cells));
+
+    await t.test('model parameters keep precision, independent components and safe provenance links', () => {
+      const model = fixture['lab/a'];
+      globals.location.hash = '#/models/lab%2Fa';
+      const parameterSection = () => select('#main').children.find(node => find(node, 'h2')?.textContent === messages.en.modelParameters);
+      const counts = () => find(parameterSection(), 'dl').children.map(fact => find(fact, 'dd').textContent);
+      const sources = node => {
+        const links = [];
+        const visit = child => {
+          if (!(child instanceof Element)) return;
+          if (child.tag === 'a') links.push(child);
+          child.children.forEach(visit);
+        };
+        visit(node);
+        return links;
+      };
+      handlers.hashchange();
+      assert.equal(parameterSection().children[1].textContent, messages.en.noParameters);
+      assert.equal(find(parameterSection(), 'table'), undefined);
+
+      model.metadata = { modelatlas: { parameters: {
+        total_billion: 671, active_billion: 37,
+        sources: ['https://example.com/full', 'https://example.com/paper'], notes: 'Reported approximate counts.',
+      } } };
+      const parameters = model.metadata.modelatlas.parameters;
+      let original = structuredClone(parameters);
+      handlers.hashchange();
+      assert.equal(select('#main').children[2], parameterSection());
+      assert.deepEqual(counts(), ['671 B', '37 B']);
+      assert.ok(parameterSection().textContent.includes(parameters.notes));
+      assert.ok(parameterSection().textContent.includes(messages.en.parameterUnit));
+      assert.deepEqual(sources(parameterSection()).map(link => link.attributes.href), parameters.sources);
+      for (const link of sources(parameterSection())) {
+        assert.equal(link.attributes.target, '_blank');
+        assert.equal(link.attributes.rel, 'noopener noreferrer');
+      }
+      assert.deepEqual(parameters, original);
+
+      for (const value of [0.35, 8.123456789, 0.000001, 1000]) {
+        parameters.total_billion = value;
+        delete parameters.active_billion;
+        handlers.hashchange();
+        assert.deepEqual(counts(), [`${value} B`, '—']);
+        assert.equal(find(parameterSection(), 'table'), undefined);
+      }
+      delete parameters.total_billion;
+      parameters.active_billion = 3;
+      handlers.hashchange();
+      assert.deepEqual(counts(), ['—', '3 B']);
+      delete parameters.active_billion;
+      delete parameters.sources;
+      parameters.notes = 'Only component counts are disclosed.';
+      parameters.components = [
+        { name: 'Multimodal Decoder', total_billion: 12, active_billion: 3, sources: ['https://example.com/decoder'], notes: 'Decoder only.' },
+        { name: 'Vision Encoder', total_billion: 0.4, sources: ['https://example.com/encoder'], notes: 'Vision weights only.' },
+        { name: 'Active component', active_billion: 0.1, sources: ['https://example.com/active'] },
+      ];
+      original = structuredClone(parameters);
+      handlers.hashchange();
+      assert.deepEqual(counts(), ['—', '—']);
+      let componentTable = find(parameterSection(), 'table');
+      assert.deepEqual(cells(find(componentTable, 'thead').children[0]), ['Component', 'Total parameters', 'Active parameters per token']);
+      const rows = find(componentTable, 'tbody').children;
+      assert.deepEqual(rows.map(row => cells(row).slice(1)), [['12 B', '3 B'], ['0.4 B', '—'], ['—', '0.1 B']]);
+      rows.forEach((row, index) => {
+        const component = parameters.components[index];
+        assert.ok(row.children[0].textContent.startsWith(component.name));
+        if (component.notes) assert.ok(row.children[0].textContent.includes(component.notes));
+        assert.deepEqual(sources(row).map(link => link.attributes.href), component.sources);
+      });
+      assert.deepEqual(parameters, original);
+
+      parameters.total_billion = 20;
+      parameters.sources = ['https://example.com/full', 'javascript:alert(1)', 'data:text/html,unsafe', 'not a URL'];
+      parameters.notes = '<script>untrusted notes</script>';
+      handlers.hashchange();
+      assert.deepEqual(counts(), ['20 B', '—']);
+      assert.deepEqual(sources(parameterSection()).map(link => link.attributes.href), ['https://example.com/full', ...parameters.components.flatMap(component => component.sources)]);
+      assert.ok(parameterSection().textContent.includes(parameters.notes));
+      assert.equal(find(parameterSection(), 'script'), undefined);
+
+      // Use the actual language selector to check translated labels and rerendering.
+      const languagePicker = select('#language').children[0];
+      languagePicker.children[1].children[1].handlers.click();
+      const translated = select('#main').children[2];
+      assert.equal(find(translated, 'h2').textContent, messages['zh-CN'].modelParameters);
+      assert.deepEqual(find(translated, 'dl').children.map(fact => find(fact, 'dt').textContent), [messages['zh-CN'].totalParameters, messages['zh-CN'].activeParameters]);
+      assert.deepEqual(find(translated, 'dl').children.map(fact => find(fact, 'dd').textContent), ['20 B', '—']);
+      componentTable = find(translated, 'table');
+      assert.deepEqual(cells(find(componentTable, 'thead').children[0]), ['组件', '总参数量', '每 token 激活参数量']);
+      assert.ok(translated.textContent.includes(parameters.notes));
+      assert.ok(translated.textContent.includes(messages['zh-CN'].parameterUnit));
+      delete model.metadata;
+      handlers.hashchange();
+      assert.equal(select('#main').children[2].children[1].textContent, messages['zh-CN'].noParameters);
+    });
   } finally {
     for (const [key, descriptor] of previous) {
       if (descriptor) Object.defineProperty(globalThis, key, descriptor); else delete globalThis[key];

@@ -157,6 +157,26 @@ function detailHeader(kind, id, title, desc) {
   return el('div', { class: 'detail-header' }, el('div', { class: 'breadcrumbs' }, el('a', { href: routeFor(kind) }, kind === 'models' ? T.models : T.benchmarks), ' / ', kind === 'models' ? modelLab(id) : T.definition),
     el('h1', {}, title), desc && el('p', {}, desc), el('div', { class: 'code-line' }, el('code', {}, id), copy));
 }
+function modelParameters(parameters) {
+  const count = value => Number.isFinite(value) && value > 0 ? `${value} B` : '—';
+  const components = parameters?.components || [];
+  const hasCount = entry => Number.isFinite(entry?.total_billion) && entry.total_billion > 0 || Number.isFinite(entry?.active_billion) && entry.active_billion > 0;
+  if (!hasCount(parameters) && !components.some(hasCount)) return el('p', {}, T.noParameters);
+  const provenance = entry => {
+    const links = (entry.sources || []).map((url, index) => external(url, `${T.source} ${index + 1}`)).filter(Boolean);
+    return el('div', { class: 'parameter-provenance' },
+      links.length ? el('div', { class: 'external-links' }, links) : null,
+      entry.notes ? el('p', { class: 'note' }, `${T.parameterNotes}: `, entry.notes) : null);
+  };
+  const totals = facts([[T.totalParameters, count(parameters.total_billion)], [T.activeParameters, count(parameters.active_billion)]]);
+  totals.className = 'facts parameter-facts';
+  return el('div', {}, totals, el('p', { class: 'note' }, T.parameterUnit), provenance(parameters),
+    components.length ? el('div', { class: 'parameter-components' },
+      el('h3', {}, T.componentParameters),
+      table([T.component, T.totalParameters, T.activeParameters], components.map(component => [
+        el('div', {}, el('strong', {}, component.name), provenance(component)), count(component.total_billion), count(component.active_billion),
+      ]), 'parameter-table')) : null);
+}
 function modelDetail(id) {
   if (!Object.hasOwn(data.models, id)) return notFound();
   const m = data.models[id];
@@ -169,6 +189,7 @@ function modelDetail(id) {
   const entries = [...(data.index.byModel.get(id) || [])].sort((a, b) => a.result.name.localeCompare(b.result.name, undefined, { numeric: true, sensitivity: 'base' }));
   main.replaceChildren(detailHeader('models', id, m.name, description(descriptionLocale(language, data.locale), 'model', id, m.description)),
     section(T.overview, facts([[T.modelId, id], [T.organization, labLabel(id)], [T.family, m.family], [T.release, m.release_date], [T.weights, badge(m.open_weights)], [T.license, m.license]])),
+    section(T.modelParameters, modelParameters(m.metadata?.modelatlas?.parameters)),
     section(T.sourcesLinks, links.length ? el('div', { class: 'external-links' }, links) : el('p', {}, T.noLinks)),
     section(T.capabilities, facts([...modalities, ...caps].length ? [...modalities, ...caps] : [[T.information, '—']])),
     section(T.limits, facts(limits.length ? limits : [[T.information, '—']])),
