@@ -268,9 +268,12 @@ variant = "shell and web browsing; blind pairwise comparisons"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/models/comparisons/gemini-3-8-flash-vs-hy3"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "google/gemini-3.8-flash"; stderr = 1.141; provider = "Google".
+# Evaluation settings: max_output_tokens = 65536; reasoning_effort = "high".
 [[benchmarks]]
 name = "Vals Index"
-score = 55.95
+score = 55.951
 cost = 5.025617
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

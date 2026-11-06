@@ -199,14 +199,18 @@ variant = "pass@1 averaged over 3 repeats; source displays rounded integer perce
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/comparisons/muse-spark-open-vs-gpt-6-1-sol-high"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "meta/muse-spark-open"; stderr = 1.087; provider = "Together AI".
+# Evaluation settings: temperature = 1.0; top_p = 1.0; max_output_tokens = 131072; reasoning_effort = "xhigh".
 [[benchmarks]]
 name = "Vals Index"
-score = 48.57
+score = 48.567
 cost = 4.71792
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
+effort = "xhigh"
 source = "https://www.vals.ai/models/meta_muse-spark-open"
 
 [[benchmarks]]

@@ -155,6 +155,20 @@ metric = "accuracy"
 dataset = "2,158 text-only questions from the original 2,500-item HLE set"
 source = "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-flash-vs-step-5"
 
+# JSON model = "xiaomi/mimo-v2.6-flash"; stderr = 1.114; provider = "Xiaomi".
+# Official API evaluation, not a verified evaluation of the linked Flash-RL weights.
+# No reasoning/compute effort, unified harness or evaluation date is disclosed.
+# The output cap below is an evaluation setting, not a model output limit.
+[[benchmarks]]
+name = "Vals Index"
+score = 54.826
+cost = 0.221007
+cost_unit = "USD/test"
+metric = "performance score"
+version = "2.2"
+variant = "Official Xiaomi API; exact evaluated checkpoint undisclosed; not verified as the linked Flash-RL weights; temperature=1.0; top_p=0.95; max_output_tokens=128000"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
+
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 26.7276981444568

@@ -229,14 +229,18 @@ version = "5.0.1"
 effort = "Max"
 source = "https://artificialanalysis.ai/models/glm-5-3"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "zai/glm-5.3"; stderr = 1.111; provider = "Fireworks AI".
+# Evaluation settings: temperature = 1.0; top_p = 0.95; max_output_tokens = 131072; reasoning_effort = "max".
 [[benchmarks]]
 name = "Vals Index"
-score = 59.73
+score = 59.729
 cost = 8.524625
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
+effort = "max"
 source = "https://www.vals.ai/benchmarks/vals_index"
 
 [[benchmarks]]

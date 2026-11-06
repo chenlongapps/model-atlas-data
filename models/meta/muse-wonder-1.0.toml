@@ -208,9 +208,12 @@ effort = "Max"
 harness = "Stirrup agent loop (shell and web browsing)"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "meta/muse-wonder"; stderr = 1.067; provider = "Meta".
+# Evaluation settings: temperature = 1.0; max_output_tokens = 131072; reasoning_effort = "max".
 [[benchmarks]]
 name = "Vals Index"
-score = 64.88
+score = 64.877
 cost = 10.647504
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

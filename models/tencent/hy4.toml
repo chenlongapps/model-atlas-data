@@ -291,3 +291,18 @@ score = 55.6
 metric = "score"
 variant = "without tools; highest available reasoning setting"
 source = "https://hy.tencent.ai/research/hy4?langVersion=en"
+
+# JSON model = "tencent/hy4"; stderr = 1.081; provider = "Tencent".
+# Evaluation settings: temperature = 0.9; top_p = 1.0; max_output_tokens = 65536.
+# No reasoning/compute effort is specified. Vals says access was via OpenRouter
+# and costs use Tencent's list price: https://www.vals.ai/models/tencent_hy4
+# Vals' open-weight label disagrees with the local profile; do not change model
+# ownership/weight status on the basis of this benchmark observation.
+[[benchmarks]]
+name = "Vals Index"
+score = 59.353
+cost = 1.720395
+cost_unit = "USD/test"
+metric = "performance score"
+version = "2.2"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

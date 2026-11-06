@@ -85,9 +85,12 @@ variant = "single run; pass@1; reported ±2.01 percentage points"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-science"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "stepfun/step-5-preview"; stderr = 1.163; provider = "Stepfun".
+# Evaluation settings: temperature = 1.0; top_p = 0.95; max_output_tokens = 1024000.
 [[benchmarks]]
 name = "Vals Index"
-score = 54.76
+score = 54.762
 cost = 2.73409
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

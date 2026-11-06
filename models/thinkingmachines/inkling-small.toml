@@ -80,12 +80,16 @@ metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/inkling-small/"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "thinkingmachines/inkling-small"; stderr = 1.133; provider = "Thinkingmachines".
+# Evaluation settings: temperature = 1.0; top_p = 1.0; max_output_tokens = 262000; reasoning_effort = "0.99".
 [[benchmarks]]
 name = "Vals Index"
-score = 27.59
+score = 27.588
 cost = 0.401307
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
+effort = "0.99"
 source = "https://www.vals.ai/benchmarks/vals_index"

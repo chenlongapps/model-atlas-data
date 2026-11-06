@@ -1,0 +1,38 @@
+# Sources (checked 2026-11-06):
+# - https://thinkingmachines.ai/news/inkling-2-small/
+# - https://thinkingmachines.ai/model-card/inkling-2-small/
+# - https://www.vals.ai/models/thinkingmachines_inkling-2-small
+# The publisher says weights are initially closed, with an Apache-2.0 release
+# planned after external safety testing. Vals' "open-weight" label is premature.
+# Do not assign a future license or infer audio support from older Inkling models.
+# Sampling controls and provider-specific limits are not model-wide facts here.
+schema = 2
+name = "Inkling 2 Small"
+description = "Thinking Machines' 594B-total, 17B-active MoE reasoning model for text and image inputs, text output, coding, and tool use; weights are initially closed pending safety testing."
+open_weights = false
+release_date = "2026-11-05"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+
+[limit]
+# The publisher describes up to 1M context without an exact token count.
+# Tinker training/serverless limits are provider-specific, not model limits.
+
+# JSON model = "thinkingmachines/inkling-2-small"; stderr = 1.18; provider = "Thinkingmachines".
+# Evaluation settings: temperature = 1.0; top_p = 1.0; max_output_tokens = 1024000;
+# reasoning_effort = "0.99". The output cap is not a model output limit.
+[[benchmarks]]
+name = "Vals Index"
+score = 56.081
+cost = 3.509318
+cost_unit = "USD/test"
+metric = "performance score"
+version = "2.2"
+effort = "0.99"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

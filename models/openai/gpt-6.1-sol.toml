@@ -194,14 +194,18 @@ variant = "pass@1 averaged over three repeats; 1,000 agent step cap"
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-low-vs-gpt-6-1-sol-xhigh"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "openai/gpt-6.1-sol"; stderr = 1.072; provider = "OpenAI".
+# Evaluation settings: max_output_tokens = 128000; reasoning_effort = "max".
 [[benchmarks]]
 name = "Vals Index"
-score = 63.94
+score = 63.944
 cost = 3.614054
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
+effort = "max"
 dataset = "finance, coding, legal, and tax tasks"
 source = "https://www.vals.ai/models/openai_gpt-6.1-sol"
 

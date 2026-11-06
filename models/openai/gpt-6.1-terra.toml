@@ -124,3 +124,18 @@ metric = "index score"
 version = "5.0.1"
 effort = "High"
 source = "https://artificialanalysis.ai/models/gpt-6-1-terra-high"
+
+# JSON model = "openai/gpt-6.1-terra"; stderr = 0.994; provider = "OpenAI".
+# Evaluation settings: max_output_tokens = 128000; reasoning_effort = "max".
+# Current JSON and profile table agree. The profile's Oct 26 update reports
+# 60.17 instead; no run identifier or revision explanation reconciles them.
+# This records the current JSON, not an inferred official correction.
+[[benchmarks]]
+name = "Vals Index"
+score = 60.536
+cost = 2.939376
+cost_unit = "USD/test"
+metric = "performance score"
+version = "2.2"
+effort = "max"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

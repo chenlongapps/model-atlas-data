@@ -1,0 +1,46 @@
+# Sources (checked 2026-11-06):
+# - https://mistral.ai/news/mistral-large-4-oss/
+# - https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B
+# - https://docs.mistral.ai/models/mistral-large-4-0
+# - https://www.vals.ai/models/mistralai_mistral-large-4-oss
+# Models.dev only has the Oct 6 Preview. The Oct 29 release has additional RL
+# training; keep it separate and use the publisher's explicit weight identifier.
+# Context 1048576 is stated in the model card's local Vibe configuration.
+# The Vals output cap is an evaluation setting; no model output limit is inferred.
+schema = 2
+name = "Mistral Large 4 (Le Chonk)"
+description = "October 29 open-weight release of Mistral Large 4, a multimodal MoE model with 1.05T total and 52B active parameters, improved through additional RL for coding, cybersecurity, and reasoning."
+family = "mistral-large"
+open_weights = true
+release_date = "2026-10-29"
+license = "Mistral Ecosystem Open-Weight License"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+
+[limit]
+context = 1_048_576
+
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+
+# JSON model = "mistralai/mistral-large-4-oss"; stderr = 1.258; provider = "Mistral AI".
+# Evaluation settings: temperature = 1.0; top_p = 0.95; max_output_tokens = 256000;
+# reasoning_effort = "high". Evaluated checkpoint precision is not disclosed.
+# The profile's Oct 29 update reports 56.42; retain this current JSON observation
+# without asserting a correction of the historical result.
+[[benchmarks]]
+name = "Vals Index"
+score = 56.527
+cost = 3.716552
+cost_unit = "USD/test"
+metric = "performance score"
+version = "2.2"
+effort = "high"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"

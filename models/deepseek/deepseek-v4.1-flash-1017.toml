@@ -137,14 +137,18 @@ effort = "Max"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
 
+# Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
+# JSON model = "deepseek/deepseek-v4.1-flash-1017"; stderr = 1.055; provider = "DeepSeek".
+# Evaluation settings: temperature = 1.0; top_p = 1.0; max_output_tokens = 384000; reasoning_effort = "max".
 [[benchmarks]]
 name = "Vals Index"
-score = 61.26
+score = 61.257
 cost = 0.65747
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
+effort = "max"
 source = "https://www.vals.ai/models/deepseek_deepseek-v4.1-flash-1017"
 
 [[benchmarks]]
