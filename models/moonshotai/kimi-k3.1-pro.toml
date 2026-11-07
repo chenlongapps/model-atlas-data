@@ -10,7 +10,7 @@ schema = 2
 name = "Kimi K3.1 Pro"
 description = "Multimodal Kimi model with 1M context and always-on reasoning for coding, 3D creation, financial research, and agentic work"
 family = "kimi-k3"
-open_weights = true
+open_weights = false
 release_date = "2026-10-23"
 license = "Kimi K3.1-Pro License"
 
