@@ -5,6 +5,8 @@ import { messages, resolveLanguage, descriptionLocale } from '../web/i18n.mjs';
 import { readFile } from 'node:fs/promises';
 import { createSelect } from '../web/select.mjs';
 import { groupModalities, renderModalities } from '../web/modalities.mjs';
+import { hasBenchmarkCost, releaseTimestamp, costOptions, chartPoints, conditionKey, comparisonGroups, frontierUnavailable, paretoFront, median, numericDomain, axisTicks, formatTick, costAxis, formatCostTick, placeLabels, labColor } from '../web/chart-data.mjs';
+import { createBenchmarkChart } from '../web/chart.mjs';
 
 const models = {
   'lab/A': { name: 'Alpha', open_weights: true, release_date: '2025-01-01' },
@@ -181,6 +183,9 @@ test('both languages cover all UI message keys and static HTML references', asyn
   }
   const app = await readFile(new URL('../web/app.mjs', import.meta.url), 'utf8');
   for (const [, key] of app.matchAll(/\bT\.([A-Za-z][A-Za-z0-9]*)/g)) assert.ok(Object.hasOwn(messages.en, key), key);
+  const chart = await readFile(new URL('../web/chart.mjs', import.meta.url), 'utf8');
+  for (const [, key] of chart.matchAll(/\bT\.([A-Za-z][A-Za-z0-9]*)/g)) assert.ok(Object.hasOwn(messages.en, key), key);
+  for (const reason of ['costOnly', 'direction', 'few', 'conditions']) assert.equal(typeof messages.en[`chartFrontier_${reason}`], 'string');
 });
 test('descriptions follow the selected language and preserve fallback', () => {
   const locale = { model: { descriptions: { 'lab/a': '中文' } }, benchmark: { description: { b: '评测' } } };
@@ -217,8 +222,8 @@ test('detail pages preserve results, optional prices and parameter provenance', 
   const ambiguousDefinition = { ...definition, name: 'Ambiguous bench' };
   const defs = { b1: { ...definition, higher_is_better: true }, b2: ambiguousDefinition, b3: { ...ambiguousDefinition }, b4: { ...definition, name: 'Matched bench' } };
   const fixture = {
-    'lab/a': { name: 'Alpha', benchmarks: [{ ...result, score: 10 }] },
-    'lab/b': { name: 'Beta', benchmarks: [{ ...result, score: 20, effort: 'Adaptive/Max', harness: 'H', future: { budget: 2 } }] },
+    'lab/a': { name: 'Alpha', release_date: '2026-01-01', benchmarks: [{ ...result, score: 10 }] },
+    'lab/b': { name: 'Beta', release_date: '2026-02-01', benchmarks: [{ ...result, score: 20, effort: 'Adaptive/Max', harness: 'H', future: { budget: 2 } }] },
     'lab/c': { name: 'Gamma', benchmarks: [
       { ...result, name: 'Zulu', score: 99 },
       { ...result, name: 'Matched bench', score: 2, effort: 'xhigh' },
@@ -229,7 +234,7 @@ test('detail pages preserve results, optional prices and parameter provenance', 
   };
   const globals = {
     Node: Element,
-    document: { createElement: tag => new Element(tag), createTextNode: String, querySelector: select, querySelectorAll: () => [], addEventListener() {}, documentElement: new Element() },
+    document: { createElement: tag => new Element(tag), createElementNS: (_, tag) => new Element(tag), createTextNode: String, querySelector: select, querySelectorAll: () => [], addEventListener() {}, documentElement: new Element() },
     window: { addEventListener: (name, handler) => { handlers[name] = handler; } },
     location: { hash: '#/benchmarks/b1' },
     navigator: { languages: ['en'] },
@@ -471,6 +476,506 @@ test('detail pages preserve results, optional prices and parameter provenance', 
       if (descriptor) Object.defineProperty(globalThis, key, descriptor); else delete globalThis[key];
     }
   }
+});
+
+const deepDefinition = { name: 'DeepSWE', version: '1.1', metric: 'pass@1', unit: 'percent', higher_is_better: true };
+const deepResult = {
+  name: 'DeepSWE', version: '1.1', metric: 'pass@1', score: 50, cost: 1.234567891, cost_unit: 'USD/task',
+  dataset: '113 tasks', harness: 'mini-swe-agent', effort: 'high',
+  variant: '4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded',
+  source: 'https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json',
+};
+
+test('chart costs keep exact bases, finite values, true zero and source precision', () => {
+  for (const cost of [0, 0.0000001, 1.234567891]) assert.equal(hasBenchmarkCost({ cost, cost_unit: 'USD/task' }), true);
+  for (const cost of [undefined, null, '', '1', -1, NaN, Infinity]) assert.equal(hasBenchmarkCost({ cost, cost_unit: 'USD/task' }), false);
+  for (const cost_unit of [undefined, '', ' ', null, 1]) assert.equal(hasBenchmarkCost({ cost: 1, cost_unit }), false);
+  const results = [deepResult, { ...deepResult, cost: 0 }, { ...deepResult, cost_unit: 'USD/test' }, { ...deepResult, cost_unit: 'USD/task ' }, { ...deepResult, score: NaN }, { ...deepResult, cost: -1 }];
+  const entries = results.map(result => ({ modelId: 'lab/A', result }));
+  const original = structuredClone(entries);
+  assert.deepEqual(costOptions(entries), [['USD/task', 2], ['USD/task ', 1], ['USD/test', 1]]);
+  assert.deepEqual(chartPoints(entries, models, 'cost', 'USD/task').map(point => point.x), [1.234567891, 0]);
+  assert.deepEqual(chartPoints(entries, models, 'cost'), []);
+  assert.deepEqual(chartPoints(entries, models, 'other', 'USD/task'), []);
+  assert.deepEqual(entries, original);
+});
+
+test('release coordinates use strict UTC model dates, not result dates or normalized invalid dates', () => {
+  assert.equal(releaseTimestamp('1970-01-01'), 0);
+  assert.equal(releaseTimestamp('2024-02-29'), Date.UTC(2024, 1, 29));
+  for (const value of ['2026-02-29', '2026-04-31', '2026-13-01', '2026-00-01', '2026-1-01', '2026-01', '2026-01-01T00:00:00Z', undefined]) assert.equal(releaseTimestamp(value), undefined);
+  const entries = [{ modelId: 'lab/A', result: { ...deepResult, date: '2020-01-01' } }, { modelId: 'other/c', result: deepResult }];
+  const points = chartPoints(entries, models, 'release');
+  assert.equal(points.length, 1);
+  assert.equal(points[0].x, Date.UTC(2025, 0, 1));
+  assert.equal(points[0].release, '2025-01-01');
+});
+
+test('Pareto front uses strict improvements, preserves tied observations and both scoring directions', () => {
+  const points = [[0, 0], [1, 2], [1, 2], [1, 1], [2, 2], [3, 3], [4, -1]].map(([x, y], i) => ({ x, y, id: i }));
+  const original = structuredClone(points);
+  assert.deepEqual(paretoFront(points, true).map(point => point.id), [0, 1, 2, 5]);
+  assert.deepEqual(paretoFront(points, false).map(point => point.id), [0, 6]);
+  assert.deepEqual(paretoFront(points, undefined), []);
+  assert.deepEqual(paretoFront([], true), []);
+  assert.deepEqual(paretoFront([{ x: -1, y: 99 }, { x: Infinity, y: 99 }, { x: 0, y: NaN }], true), []);
+  assert.deepEqual(points, original);
+  // Compare the optimized algorithm against the definition of dominance.
+  const sample = Array.from({ length: 80 }, (_, i) => ({ x: (i * 7) % 13, y: (i * 19) % 23, id: i }));
+  for (const higher of [true, false]) {
+    const expected = sample.filter(a => !sample.some(b => b.x <= a.x && (higher ? b.y >= a.y : b.y <= a.y) && (b.x < a.x || b.y !== a.y)));
+    assert.deepEqual(new Set(paretoFront(sample, higher).map(point => point.id)), new Set(expected.map(point => point.id)));
+  }
+});
+
+test('frontier eligibility requires a documented protocol, exact known conditions and multiple models', () => {
+  const entries = ['lab/A', 'lab/b'].map(modelId => ({ modelId, result: { ...deepResult } }));
+  const points = chartPoints(entries, models, 'cost', 'USD/task');
+  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'cost'), null);
+  assert.equal(comparisonGroups(points, 'deepswe-v1.1', deepDefinition)[0].verified, true);
+  assert.equal(frontierUnavailable(points, 'other', deepDefinition, 'cost'), 'conditions');
+  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'release'), 'costOnly');
+  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', {}, 'cost'), 'direction');
+  assert.equal(frontierUnavailable(points.slice(0, 1), 'deepswe-v1.1', deepDefinition, 'cost'), 'few');
+  for (const changes of [{ source: 'https://example.com' }, { source: 'https://deepswe.datacurve.ai/other' }, { effort: undefined }, { effort: 'High' }, { harness: 'other' }, { dataset: '111 tasks' }, { variant: '4 runs' }, { date: '2026-01-01' }, { future: { tools: true } }]) {
+    const changed = structuredClone(points);
+    Object.assign(changed[0].result, changes);
+    assert.equal(frontierUnavailable(changed, 'deepswe-v1.1', deepDefinition, 'cost'), 'conditions', JSON.stringify(changes));
+  }
+  const future = points.map(point => ({ ...point, result: { ...point.result, unknown_condition: true } }));
+  assert.equal(frontierUnavailable(future, 'deepswe-v1.1', deepDefinition, 'cost'), 'conditions');
+  assert.notEqual(conditionKey({ ...deepResult, effort: undefined }), conditionKey({ ...deepResult, effort: 'default' }));
+  assert.notEqual(conditionKey(deepResult), conditionKey({ ...deepResult, cost_source: 'https://example.com', future: 1 }));
+  assert.equal(conditionKey(deepResult), conditionKey({ ...deepResult, cost: 99, score: 20, cost_source: 'https://example.com' }));
+  assert.equal(conditionKey({ nested: { b: 1, a: 2 } }), conditionKey({ nested: { a: 2, b: 1 } }));
+});
+
+test('mixed conditions retain independent verified frontiers without admitting unknown or single-model groups', () => {
+  const entries = [
+    { modelId: 'lab/A', result: { ...deepResult, cost: 1, score: 40 } },
+    { modelId: 'lab/b', result: { ...deepResult, cost: 3, score: 60 } },
+    { modelId: 'lab/A', result: { ...deepResult, effort: 'low', cost: 2, score: 30 } },
+    { modelId: 'lab/b', result: { ...deepResult, effort: 'low', cost: 4, score: 50 } },
+    { modelId: 'other/c', result: { ...deepResult, harness: 'unknown agent', cost: 0, score: 100 } },
+    { modelId: 'other/c', result: { ...deepResult, effort: 'max', cost: 1, score: 90 } },
+    { modelId: 'other/c', result: { ...deepResult, effort: 'max', cost: 2, score: 95 } },
+  ];
+  const original = structuredClone(entries);
+  const points = chartPoints(entries, models, 'cost', 'USD/task');
+  const groups = comparisonGroups(points, 'deepswe-v1.1', deepDefinition).filter(group => group.verified);
+  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'cost'), null);
+  assert.equal(groups.length, 2);
+  assert.deepEqual(groups.map(group => group.points.length), [2, 2]);
+  assert.deepEqual(groups.map(group => paretoFront(group.points, true).length), [2, 2]);
+  assert.deepEqual(paretoFront(points, true).map(point => point.modelId), ['other/c']); // A global frontier would be wrong.
+  assert.equal(frontierUnavailable(points.slice(4), 'deepswe-v1.1', deepDefinition, 'cost'), 'few');
+  assert.equal(frontierUnavailable(points, 'other', deepDefinition, 'cost'), 'conditions');
+  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'release'), 'costOnly');
+  assert.deepEqual(entries, original);
+});
+
+test('axis domains, medians and organization colors are stable without changing observations', () => {
+  assert.equal(median([3, 1, 2]), 2);
+  assert.equal(median([4, 1, 3, 2]), 2.5);
+  assert.equal(median([]), undefined);
+  for (const values of [[0], [50], [-10, 10], [0.0000001, 0.0000003]]) {
+    const domain = numericDomain(values);
+    assert.ok(domain[0] < Math.min(...values));
+    assert.ok(domain[1] > Math.max(...values));
+    assert.ok(axisTicks(domain).every(Number.isFinite));
+    assert.ok(axisTicks(domain).length > 0);
+  }
+  assert.deepEqual(numericDomain([30, 40], { min: 0, max: 100 }), [0, 100]);
+  assert.equal(numericDomain([0], { zero: true })[0], 0);
+  const closeTicks = axisTicks(numericDomain([50.0001, 50.0002]));
+  assert.equal(new Set(closeTicks.map(value => formatTick(value, closeTicks, 'en'))).size, closeTicks.length);
+  assert.equal(labColor('openai'), labColor('openai'));
+  assert.equal(labColor('new-lab'), labColor('new-lab'));
+  assert.notEqual(labColor('openai'), labColor('google'));
+});
+
+test('logarithmic cost coordinates preserve orders, precision and real zeros without epsilon substitution', () => {
+  const values = [0.005, 0.05, 0.5, 5], original = [...values];
+  const log = costAxis(values);
+  assert.equal(log.kind, 'log');
+  assert.equal(log.fallback, false);
+  const gaps = values.slice(1).map((value, i) => log.position(value) - log.position(values[i]));
+  assert.ok(gaps.every(gap => Math.abs(gap - gaps[0]) < 1e-12));
+  assert.ok(log.ticks.length > 2);
+  assert.ok(log.ticks.every(tick => tick > 0 && Number.isFinite(tick) && tick >= log.domain[0] && tick <= log.domain[1]));
+  assert.equal(new Set(log.ticks).size, log.ticks.length);
+  for (const values of [[0], [0, 0.005, 5]]) {
+    const axis = costAxis(values);
+    assert.equal(axis.kind, 'linear');
+    assert.equal(axis.fallback, true);
+    assert.equal(axis.position(0), 0);
+    assert.ok(values.every(value => Number.isFinite(axis.position(value))));
+  }
+  assert.equal(costAxis(values, 'linear').fallback, false);
+  assert.equal(costAxis(values, 'linear').kind, 'linear');
+  for (const values of [[1], [0.00001], [2.001, 2.002], [0.000001, 100000]]) {
+    const axis = costAxis(values);
+    assert.ok(axis.domain[0] > 0 && axis.domain[1] > axis.domain[0]);
+    assert.ok(axis.ticks.length > 0);
+    assert.ok(values.every(value => Number.isFinite(axis.position(value))));
+  }
+  assert.deepEqual(values, original);
+  assert.equal(formatCostTick(0.005, [0.005, 0.01, 0.02], 'USD/task', 'en'), '$0.005');
+  assert.equal(formatCostTick(5, [1, 2, 5], 'EUR/test', 'en'), '€5');
+  assert.equal(formatCostTick(5, [1, 2, 5], 'XYZ/task', 'en'), 'XYZ 5');
+});
+
+test('annotation layout avoids collisions and clips long labels without moving source coordinates', () => {
+  const labels = [{ x: 100, y: 100, text: 'Alpha (high)' }, { x: 105, y: 100, text: 'Beta (max)' }];
+  const original = structuredClone(labels), bounds = { left: 10, top: 10, right: 580, bottom: 280 };
+  const placed = placeLabels(labels, bounds);
+  assert.equal(placed.length, 2);
+  const [a, b] = placed.map(label => label.box);
+  assert.ok(a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y);
+  for (const { box } of placed) assert.ok(box.x >= bounds.left && box.y >= bounds.top && box.x + box.width <= bounds.right && box.y + box.height <= bounds.bottom);
+  const blocked = [{ x: 0, y: 0, width: 600, height: 300 }];
+  assert.deepEqual(placeLabels(labels, bounds, blocked), []);
+  const required = placeLabels([{ ...labels[0], text: 'Very long model name '.repeat(30), required: true }], bounds, blocked);
+  assert.equal(required.length, 1);
+  assert.match(required[0].text, /…$/);
+  assert.equal(required[0].x, labels[0].x);
+  assert.equal(required[0].y, labels[0].y);
+  const crowded = placeLabels(Array.from({ length: 7 }, (_, i) => ({ x: 100, y: 100, text: `Frontier model ${i} (high)`, required: true })), bounds, blocked);
+  assert.equal(crowded.length, 7);
+  for (const [i, { box: a }] of crowded.entries()) {
+    for (const { box: b } of crowded.slice(i + 1)) assert.ok(a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y);
+  }
+  assert.deepEqual(labels, original);
+});
+
+test('interactive chart preserves records, isolates costs and supports search, legend, touch and keyboard', async t => {
+  let chartWidth = 820;
+  class Element {
+    constructor(tag) {
+      this.tag = tag; this.children = []; this.attributes = {}; this.handlers = {}; this.className = ''; this.isConnected = true;
+      this.clientWidth = chartWidth;
+      this.classList = { toggle: (name, enabled) => {
+        const classes = new Set(this.className.split(' ').filter(Boolean));
+        if (enabled) classes.add(name); else classes.delete(name);
+        this.className = [...classes].join(' ');
+      } };
+    }
+    setAttribute(name, value) { this.attributes[name] = value; if (name === 'class') this.className = value; }
+    removeAttribute(name) { delete this.attributes[name]; }
+    getAttribute(name) { return this.attributes[name]; }
+    append(...children) { this.children.push(...children); }
+    replaceChildren(...children) { this.children = children; }
+    contains(target) { return this === target || this.children.some(child => child instanceof Element && child.contains(target)); }
+    addEventListener(name, handler) { this.handlers[name] = handler; }
+    focus() { globalThis.document.activeElement = this; this.handlers.focus?.(); }
+    dispatch(name, options = {}) { const event = { target: this, preventDefault() {}, ...options }; this.handlers[name]?.(event); }
+    set textContent(value) { this.children = [String(value)]; }
+    get textContent() { return this.children.map(child => child instanceof Element ? child.textContent : String(child)).join(''); }
+  }
+  const previous = globalThis.document;
+  globalThis.document = { createElement: tag => new Element(tag), createElementNS: (_, tag) => new Element(tag), addEventListener() {} };
+  const all = (node, predicate) => [node, ...node.children.filter(child => child instanceof Element).flatMap(child => all(child, () => true))].filter(predicate);
+  const byClass = (root, name) => all(root, node => node.className.split(' ').includes(name));
+  const choose = (root, label, text) => {
+    const select = all(root, node => node.attributes.role === 'combobox' && node.attributes['aria-label'] === label)[0];
+    const list = all(root, node => node.id === select.attributes['aria-controls'])[0];
+    const option = list.children.find(node => node.textContent.startsWith(text));
+    assert.ok(option, `${label}: ${text}`);
+    option.dispatch('click');
+  };
+  const chartModels = { 'lab/a': { name: 'Alpha', release_date: '2026-01-01' }, 'google/b': { name: 'Beta', release_date: '2026-01-01' }, 'other/c': { name: 'Gamma', release_date: '2026-02-01' }, 'other/d': { name: 'Delta', release_date: 'invalid' } };
+  const entries = Object.keys(chartModels).map((modelId, i) => ({ modelId, result: { ...deepResult, ...(i > 1 ? { cost: i + 1, score: i === 2 ? 60 : 55 } : {}) } }));
+  const original = structuredClone(entries);
+  const make = (options = {}) => createBenchmarkChart({ id: 'deepswe-v1.1', definition: deepDefinition, entries, models: chartModels, manifest: { published_at: '2026-11-07T00:00:00Z' }, language: 'en', T: messages.en, ...options });
+  try {
+    await t.test('quadrants and eligible frontiers default on without overriding explicit preferences', () => {
+      const state = {}, root = make({ state });
+      const toggles = all(root, node => node.attributes.type === 'checkbox');
+      assert.ok(toggles.every(toggle => toggle.checked && !toggle.disabled));
+      assert.equal(byClass(root, 'chart-quadrants').length, 1);
+      assert.equal(byClass(root, 'chart-frontier').length, 1);
+      assert.equal(byClass(root, 'chart-thresholds')[0].hidden, false);
+      choose(root, messages.en.chartXAxis, messages.en.release);
+      assert.ok(toggles.every(toggle => !toggle.checked && toggle.disabled));
+      assert.equal(state.quadrants, true);
+      assert.equal(state.frontier, true);
+      choose(root, messages.en.chartXAxis, messages.en.chartCost);
+      assert.ok(toggles.every(toggle => toggle.checked && !toggle.disabled));
+      for (const toggle of toggles) toggle.dispatch('change', { target: { checked: false } });
+      assert.equal(byClass(root, 'chart-quadrants').length, 0);
+      assert.equal(byClass(root, 'chart-frontier').length, 0);
+      assert.equal(byClass(root, 'chart-thresholds')[0].hidden, true);
+      const translated = make({ state, language: 'zh-CN', T: messages['zh-CN'] });
+      assert.ok(all(translated, node => node.attributes.type === 'checkbox').every(toggle => !toggle.checked && !toggle.disabled));
+      assert.equal(byClass(translated, 'chart-quadrants').length, 0);
+      assert.equal(byClass(translated, 'chart-frontier').length, 0);
+    });
+    await t.test('point details include all overlapping records and exact numbers; pinning survives hover', () => {
+      const root = make();
+      const dots = byClass(root, 'chart-dot');
+      assert.equal(dots.length, 3);
+      assert.equal(byClass(root, 'chart-frontier').length, 1);
+      assert.match(byClass(root, 'chart-frontier')[0].attributes.d, /^M.* L/);
+      assert.doesNotMatch(byClass(root, 'chart-frontier')[0].attributes.d, /[CHVQS]/);
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, true);
+      const labels = byClass(root, 'chart-point-label');
+      assert.deepEqual(new Set(labels.map(label => label.children[0])), new Set(['Alpha (high)', 'Beta (high)', 'Gamma (high)']));
+      assert.equal(labels.find(label => label.children[0] === 'Alpha (high)').attributes.fill, labColor('lab'));
+      assert.equal(labels.find(label => label.children[0] === 'Beta (high)').attributes.fill, labColor('google'));
+      dots[0].dispatch('pointerenter', { pointerType: 'mouse' });
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, false);
+      assert.match(byClass(root, 'chart-detail')[0].attributes.style, /left:.*top:.*max-height:/);
+      const body = byClass(root, 'chart-detail-body')[0];
+      assert.equal(byClass(root, 'chart-record').length, 2);
+      assert.match(body.textContent, /Alpha/);
+      assert.match(body.textContent, /Beta/);
+      assert.match(body.textContent, /1\.234567891 USD\/task/);
+      assert.ok(all(body, node => node.attributes.href === '#/models/lab%2Fa').length);
+      dots[0].dispatch('click');
+      assert.equal(dots[0].attributes['aria-pressed'], 'true');
+      byClass(root, 'chart-layout')[0].dispatch('pointerleave');
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, false);
+      dots[1].dispatch('pointerenter', { pointerType: 'mouse' });
+      assert.match(body.textContent, /Alpha/);
+      assert.match(byClass(root, 'chart-detail-heading')[0].textContent, /Pinned/);
+      root.dispatch('keydown', { key: 'Escape' });
+      assert.equal(dots[0].attributes['aria-pressed'], 'false');
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, true);
+      assert.equal(body.textContent, messages.en.chartInspectHint);
+      dots[1].dispatch('pointerenter', { pointerType: 'touch' });
+      assert.equal(body.textContent, messages.en.chartInspectHint);
+      dots[1].dispatch('pointerdown', { pointerType: 'touch' });
+      dots[1].focus();
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, true);
+      dots[1].dispatch('click');
+      assert.match(body.textContent, /Gamma/);
+      dots[1].dispatch('keydown', { key: 'End' });
+      assert.equal(document.activeElement, dots[2]);
+      dots[2].dispatch('keydown', { key: 'Enter' });
+      assert.match(body.textContent, /Delta/);
+      assert.equal(dots[2].attributes['aria-pressed'], 'true');
+      assert.ok(root.textContent.includes('Package generated: 2026-11-07T00:00:00Z'));
+    });
+    await t.test('compact filters, logarithmic toggle and zero fallback keep every original observation', () => {
+      const root = make();
+      assert.equal(byClass(root, 'chart-filter-panel')[0].hidden, true);
+      byClass(root, 'chart-filter-button')[0].dispatch('click');
+      assert.equal(byClass(root, 'chart-filter-panel')[0].hidden, false);
+      assert.equal(byClass(root, 'chart-filter-button')[0].attributes['aria-expanded'], 'true');
+      assert.equal(byClass(root, 'chart-svg')[0].attributes['data-scale'], 'log');
+      const positions = byClass(root, 'chart-dot').map(dot => dot.attributes.transform);
+      choose(root, messages.en.chartScale, messages.en.chartLinear);
+      assert.equal(byClass(root, 'chart-svg')[0].attributes['data-scale'], 'linear');
+      assert.equal(byClass(root, 'chart-dot').length, 3);
+      choose(root, messages.en.chartScale, messages.en.chartLog);
+      assert.deepEqual(byClass(root, 'chart-dot').map(dot => dot.attributes.transform), positions);
+      const withZero = make({ entries: entries.map((entry, i) => i ? entry : { ...entry, result: { ...entry.result, cost: 0 } }) });
+      assert.equal(byClass(withZero, 'chart-svg')[0].attributes['data-scale'], 'linear');
+      assert.equal(byClass(withZero, 'chart-scale-notice')[0].hidden, false);
+      assert.equal(byClass(withZero, 'chart-dot').length, 4);
+      const positiveLab = all(withZero, node => node.attributes['data-lab'] === 'google' && node.tag === 'button')[0];
+      positiveLab.dispatch('click');
+      assert.equal(byClass(withZero, 'chart-svg')[0].attributes['data-scale'], 'log');
+      assert.equal(byClass(withZero, 'chart-scale-notice')[0].hidden, true);
+    });
+    await t.test('search only highlights; legend filters recompute the displayed frontier and counts', () => {
+      const root = make();
+      const path = byClass(root, 'chart-frontier')[0].attributes.d;
+      const search = all(root, node => node.attributes.type === 'search')[0];
+      search.dispatch('input', { target: { value: 'Alpha' } });
+      assert.equal(byClass(root, 'chart-dot').length, 3);
+      assert.equal(byClass(root, 'chart-dot').filter(node => node.className.includes('is-match')).length, 1);
+      assert.equal(byClass(root, 'chart-frontier')[0].attributes.d, path);
+      assert.match(byClass(root, 'chart-status')[0].textContent, /1 highlighted records/);
+      const lab = all(root, node => node.tag === 'button' && node.attributes['data-lab'] === 'other')[0];
+      lab.dispatch('click');
+      assert.equal(lab.attributes['aria-pressed'], 'true');
+      assert.match(byClass(root, 'chart-status')[0].textContent, /2 displayed records \/ 2 models/);
+      assert.equal(byClass(root, 'chart-frontier').length, 0); // Gamma dominates Delta in the selected institution.
+      assert.equal(byClass(root, 'chart-frontier-halo').length, 1); // A singleton frontier remains visible without inventing a line.
+      const labels = byClass(root, 'chart-point-label').map(label => label.children[0]);
+      assert.deepEqual(new Set(labels), new Set(['Gamma (high)', 'Delta (high)']));
+      assert.ok(byClass(root, 'chart-dot').every(dot => !/Alpha|Beta/.test(dot.attributes['aria-label'])));
+      byClass(root, 'chart-show-all')[0].dispatch('click');
+      assert.equal(byClass(root, 'chart-frontier')[0].attributes.d, path);
+      const quadrant = all(root, node => node.attributes.type === 'checkbox')[0];
+      quadrant.dispatch('change', { target: { checked: true } });
+      assert.equal(byClass(root, 'chart-quadrants').length, 1);
+      assert.ok(root.textContent.includes(messages.en.chartMedianNote));
+    });
+    await t.test('institution focus labels all models, including overlaps and more than the overview label limit', () => {
+      const state = {}, focusedModels = { ...chartModels };
+      const focusedEntries = Array.from({ length: 25 }, (_, i) => {
+        const modelId = `lab/focus-${i}`;
+        focusedModels[modelId] = { name: `Focus ${i}`, release_date: '2026-01-01' };
+        return { modelId, result: { ...deepResult, cost: i < 2 ? 1 : i + 1, score: i < 2 ? 40 : 20 + i, harness: 'unverified agent' } };
+      });
+      const input = [...focusedEntries, { ...entries[1], result: { ...entries[1].result, cost_unit: 'USD/test' } }];
+      const original = structuredClone(input);
+      const root = make({ entries: input, models: focusedModels, state });
+      const institution = all(root, node => node.tag === 'button' && node.attributes['data-lab'] === 'lab')[0];
+      institution.dispatch('click');
+      assert.equal(root.attributes['data-lab'], 'lab');
+      assert.equal(institution.attributes['aria-pressed'], 'true');
+      assert.equal(byClass(root, 'chart-point-label').length, 25);
+      assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(focusedEntries.map((_, i) => `Focus ${i} (high)`)));
+      assert.equal(byClass(root, 'chart-dot').length, 24); // Both overlapping model names are still labelled.
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      const translated = make({ entries: input, models: focusedModels, state, language: 'zh-CN', T: messages['zh-CN'] });
+      assert.equal(translated.attributes['data-lab'], 'lab');
+      assert.equal(byClass(translated, 'chart-point-label').length, 25);
+      institution.dispatch('click');
+      assert.equal(root.attributes['data-lab'], '');
+      assert.equal(byClass(root, 'chart-show-all')[0].attributes['aria-pressed'], 'true');
+      institution.dispatch('click');
+      choose(root, messages.en.chartCostUnit, 'USD/test');
+      assert.equal(byClass(root, 'chart-svg').length, 0);
+      assert.equal(institution.hidden, false); // The selected zero-count institution remains clearable.
+      byClass(root, 'chart-show-all')[0].dispatch('click');
+      assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
+      assert.deepEqual(input, original);
+    });
+    await t.test('quadrant shading follows scoring direction without moving points or rounding boundaries', () => {
+      for (const higher_is_better of [true, false]) {
+        const root = make({ definition: { ...deepDefinition, higher_is_better } });
+        const before = byClass(root, 'chart-dot').map(dot => dot.attributes.transform);
+        all(root, node => node.attributes.type === 'checkbox')[0].dispatch('change', { target: { checked: true } });
+        const good = byClass(root, 'chart-quadrant-good')[0], bad = byClass(root, 'chart-quadrant-bad')[0];
+        assert.equal(Number(good.attributes.y) < Number(bad.attributes.y), higher_is_better);
+        assert.deepEqual(byClass(root, 'chart-dot').map(dot => dot.attributes.transform), before);
+        const caption = byClass(root, 'chart-thresholds')[0];
+        assert.match(caption.textContent, /≈/);
+        assert.ok(caption.title.includes(`${median(entries.map(entry => entry.result.cost))} USD/task`));
+      }
+    });
+    await t.test('axis, unit and exact effort filters never infer defaults or combine bases', () => {
+      const mixed = [...entries, { modelId: 'lab/a', result: { ...deepResult, cost_unit: 'USD/test', effort: 'default' } }, { modelId: 'google/b', result: { ...deepResult, cost_unit: 'USD/test', effort: undefined } }];
+      delete mixed[5].result.effort;
+      const root = make({ entries: mixed });
+      choose(root, messages.en.chartCostUnit, 'USD/test');
+      assert.match(byClass(root, 'chart-status')[0].textContent, /2 displayed records/);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      choose(root, messages.en.effort, 'default');
+      assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
+      choose(root, messages.en.effort, '—');
+      assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
+      choose(root, messages.en.effort, messages.en.chartAllEfforts);
+      choose(root, messages.en.chartXAxis, messages.en.release);
+      assert.match(byClass(root, 'chart-status')[0].textContent, /5 displayed records/);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[0].disabled, true);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+    });
+    await t.test('mixed observations do not disable a verified cohort; explicit filters survive a language rerender', () => {
+      const mixed = [...entries, { modelId: 'lab/a', result: { ...deepResult, harness: 'different agent', score: 99 } }];
+      const state = {};
+      const root = make({ entries: mixed, state });
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
+      assert.equal(byClass(root, 'chart-frontier').length, 1);
+      assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /1 other records shown only as a distribution/);
+      assert.ok(!byClass(root, 'chart-point-label').some(label => label.children[0].includes('+')));
+      choose(root, messages.en.conditions, messages.en.chartVerified);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
+      assert.match(byClass(root, 'chart-status')[0].textContent, /4 displayed records/);
+      const translated = make({ entries: mixed, state, language: 'zh-CN', T: messages['zh-CN'] });
+      assert.equal(all(translated, node => node.attributes.type === 'checkbox')[1].disabled, false);
+      assert.ok(translated.textContent.includes(messages['zh-CN'].chartVerifiedNote));
+      const unknown = make({ definition: { ...deepDefinition, higher_is_better: undefined } });
+      assert.equal(all(unknown, node => node.attributes.type === 'checkbox')[0].disabled, true);
+      assert.equal(all(unknown, node => node.attributes.type === 'checkbox')[1].disabled, true);
+    });
+    await t.test('multiple cohorts use separate paths, dominance checks and legends, in either scoring direction', () => {
+      for (const higher_is_better of [true, false]) {
+        const cohortModels = { ...chartModels, 'lab/e': { name: 'Epsilon' } };
+        const cohortEntries = [
+          { modelId: 'lab/a', result: { ...deepResult, cost: 1, score: 40 } },
+          { modelId: 'google/b', result: { ...deepResult, cost: 3, score: 60 } },
+          { modelId: 'other/c', result: { ...deepResult, effort: 'low', cost: 2, score: 30 } },
+          { modelId: 'other/d', result: { ...deepResult, effort: 'low', cost: 4, score: 50 } },
+          { modelId: 'lab/e', result: { ...deepResult, harness: 'unknown agent', cost: 0.1, score: 100 } },
+        ].map(entry => ({ ...entry, result: { ...entry.result, score: entry.result.score * (higher_is_better ? 1 : -1) } }));
+        const original = structuredClone(cohortEntries);
+        const root = make({ entries: cohortEntries, models: cohortModels, definition: { ...deepDefinition, higher_is_better } });
+        assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
+        assert.equal(byClass(root, 'chart-dot').length, 5);
+        assert.equal(byClass(root, 'chart-frontier-halo').length, 4);
+        const paths = byClass(root, 'chart-frontier');
+        assert.equal(paths.length, 2);
+        assert.equal(new Set(paths.map(path => path.attributes['stroke-dasharray'])).size, 2);
+        const dots = byClass(root, 'chart-dot');
+        const position = index => dots[index].attributes.transform.match(/^translate\((\S+) (\S+)\)$/).slice(1).join(',');
+        assert.deepEqual(new Set(paths.map(path => path.attributes.d)), new Set([`M${position(0)} L${position(1)}`, `M${position(2)} L${position(3)}`]));
+        assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(['Alpha (high)', 'Beta (high)', 'Gamma (low)', 'Delta (low)']));
+        assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /4 models in 2 independently computed cohorts/);
+        assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /1 other records/);
+        const legend = byClass(root, 'chart-frontier-legend')[0];
+        assert.equal(legend.children.length, 2);
+        legend.children.find(button => button.textContent.includes('low')).dispatch('click');
+        assert.equal(byClass(root, 'chart-frontier').length, 1);
+        assert.match(byClass(root, 'chart-status')[0].textContent, /2 displayed records/);
+        assert.equal(byClass(root, 'chart-filter-button')[0].textContent, 'Filters (1)');
+        assert.deepEqual(cohortEntries, original);
+      }
+    });
+    await t.test('every frontier model is labelled on desktop and mobile, including ties, beyond optional limits', () => {
+      const frontierModels = { ...chartModels };
+      const frontierEntries = Array.from({ length: 26 }, (_, i) => {
+        const modelId = `lab/front-${i}`;
+        frontierModels[modelId] = { name: `Front ${i}` };
+        return { modelId, result: { ...deepResult, cost: i < 2 ? 1 : i + 1, score: i < 2 ? 0 : i } };
+      });
+      // An unverified model at the same coordinates must not acquire a frontier label.
+      frontierEntries.push({ modelId: 'other/c', result: { ...deepResult, cost: 1, score: 0, harness: 'unknown agent' } });
+      const original = structuredClone(frontierEntries);
+      const expected = new Set(Array.from({ length: 26 }, (_, i) => `Front ${i} (high)`));
+      try {
+        for (const width of [820, 360]) {
+          chartWidth = width;
+          const root = make({ entries: frontierEntries, models: frontierModels });
+          const names = () => byClass(root, 'chart-point-label').map(label => label.children[0]);
+          assert.equal(names().length, 26);
+          assert.deepEqual(new Set(names()), expected);
+          assert.equal(byClass(root, 'chart-frontier-halo').length, 25);
+          assert.ok(Number(byClass(root, 'chart-svg')[0].attributes.viewBox.split(' ')[3]) > 420);
+          const search = all(root, node => node.attributes.type === 'search')[0];
+          const path = byClass(root, 'chart-frontier')[0].attributes.d;
+          search.dispatch('input', { target: { value: 'Front 25' } });
+          assert.deepEqual(new Set(names()), expected);
+          assert.equal(byClass(root, 'chart-frontier')[0].attributes.d, path);
+          search.dispatch('input', { target: { value: '' } });
+          const frontier = all(root, node => node.attributes.type === 'checkbox')[1];
+          frontier.dispatch('change', { target: { checked: false } });
+          assert.equal(byClass(root, 'chart-frontier').length, 0);
+          assert.equal(byClass(root, 'chart-frontier-halo').length, 0);
+          assert.equal(byClass(root, 'chart-frontier-info')[0].hidden, true);
+          assert.deepEqual(names(), []);
+          frontier.dispatch('change', { target: { checked: true } });
+          assert.deepEqual(new Set(names()), expected);
+        }
+      } finally { chartWidth = 820; }
+      assert.deepEqual(frontierEntries, original);
+    });
+    await t.test('empty charts, unsafe provenance, unknown conditions and translated labels remain safe', () => {
+      const empty = make({ entries: [], manifest: null });
+      assert.equal(byClass(empty, 'chart-svg').length, 0);
+      assert.ok(empty.textContent.includes(messages.en.chartUpdateUnknown));
+      const unsafe = entries.map(entry => ({ ...entry, result: { ...entry.result, source: 'javascript:alert(1)', cost_source: 'data:text/html,unsafe', future: { budget: 2 }, variant: '<script>unsafe</script>' } }));
+      const root = make({ entries: unsafe, language: 'zh-CN', T: messages['zh-CN'] });
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      assert.equal(byClass(root, 'chart-frontier-info')[0].hidden, false);
+      assert.equal(byClass(root, 'chart-frontier-info')[0].textContent, messages['zh-CN'].chartFrontier_conditions);
+      byClass(root, 'chart-dot')[0].dispatch('click');
+      assert.match(byClass(root, 'chart-detail-body')[0].textContent, /<script>unsafe<\/script>/);
+      assert.match(byClass(root, 'chart-detail-body')[0].textContent, /"budget":2/);
+      assert.equal(all(root, node => node.tag === 'script').length, 0);
+      assert.equal(all(root, node => node.tag === 'a' && /^(javascript|data):/.test(node.attributes.href)).length, 0);
+      assert.ok(root.textContent.includes(messages['zh-CN'].chartTitle));
+      const noCosts = make({ entries: entries.map(entry => ({ ...entry, result: { name: 'B', score: 0 } })) });
+      assert.ok(byClass(noCosts, 'chart-svg').length);
+      choose(noCosts, messages.en.chartXAxis, messages.en.chartCost);
+      assert.ok(noCosts.textContent.includes(messages.en.chartNoCosts));
+    });
+    assert.deepEqual(entries, original);
+  } finally { globalThis.document = previous; }
 });
 
 test('custom selects support keyboard, selection, dismissal and a single open list', () => {

@@ -2,6 +2,8 @@ import { modelLab, labLogoUrl, routeFor, parseRoute, filterModels, filterBenchma
 import { messages, resolveLanguage, descriptionLocale } from './i18n.mjs';
 import { createSelect } from './select.mjs';
 import { renderModalities } from './modalities.mjs';
+import { createBenchmarkChart } from './chart.mjs';
+import { hasBenchmarkCost } from './chart-data.mjs';
 
 let savedLanguage;
 try { savedLanguage = localStorage.getItem('model-atlas-language'); } catch { /* Optional preference. */ }
@@ -14,6 +16,7 @@ let data;
 let loadError;
 const state = { models: { query: '', lab: '', weights: '', sort: 'newest', page: 1, sortField: '', direction: 'asc' }, benchmarks: { query: '', category: '', page: 1, sortField: '', direction: 'asc' } };
 const pageSize = 50;
+const chartStates = new Map();
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -137,15 +140,14 @@ function listing(kind) {
 }
 function resultTable(entries, forModel) {
   if (!entries.length) return el('p', { class: 'state' }, T.noResults);
-  const hasCost = r => Number.isFinite(r.cost) && r.cost >= 0 && typeof r.cost_unit === 'string' && r.cost_unit.trim() !== '';
-  const showCost = !forModel && entries.some(entry => hasCost(entry.result));
+  const showCost = !forModel && entries.some(entry => hasBenchmarkCost(entry.result));
   const rows = entries.map(entry => {
     const r = entry.result;
     const name = forModel ? (entry.status === 'matched' ? internal('benchmarks', entry.benchmarkId, r.name, 'primary') : el('span', {}, r.name, entry.status === 'ambiguous' ? [' ', el('span', { class: 'pill' }, T.ambiguous)] : [])) : internal('models', entry.modelId, data.models[entry.modelId]?.name || entry.modelId, 'primary');
     // Keep every present/future result field, including nested test conditions.
     const extra = Object.entries(r).filter(([key]) => !['name', 'score', 'effort', 'metric', 'version', 'source', ...(showCost ? ['cost', 'cost_unit', 'cost_source'] : [])].includes(key));
     const conditions = el('div', { class: 'conditions' }, extra.length ? extra.map(([key, value]) => el('span', { class: 'condition' }, el('b', {}, `${key}: `), text(value))) : '—');
-    const cost = showCost && hasCost(r) ? benchmarkCost(r) : '—';
+    const cost = showCost && hasBenchmarkCost(r) ? benchmarkCost(r) : '—';
     return [name, Number.isFinite(r.score) ? r.score.toFixed(1) : r.score, ...(showCost ? [cost] : []), r.effort, r.metric, r.version, conditions, external(r.source, T.source) || text(r.source)];
   });
   return table([forModel ? T.benchmark : T.model, T.score, ...(showCost ? [T.cost] : []), T.effort, T.metric, T.version, T.conditions, T.source], rows, 'result-table');
@@ -200,10 +202,12 @@ function benchmarkDetail(id) {
   const b = data.benchmarks[id];
   const links = [external(b.url, T.website), external(b.methodology, T.methodLink)].filter(Boolean);
   const entries = sortBenchmarkResults(data.index.byBenchmark.get(id) || [], b);
+  if (!chartStates.has(id)) chartStates.set(id, {});
   main.replaceChildren(detailHeader('benchmarks', id, b.name, description(descriptionLocale(language, data.locale), 'benchmark', id, b.description)),
     section(T.overview, facts([[T.benchmarkId, id], [T.version, b.version], [T.category, b.category], [T.organization, b.organization]])),
     section(T.definition, facts([[T.metric, b.metric], [T.unit, b.unit], [T.higherBetter, b.higher_is_better], [T.minScore, b.min_score], [T.maxScore, b.max_score]])),
     section(T.methodology, links.length ? el('div', { class: 'external-links' }, links) : el('p', {}, T.noLinks)),
+    createBenchmarkChart({ id, definition: b, entries, models: data.models, manifest: data.manifest, language, T, state: chartStates.get(id) }),
     section(T.modelResults, el('div', {}, el('p', { class: 'note' }, T.matchNote, ' ', typeof b.higher_is_better === 'boolean' ? T.sortedResultNote : T.resultNote), resultTable(entries, false)), T.countRecords(entries.length.toLocaleString(language))));
 }
 function notFound() {

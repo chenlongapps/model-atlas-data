@@ -3,4 +3,4 @@
 - [x] 所有的开放权重模型 增加模型参数信息
   
 # web UI
-- [ ] 在 benchmark 页面增加图表，X 为 cost 或者 发布时间， Y 为 benchmark 任务的性能指标。
+- [x] 在 benchmark 详情页增加交互式散点图，X 为评测成本或模型发布日期，Y 为原始性能指标；支持机构配色与筛选、搜索突出显示、重合点详情、象限及已核实可比组的帕累托前沿，详见 [Web Explorer 说明](README.md#web-explorer-与-github-pages-数据发布)。
