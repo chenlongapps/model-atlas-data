@@ -27,6 +27,8 @@ reasoning = { supported = true }
 # JSON model = "thinkingmachines/inkling-2-small"; stderr = 1.18; provider = "Thinkingmachines".
 # Evaluation settings: temperature = 1.0; top_p = 1.0; max_output_tokens = 1024000;
 # reasoning_effort = "0.99". The output cap is not a model output limit.
+# Rechecked 2026-11-08: the original CxyItaos JSON asset is no longer available;
+# the current Bndh1wJE asset reports identical score, cost, and settings.
 [[benchmarks]]
 name = "Vals Index"
 score = 56.081
@@ -35,10 +37,12 @@ cost_unit = "USD/test"
 metric = "performance score"
 version = "2.2"
 effort = "0.99"
-source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
+source = "https://www.vals.ai/benchmarks/vals_index"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.Bndh1wJE.json"
 
 # Vals overall JSON checked 2026-11-06; model = "thinkingmachines/inkling-2-small"; stderr = 3.072 percentage points.
 # Row settings: temperature = 1; top_p = 1; max_output_tokens = 1024000; reasoning_effort = "0.99"; provider = "Thinkingmachines".
+# Rechecked 2026-11-08 against the current CfJg38mV JSON asset; score and cost unchanged.
 [[benchmarks]]
 name = "Terminal-Bench"
 score = 12.626
@@ -50,7 +54,8 @@ variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost
 harness = "Mini-SWE-agent"
 cost = 8.218043
 cost_unit = "USD/test"
-source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.CfJg38mV.json"
 
 # User AA export 2026-11-07; version and weighted-task cost checked against the model page.
 [[benchmarks]]
@@ -60,4 +65,138 @@ cost = 1.1784281349617984
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
+source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+# Collected 2026-11-08. The publisher attributes DeepSWE to Datacurve and
+# SWE-bench Pro V2 to Scale AI. Its release post specifies effort 0.99 (xhigh),
+# temperature 1.0, and a 1M-token maximum trajectory limit for its eval table.
+# These are publisher-reported snapshots, not newly reproduced evaluations.
+# Per-row harnesses and run counts are not disclosed and are not inferred.
+[[benchmarks]]
+name = "DeepSWE"
+score = 72.1
+metric = "pass@1"
+version = "1.1"
+effort = "0.99"
+variant = "Publisher-reported Datacurve result; temperature 1.0; 1M-token maximum trajectory limit"
+source = "https://thinkingmachines.ai/news/inkling-2-small/"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 86.3
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "SWE-bench Pro V2 Hard"
+effort = "0.99"
+variant = "Publisher-reported Scale AI result; temperature 1.0; 1M-token maximum trajectory limit"
+source = "https://thinkingmachines.ai/model-card/inkling-2-small/"
+
+[[benchmarks]]
+name = "SWE-bench Pro"
+score = 97.7
+metric = "task resolution rate"
+version = "2.0.0"
+dataset = "SWE-bench Pro V2 Full"
+effort = "0.99"
+variant = "Publisher-reported Scale AI result; temperature 1.0; 1M-token maximum trajectory limit"
+source = "https://thinkingmachines.ai/model-card/inkling-2-small/"
+
+# AA model-page embedded data, slug = "inkling-2-small", checked 2026-11-08.
+# Fraction-valued accuracy fields below are converted to percent, without rounding.
+# AA does not disclose this row's effort; the publisher's setting is not copied.
+# Costs are direct intelligenceIndexEvaluations[].costPerTask values, NOT the
+# weighted contributions in intelligenceIndexCostPerTask.evaluations[].
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 13.1313131313131
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "Terminal-Bench 4.0 (66 tasks)"
+variant = "AA independent evaluation; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 2.4766515872666672
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 5.71428571428571
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "Terminal-Bench-Science 0.1.0 (70 tasks)"
+variant = "AA independent evaluation; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 3.6782952861271414
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+# Vals overall JSON: stderr = 2.006 percentage points; provider = Thinkingmachines;
+# temperature = 1; top_p = 1; max_output_tokens = 1024000.
+# Methodology: single run, infrastructure/provider errors may be re-attempted;
+# graded outcomes are never re-run. This is not AA's three-repeat result above.
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 2.857
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "Terminal-Bench-Science 0.1.0 (70 tasks)"
+effort = "0.99"
+variant = "Vals independent evaluation; single-run pass@1; infrastructure/provider-error retries only; 8-hour task limit"
+harness = "Mini-SWE-agent"
+cost = 5.546533
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.KYAu-wfB.json"
+
+# AA's guardrail-gated objective-completion score is not Zapier's strict
+# task_completed_correctly metric; it has a separate Benchmark definition.
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 45.621320178972646
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+variant = "AA independent evaluation; zero for any guardrail violation, otherwise share of objectives completed; one run per task; 50-turn cap"
+cost = 0.058102370538660575
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+# Publisher model card distinguishes original and with-Python results.
+# Do not copy the generic Surge leaderboard's harness/run count onto these rows:
+# the current Surge Chartography leaderboard does not list Inkling 2 Small.
+[[benchmarks]]
+name = "Chartography"
+score = 36.7
+metric = "accuracy (mean; Pass@1)"
+effort = "0.99"
+variant = "Publisher-reported snapshot; original (without Python); temperature 1.0; 1M-token maximum trajectory limit; run count not disclosed"
+source = "https://thinkingmachines.ai/model-card/inkling-2-small/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 80.4
+metric = "accuracy (mean; Pass@1)"
+effort = "0.99"
+variant = "Publisher-reported snapshot; with Python; temperature 1.0; 1M-token maximum trajectory limit; run count not disclosed"
+source = "https://thinkingmachines.ai/model-card/inkling-2-small/"
+
+# AA embedded field hle = 0.44114921223355; this is the original text-only
+# HLE evaluation, not hleDiamond = 0.287. No tool-use or effort is inferred.
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 44.114921223355
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+variant = "AA independent evaluation; text-only; no tools"
+source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+# AA embedded field gdpval = 1630.23; reported interval = [1609, 1652].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1630.23
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+variant = "AA independent evaluation; reported interval [1609, 1652]; shell and web browsing"
+harness = "Stirrup"
 source = "https://artificialanalysis.ai/models/inkling-2-small"
