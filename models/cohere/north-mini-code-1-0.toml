@@ -69,3 +69,12 @@ score = 37
 metric = "success rate"
 source = "https://artificialanalysis.ai/articles/north-mini-code-cohere-s-small-coding-focused-moe-model"
 date = "2026-06-09"
+
+# User AA export 2026-11-07; current v5.0.1 is separate from the unversioned release result.
+# Exported zero cost is not verified as a real zero and is deliberately omitted.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 3.42470262148493
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/north-mini-code"

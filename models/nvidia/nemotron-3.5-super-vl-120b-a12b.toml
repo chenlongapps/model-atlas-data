@@ -84,7 +84,9 @@ source = "https://www.vals.ai/models/baseten_nemotron-3.5-super-vl-120b-a12b"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 13.6203422723141
-cost = 0.5382257339551116
+# Current cost observation in the 2026-11-07 export and official page; score unchanged.
+# Previous snapshot cost: 0.5382257339551116 USD/weighted task.
+cost = 0.5196327287868884
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

@@ -229,6 +229,8 @@ source = "https://www.vals.ai/models/meta_muse-wonder"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 40.5266079185604
+cost = 4.560546278670271
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"

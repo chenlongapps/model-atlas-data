@@ -24,6 +24,8 @@ output = 65_536
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 34.5552385392508
+cost = 1.0311060706397974
+cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/tencent-hy4"

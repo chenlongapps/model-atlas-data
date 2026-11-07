@@ -57,7 +57,9 @@ cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 23.1277321742266
-cost = 1.4119376739255958
+# Current cost observation in the 2026-11-07 export and official page; score unchanged.
+# Previous snapshot cost: 1.4119376739255958 USD/weighted task.
+cost = 1.4120973060945472
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
@@ -77,7 +79,9 @@ source = "https://artificialanalysis.ai/models/mistral-large-4-preview"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 26.1249946754784
-cost = 2.061496607384404
+# Current cost observation in the 2026-11-07 export and official page; score unchanged.
+# Previous snapshot cost: 2.061496607384404 USD/weighted task.
+cost = 2.0617306268126856
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

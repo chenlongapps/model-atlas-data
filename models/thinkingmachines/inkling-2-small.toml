@@ -51,3 +51,13 @@ harness = "Mini-SWE-agent"
 cost = 8.218043
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+# User AA export 2026-11-07; version and weighted-task cost checked against the model page.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 30.6286781498958
+cost = 1.1784281349617984
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/inkling-2-small"

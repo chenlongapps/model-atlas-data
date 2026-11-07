@@ -51,3 +51,34 @@ harness = "Mini-SWE-agent"
 cost = 7.452059
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+# User AA export 2026-11-07; each reasoning configuration is recorded separately.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 58.2587824022788
+cost = 6.585776867225546
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/gemini-4-carbon-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 60.025738829526
+cost = 7.755545745286556
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/gemini-4-carbon"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 54.2206114502924
+cost = 7.186577262951972
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+source = "https://artificialanalysis.ai/models/gemini-4-carbon-low"
