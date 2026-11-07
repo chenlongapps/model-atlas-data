@@ -30,7 +30,6 @@ const effortKey = result => Object.hasOwn(result, 'effort') ? JSON.stringify([re
 const pointColor = lab => lab === 'openai' ? 'var(--chart-openai)' : labColor(lab);
 const modelLabel = point => `${point.name}${point.result.effort ? ` (${point.result.effort})` : ''}`;
 const pointLabels = points => [...new Map(points.map(point => [modelLabel(point), { text: modelLabel(point), color: pointColor(point.lab) }])).values()];
-const frontierDashes = ['6 5', '2 5', '10 4 2 4', '10 4'];
 
 // A self-contained card: it never mutates source entries or filters the raw table.
 // Only its small preference object survives page/language re-renders.
@@ -121,13 +120,13 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
   function groupLabel(group) {
     const r = group.result;
     const extras = Object.entries(r).filter(([key]) => !['name', 'version', 'metric', 'score', 'cost', 'cost_unit', 'cost_source', 'source', 'effort', 'dataset', 'harness', 'variant'].includes(key));
-    return `${group.verified ? `${T.chartVerified} · ` : ''}${valueText(r.source)} · ${T.effort}: ${valueText(r.effort)} · ${T.chartDataset}: ${valueText(r.dataset)} · ${T.chartHarness}: ${valueText(r.harness)} · ${T.conditions}: ${valueText(r.variant)}${extras.map(([key, value]) => ` · ${key}: ${valueText(value)}`).join('')} · ${T.countRecords(group.points.length)}`;
+    return `${valueText(r.source)} · ${T.effort}: ${valueText(r.effort)} · ${T.chartDataset}: ${valueText(r.dataset)} · ${T.chartHarness}: ${valueText(r.harness)} · ${T.conditions}: ${valueText(r.variant)}${extras.map(([key, value]) => ` · ${key}: ${valueText(value)}`).join('')} · ${T.countRecords(group.points.length)}`;
   }
   const effortPoints = () => available.filter(point => !state.effort || effortKey(point.result) === state.effort);
   function refresh() {
     unitControl.hidden = state.axis !== 'cost';
     available = chartPoints(entries, models, state.axis, state.unit);
-    groups = comparisonGroups(effortPoints(), id, definition);
+    groups = comparisonGroups(effortPoints());
     if (!groups.some(group => group.key === state.group)) state.group = '';
     groupControl.replaceChildren(createSelect(T.conditions, [['', T.chartAllConditions], ...groups.map(group => [group.key, groupLabel(group)])], state.group, value => { state.group = value; draw(); }));
     draw();
@@ -223,25 +222,21 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
       count.textContent = String(total);
       button.hidden = total === 0 && state.lab !== lab;
     }
-    const reason = frontierUnavailable(displayed, id, definition, state.axis);
+    const reason = frontierUnavailable(displayed, definition, state.axis);
     frontier.input.disabled = reason !== null;
     frontier.input.checked = reason === null && state.frontier;
     frontier.element.title = reason ? T[`chartFrontier_${reason}`] : T.chartFrontierNote;
-    const cohorts = frontier.input.checked ? comparisonGroups(displayed, id, definition).filter(group => group.verified)
-      .map((group, index) => ({ ...group, front: paretoFront(group.points, definition.higher_is_better), dash: frontierDashes[index % frontierDashes.length] })) : [];
-    const front = cohorts.flatMap(group => group.front), frontIds = new Set(front.map(point => point.id));
+    const front = frontier.input.checked ? paretoFront(displayed, definition.higher_is_better) : [];
+    const frontIds = new Set(front.map(point => point.id));
     frontierInfo.hidden = state.axis !== 'cost' || (!reason && !frontier.input.checked);
-    frontierInfo.replaceChildren(node('p', {}, reason ? T[`chartFrontier_${reason}`] : T.chartFrontierSummary(new Set(front.map(point => point.modelId)).size, cohorts.length, displayed.length - cohorts.reduce((sum, group) => sum + group.points.length, 0))),
-      ...(cohorts.length > 1 ? [node('div', { class: 'chart-frontier-legend' }, cohorts.map((group, index) => node('button', { type: 'button', title: `${groupLabel(group)} · ${T.chartShowCohort}`, onclick: () => { state.group = group.key; draw(); } },
-        svg('svg', { viewBox: '0 0 32 12', 'aria-hidden': 'true' }, svg('path', { class: 'chart-frontier-swatch', 'stroke-dasharray': group.dash, d: 'M2,6 L30,6' })),
-        `#${index + 1} · ${T.effort}: ${valueText(group.result.effort)}`)))] : []));
+    frontierInfo.replaceChildren(node('p', {}, reason ? T[`chartFrontier_${reason}`] : T.chartFrontierSummary(new Set(front.map(point => point.modelId)).size, front.length, displayed.length)));
     comparisonBadge.hidden = reason === null || state.axis !== 'cost';
     comparisonBadge.textContent = T.chartDistribution;
     comparisonBadge.title = reason ? T[`chartFrontier_${reason}`] : '';
     const canQuadrant = state.axis === 'cost' && typeof definition.higher_is_better === 'boolean' && displayed.length > 1;
     quadrants.input.disabled = !canQuadrant;
     quadrants.input.checked = canQuadrant && state.quadrants;
-    limitation.textContent = `${T.chartComparisonNote} ${reason ? T[`chartFrontier_${reason}`] : `${T.chartVerifiedNote} ${T.chartFrontierNote}`}${canQuadrant && state.quadrants ? ` ${T.chartMedianNote}` : ''}`;
+    limitation.textContent = `${T.chartComparisonNote} ${reason ? T[`chartFrontier_${reason}`] : T.chartFrontierNote}${canQuadrant && state.quadrants ? ` ${T.chartMedianNote}` : ''}`;
     const costs = costAxis(state.axis === 'cost' ? displayed.map(point => point.x) : [], state.scale, (plot.clientWidth || 820) < 600 ? 4 : 10);
     scaleControl.hidden = state.axis !== 'cost';
     const signature = JSON.stringify([costs.kind, costs.fallback, state.scale]);
@@ -311,12 +306,10 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
     for (const tick of [...new Set(xTicks)].filter(tick => tick >= xDomain[0] && tick <= xDomain[1])) grid.append(svg('line', { class: 'chart-axis-tick', x1: x(tick), x2: x(tick), y1: bottom, y2: bottom + 6 }), svg('text', { x: x(tick), y: bottom + 26, 'text-anchor': 'middle' }, state.axis === 'cost' ? formatCostTick(tick, xTicks, state.unit, language) : dateFormat.format(tick)));
     canvas.append(grid, svg('text', { class: 'chart-axis-label', x: left, y: 18 }, `${definition.metric} (${definition.unit})`),
       svg('text', { class: 'chart-axis-label', x: (left + right) / 2, y: height - 12, 'text-anchor': 'middle' }, state.axis === 'cost' ? `${T.chartCost} (${state.unit}) · ${costs.kind === 'log' ? T.chartLog : T.chartLinear}` : T.release));
-    for (const group of cohorts) {
-      const unique = group.front.filter((point, i) => !i || point.x !== group.front[i - 1].x || point.y !== group.front[i - 1].y);
-      // One non-dominated position still has its halo and all model names, but
-      // no invented segment to another cohort or to an unobserved endpoint.
-      if (unique.length > 1) canvas.append(svg('path', { class: 'chart-frontier', 'stroke-dasharray': group.dash, 'aria-label': `${groupLabel(group)}. ${T.chartFrontierNote}`, d: unique.map((point, i) => `${i ? 'L' : 'M'}${x(point.x)},${y(point.y)}`).join(' ') }, svg('title', {}, groupLabel(group))));
-    }
+    const uniqueFront = front.filter((point, i) => !i || point.x !== front[i - 1].x || point.y !== front[i - 1].y);
+    // A single non-dominated position still has its halo and all model names;
+    // never invent a segment to a dominated point or an unobserved endpoint.
+    if (uniqueFront.length > 1) canvas.append(svg('path', { class: 'chart-frontier', 'aria-label': T.chartFrontierNote, d: uniqueFront.map((point, i) => `${i ? 'L' : 'M'}${x(point.x)},${y(point.y)}`).join(' ') }, svg('title', {}, T.chartFrontierNote)));
 
     const positions = new Map();
     for (const point of displayed) {

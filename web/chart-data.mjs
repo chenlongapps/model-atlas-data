@@ -42,41 +42,26 @@ export function conditionKey(result) {
   return JSON.stringify(canonical(Object.fromEntries(Object.entries(result).filter(([key]) => !['score', 'cost', 'cost_unit', 'cost_source'].includes(key)))));
 }
 
-// Equality of fields or a shared source hostname is NOT evidence of comparability.
-// This deliberately narrow protocol is documented in docs/benchmark-costs-2026-11-06.md
-// and the official v1.1 methodology. Only fully scored, identical configurations
-// qualify; partial runs, absent efforts, other sources and prose variants do not.
-function verifiedProtocol(point, benchmarkId) {
-  const r = point.result;
-  if (Object.keys(r).some(key => !['name', 'version', 'metric', 'score', 'cost', 'cost_unit', 'cost_source', 'dataset', 'harness', 'effort', 'variant', 'source', 'date'].includes(key))) return false;
-  return benchmarkId === 'deepswe-v1.1' && r.name === 'DeepSWE' && r.version === '1.1' && r.metric === 'pass@1' &&
-    r.cost_unit === 'USD/task' && hasBenchmarkCost(r) && r.dataset === '113 tasks' && r.harness === 'mini-swe-agent' &&
-    typeof r.effort === 'string' && r.effort.trim() !== '' &&
-    r.variant === '4 whole-benchmark passes; 113 tasks attempted; 452 scored attempts; provider/verifier/network errors excluded' &&
-    ['https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json', 'https://deepswe.datacurve.ai/blog/deepswe-v1-1'].includes(r.source);
-}
-
-export function frontierUnavailable(points, benchmarkId, definition, axis) {
+// This is an exploratory envelope of the displayed coordinates, not a verified
+// comparable ranking. chartPoints keeps cost bases separate before this step.
+export function frontierUnavailable(points, definition, axis) {
   if (axis !== 'cost') return 'costOnly';
   if (typeof definition.higher_is_better !== 'boolean') return 'direction';
-  if (new Set(points.map(point => point.modelId)).size < 2) return 'few';
-  // Unrelated observations must not disable a verified cohort. Each eligible
-  // group gets its own frontier; no dominance comparisons cross group boundaries.
-  if (!comparisonGroups(points, benchmarkId, definition).some(group => group.verified)) return 'conditions';
+  if (!points.length) return 'empty';
   return null;
 }
 
-export function comparisonGroups(points, benchmarkId, definition) {
+// Exact-condition groups are optional filters, not proof of comparability and
+// not automatic boundaries for the exploratory frontier.
+export function comparisonGroups(points) {
   const groups = new Map();
   for (const point of points) {
     const key = conditionKey(point.result);
     if (!groups.has(key)) groups.set(key, { key, points: [], result: point.result });
     groups.get(key).points.push(point);
   }
-  return [...groups.values()].filter(group => group.points.length > 1).map(group => ({
-    ...group, verified: typeof definition.higher_is_better === 'boolean' &&
-      new Set(group.points.map(point => point.modelId)).size >= 2 && group.points.every(point => verifiedProtocol(point, benchmarkId)),
-  })).sort((a, b) => Number(b.verified) - Number(a.verified) || b.points.length - a.points.length || a.key.localeCompare(b.key));
+  return [...groups.values()].filter(group => group.points.length > 1)
+    .sort((a, b) => b.points.length - a.points.length || a.key.localeCompare(b.key));
 }
 
 // Weak dominance with at least one strict improvement. Identical coordinates are

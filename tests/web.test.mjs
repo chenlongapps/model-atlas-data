@@ -185,7 +185,7 @@ test('both languages cover all UI message keys and static HTML references', asyn
   for (const [, key] of app.matchAll(/\bT\.([A-Za-z][A-Za-z0-9]*)/g)) assert.ok(Object.hasOwn(messages.en, key), key);
   const chart = await readFile(new URL('../web/chart.mjs', import.meta.url), 'utf8');
   for (const [, key] of chart.matchAll(/\bT\.([A-Za-z][A-Za-z0-9]*)/g)) assert.ok(Object.hasOwn(messages.en, key), key);
-  for (const reason of ['costOnly', 'direction', 'few', 'conditions']) assert.equal(typeof messages.en[`chartFrontier_${reason}`], 'string');
+  for (const reason of ['costOnly', 'direction', 'empty']) assert.equal(typeof messages.en[`chartFrontier_${reason}`], 'string');
 });
 test('descriptions follow the selected language and preserve fallback', () => {
   const locale = { model: { descriptions: { 'lab/a': '中文' } }, benchmark: { description: { b: '评测' } } };
@@ -528,29 +528,28 @@ test('Pareto front uses strict improvements, preserves tied observations and bot
   }
 });
 
-test('frontier eligibility requires a documented protocol, exact known conditions and multiple models', () => {
+test('exploratory frontier needs only cost coordinates and a known scoring direction, even for one model', () => {
   const entries = ['lab/A', 'lab/b'].map(modelId => ({ modelId, result: { ...deepResult } }));
   const points = chartPoints(entries, models, 'cost', 'USD/task');
-  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'cost'), null);
-  assert.equal(comparisonGroups(points, 'deepswe-v1.1', deepDefinition)[0].verified, true);
-  assert.equal(frontierUnavailable(points, 'other', deepDefinition, 'cost'), 'conditions');
-  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'release'), 'costOnly');
-  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', {}, 'cost'), 'direction');
-  assert.equal(frontierUnavailable(points.slice(0, 1), 'deepswe-v1.1', deepDefinition, 'cost'), 'few');
+  assert.equal(frontierUnavailable(points, deepDefinition, 'cost'), null);
+  assert.equal(frontierUnavailable(points, deepDefinition, 'release'), 'costOnly');
+  assert.equal(frontierUnavailable(points, {}, 'cost'), 'direction');
+  assert.equal(frontierUnavailable(points.slice(0, 1), deepDefinition, 'cost'), null);
+  assert.equal(frontierUnavailable([], deepDefinition, 'cost'), 'empty');
   for (const changes of [{ source: 'https://example.com' }, { source: 'https://deepswe.datacurve.ai/other' }, { effort: undefined }, { effort: 'High' }, { harness: 'other' }, { dataset: '111 tasks' }, { variant: '4 runs' }, { date: '2026-01-01' }, { future: { tools: true } }]) {
     const changed = structuredClone(points);
     Object.assign(changed[0].result, changes);
-    assert.equal(frontierUnavailable(changed, 'deepswe-v1.1', deepDefinition, 'cost'), 'conditions', JSON.stringify(changes));
+    assert.equal(frontierUnavailable(changed, deepDefinition, 'cost'), null, JSON.stringify(changes));
   }
   const future = points.map(point => ({ ...point, result: { ...point.result, unknown_condition: true } }));
-  assert.equal(frontierUnavailable(future, 'deepswe-v1.1', deepDefinition, 'cost'), 'conditions');
+  assert.equal(frontierUnavailable(future, deepDefinition, 'cost'), null);
   assert.notEqual(conditionKey({ ...deepResult, effort: undefined }), conditionKey({ ...deepResult, effort: 'default' }));
   assert.notEqual(conditionKey(deepResult), conditionKey({ ...deepResult, cost_source: 'https://example.com', future: 1 }));
   assert.equal(conditionKey(deepResult), conditionKey({ ...deepResult, cost: 99, score: 20, cost_source: 'https://example.com' }));
   assert.equal(conditionKey({ nested: { b: 1, a: 2 } }), conditionKey({ nested: { a: 2, b: 1 } }));
 });
 
-test('mixed conditions retain independent verified frontiers without admitting unknown or single-model groups', () => {
+test('mixed efforts and conditions share one exploratory frontier without altering optional exact filters', () => {
   const entries = [
     { modelId: 'lab/A', result: { ...deepResult, cost: 1, score: 40 } },
     { modelId: 'lab/b', result: { ...deepResult, cost: 3, score: 60 } },
@@ -562,15 +561,15 @@ test('mixed conditions retain independent verified frontiers without admitting u
   ];
   const original = structuredClone(entries);
   const points = chartPoints(entries, models, 'cost', 'USD/task');
-  const groups = comparisonGroups(points, 'deepswe-v1.1', deepDefinition).filter(group => group.verified);
-  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'cost'), null);
-  assert.equal(groups.length, 2);
-  assert.deepEqual(groups.map(group => group.points.length), [2, 2]);
-  assert.deepEqual(groups.map(group => paretoFront(group.points, true).length), [2, 2]);
-  assert.deepEqual(paretoFront(points, true).map(point => point.modelId), ['other/c']); // A global frontier would be wrong.
-  assert.equal(frontierUnavailable(points.slice(4), 'deepswe-v1.1', deepDefinition, 'cost'), 'few');
-  assert.equal(frontierUnavailable(points, 'other', deepDefinition, 'cost'), 'conditions');
-  assert.equal(frontierUnavailable(points, 'deepswe-v1.1', deepDefinition, 'release'), 'costOnly');
+  const groups = comparisonGroups(points);
+  assert.equal(frontierUnavailable(points, deepDefinition, 'cost'), null);
+  assert.equal(groups.length, 3);
+  assert.deepEqual(groups.map(group => group.points.length), [2, 2, 2]);
+  assert.ok(groups.every(group => group.points.every(point => conditionKey(point.result) === group.key)));
+  assert.deepEqual(paretoFront(points, true).map(point => point.modelId), ['other/c']);
+  assert.equal(frontierUnavailable(points.slice(4), deepDefinition, 'cost'), null);
+  assert.equal(frontierUnavailable(points, deepDefinition, 'release'), 'costOnly');
+  assert.deepEqual(paretoFront(points.slice(5), true).map(point => point.y), [90, 95]); // Two configurations of one model can form a line.
   assert.deepEqual(entries, original);
 });
 
@@ -820,7 +819,7 @@ test('interactive chart preserves records, isolates costs and supports search, l
       assert.equal(byClass(root, 'chart-point-label').length, 25);
       assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(focusedEntries.map((_, i) => `Focus ${i} (high)`)));
       assert.equal(byClass(root, 'chart-dot').length, 24); // Both overlapping model names are still labelled.
-      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
       const translated = make({ entries: input, models: focusedModels, state, language: 'zh-CN', T: messages['zh-CN'] });
       assert.equal(translated.attributes['data-lab'], 'lab');
       assert.equal(byClass(translated, 'chart-point-label').length, 25);
@@ -854,9 +853,12 @@ test('interactive chart preserves records, isolates costs and supports search, l
       const root = make({ entries: mixed });
       choose(root, messages.en.chartCostUnit, 'USD/test');
       assert.match(byClass(root, 'chart-status')[0].textContent, /2 displayed records/);
-      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
       choose(root, messages.en.effort, 'default');
       assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
+      assert.equal(byClass(root, 'chart-frontier-halo').length, 1);
+      assert.equal(byClass(root, 'chart-frontier').length, 0);
       choose(root, messages.en.effort, '—');
       assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
       choose(root, messages.en.effort, messages.en.chartAllEfforts);
@@ -865,25 +867,28 @@ test('interactive chart preserves records, isolates costs and supports search, l
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[0].disabled, true);
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
     });
-    await t.test('mixed observations do not disable a verified cohort; explicit filters survive a language rerender', () => {
+    await t.test('all conditions participate by default; explicit filters survive a language rerender', () => {
       const mixed = [...entries, { modelId: 'lab/a', result: { ...deepResult, harness: 'different agent', score: 99 } }];
       const state = {};
       const root = make({ entries: mixed, state });
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
-      assert.equal(byClass(root, 'chart-frontier').length, 1);
-      assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /1 other records shown only as a distribution/);
+      assert.equal(byClass(root, 'chart-frontier').length, 0); // The different-agent record dominates all others.
+      assert.equal(byClass(root, 'chart-frontier-halo').length, 1);
+      assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /all 5 visible records, not a verified comparable ranking/);
       assert.ok(!byClass(root, 'chart-point-label').some(label => label.children[0].includes('+')));
-      choose(root, messages.en.conditions, messages.en.chartVerified);
+      choose(root, messages.en.conditions, deepResult.source);
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
       assert.match(byClass(root, 'chart-status')[0].textContent, /4 displayed records/);
+      assert.equal(byClass(root, 'chart-frontier').length, 1);
       const translated = make({ entries: mixed, state, language: 'zh-CN', T: messages['zh-CN'] });
       assert.equal(all(translated, node => node.attributes.type === 'checkbox')[1].disabled, false);
-      assert.ok(translated.textContent.includes(messages['zh-CN'].chartVerifiedNote));
+      assert.match(byClass(translated, 'chart-status')[0].textContent, /展示 4 条记录/);
+      assert.ok(translated.textContent.includes(messages['zh-CN'].chartFrontierNote));
       const unknown = make({ definition: { ...deepDefinition, higher_is_better: undefined } });
       assert.equal(all(unknown, node => node.attributes.type === 'checkbox')[0].disabled, true);
       assert.equal(all(unknown, node => node.attributes.type === 'checkbox')[1].disabled, true);
     });
-    await t.test('multiple cohorts use separate paths, dominance checks and legends, in either scoring direction', () => {
+    await t.test('different efforts and harnesses share one frontier, in either scoring direction', () => {
       for (const higher_is_better of [true, false]) {
         const cohortModels = { ...chartModels, 'lab/e': { name: 'Epsilon' } };
         const cohortEntries = [
@@ -891,30 +896,52 @@ test('interactive chart preserves records, isolates costs and supports search, l
           { modelId: 'google/b', result: { ...deepResult, cost: 3, score: 60 } },
           { modelId: 'other/c', result: { ...deepResult, effort: 'low', cost: 2, score: 30 } },
           { modelId: 'other/d', result: { ...deepResult, effort: 'low', cost: 4, score: 50 } },
-          { modelId: 'lab/e', result: { ...deepResult, harness: 'unknown agent', cost: 0.1, score: 100 } },
+          { modelId: 'lab/e', result: { ...deepResult, harness: 'unknown agent', cost: 0.1, score: 20 } },
         ].map(entry => ({ ...entry, result: { ...entry.result, score: entry.result.score * (higher_is_better ? 1 : -1) } }));
         const original = structuredClone(cohortEntries);
         const root = make({ entries: cohortEntries, models: cohortModels, definition: { ...deepDefinition, higher_is_better } });
         assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
         assert.equal(byClass(root, 'chart-dot').length, 5);
-        assert.equal(byClass(root, 'chart-frontier-halo').length, 4);
+        assert.equal(byClass(root, 'chart-frontier-halo').length, 3);
         const paths = byClass(root, 'chart-frontier');
-        assert.equal(paths.length, 2);
-        assert.equal(new Set(paths.map(path => path.attributes['stroke-dasharray'])).size, 2);
+        assert.equal(paths.length, 1);
         const dots = byClass(root, 'chart-dot');
         const position = index => dots[index].attributes.transform.match(/^translate\((\S+) (\S+)\)$/).slice(1).join(',');
-        assert.deepEqual(new Set(paths.map(path => path.attributes.d)), new Set([`M${position(0)} L${position(1)}`, `M${position(2)} L${position(3)}`]));
-        assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(['Alpha (high)', 'Beta (high)', 'Gamma (low)', 'Delta (low)']));
-        assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /4 models in 2 independently computed cohorts/);
-        assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /1 other records/);
-        const legend = byClass(root, 'chart-frontier-legend')[0];
-        assert.equal(legend.children.length, 2);
-        legend.children.find(button => button.textContent.includes('low')).dispatch('click');
+        assert.equal(paths[0].attributes.d, `M${position(4)} L${position(0)} L${position(1)}`);
+        assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(['Epsilon (high)', 'Alpha (high)', 'Beta (high)']));
+        assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /3 models \/ 3 configurations.*all 5 visible records/);
+        assert.equal(byClass(root, 'chart-frontier-legend').length, 0);
+        choose(root, messages.en.effort, 'low');
         assert.equal(byClass(root, 'chart-frontier').length, 1);
         assert.match(byClass(root, 'chart-status')[0].textContent, /2 displayed records/);
         assert.equal(byClass(root, 'chart-filter-button')[0].textContent, 'Filters (1)');
         assert.deepEqual(cohortEntries, original);
       }
+    });
+    await t.test('AA Index draws one line across all visible configurations, without mixing cost bases or filling missing costs', () => {
+      const aaDefinition = { name: 'Artificial Analysis Intelligence Index', version: '5.0.1', metric: 'index score', unit: 'points', higher_is_better: true };
+      const aaResult = { name: aaDefinition.name, version: aaDefinition.version, metric: aaDefinition.metric, cost_unit: 'USD/weighted task' };
+      const aaEntries = [
+        { modelId: 'lab/a', result: { ...aaResult, cost: 1, score: 40, effort: 'low' } },
+        { modelId: 'lab/a', result: { ...aaResult, cost: 3, score: 60, effort: 'high' } },
+        { modelId: 'google/b', result: { ...aaResult, cost: 2, score: 30, effort: 'default' } },
+        { modelId: 'other/c', result: { ...aaResult, cost: 4, score: 70 } },
+        { modelId: 'other/d', result: { ...aaResult, score: 99 } },
+        { modelId: 'other/d', result: { ...aaResult, cost: 0.1, cost_unit: 'USD/test', score: 99 } },
+      ];
+      const original = structuredClone(aaEntries);
+      const root = make({ id: 'artificial-analysis-intelligence-index-v5', definition: aaDefinition, entries: aaEntries });
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
+      assert.equal(byClass(root, 'chart-dot').length, 4);
+      assert.equal(byClass(root, 'chart-frontier').length, 1);
+      assert.equal(byClass(root, 'chart-frontier-halo').length, 3);
+      const dots = byClass(root, 'chart-dot');
+      const position = index => dots[index].attributes.transform.match(/^translate\((\S+) (\S+)\)$/).slice(1).join(',');
+      assert.equal(byClass(root, 'chart-frontier')[0].attributes.d, `M${position(0)} L${position(1)} L${position(3)}`);
+      assert.deepEqual(new Set(byClass(root, 'chart-point-label').map(label => label.children[0])), new Set(['Alpha (low)', 'Alpha (high)', 'Gamma']));
+      assert.match(byClass(root, 'chart-frontier-info')[0].textContent, /2 models \/ 3 configurations.*all 4 visible records/);
+      assert.match(byClass(root, 'chart-status')[0].textContent, /2 records missing valid coordinates or using another cost basis/);
+      assert.deepEqual(aaEntries, original);
     });
     await t.test('every frontier model is labelled on desktop and mobile, including ties, beyond optional limits', () => {
       const frontierModels = { ...chartModels };
@@ -923,16 +950,17 @@ test('interactive chart preserves records, isolates costs and supports search, l
         frontierModels[modelId] = { name: `Front ${i}` };
         return { modelId, result: { ...deepResult, cost: i < 2 ? 1 : i + 1, score: i < 2 ? 0 : i } };
       });
-      // An unverified model at the same coordinates must not acquire a frontier label.
+      // Every tied observation participates, even with a different harness.
       frontierEntries.push({ modelId: 'other/c', result: { ...deepResult, cost: 1, score: 0, harness: 'unknown agent' } });
       const original = structuredClone(frontierEntries);
       const expected = new Set(Array.from({ length: 26 }, (_, i) => `Front ${i} (high)`));
+      expected.add('Gamma (high)');
       try {
         for (const width of [820, 360]) {
           chartWidth = width;
           const root = make({ entries: frontierEntries, models: frontierModels });
           const names = () => byClass(root, 'chart-point-label').map(label => label.children[0]);
-          assert.equal(names().length, 26);
+          assert.equal(names().length, 27);
           assert.deepEqual(new Set(names()), expected);
           assert.equal(byClass(root, 'chart-frontier-halo').length, 25);
           assert.ok(Number(byClass(root, 'chart-svg')[0].attributes.viewBox.split(' ')[3]) > 420);
@@ -960,9 +988,9 @@ test('interactive chart preserves records, isolates costs and supports search, l
       assert.ok(empty.textContent.includes(messages.en.chartUpdateUnknown));
       const unsafe = entries.map(entry => ({ ...entry, result: { ...entry.result, source: 'javascript:alert(1)', cost_source: 'data:text/html,unsafe', future: { budget: 2 }, variant: '<script>unsafe</script>' } }));
       const root = make({ entries: unsafe, language: 'zh-CN', T: messages['zh-CN'] });
-      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
+      assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
       assert.equal(byClass(root, 'chart-frontier-info')[0].hidden, false);
-      assert.equal(byClass(root, 'chart-frontier-info')[0].textContent, messages['zh-CN'].chartFrontier_conditions);
+      assert.equal(byClass(root, 'chart-frontier-info')[0].textContent, messages['zh-CN'].chartFrontierSummary(3, 3, 4));
       byClass(root, 'chart-dot')[0].dispatch('click');
       assert.match(byClass(root, 'chart-detail-body')[0].textContent, /<script>unsafe<\/script>/);
       assert.match(byClass(root, 'chart-detail-body')[0].textContent, /"budget":2/);
