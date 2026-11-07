@@ -1,6 +1,6 @@
-import { routeFor } from './data.mjs';
+import { routeFor, labLogoUrl, sortBenchmarkResults } from './data.mjs';
 import { createSelect } from './select.mjs';
-import { costOptions, chartPoints, conditionKey, comparisonGroups, frontierUnavailable, paretoFront, median, numericDomain, axisTicks, formatTick, costAxis, formatCostTick, placeLabels, labColor, hasBenchmarkCost } from './chart-data.mjs';
+import { costOptions, defaultChartAxis, chartPoints, conditionKey, comparisonGroups, scoreDomain, frontierUnavailable, paretoFront, median, numericDomain, axisTicks, formatTick, costAxis, formatCostTick, placeLabels, labColor, hasBenchmarkCost } from './chart-data.mjs';
 
 function node(tag, attrs = {}, ...children) {
   const element = document.createElement(tag);
@@ -35,7 +35,8 @@ const pointLabels = points => [...new Map(points.map(point => [modelLabel(point)
 // Only its small preference object survives page/language re-renders.
 export function createBenchmarkChart({ id, definition, entries, models, manifest, language, T, state = {} }) {
   const units = costOptions(entries);
-  if (!['cost', 'release'].includes(state.axis)) state.axis = units.length ? 'cost' : 'release';
+  const missingCostCount = entries.filter(({ result }) => Number.isFinite(result.score) && !hasBenchmarkCost(result)).length;
+  if (!['score', 'cost', 'release'].includes(state.axis)) state.axis = defaultChartAxis(entries);
   if (!units.some(([unit]) => unit === state.unit)) state.unit = units[0]?.[0] || '';
   state.group ??= '';
   state.effort ??= '';
@@ -68,6 +69,10 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
   const layout = node('div', { class: 'chart-layout' }, plot, details);
   layout.addEventListener('pointerleave', () => { if (!pinned) clearSelection(); });
   plot.addEventListener('click', event => { if (!marks.some(mark => mark.element.contains(event.target))) clearSelection(); });
+  plot.addEventListener('scroll', () => {
+    const active = marks.find(mark => mark.key === activeKey);
+    if (active) positionDetails(active);
+  });
 
   function toggle(label, key) {
     const input = node('input', { type: 'checkbox', onchange: event => { state[key] = event.target.checked; draw(true); } });
@@ -82,7 +87,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
   const input = node('input', { type: 'search', 'aria-label': T.chartSearch, placeholder: T.chartSearch, oninput: event => { state.query = event.target.value; draw(true); } });
   input.value = state.query;
   const search = node('div', { class: 'chart-search' }, input, node('button', { type: 'button', 'aria-label': T.clear, onclick: () => { state.query = ''; input.value = ''; draw(true); input.focus(); } }, '×'));
-  const axis = createSelect(T.chartXAxis, [['cost', T.chartCost], ['release', T.release]], state.axis, value => { state.axis = value; state.group = ''; refresh(); });
+  const axis = createSelect(T.chartView, [['score', T.chartBars], ['cost', T.chartCostScatter], ['release', T.chartReleaseScatter]], state.axis, value => { state.axis = value; state.group = ''; refresh(); });
   unitControl.append(createSelect(T.chartCostUnit, units.length ? units.map(([unit, count]) => [unit, `${unit} (${count})`]) : [['', T.chartNoCosts]], state.unit, value => { state.unit = value; state.group = ''; refresh(); }));
   const efforts = [...new Map(entries.map(entry => [effortKey(entry.result), valueText(entry.result.effort)])).entries()].sort(([, a], [, b]) => a.localeCompare(b));
   if (!efforts.some(([key]) => key === state.effort)) state.effort = '';
@@ -126,10 +131,100 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
   function refresh() {
     unitControl.hidden = state.axis !== 'cost';
     available = chartPoints(entries, models, state.axis, state.unit);
-    groups = comparisonGroups(effortPoints());
+    groups = comparisonGroups(effortPoints(), { includeSingletons: state.axis === 'score' });
     if (!groups.some(group => group.key === state.group)) state.group = '';
     groupControl.replaceChildren(createSelect(T.conditions, [['', T.chartAllConditions], ...groups.map(group => [group.key, groupLabel(group)])], state.group, value => { state.group = value; draw(); }));
     draw();
+  }
+  function registerMark(mark) {
+    const { element } = mark, index = marks.length;
+    marks.push(mark);
+    let touching = false;
+    element.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') inspect(mark); });
+    element.addEventListener('pointerdown', event => { touching = event.pointerType === 'touch'; });
+    element.addEventListener('pointercancel', () => { touching = false; });
+    element.addEventListener('focus', () => {
+      if (!touching && !clearing) {
+        element.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
+        inspect(mark);
+      }
+    });
+    element.addEventListener('click', () => { touching = false; inspect(mark, true); });
+    element.addEventListener('keydown', event => {
+      if (['Enter', ' '].includes(event.key)) { event.preventDefault(); inspect(mark, true); }
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
+        event.preventDefault();
+        const target = event.key === 'Home' ? 0 : event.key === 'End' ? marks.length - 1 : (index + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1) + marks.length) % marks.length;
+        marks[target].element.focus({ preventScroll: true });
+        if (!pinned) inspect(marks[target]);
+        marks.forEach((item, i) => item.element.setAttribute('tabindex', i === target ? '0' : '-1'));
+      }
+    });
+  }
+
+  function drawBars(viewportWidth, matches, term) {
+    // Like the raw table, this is a score-ordered view of original observations,
+    // not a comparable ranking. Never collapse a model's different records.
+    const points = sortBenchmarkResults(displayed, definition);
+    const narrow = viewportWidth < 600, left = 48, edge = 24, top = 38;
+    const width = Math.max(viewportWidth, points.length * 66 + left + edge);
+    const height = narrow ? 520 : 580, bottom = height - 230;
+    const step = (width - left - edge) / points.length, barWidth = Math.min(52, step - 20);
+    const domain = scoreDomain(points.map(point => point.y));
+    const y = value => bottom - (value - domain[0]) / (domain[1] - domain[0]) * (bottom - top);
+    const baseline = y(0);
+    const canvas = svg('svg', { viewBox: `0 0 ${width} ${height}`, style: `width: ${width}px`, class: 'chart-svg chart-bars', 'data-scale': 'score', role: 'group', 'aria-label': `${T.chartBars}: ${definition.name}. ${T.chartKeyboardHint}` }, svg('title', {}, `${definition.name} · ${definition.metric}`));
+    const ticks = axisTicks(domain, 4);
+    const grid = svg('g', { class: 'chart-grid', 'aria-hidden': 'true' });
+    for (const tick of ticks) grid.append(svg('line', { x1: left, x2: width - edge, y1: y(tick), y2: y(tick) }),
+      svg('text', { x: left - 12, y: y(tick) + 4, 'text-anchor': 'end' }, formatTick(tick, ticks, language)));
+    grid.append(svg('line', { class: 'chart-zero-axis', x1: left, x2: width - edge, y1: baseline, y2: baseline }));
+    canvas.append(grid, svg('text', { class: 'chart-axis-label', x: left, y: 18 }, `${definition.metric} (${definition.unit})`));
+    points.forEach((point, index) => {
+      const label = modelLabel(point), score = String(point.y), isMatch = Boolean(term && matches(point));
+      const cx = left + step * (index + 0.5), color = pointColor(point.lab);
+      const barTop = Math.min(y(point.y), baseline), barHeight = Math.abs(y(point.y) - baseline);
+      const scoreInside = barHeight >= 32;
+      const scoreY = scoreInside ? barTop + barHeight / 2 : point.y < 0 ? y(point.y) + 16 : y(point.y) - 12;
+      const element = svg('g', { class: `chart-bar${isMatch ? ' is-match' : term ? ' is-dimmed' : ''}`, tabindex: marks.length ? '-1' : '0', role: 'button', 'aria-pressed': 'false', 'aria-expanded': 'false', 'aria-controls': detailId, 'aria-label': `${label}, ${T.score}: ${score}. ${groupLabel({ result: point.result, points: [point] })}. ${T.chartPointHint}` });
+      element.append(svg('rect', { class: 'chart-hit', x: cx - step / 2 + 2, y: top, width: step - 4, height: height - top - 12 }),
+        svg('rect', { class: 'chart-bar-fill', x: cx - barWidth / 2, y: barTop, width: barWidth, height: barHeight, rx: 7, fill: color }),
+        svg('rect', { class: 'chart-bar-base', x: cx - barWidth / 2, y: point.y < 0 ? baseline : baseline - Math.min(7, barHeight / 2), width: barWidth, height: Math.min(7, barHeight / 2), fill: color }));
+      if (point.y === 0) element.append(svg('line', { class: 'chart-bar-zero', x1: cx - barWidth / 2, x2: cx + barWidth / 2, y1: baseline, y2: baseline, stroke: color }));
+      // Keep the original number even when it needs a smaller font to fit.
+      element.append(svg('text', { class: `chart-bar-score${scoreInside ? ' is-inside' : ''}`, x: cx, y: scoreY, 'text-anchor': 'middle', 'dominant-baseline': 'central', style: `font-size: ${Math.min(22, (barWidth - 8) / (score.length * 0.62))}px${scoreInside && point.lab === 'openai' ? '; fill: var(--bg)' : ''}` }, score));
+      const logoY = bottom + 18;
+      const fallback = svg('text', { class: 'chart-bar-logo-fallback', x: cx, y: logoY + 17, 'text-anchor': 'middle' }, point.lab.slice(0, 2).toUpperCase());
+      const logoUrl = labLogoUrl(point.lab);
+      if (logoUrl) {
+        const logo = svg('image', { href: logoUrl, x: cx - 12, y: logoY, width: 24, height: 24, 'aria-hidden': 'true' });
+        logo.addEventListener('error', () => logo.replaceWith(fallback));
+        element.append(svg('rect', { x: cx - 12, y: logoY, width: 24, height: 24, rx: 3, fill: '#fff', 'aria-hidden': 'true' }), logo);
+      } else element.append(fallback);
+      const name = svg('text', { class: 'chart-bar-name', transform: `translate(${cx + 4} ${bottom + 62}) rotate(-60)`, 'text-anchor': 'end' });
+      // Wrap before rotating so long model names remain readable, not clipped.
+      const lines = [''];
+      for (const word of label.split(/\s+/)) {
+        const last = lines.length - 1;
+        if (lines[last] && (lines[last].length + word.length > 22)) lines.push(word);
+        else lines[last] += `${lines[last] ? ' ' : ''}${word}`;
+      }
+      lines.slice(0, 3).forEach((line, i) => name.append(svg('tspan', { x: 0, dy: i ? 17 : 0 }, line.length > 24 ? `${line.slice(0, 23)}…` : line)));
+      name.append(svg('title', {}, label));
+      element.append(name);
+      registerMark({ key: point.id, points: [point], element, cx, cy: scoreY, width, height });
+      canvas.append(element);
+    });
+    return canvas;
+  }
+
+  function finishPlot(canvas, previousKey, wasPinned, restoreFocus) {
+    plot.replaceChildren(canvas);
+    const previous = marks.find(mark => mark.key === previousKey);
+    if (previous) {
+      inspect(previous, wasPinned);
+      if (restoreFocus) previous.element.focus({ preventScroll: true });
+    }
   }
   function clearSelection(focus = false) {
     clearing = true;
@@ -152,8 +247,9 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
   }
   function positionDetails(mark) {
     const width = layout.clientWidth || mark.width;
+    const cx = mark.cx - (plot.scrollLeft || 0);
     const cardWidth = Math.min(328, width - 24);
-    const fitsRight = mark.cx + cardWidth + 30 < width, fitsLeft = mark.cx - cardWidth - 30 > 0;
+    const fitsRight = cx + cardWidth + 30 < width, fitsLeft = cx - cardWidth - 30 > 0;
     let topLimit = 12, bottomLimit = mark.height - 12;
     const rect = layout.getBoundingClientRect?.();
     if (rect && typeof window !== 'undefined' && Number.isFinite(window.innerHeight)) {
@@ -171,7 +267,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
     const maxHeight = Math.min(360, fitsRight || fitsLeft ? bottomLimit - topLimit : Math.max(above, below));
     details.setAttribute('style', `width: ${cardWidth}px; max-height: ${maxHeight}px`);
     const cardHeight = details.offsetHeight || Math.min(280, maxHeight);
-    const left = Math.max(12, Math.min(width - cardWidth - 12, fitsRight ? mark.cx + 18 : mark.cx - cardWidth - 18));
+    const left = Math.max(12, Math.min(width - cardWidth - 12, fitsRight ? cx + 18 : cx - cardWidth - 18));
     const placeBelow = fitsRight || fitsLeft ? mark.cy + cardHeight + 30 < mark.height : below >= above;
     const top = Math.max(topLimit, Math.min(bottomLimit - cardHeight, placeBelow ? mark.cy + 18 : mark.cy - cardHeight - 18));
     details.setAttribute('style', `left: ${left}px; top: ${top}px; width: ${cardWidth}px; max-height: ${maxHeight}px`);
@@ -223,6 +319,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
       button.hidden = total === 0 && state.lab !== lab;
     }
     const reason = frontierUnavailable(displayed, definition, state.axis);
+    quadrants.element.hidden = frontier.element.hidden = state.axis !== 'cost';
     frontier.input.disabled = reason !== null;
     frontier.input.checked = reason === null && state.frontier;
     frontier.element.title = reason ? T[`chartFrontier_${reason}`] : T.chartFrontierNote;
@@ -236,7 +333,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
     const canQuadrant = state.axis === 'cost' && typeof definition.higher_is_better === 'boolean' && displayed.length > 1;
     quadrants.input.disabled = !canQuadrant;
     quadrants.input.checked = canQuadrant && state.quadrants;
-    limitation.textContent = `${T.chartComparisonNote} ${reason ? T[`chartFrontier_${reason}`] : T.chartFrontierNote}${canQuadrant && state.quadrants ? ` ${T.chartMedianNote}` : ''}`;
+    limitation.textContent = state.axis === 'score' ? T.chartBarNote : `${T.chartComparisonNote} ${reason ? T[`chartFrontier_${reason}`] : T.chartFrontierNote}${canQuadrant && state.quadrants ? ` ${T.chartMedianNote}` : ''}`;
     const costs = costAxis(state.axis === 'cost' ? displayed.map(point => point.x) : [], state.scale, (plot.clientWidth || 820) < 600 ? 4 : 10);
     scaleControl.hidden = state.axis !== 'cost';
     const signature = JSON.stringify([costs.kind, costs.fallback, state.scale]);
@@ -256,6 +353,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
     thresholds.textContent = quadrants.input.checked ? T.chartMedians(`${approximate(medianCost)} ${state.unit}`, `${approximate(medianScore)}${definition.unit === 'percent' ? '%' : ` ${definition.unit}`}`) : '';
     thresholds.title = `${T.chartMedians(`${medianCost} ${state.unit}`, `${medianScore} ${definition.unit}`)}. ${T.chartMedianNote}`;
     status.textContent = [T.chartCounts(displayed.length, new Set(displayed.map(point => point.modelId)).size),
+      ...(state.axis === 'cost' && missingCostCount ? [T.chartMissingCosts(missingCostCount)] : []),
       ...(entries.length > available.length ? [T.chartOmitted(entries.length - available.length)] : []),
       ...(available.length > displayed.length ? [T.chartFiltered(available.length - displayed.length)] : []),
       ...(term ? [T.chartMatches(displayed.filter(matches).length)] : [])].join(' · ');
@@ -272,6 +370,10 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
       return;
     }
     const width = Math.max(300, Math.round(plot.clientWidth || 820));
+    if (state.axis === 'score') {
+      finishPlot(drawBars(width, matches, term), previousKey, wasPinned, restoreFocus);
+      return;
+    }
     const narrow = width < 600, baseHeight = narrow ? 360 : Math.min(560, Math.max(420, Math.round(width * 0.36)));
     const left = narrow ? 52 : 64, right = width - (narrow ? 24 : 36), top = 44;
     const labelCount = new Set((state.lab ? displayed : front).map(point => JSON.stringify([point.x, point.y, modelLabel(point)]))).size;
@@ -333,30 +435,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
       });
       if (points.length > 1) element.append(svg('text', { class: 'chart-overlap-count', x: 9, y: 12, 'aria-hidden': 'true' }, String(points.length)));
       const mark = { key, points, element, cx: x(first.x), cy: y(first.y), width, height, label, labels: pointLabels(points), frontLabels: pointLabels(points.filter(point => frontIds.has(point.id))), color: pointColor(first.lab), isFront, isMatch };
-      const index = marks.length;
-      marks.push(mark);
-      let touching = false;
-      element.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') inspect(mark); });
-      element.addEventListener('pointerdown', event => { touching = event.pointerType === 'touch'; });
-      element.addEventListener('pointercancel', () => { touching = false; });
-      element.addEventListener('focus', () => {
-        if (!touching && !clearing) {
-          element.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
-          inspect(mark);
-        }
-      });
-      element.addEventListener('click', () => { touching = false; inspect(mark, true); });
-      element.addEventListener('keydown', event => {
-        if (['Enter', ' '].includes(event.key)) { event.preventDefault(); inspect(mark, true); }
-        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) {
-          event.preventDefault();
-          const target = event.key === 'Home' ? 0 : event.key === 'End' ? marks.length - 1 : (index + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1) + marks.length) % marks.length;
-          marks[target].element.focus({ preventScroll: true });
-          // Browsers dispatch focus; explicitly inspect for a consistent pinned state.
-          if (!pinned) inspect(marks[target]);
-          marks.forEach((item, i) => item.element.setAttribute('tabindex', i === target ? '0' : '-1'));
-        }
-      });
+      registerMark(mark);
       canvas.append(element);
     }
     const annotations = svg('g', { class: 'chart-annotations', 'aria-hidden': 'true' });
@@ -375,12 +454,7 @@ export function createBenchmarkChart({ id, definition, entries, models, manifest
       }));
     };
     updateLabels();
-    plot.replaceChildren(canvas);
-    const previous = marks.find(mark => mark.key === previousKey);
-    if (previous) {
-      inspect(previous, wasPinned);
-      if (restoreFocus) previous.element.focus({ preventScroll: true });
-    }
+    finishPlot(canvas, previousKey, wasPinned, restoreFocus);
   }
   refresh();
   // Match SVG coordinates to CSS pixels so axis text stays legible on phones.

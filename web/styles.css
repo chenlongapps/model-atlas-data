@@ -176,6 +176,19 @@ tbody tr:hover { background: var(--surface); }
 .chart-dot.is-active, .chart-dot:focus-visible { opacity: 1; }
 .chart-hit { fill: transparent; }
 .chart-marker { stroke: var(--bg); stroke-width: 1.7; }
+.chart-bar { cursor: pointer; outline: none; }
+.chart-bar.is-dimmed { opacity: .2; }
+.chart-bar.is-active, .chart-bar:focus-visible { opacity: 1; }
+.chart-bar.is-match .chart-bar-fill, .chart-bar.is-active .chart-bar-fill, .chart-bar:focus-visible .chart-bar-fill { stroke: var(--text); stroke-width: 2; }
+.chart-bar.is-active .chart-hit, .chart-bar:focus-visible .chart-hit { fill: var(--surface); stroke: var(--border); }
+.chart-bar-name { fill: var(--text); font-size: 14px; }
+.chart-bar-score { fill: var(--text); font-weight: 500; }
+.chart-bar-score.is-inside { fill: #fff; }
+.chart-bar-logo-fallback { fill: var(--text); font-size: 11px; }
+.chart-bars .chart-grid line { stroke-dasharray: 3 6; opacity: .9; }
+.chart-bars .chart-grid .chart-zero-axis { stroke-dasharray: none; }
+.chart-bar-zero { stroke-width: 3; }
+.chart-grid .chart-zero-axis { stroke: var(--secondary); opacity: .8; }
 .chart-annotations { pointer-events: none; }
 .chart-point-label { font-size: 13px; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .chart-label-leader { stroke: var(--tertiary); stroke-width: .8; }

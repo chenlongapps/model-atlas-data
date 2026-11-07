@@ -5,7 +5,7 @@ import { messages, resolveLanguage, descriptionLocale } from '../web/i18n.mjs';
 import { readFile } from 'node:fs/promises';
 import { createSelect } from '../web/select.mjs';
 import { groupModalities, renderModalities } from '../web/modalities.mjs';
-import { hasBenchmarkCost, releaseTimestamp, costOptions, chartPoints, conditionKey, comparisonGroups, frontierUnavailable, paretoFront, median, numericDomain, axisTicks, formatTick, costAxis, formatCostTick, placeLabels, labColor } from '../web/chart-data.mjs';
+import { hasBenchmarkCost, releaseTimestamp, costOptions, defaultChartAxis, chartPoints, conditionKey, comparisonGroups, scoreDomain, frontierUnavailable, paretoFront, median, numericDomain, axisTicks, formatTick, costAxis, formatCostTick, placeLabels, labColor } from '../web/chart-data.mjs';
 import { createBenchmarkChart } from '../web/chart.mjs';
 
 const models = {
@@ -500,6 +500,51 @@ test('chart costs keep exact bases, finite values, true zero and source precisio
   assert.deepEqual(entries, original);
 });
 
+test('bar defaults include costless results without requiring release dates or inventing scores', () => {
+  const entries = [
+    { modelId: 'lab/a', result: { ...result, score: 0 } },
+    { modelId: 'lab/a', result: { ...result, score: 42.123456789, cost: 0, cost_unit: 'USD/task' } },
+    { modelId: 'lab/b', result: { ...result, score: '43 ± 1' } },
+    { modelId: 'lab/c', result: { ...result, score: null } },
+    { modelId: 'lab/d', result: { ...result, score: NaN } },
+  ];
+  const original = structuredClone(entries);
+  assert.equal(defaultChartAxis(entries), 'score');
+  assert.equal(defaultChartAxis(entries.slice(0, 1)), 'score');
+  assert.equal(defaultChartAxis(entries.slice(1)), 'cost'); // Non-numeric scores do not have chart coordinates.
+  assert.equal(defaultChartAxis([]), 'score');
+  assert.equal(defaultChartAxis(entries.slice(2)), 'score');
+  const points = chartPoints(entries, {}, 'score');
+  assert.deepEqual(points.map(point => point.y), [0, 42.123456789]);
+  assert.ok(points.every(point => point.release === undefined));
+  assert.equal(new Set(points.map(point => point.id)).size, 2);
+  assert.deepEqual(entries, original);
+});
+
+test('bar condition filters include singleton groups without merging original configurations', () => {
+  const entries = [
+    { modelId: 'lab/a', result: { ...result, score: 2, source: 'https://example.com/a' } },
+    { modelId: 'lab/b', result: { ...result, score: 3, source: 'https://example.com/a' } },
+    { modelId: 'lab/a', result: { ...result, score: 4, source: 'https://example.com/a', effort: 'default' } },
+    { modelId: 'lab/c', result: { ...result, score: 5, source: 'https://example.com/b' } },
+    { modelId: 'lab/a', result: { ...result, score: 2, source: 'https://example.com/a', cost: 1, cost_unit: 'USD/test' } },
+    { modelId: 'lab/a', result: { ...result, score: 6, source: 'https://example.com/a', future: { budget: 8 } } },
+  ];
+  const points = chartPoints(entries, {}, 'score');
+  const original = structuredClone(points);
+  const groups = comparisonGroups(points, { includeSingletons: true });
+  assert.equal(groups.length, 4);
+  assert.equal(groups.flatMap(group => group.points).length, points.length);
+  assert.equal(new Set(groups.flatMap(group => group.points.map(point => point.id))).size, points.length);
+  assert.deepEqual(points, original);
+  assert.deepEqual(scoreDomain([0]), [0, 1]);
+  assert.deepEqual(scoreDomain([]), [0, 1]);
+  assert.equal(scoreDomain([2, 3])[0], 0);
+  assert.equal(scoreDomain([-3, -1])[1], 0);
+  assert.ok(scoreDomain([-3, 5])[0] < -3);
+  assert.ok(scoreDomain([-3, 5])[1] > 5);
+});
+
 test('release coordinates use strict UTC model dates, not result dates or normalized invalid dates', () => {
   assert.equal(releaseTimestamp('1970-01-01'), 0);
   assert.equal(releaseTimestamp('2024-02-29'), Date.UTC(2024, 1, 29));
@@ -687,6 +732,102 @@ test('interactive chart preserves records, isolates costs and supports search, l
   const original = structuredClone(entries);
   const make = (options = {}) => createBenchmarkChart({ id: 'deepswe-v1.1', definition: deepDefinition, entries, models: chartModels, manifest: { published_at: '2026-11-07T00:00:00Z' }, language: 'en', T: messages.en, ...options });
   try {
+    await t.test('costless and partial-cost charts default to bars; switching explicitly discloses omitted costs', () => {
+      const mixed = entries.map((entry, i) => ({ ...entry, result: i === 0 ? { ...deepResult, cost: undefined } : entry.result }));
+      const state = {}, root = make({ entries: mixed, state });
+      assert.equal(state.axis, 'score');
+      assert.equal(byClass(root, 'chart-bar').length, 4);
+      assert.equal(byClass(root, 'chart-dot').length, 0);
+      assert.equal(byClass(root, 'chart-svg')[0].attributes['data-scale'], 'score');
+      assert.ok(all(root, node => node.attributes.type === 'checkbox').every(toggle => toggle.disabled && !toggle.checked));
+      assert.equal(byClass(root, 'chart-switches')[0].children[1].hidden, true);
+      assert.ok(root.textContent.includes(messages.en.chartBarNote));
+      choose(root, messages.en.chartView, messages.en.chartCostScatter);
+      assert.equal(byClass(root, 'chart-bar').length, 0);
+      assert.match(byClass(root, 'chart-status')[0].textContent, /1 records omitted because evaluation cost is missing/);
+      choose(root, messages.en.chartView, messages.en.chartBars);
+      assert.equal(byClass(root, 'chart-bar').length, 4);
+      assert.doesNotMatch(byClass(root, 'chart-status')[0].textContent, /evaluation cost is missing/);
+      const translated = make({ entries: mixed, state, language: 'zh-CN', T: messages['zh-CN'] });
+      assert.equal(byClass(translated, 'chart-bar').length, 4);
+      assert.ok(translated.textContent.includes(messages['zh-CN'].chartBarNote));
+      const noCosts = make({ entries: mixed.map(entry => ({ ...entry, result: { score: entry.result.score } })), models: {} });
+      assert.equal(byClass(noCosts, 'chart-bar').length, 4);
+      assert.equal(byClass(noCosts, 'chart-bar-score').length, 4);
+    });
+    await t.test('bars preserve precise labels, zero and negative scores on desktop and mobile', () => {
+      const scores = [0, -2.123456789, 42.123456789, 'not numeric'];
+      const input = entries.map((entry, i) => ({ ...entry, result: { ...entry.result, score: scores[i], cost: undefined } }));
+      const original = structuredClone(input);
+      try {
+        for (const width of [820, 360]) {
+          chartWidth = width;
+          const root = make({ entries: input, models: {} });
+          assert.equal(byClass(root, 'chart-bar').length, 3);
+          assert.deepEqual(byClass(root, 'chart-bar-score').map(label => label.children[0]), ['42.123456789', '0', '-2.123456789']);
+          const fills = byClass(root, 'chart-bar-fill');
+          assert.equal(Number(fills[1].attributes.height), 0);
+          assert.equal(byClass(root, 'chart-bar-zero').length, 1);
+          assert.ok(Number(fills[2].attributes.y) > Number(fills[0].attributes.y));
+          assert.ok(fills.every(fill => Number(fill.attributes.height) >= 0));
+          assert.ok(fills.every(fill => Number(fill.attributes.width) <= 52));
+          const logos = all(root, node => node.tag === 'image');
+          assert.equal(logos.length, 3);
+          assert.ok(logos.every(logo => logo.attributes.href.startsWith('https://models.dev/logos/')));
+          assert.ok(byClass(root, 'chart-bar-name').every(label => label.attributes.transform.endsWith('rotate(-60)')));
+          if (width === 360) assert.ok(Number(byClass(root, 'chart-svg')[0].attributes.viewBox.split(' ')[2]) >= width);
+          assert.match(byClass(root, 'chart-status')[0].textContent, /3 displayed records.*1 records missing valid coordinates/);
+          const unknown = make({ entries: input, definition: { ...deepDefinition, higher_is_better: undefined } });
+          assert.deepEqual(byClass(unknown, 'chart-bar-score').map(label => label.children[0]), ['0', '-2.123456789', '42.123456789']);
+          const lower = make({ entries: input, definition: { ...deepDefinition, higher_is_better: false } });
+          assert.deepEqual(byClass(lower, 'chart-bar-score').map(label => label.children[0]), ['-2.123456789', '0', '42.123456789']);
+          const zeros = make({ entries: input.slice(0, 1) });
+          assert.equal(Number(byClass(zeros, 'chart-bar-fill')[0].attributes.height), 0);
+          assert.doesNotMatch(byClass(zeros, 'chart-svg')[0].textContent, /NaN|Infinity/);
+        }
+      } finally { chartWidth = 820; }
+      assert.deepEqual(input, original);
+    });
+    await t.test('bar search, condition and lab filters, keyboard, touch and pinned details retain original records', () => {
+      const input = [
+        ...entries.map(entry => ({ ...entry, result: { ...entry.result, cost: undefined } })),
+        { ...entries[0], result: { ...deepResult, cost: undefined, effort: 'low', score: 99, harness: 'other agent' } },
+      ];
+      const root = make({ entries: input });
+      assert.equal(byClass(root, 'chart-bar').length, 5);
+      const search = all(root, node => node.attributes.type === 'search')[0];
+      search.dispatch('input', { target: { value: 'Alpha' } });
+      assert.equal(byClass(root, 'chart-bar').length, 5);
+      assert.equal(byClass(root, 'chart-bar').filter(bar => bar.className.includes('is-match')).length, 2);
+      const bars = byClass(root, 'chart-bar');
+      bars[0].dispatch('pointerdown', { pointerType: 'touch' });
+      bars[0].focus();
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, true);
+      bars[0].dispatch('click');
+      assert.equal(byClass(root, 'chart-record').length, 1);
+      assert.equal(bars[0].attributes['aria-pressed'], 'true');
+      bars[1].dispatch('pointerenter', { pointerType: 'mouse' });
+      assert.equal(bars[0].attributes['aria-pressed'], 'true');
+      search.dispatch('input', { target: { value: '' } });
+      assert.equal(byClass(root, 'chart-bar')[0].attributes['aria-pressed'], 'true');
+      byClass(root, 'chart-bar')[0].dispatch('keydown', { key: 'End' });
+      const last = byClass(root, 'chart-bar').at(-1);
+      assert.equal(document.activeElement, last);
+      last.dispatch('keydown', { key: 'Enter' });
+      assert.match(byClass(root, 'chart-detail-body')[0].textContent, /Alpha/);
+      assert.match(byClass(root, 'chart-detail-body')[0].textContent, /50/);
+      root.dispatch('keydown', { key: 'Escape' });
+      assert.equal(byClass(root, 'chart-detail')[0].hidden, true);
+      choose(root, messages.en.conditions, input[4].result.source + ' · ' + messages.en.effort + ': low');
+      assert.equal(byClass(root, 'chart-bar').length, 1); // Singleton condition groups can be selected too.
+      choose(root, messages.en.conditions, messages.en.chartAllConditions);
+      const lab = all(root, node => node.tag === 'button' && node.attributes['data-lab'] === 'lab')[0];
+      lab.dispatch('click');
+      assert.equal(byClass(root, 'chart-bar').length, 2); // Both configurations of Alpha, not only its best score.
+      byClass(root, 'chart-show-all')[0].dispatch('click');
+      choose(root, messages.en.effort, 'low');
+      assert.equal(byClass(root, 'chart-bar').length, 1);
+    });
     await t.test('quadrants and eligible frontiers default on without overriding explicit preferences', () => {
       const state = {}, root = make({ state });
       const toggles = all(root, node => node.attributes.type === 'checkbox');
@@ -694,11 +835,11 @@ test('interactive chart preserves records, isolates costs and supports search, l
       assert.equal(byClass(root, 'chart-quadrants').length, 1);
       assert.equal(byClass(root, 'chart-frontier').length, 1);
       assert.equal(byClass(root, 'chart-thresholds')[0].hidden, false);
-      choose(root, messages.en.chartXAxis, messages.en.release);
+      choose(root, messages.en.chartView, messages.en.chartReleaseScatter);
       assert.ok(toggles.every(toggle => !toggle.checked && toggle.disabled));
       assert.equal(state.quadrants, true);
       assert.equal(state.frontier, true);
-      choose(root, messages.en.chartXAxis, messages.en.chartCost);
+      choose(root, messages.en.chartView, messages.en.chartCostScatter);
       assert.ok(toggles.every(toggle => toggle.checked && !toggle.disabled));
       for (const toggle of toggles) toggle.dispatch('change', { target: { checked: false } });
       assert.equal(byClass(root, 'chart-quadrants').length, 0);
@@ -862,7 +1003,7 @@ test('interactive chart preserves records, isolates costs and supports search, l
       choose(root, messages.en.effort, '—');
       assert.match(byClass(root, 'chart-status')[0].textContent, /1 displayed records/);
       choose(root, messages.en.effort, messages.en.chartAllEfforts);
-      choose(root, messages.en.chartXAxis, messages.en.release);
+      choose(root, messages.en.chartView, messages.en.chartReleaseScatter);
       assert.match(byClass(root, 'chart-status')[0].textContent, /5 displayed records/);
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[0].disabled, true);
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, true);
@@ -930,7 +1071,7 @@ test('interactive chart preserves records, isolates costs and supports search, l
         { modelId: 'other/d', result: { ...aaResult, cost: 0.1, cost_unit: 'USD/test', score: 99 } },
       ];
       const original = structuredClone(aaEntries);
-      const root = make({ id: 'artificial-analysis-intelligence-index-v5', definition: aaDefinition, entries: aaEntries });
+      const root = make({ id: 'artificial-analysis-intelligence-index-v5', definition: aaDefinition, entries: aaEntries, state: { axis: 'cost' } });
       assert.equal(all(root, node => node.attributes.type === 'checkbox')[1].disabled, false);
       assert.equal(byClass(root, 'chart-dot').length, 4);
       assert.equal(byClass(root, 'chart-frontier').length, 1);
@@ -999,7 +1140,7 @@ test('interactive chart preserves records, isolates costs and supports search, l
       assert.ok(root.textContent.includes(messages['zh-CN'].chartTitle));
       const noCosts = make({ entries: entries.map(entry => ({ ...entry, result: { name: 'B', score: 0 } })) });
       assert.ok(byClass(noCosts, 'chart-svg').length);
-      choose(noCosts, messages.en.chartXAxis, messages.en.chartCost);
+      choose(noCosts, messages.en.chartView, messages.en.chartCostScatter);
       assert.ok(noCosts.textContent.includes(messages.en.chartNoCosts));
     });
     assert.deepEqual(entries, original);

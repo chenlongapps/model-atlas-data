@@ -19,6 +19,11 @@ export function costOptions(entries) {
   return [...counts].sort(([a, n], [b, m]) => m - n || a.localeCompare(b));
 }
 
+export function defaultChartAxis(entries) {
+  const numeric = entries.filter(({ result }) => Number.isFinite(result.score));
+  return numeric.length && numeric.every(({ result }) => hasBenchmarkCost(result)) ? 'cost' : 'score';
+}
+
 export function chartPoints(entries, models, axis, costUnit) {
   return entries.flatMap(({ modelId, result }, index) => {
     if (!Number.isFinite(result.score)) return [];
@@ -26,7 +31,7 @@ export function chartPoints(entries, models, axis, costUnit) {
     const date = releaseTimestamp(model.release_date);
     // An explicit, exact unit is mandatory. Never silently combine cost bases.
     const x = axis === 'cost' ? (hasBenchmarkCost(result) && result.cost_unit === costUnit ? result.cost : undefined)
-      : axis === 'release' ? date : undefined;
+      : axis === 'release' ? date : axis === 'score' ? result.score : undefined;
     return x === undefined ? [] : [{ id: `${modelId}:${index}`, modelId, name: model.name || modelId, lab: modelLab(modelId), release: model.release_date, result, x, y: result.score }];
   });
 }
@@ -53,15 +58,22 @@ export function frontierUnavailable(points, definition, axis) {
 
 // Exact-condition groups are optional filters, not proof of comparability and
 // not automatic boundaries for the exploratory frontier.
-export function comparisonGroups(points) {
+export function comparisonGroups(points, { includeSingletons = false } = {}) {
   const groups = new Map();
   for (const point of points) {
     const key = conditionKey(point.result);
     if (!groups.has(key)) groups.set(key, { key, points: [], result: point.result });
     groups.get(key).points.push(point);
   }
-  return [...groups.values()].filter(group => group.points.length > 1)
+  return [...groups.values()].filter(group => includeSingletons || group.points.length > 1)
     .sort((a, b) => b.points.length - a.points.length || a.key.localeCompare(b.key));
+}
+
+// Bars always start at a real zero, including for signed and all-zero scores.
+export function scoreDomain(values) {
+  const low = Math.min(0, ...values), high = Math.max(0, ...values);
+  const pad = (high - low || 1) * 0.05;
+  return [low < 0 ? low - pad : 0, high > 0 ? high + pad : low < 0 ? 0 : 1];
 }
 
 // Weak dominance with at least one strict improvement. Identical coordinates are
