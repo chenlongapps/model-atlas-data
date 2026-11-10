@@ -35,16 +35,6 @@ label = "Announcement"
 url = "https://research.meta.ai/blog/muse-ember"
 type = "announcement"
 
-[[links]]
-label = "Documentation"
-url = "https://dev.meta.ai/docs/muse-ember"
-type = "docs"
-
-[[links]]
-label = "Evaluation report"
-url = "https://research.meta.ai/static/muse-ember-evaluation-report"
-type = "model_card"
-
 # Scores below are the max-effort launch scorecard. Methodology is in the linked
 # evaluation report; publication dates are not treated as evaluation dates.
 # Artificial Analysis results are its November 9 snapshot, not Meta internal runs.

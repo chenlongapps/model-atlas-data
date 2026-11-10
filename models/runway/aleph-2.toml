@@ -9,10 +9,10 @@ name = "Aleph 2.0"
 description = "In-context video editing model that applies text and keyframe edits across existing footage"
 family = "runway"
 open_weights = false
-release_date = "2026-06"
+release_date = "2026-06-02"
 
 [modalities]
-input = ["text", "image/jpeg", "image/png", "image/webp", "video/mp4", "video/quicktime"]
+input = ["text", "image/jpeg", "image/png", "image/webp", "video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/3gpp", "video/ogg"]
 output = ["video/mp4"]
 
 [capabilities]
