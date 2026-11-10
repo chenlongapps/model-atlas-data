@@ -46,6 +46,8 @@ ModelAtlas Data 是 [ModelAtlas Android](https://github.com/chenlongapps/model-a
 
 ## Benchmark 定义与排行榜
 
+默认不主动向 `benchmarks/` 新增 Benchmark 定义；只有用户明确要求或确认后才可新增。收集或同步成绩时优先复用已有定义；缺少对应定义时，仍可在模型文件中保留已核实的原始成绩并报告未映射情况，不得仅为消除构建警告或补齐评测分项而自动创建定义。
+
 `benchmarks/` 使用 ModelAtlas 专有定义，而非 Models.dev 模型 Schema。定义应包含稳定唯一的 `id`、正式 `name`、`version`、`category`、`metric`、`unit` 和 `higher_is_better`；需要时可补充描述、来源和方法。
 
 不得猜测评测版本、指标、单位或评分方向，不得将综合指数标为单一能力测试；测试规则不兼容的版本应分别定义。构建脚本按名称、版本和必要的指标信息映射成绩与定义；映射不明确时报告，不得猜测。

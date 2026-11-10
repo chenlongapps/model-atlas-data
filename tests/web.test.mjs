@@ -139,6 +139,20 @@ test('optional effort stays separate from variant and does not change definition
   assert.equal(Object.hasOwn(results[0], 'effort'), false);
   assert.deepEqual(results.map(r => r.variant), ['no tools', 'no tools', 'no tools']);
 });
+test('benchmark model counts deduplicate conditions and exclude unmatched or ambiguous records', () => {
+  const ambiguous = { ...definition, name: 'Ambiguous' };
+  const defs = { b1: definition, empty: { ...definition, version: '2' }, a1: ambiguous, a2: { ...ambiguous } };
+  const index = buildIndex({
+    'lab/a': { benchmarks: [result, { ...result, effort: 'xhigh' }, { ...result, source: 'https://example.com' }] },
+    'lab/b': { benchmarks: [result] },
+    'lab/c': { benchmarks: [{ ...result, version: undefined }, { ...result, metric: 'other' }, { ...result, name: 'Ambiguous' }] },
+    'lab/d': {},
+  }, defs);
+  assert.equal(index.byBenchmark.get('b1').length, 4);
+  assert.deepEqual([...index.modelCountByBenchmark], [['b1', 2], ['empty', 0], ['a1', 0], ['a2', 0]]);
+  assert.equal(buildIndex().modelCountByBenchmark.size, 0);
+  assert.deepEqual(sortEntries(Object.entries(defs), ([id]) => index.modelCountByBenchmark.get(id), 'desc').map(([id]) => id), ['b1', 'a1', 'a2', 'empty']);
+});
 test('empty input and missing localization fall back', () => {
   assert.deepEqual(filterModels(), []);
   assert.deepEqual(filterBenchmarks(), []);
@@ -249,6 +263,22 @@ test('detail pages preserve results, optional prices and parameter provenance', 
     for (const [key, value] of Object.entries(globals)) Object.defineProperty(globalThis, key, { configurable: true, writable: true, value });
     await import('../web/app.mjs');
     await ready;
+    await t.test('benchmark listing shows sortable unique model counts including zero', () => {
+      globals.location.hash = '#/benchmarks';
+      handlers.hashchange();
+      const headers = find(resultTable(), 'thead').children[0].children;
+      assert.equal(headers[5].textContent, 'Included models ↕');
+      const counts = () => find(resultTable(), 'tbody').children.map(row => cells(row)[5]);
+      assert.deepEqual(counts(), ['0', '0', '2', '1']);
+      find(headers[5], 'button').handlers.click();
+      assert.deepEqual(counts(), ['0', '0', '1', '2']);
+      assert.equal(find(resultTable(), 'thead').children[0].children[5].attributes['aria-sort'], 'ascending');
+      find(find(resultTable(), 'thead').children[0].children[5], 'button').handlers.click();
+      assert.deepEqual(counts(), ['2', '1', '0', '0']);
+      assert.equal(find(resultTable(), 'thead').children[0].children[5].attributes['aria-sort'], 'descending');
+      globals.location.hash = '#/benchmarks/b1';
+      handlers.hashchange();
+    });
     assert.deepEqual(cells(find(resultTable(), 'thead').children[0]), ['Model', 'Score', 'Effort', 'Metric', 'Version', 'Test conditions', 'Source']);
     const rows = find(resultTable(), 'tbody').children;
     assert.deepEqual(cells(rows[0]).slice(0, 5), ['Beta', '20.0', 'Adaptive/Max', 'accuracy', '1']);

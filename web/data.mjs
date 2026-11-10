@@ -86,7 +86,10 @@ export function buildIndex(models = {}, definitions = {}) {
     });
     byModel.set(modelId, results);
   }
-  return { byModel, byBenchmark };
+  // Multiple efforts, sources or other conditions still count as one model.
+  const modelCountByBenchmark = new Map([...byBenchmark].map(([id, entries]) =>
+    [id, new Set(entries.map(entry => entry.modelId)).size]));
+  return { byModel, byBenchmark, modelCountByBenchmark };
 }
 
 export function description(locale, type, id, original) {

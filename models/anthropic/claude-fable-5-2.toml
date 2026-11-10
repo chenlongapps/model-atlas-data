@@ -1,0 +1,1186 @@
+# Based on https://github.com/anomalyco/models.dev/blob/dev/models/anthropic/claude-fable-5-2.toml
+# Specifications: https://platform.claude.com/docs/en/models/fable-5-2/overview
+# Image/PDF input: https://platform.claude.com/docs/en/build-with-claude/vision and https://platform.claude.com/docs/en/build-with-claude/pdf-support
+# Forced tool use and sampling restrictions: https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2
+# Launch-table scores have safeguards on; cyber and biology blocks can fall back to Opus 4.8 and Opus 5 respectively.
+# "Highest available effort" is retained as a condition, not inferred to mean a named effort level.
+schema = 2
+name = "Claude Fable 5.2"
+description = "Claude model for demanding reasoning and long-horizon agentic work"
+family = "claude-fable"
+open_weights = false
+knowledge = "2026-06"
+release_date = "2026-11-09"
+
+[modalities]
+input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "application/pdf"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none"] }
+reasoning = { supported = true }
+temperature = false
+top_p = false
+top_k = false
+
+[limit]
+context = 1_000_000
+output = 128_000
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 49.1
+metric = "score"
+version = "2.0"
+effort = "Xhigh"
+variant = "safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "FrontierSWE"
+score = 69.9
+metric = "score"
+version = "2"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 51.4
+metric = "score"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 74.6
+metric = "score"
+version = "0.1"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "WANDR"
+score = 82.1
+metric = "relaxed score"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "OSWorld"
+score = 89.3
+metric = "partial score"
+version = "2.1"
+dataset = "offline set"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "RoboDojo Sim"
+score = 64.9
+metric = "average success rate"
+effort = "Max"
+variant = "internal run; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 66.1
+metric = "rubric score"
+version = "1.1"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1785
+metric = "Elo"
+version = "1.1"
+variant = "highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "Remote Labor Index"
+score = 41.3
+metric = "score"
+effort = "High"
+variant = "safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 74.2
+metric = "score"
+variant = "with tools; highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "Chartography"
+score = 73.4
+metric = "score"
+variant = "no tools; highest available effort; safeguards on"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+# AA live configuration pages checked 2026-11-10. Effort labels use the
+# embedded effort.label, not the title's capitalization. Default Fallback is
+# a source configuration, not a claim that every task used a fallback.
+# Index cost is the weighted mean cost per task; component costs are the
+# unweighted intelligenceIndexEvaluations[].costPerTask, never total cost.
+# Proportions are converted to percent without rounding. No evaluation date
+# is inferred from the release date or the date this page was checked.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 53.9249388799182
+metric = "index score"
+version = "5.0.1"
+effort = "low"
+variant = "Default Fallback"
+cost = 3.097241904274546
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 54.5454545454545
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "low"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 4.339918517524423
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 53.8095238095238
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "low"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 8.776175363262457
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 67.99749206673704
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "low"
+variant = "Default Fallback; zero for any guardrail violation, otherwise share of objectives completed; one run per task; API toolset; 50-turn cap"
+cost = 1.2783863461849208
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 59.7312326227989
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "low"
+variant = "Default Fallback; text-only; no tools"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+# GDPval-AA reported interval: [1531.89, 1559.46].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1545.68
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "low"
+variant = "Default Fallback; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 56.4083157101519
+metric = "index score"
+version = "5.0.1"
+effort = "medium"
+variant = "Default Fallback"
+cost = 3.8026050641787634
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 55.050505050505
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "medium"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 5.251012275091596
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 60.4761904761905
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "medium"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 10.98324440927286
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 68.82266338432704
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "medium"
+variant = "Default Fallback; zero for any guardrail violation, otherwise share of objectives completed; one run per task; API toolset; 50-turn cap"
+cost = 1.3316637351754355
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 61.9091751621872
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "medium"
+variant = "Default Fallback; text-only; no tools"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+# GDPval-AA reported interval: [1574.93, 1607.4].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1591.16
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "medium"
+variant = "Default Fallback; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 61.8218785440284
+metric = "index score"
+version = "5.0.1"
+effort = "high"
+variant = "Default Fallback"
+cost = 9.078414777860381
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 59.5959595959596
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 13.468788577499403
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 70
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "high"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 24.2810515829468
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 71.35975994544773
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "high"
+variant = "Default Fallback; zero for any guardrail violation, otherwise share of objectives completed; one run per task; API toolset; 50-turn cap"
+cost = 1.6912020876465343
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 66.1723818350324
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "high"
+variant = "Default Fallback; text-only; no tools"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+# GDPval-AA reported interval: [1699.84, 1736.43].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1718.13
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "high"
+variant = "Default Fallback; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 62.2167392403357
+metric = "index score"
+version = "5.0.1"
+effort = "xhigh"
+variant = "Default Fallback"
+cost = 14.828587632511116
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 61.6161616161616
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 20.8121385936618
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 67.6190476190476
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "xhigh"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 31.366492449010273
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 74.16293165236524
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "xhigh"
+variant = "Default Fallback; zero for any guardrail violation, otherwise share of objectives completed; one run per task; API toolset; 50-turn cap"
+cost = 2.2740566984684927
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 68.8600556070436
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "xhigh"
+variant = "Default Fallback; text-only; no tools"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+# GDPval-AA reported interval: [1729.28, 1772.01].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1750.65
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "xhigh"
+variant = "Default Fallback; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 64.563595756626
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+variant = "Default Fallback"
+cost = 26.53855780398091
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 59.5959595959596
+metric = "task resolution rate"
+version = "4.0.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
+harness = "mini-swe-agent"
+cost = 31.589769302212897
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 73.3333333333333
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-step cap"
+harness = "mini-swe-agent"
+cost = 45.205926007936405
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 76.42233832611831
+metric = "AutomationBench-AA Score"
+version = "1.0.6"
+dataset = "Private held-out split (657 tasks across six business domains)"
+effort = "max"
+variant = "Default Fallback; zero for any guardrail violation, otherwise share of objectives completed; one run per task; API toolset; 50-turn cap"
+cost = 4.4483182548807925
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 74.2817423540315
+metric = "accuracy"
+dataset = "HLE text-only subset (2,158 questions)"
+effort = "max"
+variant = "Default Fallback; text-only; no tools"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+# GDPval-AA reported interval: [1804.31, 1858.34].
+[[benchmarks]]
+name = "GDPval-AA"
+score = 1831.33
+metric = "Elo rating"
+version = "2.1"
+dataset = "GDPval public set (220 tasks across 44 occupations)"
+effort = "max"
+variant = "Default Fallback; shell and web browsing"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+# Vals model-page overall scores, checked 2026-11-10 against each benchmark's
+# linked JSON. Row settings: provider Anthropic; compute_effort "high";
+# max_output_tokens 128000; temperature/top_p null (not defaulted).
+# stderr below is in percentage points. Composite rows have no single harness.
+# Source updated/release dates are not evaluation dates. Costs use cost_per_test.
+# For fallback-affected rows the published score includes fallback completions.
+# The separately reported noFallbackScorePct is a post-hoc rescore, not a rerun;
+# its cost is omitted rather than borrowed from the fallback-enabled run.
+# Vals Index stderr = 0.956; 26 fallback-assisted tasks out of 1380.
+[[benchmarks]]
+name = "Vals Index"
+score = 71.309
+metric = "performance score"
+version = "2.2"
+effort = "high"
+variant = "published score; server-side Opus 4.8 / Opus 5 fallbacks included"
+cost = 17.939202
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/vals_index"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.DeTlTtu4.json"
+
+[[benchmarks]]
+name = "Vals Index"
+score = 69.483
+metric = "performance score"
+version = "2.2"
+effort = "high"
+variant = "fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun"
+source = "https://www.vals.ai/_astro/refusal_fallback.DuYWHFGW.js"
+
+# stderr = 1.38.
+[[benchmarks]]
+name = "Vals Finance Index"
+score = 63.583
+metric = "performance score"
+version = "1"
+effort = "high"
+cost = 4.938442
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/finance_index"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_finance_index.SoS3fFjr.json"
+
+# stderr = 1.813; one fallback-assisted task; Opus 5 is a responding model.
+[[benchmarks]]
+name = "Vals Legal Index"
+score = 69.175
+metric = "performance score"
+version = "1"
+effort = "high"
+variant = "published score; server-side Opus 5 fallback included"
+cost = 8.877409
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/legal_index"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_index.DoifPxRC.json"
+
+[[benchmarks]]
+name = "Vals Legal Index"
+score = 69.09
+metric = "performance score"
+version = "1"
+effort = "high"
+variant = "fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun"
+source = "https://www.vals.ai/_astro/refusal_fallback.Dygvf87S.js"
+
+# stderr = 2.3; two fallback-assisted tasks; rescore remains 63.74.
+[[benchmarks]]
+name = "Vals Science Index"
+score = 63.74
+metric = "performance score"
+version = "1.0"
+effort = "high"
+variant = "published score; server-side Opus 5 fallback included"
+cost = 8.790492
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/science_index"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_science_index.aXAzSjqu.json"
+
+# stderr = 3.115; 26 fallback-assisted tasks; Opus 5 is a responding model.
+[[benchmarks]]
+name = "Code Migration v1.1"
+score = 83.265
+metric = "hidden-test pass rate"
+version = "1.1"
+dataset = "30 CLI source repositories plus 10 COBOL source repositories; repository-weighted overall"
+effort = "high"
+variant = "offline sandbox; published score includes server-side Opus 5 fallback; anti-cheat gating"
+harness = "Pi"
+cost = 69.18581
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/code-migration-v1-1"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_code_migration_v1_1.B0T5Uk7z.json"
+
+[[benchmarks]]
+name = "Code Migration v1.1"
+score = 73.02
+metric = "hidden-test pass rate"
+version = "1.1"
+dataset = "30 CLI source repositories plus 10 COBOL source repositories; repository-weighted overall"
+effort = "high"
+variant = "offline sandbox; fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun; anti-cheat gating"
+harness = "Pi"
+source = "https://www.vals.ai/_astro/refusal_fallback.CM0jPETe.js"
+
+# stderr = 2.187.
+[[benchmarks]]
+name = "EMB v1.1"
+score = 77.377
+metric = "modeling score"
+version = "1.1"
+effort = "high"
+variant = "Template cell matching and Scratch rubric scoring; GPT-6 Luna Scratch judge; equal category weights; 3.5-hour task limit"
+cost = 6.672375
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/emb-v1-1"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_emb_v1_1.BepKO0Tl.json"
+
+# stderr = 1.977.
+[[benchmarks]]
+name = "Finance Agent v2.1"
+score = 69.47
+metric = "partial credit"
+version = "2.1"
+effort = "high"
+variant = "dealbreaker-gated, severity-weighted checks; three-judge jury; two-hour task limit"
+cost = 4.833915
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/fabv2-1"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_finance_agent_v2_1.6b1PiRZr.json"
+
+# stderr = 1.327.
+[[benchmarks]]
+name = "Immigration"
+score = 73.982
+metric = "average answer accuracy"
+version = "1"
+effort = "high"
+variant = "up to five exchanges; GPT-6 Luna simulated person; Claude Sonnet 5 rubric grader"
+cost = 0.638668
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/immigration"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_immigration.CuSr5RWh.json"
+
+# stderr = 3.465; one fallback-assisted task; Opus 5 is a responding model.
+[[benchmarks]]
+name = "Legal Research Bench"
+score = 46.154
+metric = "all-pass accuracy"
+version = "1"
+dataset = "Private Test split (208 questions)"
+effort = "high"
+variant = "published score includes server-side Opus 5 fallback; GPT 5.4 rubric judge; three-hour task limit"
+cost = 3.956441
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/legal_research"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_research.BeXLzS5J.json"
+
+[[benchmarks]]
+name = "Legal Research Bench"
+score = 45.673
+metric = "all-pass accuracy"
+version = "1"
+dataset = "Private Test split (208 questions)"
+effort = "high"
+variant = "fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun; GPT 5.4 rubric judge; three-hour task limit"
+source = "https://www.vals.ai/_astro/refusal_fallback.B3dfh3tF.js"
+
+# stderr = 3.361.
+[[benchmarks]]
+name = "MysteryMechanism"
+score = 51.802
+metric = "functional recovery accuracy"
+version = "1"
+effort = "high"
+variant = "binary functional equivalence on private structural probes; noise-aware error thresholds"
+cost = 1.552812
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/mysterymechanism"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_mysterymechanism.CLShNtFx.json"
+
+# stderr = 0; no uncertainty is inferred for any other row.
+[[benchmarks]]
+name = "ProofBench v1.1"
+score = 100
+metric = "proof success rate"
+version = "1.1"
+effort = "high"
+variant = "Lean 4 checker; Mathlib search and Lean execution; no internet"
+harness = "ProofBench"
+cost = 0.786101
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/proof_bench"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_proof_bench.CgnEBbDD.json"
+
+# stderr = 3.367.
+[[benchmarks]]
+name = "Tax Agent Bench"
+score = 32.092
+metric = "citation-adjusted all-pass accuracy"
+version = "1"
+dataset = "Private Test split (193 questions)"
+effort = "high"
+variant = "all-pass times (0.7 + 0.3 times citation quality); GPT 5.4 rubric judge; three-hour task limit"
+cost = 3.309035
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/tax_agent_bench"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_tax_agent_bench.CoAIMgK7.json"
+
+# stderr = 1.152.
+[[benchmarks]]
+name = "Vibe Code Bench v1.1"
+score = 93.771
+metric = "test pass rate"
+version = "1.1"
+effort = "high"
+harness = "OpenHands"
+cost = 22.13226
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/vibe-code"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DtQxXDu0.json"
+
+# stderr = 0.741; 90 tasks, three independent full-benchmark runs.
+[[benchmarks]]
+name = "BioMysteryBench"
+score = 83.704
+metric = "accuracy"
+version = "1"
+dataset = "90 tasks"
+effort = "high"
+variant = "mean of three full runs; 200-turn cap; four-hour limit; restricted scientific network; GPT-5.6 Terra judge; policy failures score zero"
+harness = "Terminus 2"
+cost = 1.681583
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/biomysterybench"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_biomysterybench.ccJddhBB.json"
+
+# stderr = 1.715; headline is average of two judges' all-criteria task pass rates.
+[[benchmarks]]
+name = "HLAB-Vals-1.1"
+score = 5
+metric = "all-pass rate"
+version = "1.1"
+dataset = "120 tasks"
+effort = "high"
+variant = "Harvey v1.1 holdout fixes; Vals harness updates; offline; GPT 5.5 and Claude Sonnet 4.6 judges"
+cost = 19.366751
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/hlab"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_agent_benchmark.BNvE9afF.json"
+
+# stderr = 2.781; 37 fallback-assisted tasks; Opus 4.8 / Opus 5 responding models.
+[[benchmarks]]
+name = "ProgramBench"
+score = 19
+metric = "fully resolved rate"
+version = "1"
+dataset = "200 public tasks"
+effort = "high"
+variant = "published score includes server-side Opus 4.8 / Opus 5 fallbacks; offline cleanroom; 1,000 steps; six-hour task limit"
+harness = "mini-SWE-agent"
+cost = 46.822029
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/programbench"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_programbench.7VHjeIKB.json"
+
+[[benchmarks]]
+name = "ProgramBench"
+score = 18
+metric = "fully resolved rate"
+version = "1"
+dataset = "200 public tasks"
+effort = "high"
+variant = "fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun; offline cleanroom; 1,000 steps; six-hour task limit"
+harness = "mini-SWE-agent"
+source = "https://www.vals.ai/_astro/refusal_fallback.3mxsml3M.js"
+
+# stderr = 2.214; the row has no confirmed fallback accounting.
+[[benchmarks]]
+name = "SWE-bench Multimodal"
+score = 62.292
+metric = "task resolution rate"
+version = "1"
+effort = "high"
+variant = "single run; no internet; issue screenshots downloaded before the run; upstream SWE-bench verifier"
+harness = "mini-swe-agent"
+cost = 1.839479
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/swebench-multimodal"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_swebench_multimodal.CYd_UmqN.json"
+
+# stderr = 2.314; 17 fallback-assisted attempts out of 198.
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 65.152
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "avg@3 (mean of three pass@1 runs); eight-hour task limit; no step or cost limit; published score includes server-side Opus 4.8 / Opus 5 fallbacks"
+harness = "mini-swe-agent"
+cost = 14.564414
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.D_ldiP5A.json"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 58.586
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "avg@3 (mean of three pass@1 runs); fallback-assisted tasks scored as failures; post-hoc rescoring, not a rerun"
+harness = "mini-swe-agent"
+source = "https://www.vals.ai/_astro/refusal_fallback.qAdZ62_N.js"
+
+# stderr = 5.98; two fallback-assisted tasks out of 70, neither earned credit.
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 55.714
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "high"
+variant = "single-run pass@1; infrastructure/provider-error retries only; eight-hour task limit; published score includes server-side Opus 5 fallback"
+harness = "Mini-SWE-agent"
+cost = 23.13708
+cost_unit = "USD/test"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.DmI0IAT2.json"
+
+# Remaining AA Intelligence Index evaluation headlines, from the same seven
+# configuration snapshots as the records above. AA-Omniscience's headline is
+# Net Score (points), not accuracy or a recomputed Index contribution.
+# GDP.pdf has no published semantic version. CritPt's hard subset is distinct
+# from its 70-problem full set and the legacy CritPt benchmark.
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1562.73
+metric = "Elo"
+version = "1.1"
+effort = "low"
+variant = "Default Fallback; combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+cost = 5.617327431446156
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 38.4397474747475
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "low"
+variant = "Default Fallback; three attempts per task; blocking-check and anti-cheat gating; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+cost = 2.1165804247563167
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 62.93333333333333
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "low"
+variant = "Default Fallback; GPT-5.6 Luna (medium) judge"
+cost = 0.013750208863165666
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 26.8
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "low"
+variant = "Default Fallback; extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) criterion judge"
+cost = 1.53269266200902
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 60.8
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "low"
+variant = "Default Fallback; no tools; pass@1; GPT-5.6 Luna (medium) judge"
+cost = 0.128247592
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 60
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "low"
+variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-turn cap; November 2026 regrading"
+harness = "Stirrup"
+cost = 0.3129632866319219
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-low"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1622.24
+metric = "Elo"
+version = "1.1"
+effort = "medium"
+variant = "Default Fallback; combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+cost = 6.835245733157161
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 41.2984090909091
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "medium"
+variant = "Default Fallback; three attempts per task; blocking-check and anti-cheat gating; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+cost = 2.6864489410815566
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 63.5
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "medium"
+variant = "Default Fallback; GPT-5.6 Luna (medium) judge"
+cost = 0.015341321777060666
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 23.8
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "medium"
+variant = "Default Fallback; extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) criterion judge"
+cost = 1.55747228463872
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 66.3
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "medium"
+variant = "Default Fallback; no tools; pass@1; GPT-5.6 Luna (medium) judge"
+cost = 0.183118464
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 61.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "medium"
+variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-turn cap; November 2026 regrading"
+harness = "Stirrup"
+cost = 0.3669312848560007
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-medium"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1677.44
+metric = "Elo"
+version = "1.1"
+effort = "high"
+variant = "Default Fallback; combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+cost = 15.486568536849699
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 49.1275757575758
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "high"
+variant = "Default Fallback; three attempts per task; blocking-check and anti-cheat gating; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+cost = 9.635322308119388
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 64.03333333333333
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "high"
+variant = "Default Fallback; GPT-5.6 Luna (medium) judge"
+cost = 0.019553882127697
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 21.8
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "high"
+variant = "Default Fallback; extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) criterion judge"
+cost = 1.6442819737348697
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 73.8
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "high"
+variant = "Default Fallback; no tools; pass@1; GPT-5.6 Luna (medium) judge"
+cost = 0.464489248
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 73
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "high"
+variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-turn cap; November 2026 regrading"
+harness = "Stirrup"
+cost = 1.049383457348336
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1737.78
+metric = "Elo"
+version = "1.1"
+effort = "xhigh"
+variant = "Default Fallback; combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+cost = 28.563319210307895
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 47.5810858585859
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "xhigh"
+variant = "Default Fallback; three attempts per task; blocking-check and anti-cheat gating; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+cost = 21.41390231508486
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 64.76666666666667
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "Default Fallback; GPT-5.6 Luna (medium) judge"
+cost = 0.032593153410362334
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 21.4
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "xhigh"
+variant = "Default Fallback; extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) criterion judge"
+cost = 1.8491524518542
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 75.8
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "xhigh"
+variant = "Default Fallback; no tools; pass@1; GPT-5.6 Luna (medium) judge"
+cost = 0.8755616879999999
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 73.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "xhigh"
+variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-turn cap; November 2026 regrading"
+harness = "Stirrup"
+cost = 2.4721107765679204
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1785.32
+metric = "Elo"
+version = "1.1"
+effort = "max"
+variant = "Default Fallback; combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+cost = 59.35153486471977
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 48.7597222222222
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "max"
+variant = "Default Fallback; three attempts per task; blocking-check and anti-cheat gating; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+cost = 43.3740716159139
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 66.76666666666667
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "max"
+variant = "Default Fallback; GPT-5.6 Luna (medium) judge"
+cost = 0.21898487481174234
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 24.2
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "max"
+variant = "Default Fallback; extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) criterion judge"
+cost = 2.51789698324489
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 80.2
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "max"
+variant = "Default Fallback; no tools; pass@1; GPT-5.6 Luna (medium) judge"
+cost = 1.733883952
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 76.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "max"
+variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-turn cap; November 2026 regrading"
+harness = "Stirrup"
+cost = 6.353041121460681
+cost_unit = "USD/task"
+source = "https://artificialanalysis.ai/models/claude-fable-5-2"

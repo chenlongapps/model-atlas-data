@@ -1,0 +1,62 @@
+# Specifications and model ID: https://platform.claude.com/docs/en/models/mythos-5-2/overview
+# Same underlying model and specifications as Fable 5.2, with access restricted to verified organizations.
+# Shared capabilities/restrictions: https://platform.claude.com/docs/en/models/fable-5-2/overview
+# Image/PDF input: https://platform.claude.com/docs/en/build-with-claude/vision and https://platform.claude.com/docs/en/build-with-claude/pdf-support
+# Only scores explicitly attributed to Mythos 5.2 are included; Fable scores are not copied.
+# CyScenarioBench tasks differ between labs; the launch-table scores are not directly comparable across labs.
+schema = 2
+name = "Claude Mythos 5.2"
+description = "Restricted-access Claude model for verified cybersecurity and life sciences research organizations"
+family = "claude-mythos"
+open_weights = false
+knowledge = "2026-06"
+release_date = "2026-11-09"
+
+[modalities]
+input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "application/pdf"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true, choice = ["auto", "none"] }
+reasoning = { supported = true }
+temperature = false
+top_p = false
+top_k = false
+
+[limit]
+context = 1_000_000
+output = 128_000
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 75.3
+metric = "score"
+version = "0.1"
+variant = "highest available effort"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "CyScenarioBench"
+score = 76.3
+metric = "score"
+variant = "highest available effort; lab-specific tasks"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "CVE Rediscovery"
+score = 89.6
+metric = "advisories found"
+dataset = "1,829 CVEs; October 2026 run"
+variant = "highest available effort"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"
+
+[[benchmarks]]
+name = "De novo binder design"
+score = 85.1
+metric = "score"
+variant = "24 hr; highest available effort"
+source = "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+date = "2026-11-09"

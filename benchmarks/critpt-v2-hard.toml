@@ -1,0 +1,11 @@
+id = "critpt-v2-hard"
+name = "CritPt v2 (Hard Subset)"
+version = "2"
+category = "science"
+description = "Artificial Analysis' fixed private hard subset of 40 of CritPt v2's 70 physics challenges. Scores are mean pass@1 over five repeats using code tools, including the November 2026 grading robustness update. This is not the full v2 set or legacy CritPt."
+organization = "Artificial Analysis / CritPt"
+metric = "accuracy"
+unit = "percent"
+higher_is_better = true
+url = "https://artificialanalysis.ai/evaluations/critpt-v2?critpt-subset=hard"
+methodology = "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
