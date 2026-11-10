@@ -75,7 +75,7 @@ date = "2026-03-17"
 name = "Humanity's Last Exam"
 score = 41.5
 metric = "accuracy"
-effort = "xhigh"
+effort = "Xhigh"
 variant = "with tools"
 source = "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
 
@@ -83,7 +83,7 @@ source = "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
 name = "Humanity's Last Exam"
 score = 28.2
 metric = "accuracy"
-effort = "xhigh"
+effort = "Xhigh"
 variant = "without tools"
 source = "https://openai.com/index/introducing-gpt-5-4-mini-and-nano/"
 
@@ -172,7 +172,7 @@ score = 2.525
 metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
-effort = "xhigh"
+effort = "Xhigh"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
 harness = "Mini-SWE-agent"
 cost = 1.438224

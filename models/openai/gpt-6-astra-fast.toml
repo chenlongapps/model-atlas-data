@@ -26,6 +26,6 @@ name = "Artificial Analysis Intelligence Index"
 score = 57
 metric = "index score"
 version = "5.0.1"
-effort = "max"
+effort = "Max"
 variant = "Fast mode"
 source = "https://artificialanalysis.ai/providers/openai/"

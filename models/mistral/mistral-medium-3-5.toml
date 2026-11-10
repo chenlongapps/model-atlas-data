@@ -70,5 +70,5 @@ cost = 1.0390849688366068
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
-effort = "high"
+effort = "High"
 source = "https://artificialanalysis.ai/models/mistral-medium-3-5"

@@ -43,7 +43,7 @@ dataset = "Terminal-Bench 4.0 (66 tasks), Vals AI evaluation"
 variant = "avg@3; mean of 3 full pass@1 runs; 8-hour agent time limit per task"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
-effort = "high"
+effort = "High"
 
 # Raw Vals Index v2.2 result: https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json
 # JSON model = "inception/mercury-3"; stderr = 1.227; provider = "Inception".
@@ -56,5 +56,5 @@ cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
-effort = "high"
+effort = "High"
 source = "https://www.vals.ai/models/inception_mercury-3"

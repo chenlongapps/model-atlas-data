@@ -61,7 +61,7 @@ dataset = "Terminal-Bench 4.0, 66 tasks"
 variant = "Vals AI Baseten-hosted evaluation; reported ±0.00"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
-effort = "high"
+effort = "High"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -90,5 +90,5 @@ cost = 0.5196327287868884
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
-effort = "high"
+effort = "High"
 source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"

@@ -121,7 +121,7 @@ score = "53% ±4%"
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
-effort = "max"
+effort = "Max"
 harness = "Mini-SWE-agent"
 source = "https://deepswe.datacurve.ai/"
 
@@ -139,7 +139,7 @@ dataset = "66 tasks"
 variant = "average@3; per-run pass@1"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
-effort = "high"
+effort = "High"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"

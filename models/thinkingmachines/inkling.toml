@@ -43,7 +43,7 @@ score = 89.88
 metric = "task resolution rate"
 version = "2.0.0"
 dataset = "SWE-bench Pro V2 Full public set (642 tasks)"
-effort = "xhigh"
+effort = "Xhigh"
 variant = "reported ±2.10; uncapped cost limit; 250-turn limit"
 harness = "mini-swe-agent"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public_v2?tab=full"

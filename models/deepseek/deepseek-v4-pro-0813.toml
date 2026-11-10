@@ -79,7 +79,7 @@ name = "DeepSWE"
 score = 62.7
 metric = "score"
 harness = "DeepSeek Harness minimal mode"
-effort = "max"
+effort = "Max"
 variant = "temperature=1.0; top_p=0.95"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
 
@@ -130,7 +130,7 @@ dataset = "66 tasks"
 variant = "avg@3; each run pass@1; three runs; ±1 standard error"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
-effort = "max"
+effort = "Max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -174,7 +174,7 @@ cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
-effort = "max"
+effort = "Max"
 source = "https://www.vals.ai/benchmarks/vals_index"
 
 [[benchmarks]]

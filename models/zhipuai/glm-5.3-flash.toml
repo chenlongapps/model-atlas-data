@@ -99,7 +99,7 @@ dataset = "66 tasks"
 variant = "avg@3; each run pass@1"
 harness = "mini-swe-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-4"
-effort = "max"
+effort = "Max"
 
 [[benchmarks]]
 name = "Terminal-Bench-Science"
@@ -139,7 +139,7 @@ cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 metric = "performance score"
 version = "2.2"
-effort = "max"
+effort = "Max"
 source = "https://www.vals.ai/benchmarks/vals_index"
 
 [[benchmarks]]
@@ -149,7 +149,7 @@ cost = 0.5833103440014082
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
-effort = "max"
+effort = "Max"
 source = "https://artificialanalysis.ai/models/glm-5-3-flash"
 
 # DeepSWE JSON checked 2026-11-06; config = "mini_swe_agent_glm_5_3_flash_max".
@@ -161,7 +161,7 @@ score = 63.39285714285714
 metric = "pass@1"
 version = "1.1"
 dataset = "113 tasks"
-effort = "max"
+effort = "Max"
 variant = "4 whole-benchmark passes; 113 tasks attempted; 448 scored attempts; provider/verifier/network errors excluded"
 harness = "mini-swe-agent"
 source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"

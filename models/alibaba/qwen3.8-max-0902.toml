@@ -114,5 +114,5 @@ cost = 10.023891571541945
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
-effort = "xhigh"
+effort = "Xhigh"
 source = "https://artificialanalysis.ai/models/qwen3-8-max"

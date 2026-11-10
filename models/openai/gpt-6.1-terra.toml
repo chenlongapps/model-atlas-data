@@ -27,7 +27,7 @@ name = "Terminal-Bench"
 score = 50.3
 metric = "task resolution rate"
 version = "4.0.0"
-effort = "maximum reasoning effort"
+effort = "Maximum reasoning effort"
 source = "https://openai.com/index/introducing-gpt-6-1-terra/"
 
 [[benchmarks]]
@@ -39,7 +39,7 @@ cost_source = "https://artificialanalysis.ai/models/gpt-6-1-terra"
 metric = "task resolution rate"
 version = "4.0.0"
 dataset = "all 66 tasks"
-effort = "max"
+effort = "Max"
 variant = "pass@1 averaged over three repeats"
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-terra-vs-gpt-6-astra"
@@ -50,7 +50,7 @@ score = 57.6
 metric = "task resolution rate"
 version = "0.1.0"
 dataset = "all 70 tasks"
-effort = "max"
+effort = "Max"
 variant = "pass@1 averaged over three repeats"
 harness = "mini-swe-agent"
 source = "https://artificialanalysis.ai/models/releases/comparisons/gpt-6-1-terra-vs-gpt-6-astra"
@@ -137,7 +137,7 @@ cost = 2.939376
 cost_unit = "USD/test"
 metric = "performance score"
 version = "2.2"
-effort = "max"
+effort = "Max"
 source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.json"
 
 # Vals overall JSON checked 2026-11-06; model = "openai/gpt-6.1-terra"; stderr = 1.821 percentage points.
@@ -148,7 +148,7 @@ score = 49.495
 metric = "task resolution rate"
 version = "4.0"
 dataset = "66 tasks"
-effort = "max"
+effort = "Max"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
 harness = "Mini-SWE-agent"
 cost = 2.15663
