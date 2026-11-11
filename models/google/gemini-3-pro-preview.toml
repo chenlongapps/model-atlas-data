@@ -57,3 +57,12 @@ score = 43.3
 metric = "resolve rate"
 dataset = "public"
 source = "https://labs.scale.com/leaderboard/swe_bench_pro_public"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 37.52
+metric = "accuracy"
+dataset = "Final original HLE; 2,500 public questions, multimodal"
+variant = "Scale Labs evaluation; temperature=0.0 when configurable (otherwise provider-stated); o3-mini-2025-01-31 extractor/judge; tool use not stated"
+harness = "Scale Labs leaderboard"
+source = "https://labs.scale.com/leaderboard/humanitys_last_exam"

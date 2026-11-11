@@ -336,3 +336,13 @@ harness = "mini-swe-agent"
 cost = 1.6626223919821828
 cost_unit = "USD/task"
 source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 54.9
+metric = "accuracy"
+dataset = "Artificial Analysis HLE text-only subset (2,158 questions from the original 2,500-question set)"
+effort = "Max"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/claude-opus-5"

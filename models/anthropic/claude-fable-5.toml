@@ -258,3 +258,12 @@ harness = "Mini-SWE-agent"
 cost = 30.339756
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 55.5
+metric = "accuracy"
+dataset = "Artificial Analysis HLE text-only subset (2,158 questions from the original 2,500-question set)"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/claude-fable-5"

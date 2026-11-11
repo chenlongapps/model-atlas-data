@@ -333,3 +333,23 @@ harness = "mini-swe-agent"
 cost = 1.9671024789823006
 cost_unit = "USD/task"
 source = "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 44.52
+metric = "accuracy"
+dataset = "Final original HLE; 2,500 public questions, multimodal"
+variant = "Scale Labs evaluation; temperature=0.0 when configurable (otherwise provider-stated); o3-mini-2025-01-31 extractor/judge; tool use not stated"
+harness = "Scale Labs leaderboard"
+source = "https://labs.scale.com/leaderboard/humanitys_last_exam"
+
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 33.1
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+effort = "High"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/gemini-3-8-flash"

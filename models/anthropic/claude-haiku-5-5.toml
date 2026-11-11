@@ -251,3 +251,33 @@ metric = "index score"
 version = "5.0.1"
 effort = "Medium"
 source = "https://artificialanalysis.ai/models/claude-haiku-5-5-medium"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 30.12
+metric = "accuracy"
+dataset = "Final original HLE; 2,500 public questions, multimodal"
+variant = "Scale Labs evaluation; temperature=0.0 when configurable (otherwise provider-stated); o3-mini-2025-01-31 extractor/judge; tool use not stated"
+harness = "Scale Labs leaderboard"
+source = "https://labs.scale.com/leaderboard/humanitys_last_exam"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 44.4
+metric = "accuracy"
+dataset = "Artificial Analysis HLE text-only subset (2,158 questions from the original 2,500-question set)"
+effort = "Max"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5"
+
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 29.6
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+effort = "Max"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/claude-haiku-5-5"

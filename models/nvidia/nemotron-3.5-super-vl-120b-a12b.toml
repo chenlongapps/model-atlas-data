@@ -92,3 +92,22 @@ metric = "index score"
 version = "5.0.1"
 effort = "High"
 source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 30.7
+metric = "accuracy"
+dataset = "Artificial Analysis HLE text-only subset (2,158 questions from the original 2,500-question set)"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"
+
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 8.8
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/nemotron-3-5-super-vl"

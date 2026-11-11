@@ -43,3 +43,12 @@ score = 3.8
 metric = "success rate"
 source = "https://openrouter.ai/mistralai/mistral-medium-3/benchmarks"
 date = "2026-05-30"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 4.52
+metric = "accuracy"
+dataset = "Final original HLE; 2,500 public questions, multimodal"
+variant = "Scale Labs evaluation; temperature=0.0 when configurable (otherwise provider-stated); o3-mini-2025-01-31 extractor/judge; tool use not stated"
+harness = "Scale Labs leaderboard"
+source = "https://labs.scale.com/leaderboard/humanitys_last_exam"

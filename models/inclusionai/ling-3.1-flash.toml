@@ -45,3 +45,22 @@ version = "4.0.0"
 dataset = "Artificial Analysis Terminal-Bench 4.0 (66 tasks)"
 harness = "mini-swe-agent (pass@1 averaged over three repeats)"
 source = "https://artificialanalysis.ai/models/comparisons/reflection-beam-vs-ling-3-1-flash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 43.5
+metric = "accuracy"
+dataset = "Artificial Analysis HLE text-only subset (2,158 questions from the original 2,500-question set)"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/ling-3-1-flash-1019"
+
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 17.2
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/ling-3-1-flash-1019"

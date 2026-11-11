@@ -116,3 +116,12 @@ metric = "index score"
 version = "5.0.1"
 effort = "Xhigh"
 source = "https://artificialanalysis.ai/models/qwen3-8-max"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 24.0
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/qwen3-8-max"
