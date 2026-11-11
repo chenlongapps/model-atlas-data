@@ -58,7 +58,7 @@ name = "Terminal-Bench"
 score = 37.6
 metric = "score"
 variant = "xhigh effort"
-version = "4.0"
+version = "4.0.0"
 source = "https://x.ai/news/grok-4-7"
 
 [[benchmarks]]
@@ -190,7 +190,7 @@ source = "https://artificialanalysis.ai/models/grok-4-7-high"
 name = "Terminal-Bench"
 score = 28.788
 metric = "task resolution rate"
-version = "4.0"
+version = "4.0.0"
 dataset = "66 tasks"
 effort = "Xhigh"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"

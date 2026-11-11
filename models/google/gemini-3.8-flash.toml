@@ -96,7 +96,7 @@ source = "https://blog.google/innovation-and-ai/models-and-research/gemini-model
 name = "Terminal-Bench"
 score = 19.1
 metric = "pass@1"
-version = "4.0"
+version = "4.0.0"
 source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
 
 [[benchmarks]]
@@ -188,7 +188,7 @@ cost = 8.64749
 cost_unit = "USD/test"
 cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
 metric = "task resolution rate"
-version = "4.0"
+version = "4.0.0"
 dataset = "66 tasks"
 effort = "High"
 variant = "avg@3; reported ±2.31 standard error; no step or cost limit; 8-hour task timeout"

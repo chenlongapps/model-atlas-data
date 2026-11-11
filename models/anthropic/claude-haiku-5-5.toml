@@ -65,7 +65,7 @@ source = "https://www.anthropic.com/claude-haiku-5-5"
 name = "Terminal-Bench"
 score = 39.2
 metric = "score"
-version = "4.0"
+version = "4.0.0"
 source = "https://www.anthropic.com/claude-haiku-5-5"
 
 [[benchmarks]]

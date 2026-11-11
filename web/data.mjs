@@ -78,9 +78,11 @@ const key = d => JSON.stringify([d.name, d.version, d.metric]);
 export function buildIndex(models = {}, definitions = {}) {
   const lookup = new Map(), byModel = new Map(), byBenchmark = new Map();
   for (const [id, definition] of Object.entries(definitions)) {
-    const k = key(definition);
-    if (!lookup.has(k)) lookup.set(k, []);
-    lookup.get(k).push(id);
+    for (const version of [definition.version, ...(definition.compatible_versions || [])]) {
+      const k = key({ ...definition, version });
+      if (!lookup.has(k)) lookup.set(k, []);
+      lookup.get(k).push(id);
+    }
     byBenchmark.set(id, []);
   }
   for (const [modelId, model] of Object.entries(models)) {

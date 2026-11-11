@@ -158,6 +158,16 @@ test('exact association requires explicit version and metric and preserves every
   assert.equal(index.byBenchmark.get('b1')[0].result.variant, 'no tools');
   assert.equal(index.byModel.get('lab/a')[1].result.version, undefined);
 });
+test('declared compatible benchmark versions map to the same definition', () => {
+  const compatibleDefinition = { ...definition, version: '4.0.0', compatible_versions: ['4.0'] };
+  const results = [
+    { ...result, version: '4.0.0' },
+    { ...result, version: '4.0' },
+  ];
+  const index = buildIndex({ 'lab/a': { benchmarks: results } }, { terminalBench: compatibleDefinition });
+  assert.deepEqual(index.byModel.get('lab/a').map(entry => entry.status), ['matched', 'matched']);
+  assert.deepEqual(index.byBenchmark.get('terminalBench').map(entry => entry.result), results);
+});
 test('multiple exact candidates remain ambiguous', () => {
   const index = buildIndex({ 'lab/a': { benchmarks: [result] } }, { b1: definition, b2: { ...definition } });
   assert.equal(index.byModel.get('lab/a')[0].status, 'ambiguous');

@@ -95,7 +95,7 @@ name = "Terminal-Bench"
 score = 31.2
 metric = "pass@1"
 variant = "reasoning_effort=100"
-version = "4.0"
+version = "4.0.0"
 harness = "DeepSeek Harness minimal mode"
 source = "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash"
 
@@ -344,7 +344,7 @@ source = "https://surgehq.ai/benchmarks/chartography"
 name = "Terminal-Bench"
 score = 19.697
 metric = "task resolution rate"
-version = "4.0"
+version = "4.0.0"
 dataset = "66 tasks"
 effort = "High"
 variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
