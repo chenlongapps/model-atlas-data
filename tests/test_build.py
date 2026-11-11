@@ -116,6 +116,23 @@ class BuildTests(unittest.TestCase):
         self.assertTrue(raw.endswith(b"\n"))
         self.assertNotIn(b"\r", raw)
 
+    def test_optional_benchmark_popularity_round_trips_without_a_default(self):
+        for value in (None, "0", "1", "0.98"):
+            with self.subTest(value=value):
+                content = DEFINITION + (f"popularity = {value}\n" if value is not None else "")
+                self.write("benchmarks/filename-need-not-match-id.toml", content)
+                code, _, stderr = self.run_build()
+                self.assertEqual(code, 0, stderr)
+                expected = tomllib.loads(content)
+                del expected["id"]
+                self.assertEqual(self.read_json("benchmarks.json")["example-bench"], expected)
+
+    def test_benchmark_popularity_rejects_invalid_types_ranges_and_nonfinite_values(self):
+        for value in ('true', 'false', '"0.98"', '[]', '{}', '-0.01', '1.01', 'nan', 'inf', '-inf'):
+            with self.subTest(value=value):
+                self.write("benchmarks/filename-need-not-match-id.toml", DEFINITION + f"popularity = {value}\n")
+                self.assert_failure("popularity: expected a finite number between 0 and 1")
+
     def test_preserves_all_result_conditions_order_unknown_fields_and_missing_values(self):
         content = MODEL.replace('name = "Example"', 'name = "Example"\nfuture_field = { enabled = true }')
         content += RESULT + RESULT.replace("42.10", "39.125").replace("without tools", "with tools")

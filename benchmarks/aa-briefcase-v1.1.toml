@@ -2,6 +2,7 @@ id = "aa-briefcase-v1.1"
 name = "AA-Briefcase"
 version = "1.1"
 category = "professional-work"
+popularity = 0.69
 description = "Artificial Analysis' agentic knowledge-work benchmark. Its combined Elo aggregates rubric pass rate, analytical quality, and presentation quality; v1.1 uses Crowd-BT fitting. Elo is not the separate rubric pass rate."
 organization = "Artificial Analysis"
 metric = "Elo"

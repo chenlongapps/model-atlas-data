@@ -2,6 +2,7 @@ id = "chartography"
 name = "Chartography"
 version = "unspecified"
 category = "multimodal"
+popularity = 0.49
 description = "Evaluates visual reading, domain interpretation, and multi-step chart reasoning using charts from specialized fields and expert-written questions. Official materials describe 100 tasks but do not specify a semantic version; tool-use conditions and multiple-sampling metrics must be recorded separately."
 
 organization = "Surge AI"

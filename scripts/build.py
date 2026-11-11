@@ -159,6 +159,9 @@ def validate_definition(data):
     require(SLUG.fullmatch(data["id"]), "id: invalid Benchmark ID")
     require(type(data.get("higher_is_better")) is bool, "higher_is_better: required boolean")
     fields(data, {key: str for key in ("description", "organization", "url", "methodology")}, "benchmark")
+    if "popularity" in data:
+        require(number(data["popularity"]) and 0 <= data["popularity"] <= 1,
+                "popularity: expected a finite number between 0 and 1")
     if "compatible_versions" in data:
         versions = data["compatible_versions"]
         require(isinstance(versions, list) and all(text(version) for version in versions),

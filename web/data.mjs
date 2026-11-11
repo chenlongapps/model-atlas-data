@@ -42,7 +42,14 @@ export function filterBenchmarks(definitions, { query = '', category = '' } = {}
   return Object.entries(definitions || {}).filter(([id, d]) =>
     `${id} ${d.name || ''} ${d.category || ''} ${d.organization || ''}`.toLowerCase().includes(term) &&
     (!category || d.category === category)
-  ).sort(([a, x], [b, y]) => (x.name || a).localeCompare(y.name || b) || a.localeCompare(b));
+  ).sort(([a, x], [b, y]) => {
+    // Editorial display priority, not a benchmark result; missing values stay last.
+    const hasX = Number.isFinite(x.popularity) && x.popularity >= 0 && x.popularity <= 1;
+    const hasY = Number.isFinite(y.popularity) && y.popularity >= 0 && y.popularity <= 1;
+    if (hasX !== hasY) return hasX ? -1 : 1;
+    return (hasX ? y.popularity - x.popularity : 0) ||
+      (x.name || a).localeCompare(y.name || b) || a.localeCompare(b);
+  });
 }
 
 // Missing values remain last in both directions; ties have a stable ID order.

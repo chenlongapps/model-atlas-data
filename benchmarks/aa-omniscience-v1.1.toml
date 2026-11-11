@@ -2,6 +2,7 @@ id = "aa-omniscience-v1.1"
 name = "AA-Omniscience"
 version = "1.1"
 category = "knowledge"
+popularity = 0.72
 description = "Artificial Analysis' 3,000-question factual-reliability benchmark. Net Score rewards correct answers, penalizes hallucinations, and leaves abstentions neutral, from -100 to 100. It is not accuracy or hallucination rate; v1.1 scores are not directly comparable with v1."
 organization = "Artificial Analysis"
 metric = "Net Score"

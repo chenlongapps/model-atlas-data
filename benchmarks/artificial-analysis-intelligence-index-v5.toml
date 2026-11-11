@@ -2,6 +2,7 @@ id = "artificial-analysis-intelligence-index-v5"
 name = "Artificial Analysis Intelligence Index"
 version = "5.0.1"
 category = "composite"
+popularity = 0.96
 description = "A composite evaluation of language model performance across knowledge work, coding, science, and general knowledge, aggregating nine evaluations into a single score."
 
 organization = "Artificial Analysis"

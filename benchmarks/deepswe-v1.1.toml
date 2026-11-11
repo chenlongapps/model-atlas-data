@@ -2,6 +2,7 @@ id = "deepswe-v1.1"
 name = "DeepSWE"
 version = "1.1"
 category = "coding"
+popularity = 0.54
 description = "Evaluates coding agents on 113 long-horizon software engineering tasks; v1.1 validates agent-submitted patches in isolated environments."
 
 organization = "Datacurve"

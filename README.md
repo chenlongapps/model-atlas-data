@@ -56,6 +56,18 @@ sources = ["https://huggingface.co/mistralai/Pixtral-12B-2409"]
 
 这是增量 metadata 扩展：原有完整总量、激活量及缺失状态的语义不变，旧记录无需迁移。只读取父表数值的旧消费者仍会得到“完整总量未知”，不得以首个组件或组件之和作为回退。支持组件的新消费者应单独展示组件名称、数值及范围，不与整模型总量混排。JSON 构建原样保留数组顺序和来源；自动同步在上游未明确提供该路径时保留本地组件数组。严格的 ModelAtlas 消费者需显式支持新字段；Models.dev 的通用 JSON metadata 扩展点无需改变。
 
+## Benchmark 展示优先级
+
+`benchmarks/*.toml` 支持可选顶层字段 `popularity`，用于维护知名度对应的展示优先级：
+
+```toml
+popularity = 0.98
+```
+
+- 数值必须有限且位于 `[0, 1]`，越大越优先。它是人工维护的展示权重，不是官方知名度指标、模型评测成绩或能力排名。
+- 字段可省略；旧定义仍然有效，构建 JSON 原样保留数值及缺失状态，不自动填零。此字段属于 ModelAtlas 专有 Benchmark 定义，不修改 Models.dev 模型 Schema；消费者可按需使用或忽略。
+- Web Explorer 的评测列表默认按 `popularity` 降序，同分按名称、再按 ID 排序；缺失值置后。搜索及分类筛选沿用此顺序，用户点击表头后以手动排序为准；不新增知名度展示列，也不改变模型成绩排序。
+
 ## Benchmark 成绩的推理档位
 
 模型文件的 `[[benchmarks]]` 支持 ModelAtlas 扩展字段 `effort`：

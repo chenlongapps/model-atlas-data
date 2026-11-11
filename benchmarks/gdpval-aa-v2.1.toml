@@ -2,6 +2,7 @@ id = "gdpval-aa-v2.1"
 name = "GDPval-AA"
 version = "2.1"
 category = "professional-work"
+popularity = 0.78
 description = "An independent Artificial Analysis evaluation of OpenAI's public GDPval dataset, using 220 tasks across 44 occupations. Models produce professional work outputs in an agentic setting; blinded pairwise comparisons judged by LLMs sampled from a judge panel are aggregated into an Elo rating."
 
 organization = "Artificial Analysis"

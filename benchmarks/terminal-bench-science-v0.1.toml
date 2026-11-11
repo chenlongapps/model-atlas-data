@@ -2,6 +2,7 @@ id = "terminal-bench-science-v0.1"
 name = "Terminal-Bench-Science"
 version = "0.1.0"
 category = "science"
+popularity = 0.46
 description = "Evaluates agents on 70 expert-curated, terminal-based research workflows across the life, physical, Earth, mathematical, and engineering sciences. Task-specific tests verify outputs such as scientific data analyses, simulations, optimizations, proofs, and model fits."
 
 organization = "Terminal-Bench-Science / Stanford University"

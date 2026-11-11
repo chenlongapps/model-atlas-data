@@ -81,6 +81,39 @@ test('benchmark search and dynamic category filter', () => {
   assert.deepEqual(filterBenchmarks(defs, { query: 'B1' }).map(([id]) => id), ['b1']);
   assert.deepEqual(filterBenchmarks(defs, { query: 'reasoning' }).map(([id]) => id), ['b1']);
 });
+test('benchmarks default to descending popularity, then name and ID without mutating definitions', () => {
+  const defs = {
+    missing: { ...definition, name: 'A missing' },
+    zero: { ...definition, name: 'Zero', popularity: 0 },
+    z: { ...definition, name: 'Beta', popularity: 0.8 },
+    b: { ...definition, name: 'Alpha', popularity: 0.8 },
+    a: { ...definition, name: 'Alpha', popularity: 0.8 },
+    top: { ...definition, name: 'Z top', popularity: 1 },
+  };
+  const original = JSON.stringify(defs);
+  assert.deepEqual(filterBenchmarks(defs).map(([id]) => id), ['top', 'a', 'b', 'z', 'zero', 'missing']);
+  assert.equal(JSON.stringify(defs), original);
+  assert.deepEqual(filterBenchmarks({ z: { name: 'Beta' }, a: { name: 'Alpha' } }).map(([id]) => id), ['a', 'z']);
+  assert.deepEqual(filterBenchmarks({ b: {}, a: {} }).map(([id]) => id), ['a', 'b']);
+});
+test('benchmark search and category filtering preserve popularity order while table sorting overrides it', () => {
+  const defs = {
+    low: { ...definition, name: 'Alpha', popularity: 0.1 },
+    high: { ...definition, name: 'Beta', popularity: 0.9 },
+    other: { ...definition, name: 'Other', category: 'coding', popularity: 1 },
+  };
+  const filtered = filterBenchmarks(defs, { query: 'org', category: 'reasoning' });
+  assert.deepEqual(filtered.map(([id]) => id), ['high', 'low']);
+  assert.deepEqual(sortEntries(filtered, ([, item]) => item.name).map(([id]) => id), ['low', 'high']);
+});
+test('invalid or missing benchmark popularity stays behind explicit zero', () => {
+  const values = [undefined, null, '', NaN, Infinity, -Infinity, '0.9', true, false, -0.1, 1.1];
+  const defs = Object.fromEntries(values.map((popularity, i) => [String(i), { name: `Invalid ${i}`, popularity }]));
+  defs.zero = { name: 'Zero', popularity: 0 };
+  const sorted = filterBenchmarks(defs);
+  assert.equal(sorted[0][0], 'zero');
+  assert.equal(sorted.length, values.length + 1);
+});
 test('table sorting keeps missing values last in either direction without mutating entries', () => {
   const entries = [['c', {}], ['b', { n: 2 }], ['a', { n: 10 }]];
   assert.deepEqual(sortEntries(entries, ([, item]) => item.n).map(([id]) => id), ['b', 'a', 'c']);
@@ -234,7 +267,7 @@ test('detail pages preserve results, optional prices and parameter provenance', 
   const ready = new Promise(resolve => { rendered = resolve; });
   select('.page-scroll').scrollTo = rendered;
   const ambiguousDefinition = { ...definition, name: 'Ambiguous bench' };
-  const defs = { b1: { ...definition, higher_is_better: true }, b2: ambiguousDefinition, b3: { ...ambiguousDefinition }, b4: { ...definition, name: 'Matched bench' } };
+  const defs = { b1: { ...definition, higher_is_better: true, popularity: 0.9 }, b2: ambiguousDefinition, b3: { ...ambiguousDefinition }, b4: { ...definition, name: 'Matched bench', popularity: 0.5 } };
   const fixture = {
     'lab/a': { name: 'Alpha', release_date: '2026-01-01', benchmarks: [{ ...result, score: 10 }] },
     'lab/b': { name: 'Beta', release_date: '2026-02-01', benchmarks: [{ ...result, score: 20, effort: 'Adaptive/Max', harness: 'H', future: { budget: 2 } }] },
@@ -263,13 +296,15 @@ test('detail pages preserve results, optional prices and parameter provenance', 
     for (const [key, value] of Object.entries(globals)) Object.defineProperty(globalThis, key, { configurable: true, writable: true, value });
     await import('../web/app.mjs');
     await ready;
-    await t.test('benchmark listing shows sortable unique model counts including zero', () => {
+    await t.test('benchmark listing defaults to popularity and allows manual model-count sorting including zero', () => {
       globals.location.hash = '#/benchmarks';
       handlers.hashchange();
       const headers = find(resultTable(), 'thead').children[0].children;
       assert.equal(headers[5].textContent, 'Included models ↕');
       const counts = () => find(resultTable(), 'tbody').children.map(row => cells(row)[5]);
-      assert.deepEqual(counts(), ['0', '0', '2', '1']);
+      assert.deepEqual(counts(), ['2', '1', '0', '0']);
+      assert.deepEqual(find(resultTable(), 'tbody').children.map(row => find(row.children[0], 'a').attributes.href),
+        ['#/benchmarks/b1', '#/benchmarks/b4', '#/benchmarks/b2', '#/benchmarks/b3']);
       find(headers[5], 'button').handlers.click();
       assert.deepEqual(counts(), ['0', '0', '1', '2']);
       assert.equal(find(resultTable(), 'thead').children[0].children[5].attributes['aria-sort'], 'ascending');

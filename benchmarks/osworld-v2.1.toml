@@ -2,6 +2,7 @@ id = "osworld-v2.1"
 name = "OSWorld"
 version = "osworld-v2.1"
 category = "computer-use"
+popularity = 0.89
 description = "Evaluates agents' ability to complete long-horizon computer-use workflows in real desktop environments and applications. This definition uses binary task completion rate; partial credit is a different scoring measure and must not be conflated with completion rate."
 
 organization = "XLANG Lab"

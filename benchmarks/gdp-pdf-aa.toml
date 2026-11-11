@@ -2,6 +2,7 @@ id = "gdp-pdf-aa"
 name = "GDP.pdf"
 version = "unspecified"
 category = "professional-work"
+popularity = 0.57
 description = "Artificial Analysis' independent GDP.pdf evaluation on 100 document-reasoning tasks, with five attempts each. All-pass is the share of 500 attempts passing every criterion. Extracted PDF text, adapted page images, and GPT-5.6 Luna judging differ from Surge's implementation, so the results are not directly comparable."
 organization = "Artificial Analysis / Surge AI"
 metric = "all-pass rate"

@@ -2,6 +2,7 @@ id = "frontiercode-v2"
 name = "FrontierCode"
 version = "2.0"
 category = "coding"
+popularity = 0.60
 description = "Artificial Analysis' evaluation of Cognition's 132-task FrontierCode 2.0. Attempts failing any blocking check or anti-cheat scan receive zero; other attempts receive a weighted rubric score, averaged over three attempts per task and then equally over tasks."
 organization = "Artificial Analysis / Cognition"
 metric = "weighted rubric score"

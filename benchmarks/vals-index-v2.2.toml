@@ -2,6 +2,7 @@ id = "vals-index-v2.2"
 name = "Vals Index"
 version = "2.2"
 category = "composite"
+popularity = 0.65
 description = "Aggregates agent performance on finance, coding, legal, and tax tasks using weights proportional to each sector's share of U.S. GDP, with the information sector used as a proxy for coding."
 
 organization = "Vals AI"
