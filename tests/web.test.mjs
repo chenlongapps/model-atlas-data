@@ -145,7 +145,7 @@ test('benchmark sorting leaves missing or invalid scores last rather than treati
     assert.deepEqual(sorted.slice(3), entries.slice(0, 6));
   }
 });
-test('exact association requires explicit version and metric and preserves every record', () => {
+test('versioned definitions require explicit version and metric and preserve every record', () => {
   const withoutVersion = { ...result }; delete withoutVersion.version;
   const withoutMetric = { ...result }; delete withoutMetric.metric;
   const differentMetric = { ...result, metric: 'other' };
@@ -157,6 +157,50 @@ test('exact association requires explicit version and metric and preserves every
   assert.equal(index.byBenchmark.get('b1')[1].result, anotherCondition);
   assert.equal(index.byBenchmark.get('b1')[0].result.variant, 'no tools');
   assert.equal(index.byModel.get('lab/a')[1].result.version, undefined);
+});
+test('omitted versions match only unspecified definitions without changing source records', () => {
+  const withoutVersion = { ...result }; delete withoutVersion.version;
+  const withoutMetric = { ...withoutVersion }; delete withoutMetric.metric;
+  const unspecified = { ...definition, version: 'unspecified' };
+  const results = [
+    withoutVersion,
+    { ...withoutVersion, effort: 'xhigh', variant: 'with tools', harness: 'H' },
+    { ...result, version: 'unspecified' },
+    result,
+    withoutMetric,
+    { ...withoutVersion, metric: 'other' },
+    { ...withoutVersion, version: '' },
+    { ...withoutVersion, version: 'unknown' },
+  ];
+  const original = structuredClone(results);
+  const index = buildIndex({
+    'lab/a': { benchmarks: results },
+    'lab/b': { benchmarks: [{ ...withoutVersion }] },
+  }, { unversioned: unspecified, versioned: definition });
+  assert.deepEqual(index.byModel.get('lab/a').map(entry => entry.status), [
+    'matched', 'matched', 'matched', 'matched', 'unmatched', 'unmatched', 'unmatched', 'unmatched',
+  ]);
+  assert.deepEqual(index.byBenchmark.get('unversioned').map(entry => entry.result), [...results.slice(0, 3), withoutVersion]);
+  assert.equal(index.byBenchmark.get('versioned').length, 1);
+  assert.equal(index.modelCountByBenchmark.get('unversioned'), 2);
+  assert.equal(index.modelCountByBenchmark.get('versioned'), 1);
+  assert.equal(index.byBenchmark.get('unversioned')[0].result, withoutVersion);
+  assert.equal(Object.hasOwn(withoutVersion, 'version'), false);
+  assert.deepEqual(results, original);
+});
+test('omitted versions remain ambiguous when multiple definitions accept unspecified', () => {
+  const withoutVersion = { ...result }; delete withoutVersion.version;
+  const unspecified = { ...definition, version: 'unspecified' };
+  const compatible = { ...definition, compatible_versions: ['unspecified'] };
+  const index = buildIndex({ 'lab/a': { benchmarks: [withoutVersion] } }, {
+    b1: unspecified, b2: compatible,
+  });
+  assert.equal(index.byModel.get('lab/a')[0].status, 'ambiguous');
+  assert.equal(index.byModel.get('lab/a')[0].benchmarkId, undefined);
+  for (const id of ['b1', 'b2']) {
+    assert.equal(index.byBenchmark.get(id).length, 0);
+    assert.equal(index.modelCountByBenchmark.get(id), 0);
+  }
 });
 test('declared compatible benchmark versions map to the same definition', () => {
   const compatibleDefinition = { ...definition, version: '4.0.0', compatible_versions: ['4.0'] };

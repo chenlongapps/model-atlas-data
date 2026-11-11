@@ -87,7 +87,9 @@ export function buildIndex(models = {}, definitions = {}) {
   }
   for (const [modelId, model] of Object.entries(models)) {
     const results = (Array.isArray(model.benchmarks) ? model.benchmarks : []).map(result => {
-      const candidates = result.name && result.version && result.metric ? (lookup.get(key(result)) || []) : [];
+      // Match the build validator: omitted versions may match only an unspecified definition.
+      const version = result.version ?? 'unspecified';
+      const candidates = result.name && version && result.metric ? (lookup.get(key({ ...result, version })) || []) : [];
       const status = candidates.length === 1 ? 'matched' : candidates.length > 1 ? 'ambiguous' : 'unmatched';
       const entry = { modelId, result, status, benchmarkId: status === 'matched' ? candidates[0] : undefined };
       if (entry.benchmarkId) byBenchmark.get(entry.benchmarkId).push(entry);
