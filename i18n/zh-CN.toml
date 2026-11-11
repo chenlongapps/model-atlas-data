@@ -856,12 +856,7 @@
 "zhipuai/glm-image" = "GLM-Image 是采用自回归与扩散混合解码器架构的图像生成模型。总体图像生成质量与主流潜在扩散方法相当，但在文字渲染和知识密集型生成场景中优势显著。它尤其擅长需要精准语义理解和复杂信息表达的任务，同时具备强大的高保真、精细细节生成能力。除文生图外，GLM-Image 还支持丰富的图生图任务，包括图像编辑、风格迁移、保持身份特征的生成和多主体一致性生成。"
 
 [benchmark.description]
-"aa-briefcase-v1.1" = "Artificial Analysis 的智能体知识工作评测。综合 Elo 汇总评分细则通过率、分析质量及呈现质量，v1.1 使用 Crowd-BT 拟合。Elo 不是单独报告的评分细则通过率。"
-"frontiercode-v2" = "Artificial Analysis 对 Cognition 的 132 项 FrontierCode 2.0 任务开展的评测。任一关键检查或反作弊检查失败则该次尝试记零分，否则按评分细则加权计分，先对每题的三次尝试取平均，再对任务等权平均。"
-"aa-omniscience-v1.1" = "Artificial Analysis 包含 3,000 道问题的事实可靠性评测。净分奖励正确回答、惩罚幻觉，弃答不加减分，范围为 -100 至 100；这不是准确率或幻觉率，v1.1 成绩不能与 v1 直接比较。"
-"gdp-pdf-aa" = "Artificial Analysis 在 100 项文档推理任务上独立开展的 GDP.pdf 评测，每题尝试五次。全部通过率为 500 次尝试中通过每项细则的比例。其 PDF 提取文本、适配后的页面图像及 GPT-5.6 Luna 裁判不同于 Surge 的实现，成绩不能直接比较。"
 "hle-diamond" = "经过清理修订的 1,000 道 Humanity's Last Exam 问题，推理与知识各占一半，其中 272 题含图像。Artificial Analysis 在无工具条件下评测全部问题，以 pass@1 计分并使用 GPT-5.6 Luna 裁判；它不同于原始 HLE 纯文本评测。"
-"critpt-v2-hard" = "Artificial Analysis 从 CritPt v2 的 70 项物理难题中固定选出的 40 题私有困难子集。使用代码工具运行五次，报告平均 pass@1，并包含 2026 年 11 月的评分稳健性更新；这不是完整 v2 数据集或旧版 CritPt。"
 "automationbench-aa-v1.0.6" = "Artificial Analysis 在 AutomationBench 的 657 项私有保留任务上开展的独立评测。任务若违反任何护栏则记零分，否则按已完成目标的比例计分；这不是 Zapier 的严格整任务完成率。"
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
 "automationbench-v1.0.6" = "评估智能体在模拟商业应用中完成跨应用工作流的能力，以所有断言均通过的任务比例作为主指标。官方排行榜使用独立保留的私有任务集；公开任务集成绩不可直接视为同一评测结果。"
