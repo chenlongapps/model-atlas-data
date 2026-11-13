@@ -331,6 +331,7 @@
 "google/gemini-3.8-live-extended-thinking" = "Live API 语音模型，支持可配置的后台推理，适用于多步骤实时智能体。"
 "google/gemini-4-argon" = "Google 旗舰推理模型，适用于复杂软件工程、深度数学与科学研究以及长周期自主智能体。"
 "google/gemini-4-carbon" = "Google 推理模型，已由 Vals 评测其在金融、编程、法律和税务智能体任务中的表现；模型详情目前依据 Vals 的档案记录。"
+"google/gemini-4-hydrogen" = "Google 面向日常编程和智能体工作流的 Gemini 4 模型，支持四种思考档位和 100 万 token 上下文窗口。"
 "google/gemini-embedding-001" = "适用于语义搜索、检索、聚类和排序流水线的嵌入模型。"
 "google/gemini-embedding-2" = "多模态嵌入模型，可将文本、图像、视频、音频和 PDF 映射到统一的嵌入空间。"
 "google/gemini-embedding-2-preview" = "Gemini Embedding 2 预览版，多模态嵌入模型，支持文本、图像、视频、音频和 PDF。"

@@ -1,0 +1,348 @@
+# Sources (checked 2026-11-13):
+# - https://github.com/anomalyco/models.dev/blob/dev/models/google/gemini-4-hydrogen.toml
+# - https://aistudio.google.com/docs/models/gemini-4-hydrogen
+# - https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen
+# - https://deepmind.google/models/model-cards/gemini-4-hydrogen/
+# - https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/
+# - https://storage.googleapis.com/deepmind-media/gemini/gemini_4_hydrogen_model_evaluation.pdf
+# Input, thinking, and output share one 1,048,576-token window. Synchronous
+# output is capped at 65,536 tokens per hop; longer output requires background
+# execution or client-side continuation (long decode). No separate input limit
+# is inferred. API prices and caching are provider-specific and are not stored here.
+schema = 2
+name = "Gemini 4 Hydrogen"
+description = "Google's Gemini 4 model for everyday coding and agentic workflows, with four thinking levels and a 1M-token context window"
+family = "gemini"
+open_weights = false
+knowledge = "2026-03"
+release_date = "2026-11-12"
+
+[modalities]
+input = [
+  "text",
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+  "video/mp4",
+  "video/mpeg",
+  "video/mov",
+  "video/avi",
+  "video/x-flv",
+  "video/mpg",
+  "video/webm",
+  "video/wmv",
+  "video/3gpp",
+  "audio/wav",
+  "audio/mp3",
+  "audio/aiff",
+  "audio/aac",
+  "audio/ogg",
+  "audio/flac",
+  "audio/mpeg",
+  "audio/m4a",
+  "audio/l16",
+  "audio/opus",
+  "audio/alaw",
+  "audio/mulaw",
+  "audio/webm",
+  "application/pdf",
+]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+# Custom sampling parameters are ignored by the Gemini API.
+temperature = false
+top_p = false
+top_k = false
+
+[limit]
+context = 1_048_576
+output = 65_536
+
+# Google model-card results, with conditions from the evaluation PDF above.
+# Google's self-computed results use the highest thinking setting (xhigh),
+# except Terminal-Bench, which explicitly uses high. Do not apply this setting
+# to results Google sourced from external leaderboards without row-level proof.
+[[benchmarks]]
+name = "SWE-sweep"
+score = 13.5
+metric = "subtask-weighted reward"
+effort = "xhigh"
+variant = "Google self-computed; pass@1; official integration; safety filters enabled"
+harness = "Antigravity-CLI (agy) 1.4.8"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 57.0
+metric = "cheating-adjusted accuracy"
+version = "4.1"
+effort = "high"
+variant = "Google self-computed; Average Reward over 5 attempts per task"
+harness = "mini-swe-agent vision"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 71.6
+metric = "averaged rubric Score"
+version = "1.1"
+dataset = "122 tasks; October 17, 2026 task version, without the October 26 update"
+effort = "xhigh"
+variant = "Google self-computed; pass@1; 5-hour window; official integration; safety-filtered responses become empty strings, but episodes may continue"
+harness = "Antigravity-CLI (agy) 1.4.8"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+# Secondary report: Google explicitly attributes this result to Artificial
+# Analysis. No independent AA scrape or inferred reasoning effort is included.
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 76.1
+metric = "%"
+variant = "Reported by Google from the Artificial Analysis leaderboard"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "Vending-Bench"
+score = 14549
+metric = "bank balance (USD)"
+version = "2"
+variant = "Reported by Google from the Andon Labs public leaderboard"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+# Partial score is not the binary completion rate in the existing definition.
+[[benchmarks]]
+name = "OSWorld"
+score = 77.6
+metric = "partial score"
+version = "osworld-v2.1"
+dataset = "OSWorld-2.1 offline subset (82 tasks)"
+effort = "xhigh"
+variant = "Google self-computed; maximum across 3 single-attempt runs; official Docker and evaluator; 1080p; 500-step limit; screenshot-only observations; PyAutoGUI; parallel batch tool calling; all screenshots retained with compaction; safety-filtered responses become empty strings, but episodes may continue"
+harness = "Gemini CUA"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "MKA"
+score = 53.4
+metric = "Climb WSR accuracy"
+effort = "xhigh"
+variant = "Google self-computed; pass@1"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 66.6
+metric = "pass@1"
+effort = "xhigh"
+variant = "Google self-computed; without tools; following the official Surge public leaderboard"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 51.4
+metric = "Average Reward"
+version = "0.1"
+effort = "xhigh"
+variant = "Google self-computed; averaged over 5 attempts per task"
+harness = "mini-swe-agent vision"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+# Secondary report, not a separately verified AA observation.
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 58.8
+metric = "%"
+variant = "Reported by Google from the Artificial Analysis leaderboard"
+source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
+
+# Vals AI results: https://www.vals.ai/models/google_gemini-4-hydrogen
+# The profile's Dataset JSON-LD declares CC BY 4.0 for benchmark results:
+# https://creativecommons.org/licenses/by/4.0/
+# Attribution: Vals AI. Values below retain the published JSON precision rather
+# than the rounded profile display. Scores and costs are from the same row.
+# JSON model = "google/gemini-4-hydrogen"; provider = "Google";
+# reasoning_effort = "xhigh"; max_output_tokens = 1048576 (evaluation setting,
+# not the synchronous model limit). Null sampling settings are not defaults.
+# The shared metadata update date predates release; no evaluation date inferred.
+
+# Vals Index v2.2; stderr = 0.994 percentage points.
+[[benchmarks]]
+name = "Vals Index"
+score = 68.492
+metric = "performance score"
+version = "2.2"
+effort = "xhigh"
+cost = 9.838059
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.BQOv7o-i.json"
+
+# Vals Finance Index; stderr = 1.392 percentage points.
+[[benchmarks]]
+name = "Vals Finance Index"
+score = 66.136
+metric = "accuracy"
+version = "1"
+effort = "xhigh"
+cost = 3.799925
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_finance_index.DyW6srHB.json"
+
+# Vals Legal Index; stderr = 1.846 percentage points.
+[[benchmarks]]
+name = "Vals Legal Index"
+score = 73.629
+metric = "accuracy"
+version = "1"
+effort = "xhigh"
+cost = 4.47377
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_index.D3brxS62.json"
+
+# Methodology: https://www.vals.ai/benchmarks/emb-v1-1
+# stderr = 2.034 percentage points.
+[[benchmarks]]
+name = "EMB v1.1"
+score = 75.798
+metric = "partial-credit score"
+version = "1.1"
+effort = "xhigh"
+cost = 3.170206
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_emb_v1_1.BClPXHvL.json"
+
+# Methodology: https://www.vals.ai/benchmarks/fabv2-1
+# Primary metric is dealbreaker-gated, severity-weighted Partial Credit, not
+# All-Pass. stderr = 2.036 percentage points.
+[[benchmarks]]
+name = "Finance Agent v2.1"
+score = 65.118
+metric = "Partial Credit"
+version = "2.1"
+effort = "xhigh"
+variant = "dealbreaker-gated, severity-weighted per-check scores; 2-hour task limit"
+cost = 4.358646
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_finance_agent_v2_1.vQvzZRw-.json"
+
+# Methodology: https://www.vals.ai/benchmarks/legal_research
+# stderr = 3.465 percentage points. The launch blog says 55.8%, but the
+# current Vals row is 53.846%; do not treat the blog claim as a corrected row.
+[[benchmarks]]
+name = "Legal Research Bench"
+score = 53.846
+metric = "All-Pass"
+version = "1"
+effort = "xhigh"
+variant = "3-hour task limit; GPT 5.4 rubric judge"
+cost = 6.268559
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_research.BjgV0FJw.json"
+
+# Methodology: https://www.vals.ai/benchmarks/tax_agent_bench
+# stderr = 3.603 percentage points.
+[[benchmarks]]
+name = "Tax Agent Bench"
+score = 52.305
+metric = "citation-adjusted all-pass accuracy"
+version = "1"
+dataset = "193-question private test set"
+effort = "xhigh"
+variant = "all-pass multiplied by (0.7 + 0.3 times citation quality); 3-hour task limit; GPT 5.4 rubric judge"
+cost = 3.870924
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_tax_agent_bench.CQdap7eo.json"
+
+# Methodology: https://www.vals.ai/benchmarks/vibe-code
+# stderr = 2.292 percentage points.
+[[benchmarks]]
+name = "Vibe Code Bench v1.1"
+score = 87.777
+metric = "score"
+version = "1.1"
+effort = "xhigh"
+harness = "OpenHands"
+cost = 4.553735
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DLGw-pgN.json"
+
+# Methodology: https://www.vals.ai/benchmarks/hlab
+# stderr = 2.677 percentage points. Not Harvey LAB-AA or criteria pass rate.
+[[benchmarks]]
+name = "HLAB-Vals-1.1"
+score = 11.25
+metric = "Task Pass Rate"
+version = "1.1"
+dataset = "120-task private holdout"
+effort = "xhigh"
+variant = "internet disabled; mean of GPT 5.5 and Claude Sonnet 4.6 task pass rates; task passes only if all criteria pass"
+cost = 3.281826
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_agent_benchmark.D_vTXw_F.json"
+
+# Methodology: https://www.vals.ai/benchmarks/terminal-bench-4
+# stderr = 3.312 percentage points.
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 54.04
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "avg@3 (mean of three pass@1 runs); 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 7.562172
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.B2-ATImw.json"
+
+# User-provided AA export: artificial-analysis-models-2026-11-13.toml
+# SHA256: a564acfa8cce4f8d5b06f998d47baf1703a16d12e63c8d82c8fed046eea0f6aa
+# Source file supplied from model-atlas/temp/; not copied into this repository.
+# Index version and cost basis were checked against AA's model page on
+# 2026-11-13: v5.0.1; weighted average USD per Intelligence Index task.
+# Scores, costs, and effort spelling below are verbatim from the export.
+# The export date is not an evaluation date; releaseDate is a model property.
+# User-supplied data does not establish a separate redistribution license.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 26.8936694361562
+metric = "index score"
+version = "5.0.1"
+effort = "Low"
+cost = 0.2922227000200506
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-hydrogen-low"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 53.9192287317542
+metric = "index score"
+version = "5.0.1"
+effort = "Xhigh"
+cost = 3.1601590757006157
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-hydrogen"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 50.7870826951304
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+cost = 1.8733140062520008
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-hydrogen-high"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 41.2329566992579
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+cost = 0.7979866055252406
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-hydrogen-medium"
