@@ -15,8 +15,9 @@ type = "image"
 name = "MiniMax H3 Image"
 description = "MiniMax text-to-image and image-editing model"
 family = "minimax"
-open_weights = false
+open_weights = true
 release_date = "2026-11-10"
+license = "MiniMax H3 Image Community License Agreement"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"]
@@ -32,3 +33,20 @@ top_k = false
 [limit]
 context = 0
 output = 0
+
+[[links]]
+url = "https://www.minimax.io/blog/minimax-h3-image"
+type = "announcement"
+
+[[links]]
+url = "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+type = "model_card"
+
+[[links]]
+url = "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image/blob/main/LICENSE"
+type = "license"
+
+[[weights]]
+label = "Hugging Face: MiniMax-H3-Image"
+url = "https://huggingface.co/MiniMaxAI/MiniMax-H3-Image"
+format = "safetensors"

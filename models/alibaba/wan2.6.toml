@@ -11,7 +11,7 @@ open_weights = false
 release_date = "2025-12-03"
 
 [modalities]
-input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "audio/wav", "audio/mpeg"]
+input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]
 output = ["video/mp4"]
 
 [capabilities]
