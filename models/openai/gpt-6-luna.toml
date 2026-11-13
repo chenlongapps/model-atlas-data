@@ -13,8 +13,8 @@ output = ["text"]
 [capabilities]
 tools = { supported = true }
 reasoning = { supported = true }
-temperature = false
-top_p = false
+temperature = true
+top_p = true
 top_k = false
 
 [limit]
