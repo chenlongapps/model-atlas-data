@@ -57,18 +57,11 @@ top_k = false
 
 [limit]
 context = 1_048_576
-output = 131_072
+output = 1048576
 
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
-format = "safetensors"
-# Official model card: MXFP4 weights / MXFP8 activations (quantization-aware training).
-# Selected tensors are excluded from weight quantization in the fixed config:
-# https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/config.json
-# MXFP8 is activation precision, not another published weight format.
-quantization = "mxfp4"
-
 [[links]]
 label = "Model card"
 url = "https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/d9e99b0792a5e93b78ea9bea62a68167e36ddd9e/README.md"

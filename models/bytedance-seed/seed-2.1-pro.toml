@@ -42,5 +42,5 @@ top_p = true
 top_k = false
 
 [limit]
-context = 256_000
+context = 1024000
 output = 256_000

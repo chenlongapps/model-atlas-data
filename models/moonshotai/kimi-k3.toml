@@ -51,7 +51,7 @@ top_k = false
 
 [limit]
 context = 1_048_576
-output = 131_072
+output = 1048576
 
 [[benchmarks]]
 name = "DeepSWE"
