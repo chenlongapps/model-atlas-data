@@ -235,3 +235,12 @@ score = 90.6
 metric = "score"
 variant = "with code interpreter"
 source = "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 28.5750026655353
+cost = 0.5693810918846318
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/qwen3-8-flash-next"

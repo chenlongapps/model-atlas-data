@@ -165,7 +165,9 @@ source = "https://artificialanalysis.ai/models/comparisons/muse-glimmer-vs-hy3"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 6.34128724913462
-cost = 0.16096168039127723
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 0.16096168039127723 USD/weighted task; not a correction of the historical bill.
+cost = 0.17820832971071474
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

@@ -116,7 +116,9 @@ date = "2026-06-04"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 11.7592726308177
-cost = 2.2257365504312134
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 2.2257365504312134 USD/weighted task; not a correction of the historical bill.
+cost = 2.2102962660498227
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

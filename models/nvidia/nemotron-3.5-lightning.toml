@@ -145,7 +145,9 @@ source = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 5.5346663903388
-cost = 0.28980699398265014
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 0.28980699398265014 USD/weighted task; not a correction of the historical bill.
+cost = 0.31445225066768195
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

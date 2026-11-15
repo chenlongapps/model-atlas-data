@@ -33,3 +33,12 @@ name = "Humanity's Last Exam"
 score = 29
 metric = "accuracy"
 source = "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-solarpro4"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 14.1589437644357
+cost = 0.9557366659448332
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+source = "https://artificialanalysis.ai/models/solar-pro4"

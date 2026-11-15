@@ -86,7 +86,9 @@ name = "Artificial Analysis Intelligence Index"
 score = 13.6203422723141
 # Current cost observation in the 2026-11-07 export and official page; score unchanged.
 # Previous snapshot cost: 0.5382257339551116 USD/weighted task.
-cost = 0.5196327287868884
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 0.5196327287868884 USD/weighted task; not a correction of the historical bill.
+cost = 0.5574566144919201
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

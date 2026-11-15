@@ -195,12 +195,24 @@ source = "https://www.vals.ai/benchmarks/vals_index"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 50.4121935905389
-cost = 9.946608711550533
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 9.946608711550533 USD/weighted task; not a correction of the historical bill.
+cost = 4.973304355775267
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 effort = "High"
 source = "https://artificialanalysis.ai/models/gemini-4-argon"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 47.6040598289046
+cost = 4.314621569087732
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "Medium"
+source = "https://artificialanalysis.ai/models/gemini-4-argon-medium"
 
 [[benchmarks]]
 name = "Humanity's Last Exam"

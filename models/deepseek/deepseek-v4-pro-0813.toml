@@ -186,3 +186,13 @@ metric = "index score"
 version = "5.0.1"
 variant = "Non-reasoning"
 source = "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 20.799409628237
+cost = 0.8485312855493328
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/deepseek-v4-pro-high"

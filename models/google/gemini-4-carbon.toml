@@ -56,7 +56,9 @@ source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.js
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 58.2587824022788
-cost = 6.585776867225546
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 6.585776867225546 USD/weighted task; not a correction of the historical bill.
+cost = 4.677653677420589
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
@@ -66,7 +68,9 @@ source = "https://artificialanalysis.ai/models/gemini-4-carbon-medium"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 60.025738829526
-cost = 7.755545745286556
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 7.755545745286556 USD/weighted task; not a correction of the historical bill.
+cost = 5.484780948230178
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
@@ -76,7 +80,9 @@ source = "https://artificialanalysis.ai/models/gemini-4-carbon"
 [[benchmarks]]
 name = "Artificial Analysis Intelligence Index"
 score = 54.2206114502924
-cost = 7.186577262951972
+# Current cost observation in the 2026-11-15 export and official configuration page; score unchanged.
+# Previous snapshot cost: 7.186577262951972 USD/weighted task; not a correction of the historical bill.
+cost = 5.221404723668021
 cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"

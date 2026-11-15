@@ -30,3 +30,13 @@ output = 131072
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/openai/gpt-oss-120b"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 3.81981165137417
+cost = 0.34534207651823257
+cost_unit = "USD/weighted task"
+metric = "index score"
+version = "5.0.1"
+effort = "High"
+source = "https://artificialanalysis.ai/models/gpt-oss-120b"
