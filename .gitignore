@@ -17,9 +17,19 @@ Desktop.ini
 !.env.example
 !.env.*.example
 
-# Python bytecode
+# Python virtual environments
+.venv/
+venv/
+
+# Python bytecode and tool caches
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local downloads and temporary data
+/temp/
 
 # Generated JSON datasets
 /dist/
