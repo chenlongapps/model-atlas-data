@@ -14,10 +14,11 @@ name = "Gemini 4 Carbon"
 description = "Google's most capable reasoning model for complex software engineering, deep math and science, high factual accuracy, and long-horizon autonomous agents"
 family = "gemini"
 open_weights = false
-release_date = "2026-10-28"
+release_date = "2026-11-10"
+knowledge = "2026-03"
 
 [modalities]
-input = ["text", "image", "video", "audio", "application/pdf"]
+input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif", "video/mp4", "video/mpeg", "video/mov", "video/avi", "video/x-flv", "video/mpg", "video/webm", "video/wmv", "video/3gpp", "audio/wav", "audio/mp3", "audio/aiff", "audio/aac", "audio/ogg", "audio/flac", "audio/mpeg", "audio/m4a", "audio/l16", "audio/opus", "audio/alaw", "audio/mulaw", "audio/webm", "application/pdf"]
 output = ["text"]
 
 [capabilities]
@@ -32,6 +33,7 @@ context = 1_048_576
 # Input, thinking and output share the context window. The Gemini API's standard
 # synchronous cap is 65,536; long decode can reach 1,048,576 minus input tokens.
 # Omit output: one unconditional scalar cannot describe both API execution modes.
+output = 65536
 
 [[links]]
 url = "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"

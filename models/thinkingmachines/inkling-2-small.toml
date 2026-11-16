@@ -15,6 +15,7 @@ open_weights = true
 release_date = "2026-11-05"
 last_updated = "2026-11-12"
 license = "Apache-2.0"
+family = "ling"
 
 [metadata.modelatlas.parameters]
 total_billion = 594
@@ -29,6 +30,9 @@ output = ["text"]
 [capabilities]
 tools = { supported = true }
 reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = true
 
 [limit]
 context = 1_048_576
@@ -36,6 +40,7 @@ context = 1_048_576
 # https://huggingface.co/thinkingmachines/Inkling-2-Small/blob/2ad1157016e1aac77b6ff1b770e7c05229403134/config.json
 # Maximum output and all sampling controls are not fully documented as model-wide
 # facts; omit rather than adopt provider settings or an unverified upstream cap.
+output = 131072
 
 [[weights]]
 label = "Hugging Face (NVFP4)"

@@ -10,6 +10,8 @@ description = "Huawei's Ascend-trained text MoE model with approximately 505B to
 family = "pangu"
 open_weights = true
 license = "OpenPangu Model License Agreement Version 2.0"
+release_date = "2026-07-31"
+knowledge = "2026-06"
 
 [metadata.modelatlas.parameters]
 total_billion = 505
@@ -30,6 +32,7 @@ top_k = true
 
 [limit]
 context = 524_288
+output = 131072
 
 [[weights]]
 label = "Hugging Face"
