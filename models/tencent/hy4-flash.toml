@@ -23,3 +23,194 @@ top_k = true
 context = 1_048_576
 input = 983_040
 output = 65_536
+
+# Source: https://hy.tencent.ai/research/hy4-flash
+# Transcribed from the user-supplied official comparison-table screenshot on 2026-11-16;
+# direct page retrieval returned HTTP 567. The evaluation date is not specified.
+# All results use the highest available reasoning setting; no named effort is given.
+# Costs are the reported CNY per task, based on official API prices. The source
+# converts USD to CNY at a fixed 1 USD = 7.2 CNY; no currency conversion is applied here.
+
+# WorkIndex (internal): all models evaluated on workbuddy cli.
+# PPT artifacts are rendered to PDF using LibreOffice.
+[[benchmarks]]
+name = "PPTGenBench"
+score = 54.2
+cost = 0.169
+cost_unit = "CNY/task"
+metric = "score"
+variant = "highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "PPTCoEditBench"
+score = 74.0
+cost = 0.105
+cost_unit = "CNY/task"
+metric = "score"
+dataset = "100 real-world PPT editing tasks"
+variant = "single-turn; highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "PPTFixBench"
+score = 23.7
+cost = 0.253
+cost_unit = "CNY/task"
+metric = "score"
+dataset = "50 tasks; each PowerPoint file contains more than 25 formatting or content issues"
+variant = "highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "MdCoEditBench"
+score = 56.9
+cost = 0.057
+cost_unit = "CNY/task"
+metric = "score"
+dataset = "65 Markdown co-editing tasks"
+variant = "highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "WordEditBench"
+score = 46.2
+cost = 0.629
+cost_unit = "CNY/task"
+metric = "score"
+dataset = "100 real-world Word editing tasks across four scenarios"
+variant = "rule-based document XML checker; highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "ExcelFixBench"
+score = 15.6
+cost = 0.310
+cost_unit = "CNY/task"
+metric = "score"
+dataset = "60 real-world spreadsheet repair tasks"
+variant = "per-task rubrics; averaged over 3 trials; highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "AudioVideoBench"
+score = 17.8
+cost = 0.344
+cost_unit = "CNY/task"
+metric = "score"
+variant = "highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "BuddyVQA Atlas"
+score = 48.5
+cost = 0.007
+cost_unit = "CNY/task"
+metric = "score"
+variant = "without tools; highest available reasoning setting"
+harness = "workbuddy cli"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+# Open Agent Benchmark.
+[[benchmarks]]
+name = "DeepSWE"
+score = 64.6
+cost = 0.290
+cost_unit = "CNY/task"
+metric = "pass@1"
+version = "1.1"
+variant = "8 CPU cores; 16 GB memory per task; highest available reasoning setting"
+harness = "mini-SWE-agent"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "ProgramBench"
+score = 16.0
+cost = 0.561
+cost_unit = "CNY/task"
+metric = "score"
+variant = "Almost Solved; highest available reasoning setting"
+harness = "mini-SWE-agent"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 19.2
+cost = 0.558
+cost_unit = "CNY/task"
+metric = "score"
+version = "4.0"
+variant = "up to 500 turns; 13-hour timeout per trial; 16 CPUs; 32 GB RAM; three GPU-dependent tasks additionally receive a single H100 GPU; highest available reasoning setting"
+harness = "Claude Code"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "APEX-Agents"
+score = 63.1
+cost = 0.087
+cost_unit = "CNY/task"
+metric = "pass@1"
+version = "1.1"
+variant = "up to 250 steps per trial; official two-service main + world environment; 8 CPUs and 24 GB RAM; separate verifier container with 2 CPUs and 8 GB RAM; highest available reasoning setting"
+harness = "Loop"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 52.2
+cost = 0.038
+cost_unit = "CNY/task"
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "600 public tasks"
+variant = "official evaluation method; highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "Humanity's Last Exam"
+score = 55.2
+cost = 0.060
+cost_unit = "CNY/task"
+metric = "accuracy"
+dataset = "HLE-Full"
+variant = "with tools; highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+# Partial score is not the binary task completion metric of the existing definition.
+[[benchmarks]]
+name = "OSWorld"
+score = 68.1
+cost = 0.451
+cost_unit = "CNY/task"
+metric = "partial score"
+version = "2.1"
+dataset = "Full suite"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+# Multimodal.
+[[benchmarks]]
+name = "MMMU-Pro"
+score = 75.8
+cost = 0.010
+cost_unit = "CNY/task"
+metric = "score"
+variant = "highest available reasoning setting"
+source = "https://hy.tencent.ai/research/hy4-flash"
+
+[[benchmarks]]
+name = "ZeroBench-main"
+score = 45.8
+cost = 0.077
+cost_unit = "CNY/task"
+metric = "pass@5"
+variant = "with tools; network-isolated environment supporting image outputs; up to 80 tool-calling rounds per run; 10 independent runs per problem to estimate pass@5; highest available reasoning setting"
+harness = "Jupyter"
+source = "https://hy.tencent.ai/research/hy4-flash"
