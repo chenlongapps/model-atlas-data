@@ -26,7 +26,7 @@ top_k = true
 
 [limit]
 context = 1_000_000
-output = 393_216
+output = 262144
 
 # User-provided Qwen4-Max comparison chart, associated with the WeChat URL below.
 # The linked article returned a verification page on 2026-11-16; its text and
