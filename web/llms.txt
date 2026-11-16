@@ -1,0 +1,30 @@
+# ModelAtlas Data
+
+> ModelAtlas Data maintains AI model profiles, benchmark definitions, and traceable benchmark results for ModelAtlas Android. It collects published results and does not run evaluations.
+
+Model profiles are maintained as Models.dev-style `schema = 2` TOML files in `models/<lab>/<model-id>.toml`. The path determines the model ID, `<lab>/<model-id>`. Published JSON is generated from the source TOML files. Documentation is primarily in Chinese.
+
+When using the data:
+
+- Model benchmark results live in each model's `benchmarks` array. The separate benchmark dataset contains definitions, not scores or rankings. Match results to definitions using the documented name, version, and metric rules; unresolved results remain in the model data.
+- Preserve the reported score, source, date, and known evaluation conditions, including dataset, reasoning effort, variant, and harness. Missing values are unknown, not zero or a default configuration. Different model versions and test conditions must not be treated as directly comparable; display sorting is not a verified or official ranking.
+- `effort` preserves the source's reasoning-level name and case. Benchmark `cost` and `cost_unit` describe the specific evaluation result, not provider token pricing. Compare costs only with matching currency, accounting basis, and evaluation conditions; do not mix per-task, weighted-task, per-test, or whole-evaluation costs. `cost_source`, when present, provides the independent cost reference; otherwise use `source`.
+- `effort`, `cost`, `cost_unit`, and `cost_source` are ModelAtlas benchmark extensions. Consumers requiring the strict upstream Models.dev schema must explicitly handle these fields.
+- Optional parameter counts in `metadata.modelatlas.parameters` use billions of parameters. Complete-model totals, per-token active counts, and component counts have distinct scopes. Preserve their sources and notes; do not infer missing counts or sum components into a complete-model total.
+- Use each record's source to verify claims and conditions. Build checks do not establish the truth of a result or its redistribution rights. Model weights and third-party evaluation data retain their respective licensing conditions.
+
+## Data
+
+- [Model profiles and results](https://chenlongapps.github.io/model-atlas-data/models.json): JSON object keyed by model ID, preserving profile fields and individual benchmark results, including unmatched results.
+- [Benchmark definitions](https://chenlongapps.github.io/model-atlas-data/benchmarks.json): JSON object keyed by definition ID, with names, versions, metrics, units, and scoring direction (`higher_is_better`).
+- [Simplified Chinese descriptions](https://chenlongapps.github.io/model-atlas-data/i18n/zh-CN.json): Translations under `model.descriptions` (model IDs) and `benchmark.description` (definition IDs). Missing translations fall back to the original descriptions in the Web Explorer.
+- [Release manifest](https://chenlongapps.github.io/model-atlas-data/manifest.json): Data version, source Git commit, publication-package generation time, and file sizes and SHA-256 hashes. This time is not an evaluation date. Website assets, including llms.txt, are outside the data manifest and its data version.
+
+## Documentation
+
+- [README](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/README.md): Data conventions, extension semantics, definition matching, JSON construction, validation limits, local preview, and publishing instructions.
+- [Upstream license notice](https://chenlongapps.github.io/model-atlas-data/LICENSE.models-dev): Retained MIT notice for Models.dev-derived material; model weight licenses must be checked separately.
+
+## Optional
+
+- [Parameter verification notes](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/model-parameters.md): Parameter-count sources, verification methods, scope restrictions, and unresolved cases.
