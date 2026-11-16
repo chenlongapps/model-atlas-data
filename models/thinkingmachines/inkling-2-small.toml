@@ -1,16 +1,26 @@
-# Sources (checked 2026-11-06):
+# Sources (model information rechecked 2026-11-17):
 # - https://thinkingmachines.ai/news/inkling-2-small/
 # - https://thinkingmachines.ai/model-card/inkling-2-small/
 # - https://www.vals.ai/models/thinkingmachines_inkling-2-small
-# The publisher says weights are initially closed, with an Apache-2.0 release
-# planned after external safety testing. Vals' "open-weight" label is premature.
-# Do not assign a future license or infer audio support from older Inkling models.
-# Sampling controls and provider-specific limits are not model-wide facts here.
+# - https://huggingface.co/thinkingmachines/Inkling-2-Small
+# The publisher's 2026-11-12 update confirms the Apache-2.0 weight release.
+# Do not infer audio support from older Inkling models or treat provider-specific
+# generation limits as intrinsic model output limits.
+# Historical 2026-11-06 notes before the first benchmark are preserved verbatim;
+# the model information above that block now follows the published weights.
 schema = 2
 name = "Inkling 2 Small"
-description = "Thinking Machines' 594B-total, 17B-active MoE reasoning model for text and image inputs, text output, coding, and tool use; weights are initially closed pending safety testing."
-open_weights = false
+description = "Multimodal MoE reasoning model (594B total, 17B active) for agentic coding, vision, and knowledge work"
+open_weights = true
 release_date = "2026-11-05"
+last_updated = "2026-11-12"
+license = "Apache-2.0"
+
+[metadata.modelatlas.parameters]
+total_billion = 594
+active_billion = 17
+sources = ["https://huggingface.co/thinkingmachines/Inkling-2-Small/blob/2ad1157016e1aac77b6ff1b770e7c05229403134/README.md"]
+notes = "Official full-model architecture specifications, not exact serialized tensor counts."
 
 [modalities]
 input = ["text", "image"]
@@ -21,6 +31,30 @@ tools = { supported = true }
 reasoning = { supported = true }
 
 [limit]
+context = 1_048_576
+# Exact context: text_config.model_max_length in the published config.json:
+# https://huggingface.co/thinkingmachines/Inkling-2-Small/blob/2ad1157016e1aac77b6ff1b770e7c05229403134/config.json
+# Maximum output and all sampling controls are not fully documented as model-wide
+# facts; omit rather than adopt provider settings or an unverified upstream cap.
+
+[[weights]]
+label = "Hugging Face (NVFP4)"
+url = "https://huggingface.co/thinkingmachines/Inkling-2-Small"
+quantization = "nvfp4"
+
+[[weights]]
+label = "Hugging Face (MXFP8)"
+url = "https://huggingface.co/thinkingmachines/Inkling-2-Small-MXFP8"
+quantization = "mxfp8"
+
+[[links]]
+url = "https://thinkingmachines.ai/news/inkling-2-small/"
+type = "announcement"
+
+[[links]]
+url = "https://thinkingmachines.ai/model-card/inkling-2-small/"
+type = "model_card"
+
 # The publisher describes up to 1M context without an exact token count.
 # Tinker training/serverless limits are provider-specific, not model limits.
 

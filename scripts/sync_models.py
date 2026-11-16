@@ -82,7 +82,7 @@ def no_symlinks(base, relative):
         require(not current.is_symlink(), f"symlink not allowed: {current}")
 
 
-def validate_model(data, definitions):
+def validate_model(data, definitions, *, partial_local=False):
     """Conservative import checks, not a replacement for the complete upstream schema."""
     table(data, MODEL_FIELDS, "model")
     require(type(data.get("schema")) is int and data["schema"] == 2, "expected schema = 2")
@@ -95,7 +95,7 @@ def validate_model(data, definitions):
         if key == "open_weights" or key in data:
             require(type(data.get(key)) is bool, f"{key}: expected a boolean")
     for key in ("release_date", "last_updated", "knowledge"):
-        if key == "release_date" or key in data:
+        if (key == "release_date" and not partial_local) or key in data:
             require(calendar_date(data.get(key)), f"{key}: invalid date string")
     modalities = data.get("modalities")
     table(modalities, {"input", "output"}, "modalities")
@@ -106,8 +106,12 @@ def validate_model(data, definitions):
     caps = data.get("capabilities")
     table(caps, {"tools", "reasoning", "temperature", "top_p", "top_k"}, "capabilities")
     for key in ("temperature", "top_p", "top_k"):
+        if partial_local and key not in caps:
+            continue
         require(type(caps.get(key)) is bool, f"capabilities.{key}: expected a boolean")
     for key in ("tools", "reasoning"):
+        if partial_local and key not in caps:
+            continue
         support = caps.get(key)
         allowed = {"supported"}
         if key == "tools" and isinstance(support, dict) and support.get("supported") is True:
@@ -293,7 +297,9 @@ def edit_value(target, key, value):
 
 def update_content(content, incoming, translated=False):
     data = tomllib.loads(content.decode("utf-8"))
-    validate_model(information(data), [])
+    # Local evidence may leave capabilities or release date unknown. Validate
+    # supplied values, letting complete, strictly checked upstream facts fill gaps.
+    validate_model(information(data), [], partial_local=True)
     validate_model(information(incoming), [])
     merged, changes, conflicts = merge_information(
         information(data), information(incoming), translated)
@@ -309,7 +315,14 @@ def update_content(content, incoming, translated=False):
     serialized = tomlkit.dumps(document)
     for marker, original in replacements:
         require(serialized.count(marker) == 1, "TOML editor changed a protected benchmark placeholder")
-        serialized = serialized.replace(marker, original, 1)
+        if marker.startswith("["):
+            # Non-root benchmark segments already contain their trailing blank
+            # lines. Any separator after the placeholder was added by the editor
+            # (e.g. when appending [[weights]]), not part of the original text.
+            serialized = re.sub(re.escape(marker) + r"(?:\r?\n)*",
+                                lambda _: original, serialized, count=1)
+        else:
+            serialized = serialized.replace(marker, original, 1)
     updated = serialized.encode("utf-8")
     expected = {**merged, **({"benchmarks": data["benchmarks"]} if "benchmarks" in data else {})}
     require(tomllib.loads(updated.decode("utf-8")) == expected, "TOML editing changed unexpected fields")

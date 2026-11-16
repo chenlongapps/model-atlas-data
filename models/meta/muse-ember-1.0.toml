@@ -10,7 +10,7 @@
 # reasoning-effort controls are provider-specific and are not model attributes.
 schema = 2
 name = "Muse Ember"
-description = "Muse Ember is a multimodal reasoning model from Meta for high-volume, repeated agentic work, including coding subtasks, tool calls, routing, document summarization, and extraction. It accepts text, images, audio, video, and PDFs and outputs text."
+description = "Muse Ember is Meta's smallest and most efficient reasoning model, built for the work agents repeat all day: tool calls, coding subtasks, routing, extraction, and long-document parsing. It pairs with Muse Wonder or Muse Spark, which plan while Muse Ember handles the volume."
 family = "muse"
 open_weights = false
 release_date = "2026-11-09"

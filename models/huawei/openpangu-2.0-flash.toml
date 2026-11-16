@@ -1,0 +1,74 @@
+# Manually reviewed against Models.dev commit a50e5491e509229af85d44fa17ce3ab51762f6a0
+# and the official model repository on 2026-11-17.
+# Exact context and sampling: config.json / generation_config.json at the same
+# revision as the model card below. Release date, knowledge cutoff and maximum
+# output are not verified and are omitted. Repository creation is not a release.
+# Custom license includes an EU-use restriction; see the linked LICENSE.
+schema = 2
+name = "openPangu 2.0 Flash"
+description = "Huawei's Ascend-trained text MoE model with approximately 92B total parameters, 6B active per token, 512K context, and thinking and non-thinking modes"
+family = "pangu"
+open_weights = true
+license = "OpenPangu Model License Agreement Version 2.0"
+
+[metadata.modelatlas.parameters]
+total_billion = 92
+active_billion = 6
+sources = ["https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"]
+notes = "Approximate full-model and per-token activated architecture counts reported by the publisher."
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+tools = { supported = true }
+reasoning = { supported = true }
+temperature = true
+top_p = true
+top_k = true
+
+[limit]
+context = 524_288
+
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/openpangu/openPangu-2.0-Flash"
+
+[[links]]
+url = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"
+type = "model_card"
+
+[[links]]
+url = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/LICENSE"
+type = "license"
+
+# Preserve the four upstream observations and original metrics. No explicit
+# version or compatible definition is verified; keep these results unmapped.
+[[benchmarks]]
+name = "AIME 2026"
+score = 93.3
+metric = "Avg@16"
+variant = "thinking"
+source = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"
+
+[[benchmarks]]
+name = "SWE-bench Verified"
+score = 63.1
+metric = "Avg@3"
+variant = "thinking"
+source = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"
+
+[[benchmarks]]
+name = "LiveCodeBench V6"
+score = 85.1
+metric = "Avg@3"
+variant = "thinking"
+source = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"
+
+[[benchmarks]]
+name = "GPQA-Diamond"
+score = 83.7
+metric = "Avg@4"
+variant = "thinking"
+source = "https://huggingface.co/openpangu/openPangu-2.0-Flash/blob/5b78fc70a06dd27c5c4c5e918c46c49531d357b4/README.md"

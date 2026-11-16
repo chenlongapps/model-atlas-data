@@ -8,8 +8,8 @@
 # https://platform.minimax.io/docs/api-reference/text-chat-anthropic).
 # Sampling: temperature and top_p are request parameters; top_k is ignored
 # (https://platform.minimax.io/docs/api-reference/text-anthropic-api: temperature [0, 2], top_p (0, 1]).
-# Weights: not released yet ("Model weights will be released later",
-# https://www.minimax.io/blog/minimax-m31f; no MiniMaxAI/MiniMax-M3.1-Flash repo on Hugging Face, 2026-10-19).
+# Weights now published; rechecked 2026-11-17:
+# https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash
 schema = 2
 name = "MiniMax-M3.1-Flash"
 description = "Frontier multimodal coding model with 1M context window and tunable thinking depth"
@@ -37,6 +37,10 @@ top_k = false
 [limit]
 context = 1_000_000
 output = 512_000
+
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
 
 [[benchmarks]]
 name = "DeepSWE"

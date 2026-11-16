@@ -204,6 +204,87 @@ class SyncTests(unittest.TestCase):
         self.assertIn("translations", report["conflicts"]["models/lab/existing.toml"]["description"])
         self.assertEqual(locale.read_bytes(), translations)
 
+    def test_upstream_fills_unknown_local_capabilities_without_touching_results(self):
+        for missing in (("temperature", "top_p", "top_k"),
+                        ("tools", "reasoning", "temperature", "top_p", "top_k")):
+            with self.subTest(missing=missing):
+                local = b"".join(line for line in MODEL.splitlines(keepends=True)
+                                 if not any(line.startswith(key.encode() + b" =") for key in missing))
+                updated, fields, _ = update_content(local + LOCAL_RESULTS, tomllib.loads(MODEL.decode()))
+                self.assertEqual(tomllib.loads(updated.decode())["capabilities"],
+                                 tomllib.loads(MODEL.decode())["capabilities"])
+                self.assertEqual(set(fields), {f"capabilities.{key}" for key in missing})
+                self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local + LOCAL_RESULTS))
+
+    def test_partial_local_capabilities_still_reject_invalid_supplied_values(self):
+        for key, value in (("temperature", "true"), ("top_p", "true"), ("top_k", "false"),
+                           ("tools", "{ supported = false }"), ("reasoning", "{ supported = true }")):
+            with self.subTest(key=key):
+                local = MODEL.replace(f"{key} = {value}".encode(), f'{key} = "unknown"'.encode())
+                with self.assertRaises(ValueError):
+                    update_content(local, tomllib.loads(MODEL.decode()))
+
+    def test_new_and_upstream_models_still_require_complete_capabilities(self):
+        for key in ("tools", "reasoning", "temperature", "top_p", "top_k"):
+            with self.subTest(key=key):
+                incoming = tomllib.loads(MODEL.decode())
+                del incoming["capabilities"][key]
+                with self.assertRaises(ValueError):
+                    validate_model(incoming, [])
+                with self.assertRaises(ValueError):
+                    update_content(MODEL, incoming)
+
+    def test_unknown_local_release_date_can_be_filled_but_invalid_dates_are_rejected(self):
+        local = MODEL.replace(b'release_date = "2026-10-01"\n', b"")
+        updated, fields, _ = update_content(local, tomllib.loads(MODEL.decode()))
+        self.assertEqual(fields, ["release_date"])
+        self.assertEqual(tomllib.loads(updated.decode())["release_date"], "2026-10-01")
+        for date in (b'"unknown"', b'"2026-02-30"', b'true'):
+            invalid = MODEL.replace(b'"2026-10-01"', date)
+            with self.subTest(date=date), self.assertRaisesRegex(ValueError, "release_date"):
+                update_content(invalid, tomllib.loads(MODEL.decode()))
+        with self.assertRaisesRegex(ValueError, "release_date"):
+            update_content(MODEL, tomllib.loads(local.decode()))
+
+    def test_appending_weights_preserves_benchmark_text_and_trailing_whitespace(self):
+        incoming = tomllib.loads(MODEL.decode())
+        incoming["weights"] = [{"label": "Hugging Face", "url": "https://huggingface.co/lab/model"}]
+        for suffix in (b"\n", b"\n\n", b"\n# Final result note\n"):
+            with self.subTest(suffix=suffix):
+                local = MODEL + LOCAL_RESULTS.rstrip(b"\n") + suffix
+                target = self.write(self.root, "models/lab/existing.toml", local)
+                self.init_git()
+                updated, fields, _ = update_content(local, incoming)
+                self.assertEqual(fields, ["weights"])
+                self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local))
+                self.assertIn(LOCAL_RESULTS.rstrip(b"\n") + suffix, updated)
+                self.assertEqual(tomllib.loads(updated.decode())["weights"], incoming["weights"])
+                target.write_bytes(updated)
+                self.git("add", "models/")
+                report = {"dry_run": False, "added": {}, "updated": {
+                    "models/lab/existing.toml": {"before": hashlib.sha256(local).hexdigest(),
+                                                "after": hashlib.sha256(updated).hexdigest()}}}
+                check_staged(self.root, report)
+                self.git("commit", "-m", "Add weights")
+
+    def test_appending_weights_preserves_crlf_benchmarks_and_literal_note_text(self):
+        local = (MODEL + LOCAL_RESULTS + b'# Keep literal escapes: \\\\1 \\\\n\n\n').replace(b"\n", b"\r\n")
+        incoming = tomllib.loads(MODEL.decode())
+        incoming["weights"] = [{"url": "https://huggingface.co/lab/model"}]
+        updated, _, _ = update_content(local, incoming)
+        self.assertEqual(benchmark_bytes(updated), benchmark_bytes(local))
+        self.assertIn(LOCAL_RESULTS.replace(b"\n", b"\r\n"), updated)
+
+    def test_unsafe_append_without_final_newline_is_skipped_without_writing(self):
+        local = (MODEL + LOCAL_RESULTS).rstrip(b"\n")
+        target = self.write(self.root, "models/lab/existing.toml", local)
+        self.write(self.upstream, "models/lab/existing.toml",
+                   MODEL + b'\n[[weights]]\nurl = "https://huggingface.co/lab/model"\n')
+        report = sync_models(self.upstream, self.root)
+        self.assertIn("models/lab/existing.toml", report["skipped"])
+        self.assertEqual(report["updated"], {})
+        self.assertEqual(target.read_bytes(), local)
+
     def test_dry_run_updates_have_same_hashes_without_writing(self):
         target = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
         before = target.stat().st_mtime_ns
