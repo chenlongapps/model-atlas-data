@@ -18,13 +18,13 @@ description: 更新 ModelAtlas Data 的 AA Intelligence Index 成绩与加权任
 
 使用 Python 3.11+，记录解释器实际路径为 `PYTHON`，后续所有 Python 命令显式复用该路径，不依赖跨工具调用的环境变量或激活状态。
 
-| 步骤 | 所需依赖清单 |
+| 步骤 | 所需依赖 |
 | --- | --- |
 | 下载或下载器测试 | `SKILL_ROOT/scripts/requirements.txt`（`cryptography`、`tomli-w`） |
-| 修改模型后的完整测试 | `DATA_ROOT/requirements-sync.txt`（`tomlkit`），写入前准备好 |
+| 修改模型后的完整测试 | `tomlkit==0.13.3`（版本与 `DATA_ROOT/.github/workflows/sync-models.yml` 保持一致），写入前准备好 |
 | 本地快照解析、校验、构建 | 仅标准库 |
 
-先读取清单并检查环境；满足要求就复用，否则默认自动创建临时虚拟环境，仅安装所需依赖。遵循用户安装限制和工具权限，不修改系统或已有环境，不使用 `sudo`、`--user`、`--break-system-packages`。
+先读取依赖清单或对应工作流安装命令并检查环境；满足要求就复用，否则默认自动创建临时虚拟环境，仅安装所需依赖。遵循用户安装限制和工具权限，不修改系统或已有环境，不使用 `sudo`、`--user`、`--break-system-packages`。
 
 以下为下载并运行完整测试的示例。先核实路径；`TEMP_ROOT` 使用运行环境允许的临时目录，未指定则先设为系统临时目录。整段在同一个 shell 调用中执行，失败即退出并报告：
 
@@ -34,7 +34,7 @@ VENV_DIR="$(mktemp -d "${TEMP_ROOT%/}/modelatlas-aa-XXXXXX")" || exit 1
 PYTHON="$VENV_DIR/bin/python"
 "$PYTHON" -m pip install \
   -r "$SKILL_ROOT/scripts/requirements.txt" \
-  -r "$DATA_ROOT/requirements-sync.txt" || exit 1
+  tomlkit==0.13.3 || exit 1
 "$PYTHON" -m pip check || exit 1
 "$PYTHON" -c "import tomllib, tomli_w, tomlkit; from cryptography.hazmat.primitives.ciphers.aead import AESGCM" || exit 1
 printf 'PYTHON=%s\n' "$PYTHON"

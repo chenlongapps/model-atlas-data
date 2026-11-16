@@ -18,8 +18,10 @@ from tomlkit.exceptions import TOMLKitError
 
 if __package__:
     from .build import validate_parameter_metadata
+    from .translate_descriptions import translate_candidates
 else:
     from build import validate_parameter_metadata
+    from translate_descriptions import translate_candidates
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -315,7 +317,7 @@ def update_content(content, incoming, translated=False):
     return updated, [".".join(path) for path in changes], conflicts
 
 
-def sync_models(upstream, root, dry_run=False):
+def sync_models(upstream, root, dry_run=False, translate_descriptions=False):
     require((upstream / "LICENSE").read_bytes() == (root / "LICENSE.models-dev").read_bytes(),
             "upstream LICENSE changed; review the license before syncing")
     no_symlinks(upstream, Path("models"))
@@ -377,7 +379,71 @@ def sync_models(upstream, root, dry_run=False):
                                        "after": digest, "fields": fields}
         else:
             report["added"][name] = digest
+    if translate_descriptions:
+        localize_additions(root, upstream, report)
     return report
+
+
+LOCALE = "i18n/zh-CN.toml"
+
+
+def localize_additions(root, upstream, report):
+    no_symlinks(root, Path(LOCALE))
+    path = root / LOCALE
+    previous = path.read_bytes() if path.exists() else None
+    document = tomlkit.parse(previous.decode("utf-8")) if previous is not None else tomlkit.document()
+    existing = document.get("model", {}).get("descriptions", {})
+    candidates = {}
+    for name in report["added"]:
+        identifier = "/".join(Path(name).with_suffix("").parts[1:])
+        if identifier not in existing:
+            candidates[identifier] = tomllib.loads(((upstream if report["dry_run"] else root) / name).read_text(encoding="utf-8"))
+    translations = {"accepted": {}, "attempt_failures": {}, "pending": [], "files": {}}
+    report["translations"] = translations
+    if report["dry_run"]:
+        translations["pending"] = list(candidates)
+        return
+    accepted, providers, failures = translate_candidates(candidates)
+    translations["accepted"] = providers
+    translations["attempt_failures"] = failures
+    if not accepted:
+        return
+    if "model" not in document:
+        document["model"] = tomlkit.table()
+    if "descriptions" not in document["model"]:
+        document["model"]["descriptions"] = tomlkit.table()
+    for identifier, value in accepted.items():
+        document["model"]["descriptions"][identifier] = value
+    content = tomlkit.dumps(document).encode("utf-8")
+    validate_locale_change(previous, content, set(accepted))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    no_symlinks(root, Path(LOCALE))
+    if previous is None:
+        with path.open("xb") as output:
+            output.write(content)
+    else:
+        with path.open("r+b") as output:
+            require(output.read() == previous, "local translations changed during sync")
+            output.seek(0)
+            output.write(content)
+            output.truncate()
+    translations["files"][LOCALE] = {
+        "before": hashlib.sha256(previous).hexdigest() if previous is not None else None,
+        "after": hashlib.sha256(content).hexdigest(), "added": list(accepted)}
+
+
+def validate_locale_change(previous, content, identifiers):
+    before = tomllib.loads(previous.decode("utf-8")) if previous is not None else {}
+    after = tomllib.loads(content.decode("utf-8"))
+    expected = deepcopy(before)
+    entries = expected.setdefault("model", {}).setdefault("descriptions", {})
+    actual = after.get("model", {}).get("descriptions", {})
+    require(bool(identifiers), "empty translation change")
+    for identifier in identifiers:
+        require(identifier not in entries and text(actual.get(identifier)),
+                "existing or invalid translation changed")
+        entries[identifier] = actual[identifier]
+    require(after == expected, "unrelated localization data changed")
 
 
 def git(root, *args):
@@ -391,9 +457,33 @@ def check_staged(root, report):
     # Check NUL-separated raw paths; do not depend on Git's path quoting.
     records = git(root, "diff", "--cached", "--name-status", "--no-renames", "-z").split(b"\0")[:-1]
     require(len(records) % 2 == 0, "invalid staged diff")
+    locales = report.get("translations", {}).get("files", {})
+    require(not set(locales) - {LOCALE}, "unsupported localization file")
+    require(bool(locales) == bool(report.get("translations", {}).get("accepted", {})),
+            "translation report is missing locale changes")
     actual = set()
     for status, raw_path in zip(records[::2], records[1::2]):
         name = raw_path.decode("utf-8")
+        if name in locales:
+            change = locales[name]
+            require(status == (b"A" if change["before"] is None else b"M"), "unexpected locale status")
+            content = git(root, "show", f":{name}")
+            previous = None if status == b"A" else git(root, "show", f"HEAD:{name}")
+            require(hashlib.sha256(content).hexdigest() == change["after"], "staged locale content changed")
+            require(previous is None or hashlib.sha256(previous).hexdigest() == change["before"],
+                    "locale changed since comparison")
+            if previous is not None:
+                require(git(root, "ls-tree", "HEAD", "--", name).split()[0] == b"100644",
+                        "unexpected original locale file mode")
+            identifiers = set(change["added"])
+            added_ids = {"/".join(Path(p).with_suffix("").parts[1:]) for p in report["added"]}
+            require(identifiers <= added_ids, "translation for a model not added in this sync")
+            require(identifiers == set(report["translations"]["accepted"]), "translation report mismatch")
+            validate_locale_change(previous, content, identifiers)
+            require(git(root, "ls-files", "--stage", "--", name).split()[0] == b"100644",
+                    "unexpected locale file mode")
+            actual.add(name)
+            continue
         require(status in (b"A", b"M") and model_path(Path(name)), f"unsupported staged change: {name}")
         expected = report["added"] if status == b"A" else updated
         require(name in expected, f"unexpected staged file: {name}")
@@ -414,7 +504,7 @@ def check_staged(root, report):
         mode = git(root, "ls-files", "--stage", "--", name).split()[0]
         require(mode == b"100644", f"unexpected file mode: {name}")
         actual.add(name)
-    require(actual == set(report["added"]) | set(updated), "staged files do not match sync report")
+    require(actual == set(report["added"]) | set(updated) | set(locales), "staged files do not match sync report")
     require(not git(root, "diff", "--name-only"), "unstaged tracked changes detected")
 
 
@@ -425,7 +515,7 @@ def summary(report):
              f"existing: {report['existing']}; skipped: {len(report['skipped'])}",
              "", "New models include upstream benchmarks. Existing models keep their benchmark data and text unchanged.",
              "Existing model information follows explicit upstream values; fields absent upstream are retained.",
-             "Translations are deferred for new models. Existing translated descriptions are protected.",
+             "New-model translations are optional; existing translated descriptions are protected.",
              "No source authenticity or full upstream schema validation is performed."]
     for name in report["added"]:
         lines.append(f"- Added: `{name}`")
@@ -440,6 +530,15 @@ def summary(report):
         # Escape newlines/backticks from upstream content in the workflow summary.
         reason = reason.replace("`", "'").replace("\n", " ").replace("\r", " ")
         lines.append(f"- Skipped: `{name}` — `{reason}`")
+    translations = report.get("translations", {})
+    for identifier, backend in translations.get("accepted", {}).items():
+        lines.append(f"- Translated: `{identifier}` via `{backend}`")
+    for identifier in translations.get("pending", []):
+        lines.append(f"- Pending translation (dry run): `{identifier}`")
+    for identifier, failures in translations.get("attempt_failures", {}).items():
+        detail = json.dumps(failures, ensure_ascii=False).replace("`", "'").replace("\n", " ").replace("\r", " ")
+        state = "Fallback used" if identifier in translations.get("accepted", {}) else "Translation missing; original model imported"
+        lines.append(f"- {state}: `{identifier}` — `{detail}`")
     return "\n".join(lines) + "\n"
 
 
@@ -452,6 +551,7 @@ def main(argv=None):
     sync.add_argument("--report", type=Path, required=True, help="JSON report outside the repository")
     sync.add_argument("--summary", type=Path)
     sync.add_argument("--dry-run", action="store_true")
+    sync.add_argument("--translate-descriptions", action="store_true")
     check = commands.add_parser("check-staged")
     check.add_argument("--report", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -462,7 +562,7 @@ def main(argv=None):
         else:
             upstream = args.upstream.resolve()
             sha = git(upstream, "rev-parse", "HEAD").decode().strip()
-            report = sync_models(upstream, root, args.dry_run)
+            report = sync_models(upstream, root, args.dry_run, args.translate_descriptions)
             report["upstream_sha"] = sha
             args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             output = summary(report)

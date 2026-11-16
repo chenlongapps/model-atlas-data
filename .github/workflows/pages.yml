@@ -12,7 +12,6 @@ on:
       - 'scripts/manifest.py'
       - 'scripts/validate.py'
       - 'tests/**'
-      - 'requirements-sync.txt'
       - 'LICENSE.models-dev'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -52,7 +51,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install sync test dependency
-        run: python3 -m pip install -r requirements-sync.txt
+        run: python3 -m pip install tomlkit==0.13.3
 
       - name: Run tests
         run: python3 -m unittest discover -s tests -v
