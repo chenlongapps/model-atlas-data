@@ -942,6 +942,8 @@
 "zhipuai/glm-5v-turbo" = "快速 GLM 视觉模型，适用于屏幕截图、文档和多模态智能体任务。"
 "zhipuai/glm-asr-2512" = "语音识别模型，支持多语言和方言转录以及自定义热词。"
 "zhipuai/glm-image" = "GLM-Image 是采用自回归与扩散混合解码器架构的图像生成模型。总体图像生成质量与主流潜在扩散方法相当，但在文字渲染和知识密集型生成场景中优势显著。它尤其擅长需要精准语义理解和复杂信息表达的任务，同时具备强大的高保真、精细细节生成能力。除文生图外，GLM-Image 还支持丰富的图生图任务，包括图像编辑、风格迁移、保持身份特征的生成和多主体一致性生成。"
+"meta/muse-video" = "来自 Meta 超智能实验室的视频生成模型，支持原生音频，与 Muse Image 一同预览"
+"particle-ai/particle-1" = "在 DeepSeek V4.1 Flash 上后训练的 token 高效智能体编码模型，可使用更少的推理和工具调用 token 完成软件工程任务"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
