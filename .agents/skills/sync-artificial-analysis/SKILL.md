@@ -11,7 +11,7 @@ description: 更新 ModelAtlas Data 的 AA Intelligence Index 成绩与加权任
 
 - 路径：本 Skill 目录为 `SKILL_ROOT`，向上三级为 `DATA_ROOT`；确认根目录包含 `AGENTS.md`、`models/`、`benchmarks/`。以 `DATA_ROOT` 为工作目录，不依赖当前目录或硬编码绝对路径。
 - 范围：数据操作限于仓库；外部快照只读取用户指定文件，不扫描父目录或兄弟项目。不默认新增模型、Benchmark 定义或辅助工具，不修改基本资料、其他评测、描述、本地化及已有档位表示。
-- 阅读：`AGENTS.md`、README 的成绩/成本/构建规范、相关模型和 AA 定义（通常为 `benchmarks/artificial-analysis-intelligence-index-v5.toml`，版本以内容为准）。可参考 `docs/artificial-analysis-sync-2026-11-07.md`，但历史记录不证明当前版本或许可。
+- 阅读：`AGENTS.md`、`docs/data-format.md` 的成绩与成本规范、`docs/development.md` 的构建说明、相关模型和 AA 定义（通常为 `benchmarks/artificial-analysis-intelligence-index-v5.toml`，版本以内容为准）。来源口径与许可限制见 `docs/benchmark-sources.md`、`docs/review-notes.md`，既有核验不证明当前版本或授权。
 - 检查 `git status --short`，保留用户已有改动。
 
 ### Python 与依赖
