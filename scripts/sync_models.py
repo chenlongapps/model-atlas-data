@@ -82,7 +82,7 @@ def no_symlinks(base, relative):
         require(not current.is_symlink(), f"symlink not allowed: {current}")
 
 
-def validate_model(data, definitions, *, partial_local=False):
+def validate_model(data, definitions, *, partial_local=False, skip_bad_benchmarks=False):
     """Conservative import checks, not a replacement for the complete upstream schema."""
     table(data, MODEL_FIELDS, "model")
     require(type(data.get("schema")) is int and data["schema"] == 2, "expected schema = 2")
@@ -151,51 +151,79 @@ def validate_model(data, definitions, *, partial_local=False):
         require(isinstance(data["metadata"], dict), "metadata: expected a table")
         json.dumps(data["metadata"], allow_nan=False)
     validate_parameter_metadata(data)
-    results = data.get("benchmarks", [])
-    require(isinstance(results, list), "benchmarks: expected an array")
-    seen = set()
-    for result in results:
-        table(result, BENCHMARK_FIELDS, "benchmark")
-        require(text(result.get("name")), "benchmark.name: required")
-        score = result.get("score")
-        require(number(score) or text(score), "benchmark.score: expected a finite number or nonempty string")
-        for key in BENCHMARK_FIELDS - {"score", "cost"}:
-            if key in result:
-                require(text(result[key]), f"benchmark.{key}: expected a nonempty string")
-        require(url(result.get("source")), f"{result['name']}: verifiable HTTP(S) source required")
-        if "date" in result:
-            require(calendar_date(result["date"]), "benchmark.date: invalid date")
-        require(("cost" in result) == ("cost_unit" in result),
-                "benchmark.cost: cost and cost_unit must be supplied together")
-        if "cost" in result:
-            require(number(result["cost"]) and result["cost"] >= 0,
-                    "benchmark.cost: expected a finite nonnegative number")
-        if "cost_source" in result:
-            require("cost" in result and url(result["cost_source"]),
-                    "benchmark.cost_source: expected an HTTP(S) URL and cost")
-        # Exact conditions include effort; omitted values are not default effort.
-        # Costs and their provenance are observations, not distinct conditions.
-        identity = tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"} - BENCHMARK_COST_FIELDS))
-        require(identity not in seen, f"{result['name']}: duplicate or conflicting benchmark record")
-        seen.add(identity)
-        # No aliases, version normalization, or inferred metrics/default versions.
-        # A definition may explicitly list compatible source versions.
-        matches = [definition for definition in definitions
-                   if result.get("name") == definition.get("name")
-                   and result.get("metric") == definition.get("metric")
-                   and result.get("version") in
-                       (definition.get("version"), *definition.get("compatible_versions", []))]
-        require(len(matches) == 1,
-                f"{result['name']}: benchmark definition mapping is missing or ambiguous "
-                "(exact name, explicit version and metric required)")
+    skipped = benchmark_skips(data.get("benchmarks", []), definitions)
+    if skipped and not skip_bad_benchmarks:
+        raise ValueError(skipped[0]["reason"])
+    return skipped
 
 
-def benchmark_segments(content):
-    """Split complete TOML statements, protecting benchmarks and leading comments."""
+def validate_benchmark(result, definitions):
+    table(result, BENCHMARK_FIELDS, "benchmark")
+    require(text(result.get("name")), "benchmark.name: required")
+    score = result.get("score")
+    require(number(score) or text(score), "benchmark.score: expected a finite number or nonempty string")
+    for key in BENCHMARK_FIELDS - {"score", "cost"}:
+        if key in result:
+            require(text(result[key]), f"benchmark.{key}: expected a nonempty string")
+    require(url(result.get("source")), "benchmark.source: verifiable HTTP(S) source required")
+    if "date" in result:
+        require(calendar_date(result["date"]), "benchmark.date: invalid date")
+    require(("cost" in result) == ("cost_unit" in result),
+            "benchmark.cost: cost and cost_unit must be supplied together")
+    if "cost" in result:
+        require(number(result["cost"]) and result["cost"] >= 0,
+                "benchmark.cost: expected a finite nonnegative number")
+    if "cost_source" in result:
+        require("cost" in result and url(result["cost_source"]),
+                "benchmark.cost_source: expected an HTTP(S) URL and cost")
+    # No aliases, version normalization, or inferred metrics/default versions.
+    require("version" in result and "metric" in result,
+            "benchmark definition mapping requires an explicit version and metric")
+    matches = [definition for definition in definitions
+               if result["name"] == definition.get("name")
+               and result["metric"] == definition.get("metric")
+               and result["version"] in (definition.get("version"), *definition.get("compatible_versions", []))]
+    require(matches, "benchmark definition mapping is missing (exact name, version and metric required)")
+    require(len(matches) == 1, "benchmark definition mapping is ambiguous")
+    # Omitted effort is not default effort; cost and provenance are not conditions.
+    return tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"} - BENCHMARK_COST_FIELDS))
+
+
+def benchmark_skips(results, definitions):
+    if not isinstance(results, list):
+        return [{"index": None, "reason": "benchmarks: expected an array"}]
+    groups, reasons = {}, {}
+    for index, result in enumerate(results, 1):
+        try:
+            identity = validate_benchmark(result, definitions)
+        except (ValueError, TypeError, OverflowError) as error:
+            reasons[index] = str(error)
+        else:
+            groups.setdefault(identity, []).append(index)
+    for indexes in groups.values():
+        first, *others = indexes
+        if any(results[index - 1] != results[first - 1] for index in others):
+            for index in indexes:
+                reasons[index] = "duplicate or conflicting benchmark records: values differ; all conflicting entries skipped"
+        else:
+            for index in others:
+                reasons[index] = f"duplicate or conflicting benchmark record: identical to entry #{first}"
+    skipped = []
+    for index, reason in sorted(reasons.items()):
+        result = results[index - 1]
+        details = {key: result[key] for key in ("name", "version", "metric")
+                   if isinstance(result, dict) and text(result.get(key))}
+        skipped.append({"index": index, **details, "reason": reason})
+    return skipped
+
+
+def benchmark_statements(content):
+    """Split complete TOML statements and identify their benchmark entry, if any."""
     source = content.decode("utf-8")
     tomllib.loads(source)
     tokens, pending = [], []
-    root, section = True, False
+    # -1 denotes a root benchmark value or a malformed non-array table.
+    root, section, index = True, None, -1
     for line in source.splitlines(keepends=True):
         pending.append(line)
         statement = "".join(pending)
@@ -205,22 +233,59 @@ def benchmark_segments(content):
             continue
         if statement.lstrip().startswith("["):
             root = False
-            section = "benchmarks" in parsed
-        tokens.append([statement, section or (root and "benchmarks" in parsed), root, not parsed])
+            if isinstance(parsed.get("benchmarks"), list):
+                index += 1
+            section = index if "benchmarks" in parsed else None
+        tokens.append([statement, -1 if root and "benchmarks" in parsed else section, root, not parsed])
         pending.clear()
     require(not pending, "cannot identify benchmark statements safely")
     # TOML parsers often attach comments before [[benchmarks]] to the preceding
     # table. Protect those too, so changing that table cannot drop result notes.
     for index in range(len(tokens) - 2, -1, -1):
-        if tokens[index][3] and tokens[index + 1][1]:
+        if tokens[index][3] and tokens[index + 1][1] is not None:
             tokens[index][1:3] = tokens[index + 1][1:3]
+    return tokens
+
+
+def benchmark_segments(content):
     segments = []
-    for text, protected, root, _ in tokens:
+    for text, index, root, _ in benchmark_statements(content):
+        protected = index is not None
         if segments and segments[-1][1:] == (protected, root):
             segments[-1] = (segments[-1][0] + text, protected, root)
         else:
             segments.append((text, protected, root))
     return segments
+
+
+def filter_benchmarks(content, data, skipped):
+    """Remove rejected rows without rewriting retained benchmark or model fields."""
+    rejected = {row["index"] - 1 for row in skipped if row["index"] is not None}
+    results = data["benchmarks"]
+    retained = ([row for index, row in enumerate(results) if index not in rejected]
+                if isinstance(results, list) else [])
+    tokens = benchmark_statements(content)
+    # Keep comments and blank lines introducing the next non-benchmark field or table.
+    for position in range(len(tokens) - 2, -1, -1):
+        if tokens[position][3] and tokens[position + 1][1] is None:
+            tokens[position][1] = None
+    parts = []
+    for statement, index, root, empty in tokens:
+        if index is not None:
+            if not retained or index in rejected:
+                continue
+            if index == -1 and root and not empty:  # Inline array, not [[benchmarks]].
+                doc = tomlkit.parse(statement)
+                for position in sorted(rejected, reverse=True):
+                    del doc["benchmarks"][position]
+                statement = tomlkit.dumps(doc)
+        parts.append(statement)
+    updated = "".join(parts).encode("utf-8")
+    expected = information(data)
+    if retained:
+        expected["benchmarks"] = retained
+    require(tomllib.loads(updated.decode("utf-8")) == expected, "benchmark filtering changed unexpected fields")
+    return updated
 
 
 def benchmark_bytes(content):
@@ -346,7 +411,7 @@ def sync_models(upstream, root, dry_run=False, translate_descriptions=False):
         data = tomllib.loads(path.read_text(encoding="utf-8"))
         translated.update(data.get("model", {}).get("descriptions", {}))
     report = {"added": {}, "updated": {}, "existing": 0, "conflicts": {},
-              "skipped": {}, "dry_run": dry_run}
+              "skipped": {}, "skipped_benchmarks": {}, "dry_run": dry_run}
     for source in sorted((upstream / "models").rglob("*.toml")):
         relative = source.relative_to(upstream)
         name = relative.as_posix()
@@ -369,7 +434,10 @@ def sync_models(upstream, root, dry_run=False, translate_descriptions=False):
                 if content == previous:
                     continue
             else:
-                validate_model(incoming, definitions)
+                skipped = validate_model(incoming, definitions, skip_bad_benchmarks=True)
+                if skipped:
+                    report["skipped_benchmarks"][name] = skipped
+                    content = filter_benchmarks(content, incoming, skipped)
         except (ValueError, TypeError, OverflowError, TOMLKitError) as error:
             report["skipped"][name] = str(error)
             continue
@@ -521,35 +589,46 @@ def check_staged(root, report):
     require(not git(root, "diff", "--name-only"), "unstaged tracked changes detected")
 
 
+def summary_text(value):
+    return value.replace("`", "'").replace("\n", " ").replace("\r", " ")
+
+
 def summary(report):
+    skipped_benchmarks = report.get("skipped_benchmarks", {})
     lines = ["## Models.dev sync", "", f"Upstream commit: `{report['upstream_sha']}`",
              f"Dry run: {report['dry_run']}",
              f"Added: {len(report['added'])}; updated: {len(report.get('updated', {}))}; "
              f"existing: {report['existing']}; skipped: {len(report['skipped'])}",
-             "", "New models include upstream benchmarks. Existing models keep their benchmark data and text unchanged.",
+             f"Benchmark skips: {sum(map(len, skipped_benchmarks.values()))}",
+             "", "New models include valid, uniquely mapped upstream benchmarks. Existing models keep their benchmark data and text unchanged.",
              "Existing model information follows explicit upstream values; fields absent upstream are retained.",
              "New-model translations are optional; existing translated descriptions are protected.",
              "No source authenticity or full upstream schema validation is performed."]
     for name in report["added"]:
         lines.append(f"- Added: `{name}`")
     for name, update in report.get("updated", {}).items():
-        fields = ", ".join(update["fields"]).replace("`", "'").replace("\n", " ").replace("\r", " ")
+        fields = summary_text(", ".join(update["fields"]))
         lines.append(f"- Updated: `{name}` — `{fields}`")
     for name, conflicts in report.get("conflicts", {}).items():
         for field, reason in conflicts.items():
-            detail = f"{field}: {reason}".replace("`", "'").replace("\n", " ").replace("\r", " ")
+            detail = summary_text(f"{field}: {reason}")
             lines.append(f"- Conflict retained: `{name}` — `{detail}`")
     for name, reason in report["skipped"].items():
         # Escape newlines/backticks from upstream content in the workflow summary.
-        reason = reason.replace("`", "'").replace("\n", " ").replace("\r", " ")
-        lines.append(f"- Skipped: `{name}` — `{reason}`")
+        lines.append(f"- Skipped: `{name}` — `{summary_text(reason)}`")
+    for name, rows in skipped_benchmarks.items():
+        for row in rows:
+            entry = "benchmarks" if row["index"] is None else f"benchmarks #{row['index']}"
+            fields = ", ".join(f"{key}={row.get(key, '<missing>')}" for key in ("name", "version", "metric"))
+            label = f"{entry} ({fields})" if row["index"] is not None else entry
+            lines.append(f"- Skipped benchmark: `{name}` — `{summary_text(label)}` — `{summary_text(row['reason'])}`")
     translations = report.get("translations", {})
     for identifier, backend in translations.get("accepted", {}).items():
         lines.append(f"- Translated: `{identifier}` via `{backend}`")
     for identifier in translations.get("pending", []):
         lines.append(f"- Pending translation (dry run): `{identifier}`")
     for identifier, failures in translations.get("attempt_failures", {}).items():
-        detail = json.dumps(failures, ensure_ascii=False).replace("`", "'").replace("\n", " ").replace("\r", " ")
+        detail = summary_text(json.dumps(failures, ensure_ascii=False))
         state = "Fallback used" if identifier in translations.get("accepted", {}) else "Translation missing; original model imported"
         lines.append(f"- {state}: `{identifier}` — `{detail}`")
     return "\n".join(lines) + "\n"

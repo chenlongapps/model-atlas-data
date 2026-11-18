@@ -38,6 +38,20 @@ output = 8_192
 RESULT = {"name": "Example Bench", "score": 42.10, "metric": "accuracy",
           "version": "1.0", "source": "https://example.com/results"}
 DEFINITION = {"id": "example-bench-v1", "name": "Example Bench", "version": "1.0", "metric": "accuracy"}
+DEFINITION_TOML = b'''id = "example-bench-v1"
+name = "Example Bench"
+version = "1.0"
+metric = "accuracy"
+'''
+UPSTREAM_RESULT = b'''
+[[benchmarks]] # Verified upstream result.
+name = "Example Bench"
+score = 42.10
+version = "1.0"
+metric = "accuracy"
+source = "https://example.com/results"
+'''
+UNMAPPED_RESULT = UPSTREAM_RESULT.replace(b"Example Bench", b"Unknown Bench")
 LOCAL_RESULTS = b'''
 # Locally verified evaluation conditions; retain this comment.
 [[benchmarks]] # Keep result formatting too.
@@ -414,20 +428,103 @@ class SyncTests(unittest.TestCase):
             sync_models(self.upstream, self.root)
         self.assertEqual((self.root / "models/lab/new.toml").read_bytes(), b"racing writer")
 
-    def test_sync_skips_model_with_unmapped_benchmark(self):
-        content = MODEL + b'\n[[benchmarks]]\nname = "Unknown"\nscore = 42\nsource = "https://example.com"\n'
-        self.write(self.upstream, "models/lab/new.toml", content)
+    def test_sync_imports_model_even_if_all_benchmarks_are_unmapped(self):
+        path = "models/lab/new.toml"
+        self.write(self.upstream, path, MODEL + UNMAPPED_RESULT)
         report = sync_models(self.upstream, self.root)
-        self.assertIn("mapping is missing", report["skipped"]["models/lab/new.toml"])
-        self.assertEqual(report["added"], {})
+        self.assertEqual(report["skipped"], {})
+        self.assertIn(path, report["added"])
+        self.assertEqual((self.root / path).read_bytes(), MODEL)
+        skipped, = report["skipped_benchmarks"][path]
+        self.assertIn("mapping is missing", skipped["reason"])
+        self.assertEqual(skipped["name"], "Unknown Bench")
+        self.assertEqual(skipped["index"], 1)
+
+    def test_filters_only_unmapped_record_and_preserves_surrounding_bytes(self):
+        path = "models/lab/new.toml"
+        self.write(self.root, "benchmarks/example.toml", DEFINITION_TOML)
+        self.init_git()
+        self.git("config", "core.autocrlf", "false")
+        metadata = b'\n# Keep this table in place.\n[metadata]\nnote = "Keep comment" # Also keep.\n'
+        other_result = UPSTREAM_RESULT + b'effort = "Adaptive/Max"\n'
+        expected = (MODEL + UPSTREAM_RESULT + metadata + other_result).replace(b"\n", b"\r\n")
+        self.write(self.upstream, path, (MODEL + UPSTREAM_RESULT + UNMAPPED_RESULT
+                                        + metadata + other_result).replace(b"\n", b"\r\n"))
+        preview = sync_models(self.upstream, self.root, dry_run=True)
+        self.assertFalse((self.root / path).exists())
+        report = sync_models(self.upstream, self.root)
+        self.assertEqual(preview["skipped_benchmarks"], report["skipped_benchmarks"])
+        self.assertEqual(preview["added"], report["added"])
+        self.assertEqual([row["index"] for row in report["skipped_benchmarks"][path]], [2])
+        self.assertEqual((self.root / path).read_bytes(), expected)
+        self.git("add", "models/")
+        check_staged(self.root, report)
+        self.write(self.root, "benchmarks/unknown.toml",
+                   DEFINITION_TOML.replace(b"example-bench-v1", b"unknown-bench-v1")
+                   .replace(b"Example Bench", b"Unknown Bench"))
+        repeated = sync_models(self.upstream, self.root)
+        self.assertEqual(repeated["skipped_benchmarks"], {})
+        self.assertEqual(repeated["updated"], {})
+        self.assertEqual((self.root / path).read_bytes(), expected)
+
+    def test_filters_inline_results_without_rewriting_retained_scores(self):
+        path = "models/lab/new.toml"
+        self.write(self.root, "benchmarks/example.toml", DEFINITION_TOML)
+        good = (b'  { name = "Example Bench", score = 42.10, version = "1.0",'
+                b' metric = "accuracy", source = "https://example.com" } # Keep\n')
+        self.write(self.upstream, path, b'benchmarks = [\n  { name = "Unknown Bench" },\n' + good + b']\n' + MODEL)
+        report = sync_models(self.upstream, self.root)
+        self.assertEqual([row["index"] for row in report["skipped_benchmarks"][path]], [1])
+        self.assertEqual((self.root / path).read_bytes(), b'benchmarks = [\n' + good + b']\n' + MODEL)
+
+    def test_skips_malformed_benchmark_section_but_imports_model(self):
+        path = "models/lab/new.toml"
+        for content in (b'benchmarks = "invalid"\n' + MODEL,
+                        MODEL + b'\n[benchmarks]\nname = "Not a list"\n'):
+            with self.subTest(content=content):
+                self.write(self.upstream, path, content)
+                report = sync_models(self.upstream, self.root, dry_run=True)
+                self.assertEqual(report["skipped"], {})
+                self.assertEqual(report["added"][path], hashlib.sha256(MODEL).hexdigest())
+                self.assertEqual(report["skipped_benchmarks"][path], [
+                    {"index": None, "reason": "benchmarks: expected an array"},
+                ])
+
+    def test_logs_missing_conditions_and_ambiguous_mapping_without_guessing(self):
+        path = "models/lab/new.toml"
+        self.write(self.root, "benchmarks/example.toml", DEFINITION_TOML)
+        self.write(self.root, "benchmarks/ambiguous.toml",
+                   DEFINITION_TOML.replace(b"example-bench-v1", b"ambiguous"))
+        self.write(self.upstream, path, MODEL + UPSTREAM_RESULT
+                   + UPSTREAM_RESULT.replace(b'version = "1.0"\n', b'')
+                   + UPSTREAM_RESULT.replace(b'metric = "accuracy"\n', b''))
+        report = sync_models(self.upstream, self.root)
+        first, second, third = report["skipped_benchmarks"][path]
+        self.assertIn("mapping is ambiguous", first["reason"])
+        self.assertNotIn("version", second)
+        self.assertNotIn("metric", third)
+        for row in (second, third):
+            self.assertIn("requires an explicit version and metric", row["reason"])
+        self.assertEqual((self.root / path).read_bytes(), MODEL)
+
+    def test_keeps_valid_records_and_reports_invalid_duplicate_and_conflicting_records(self):
+        path = "models/lab/new.toml"
+        self.write(self.root, "benchmarks/example.toml", DEFINITION_TOML)
+        invalid = UPSTREAM_RESULT.replace(b'source = "https://example.com/results"', b'source = "unknown"')
+        conflict = UPSTREAM_RESULT + b'effort = "Max"\n'
+        self.write(self.upstream, path, MODEL + invalid + UPSTREAM_RESULT + UPSTREAM_RESULT
+                   + conflict + conflict.replace(b"42.10", b"100"))
+        report = sync_models(self.upstream, self.root)
+        self.assertEqual((self.root / path).read_bytes(), MODEL + UPSTREAM_RESULT)
+        rows = report["skipped_benchmarks"][path]
+        self.assertEqual([row["index"] for row in rows], [1, 3, 4, 5])
+        self.assertIn("HTTP(S) source required", rows[0]["reason"])
+        self.assertIn("identical to entry #2", rows[1]["reason"])
+        for row in rows[2:]:
+            self.assertIn("all conflicting entries skipped", row["reason"])
 
     def test_sync_preserves_optional_effort_without_changing_source_bytes(self):
-        definition = b'''id = "example-bench-v1"
-name = "Example Bench"
-version = "1.0"
-metric = "accuracy"
-'''
-        self.write(self.root, "benchmarks/example.toml", definition)
+        self.write(self.root, "benchmarks/example.toml", DEFINITION_TOML)
         result = b'''
 [[benchmarks]]
 name = "Example Bench"
@@ -536,13 +633,13 @@ source = "https://example.com/results"
 
     def test_cli_writes_report_and_summary_and_checks_staged_changes(self):
         self.init_git()
-        self.write(self.upstream, "models/lab/new.toml")
+        self.write(self.upstream, "models/lab/new.toml", MODEL + UNMAPPED_RESULT)
         subprocess.run(["git", "-C", str(self.upstream), "init"], check=True, capture_output=True)
         subprocess.run(["git", "-C", str(self.upstream), "add", "."], check=True, capture_output=True)
         subprocess.run(["git", "-C", str(self.upstream), "-c", "user.name=Test", "-c", "user.email=test@example.com",
                         "commit", "-m", "Upstream"], check=True, capture_output=True)
         report_path, summary_path = self.base / "report.json", self.base / "summary.md"
-        with redirect_stdout(StringIO()):
+        with redirect_stdout(StringIO()) as stdout:
             code = main(["--root", str(self.root), "sync", "--upstream", str(self.upstream),
                          "--report", str(report_path), "--summary", str(summary_path)])
         self.assertEqual(code, 0)
@@ -551,6 +648,13 @@ source = "https://example.com/results"
         self.assertIn(report["upstream_sha"], summary_path.read_text())
         self.assertIn("follows explicit upstream values", summary_path.read_text())
         self.assertNotIn("Baseline:", summary_path.read_text())
+        self.assertIn("Benchmark skips: 1", summary_path.read_text())
+        detail = ("Skipped benchmark: `models/lab/new.toml` — "
+                  "`benchmarks #1 (name=Unknown Bench, version=1.0, metric=accuracy)` — "
+                  "`benchmark definition mapping is missing")
+        self.assertIn(detail, summary_path.read_text())
+        self.assertIn(detail, stdout.getvalue())
+        self.assertIn("models/lab/new.toml", report["skipped_benchmarks"])
         self.git("add", "models/")
         self.assertEqual(main(["--root", str(self.root), "check-staged", "--report", str(report_path)]), 0)
 
