@@ -24,3 +24,1143 @@ top_k = false
 context = 1_050_000
 input = 922_000
 output = 128_000
+
+# Artificial Analysis model configuration data and v5.0.1 methodology.
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 57.2576209885477
+metric = "index score"
+version = "5.0.1"
+effort = "max"
+cost = 1.014379970300768
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 55.7351067246438
+metric = "index score"
+version = "5.0.1"
+effort = "xhigh"
+cost = 0.6479676730055945
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 54.8898658241942
+metric = "index score"
+version = "5.0.1"
+effort = "high"
+cost = 0.563644652221075
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 52.6777305876603
+metric = "index score"
+version = "5.0.1"
+effort = "medium"
+cost = 0.40605590960076604
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 40.552508943285
+metric = "index score"
+version = "5.0.1"
+effort = "low"
+cost = 0.18358471526572703
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1612.06
+metric = "Elo"
+version = "1.1"
+dataset = "91 tasks across 4 scenarios"
+effort = "max"
+variant = "combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1580.04
+metric = "Elo"
+version = "1.1"
+dataset = "91 tasks across 4 scenarios"
+effort = "xhigh"
+variant = "combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1540.79
+metric = "Elo"
+version = "1.1"
+dataset = "91 tasks across 4 scenarios"
+effort = "high"
+variant = "combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1494.92
+metric = "Elo"
+version = "1.1"
+dataset = "91 tasks across 4 scenarios"
+effort = "medium"
+variant = "combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1229.56
+metric = "Elo"
+version = "1.1"
+dataset = "91 tasks across 4 scenarios"
+effort = "low"
+variant = "combined Elo; offline; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 71.27833267998683
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "max"
+variant = "single run; 50-turn cap; REST API tools; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 70.5524736092306
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "xhigh"
+variant = "single run; 50-turn cap; REST API tools; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 69.85330673395808
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "high"
+variant = "single run; 50-turn cap; REST API tools; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 70.28139746749251
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "medium"
+variant = "single run; 50-turn cap; REST API tools; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 63.23411367140339
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "low"
+variant = "single run; 50-turn cap; REST API tools; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 30
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "max"
+variant = "extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 28.4
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "xhigh"
+variant = "extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 28.8
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "high"
+variant = "extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 29.2
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "medium"
+variant = "extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 28.6
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "low"
+variant = "extracted text and adapted page images; no tools; five attempts per task; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 44.3797727272727
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "max"
+variant = "three attempts per task; blocking checks and trajectory screening; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 42.7523484848485
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "xhigh"
+variant = "three attempts per task; blocking checks and trajectory screening; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 40.224898989899
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "high"
+variant = "three attempts per task; blocking checks and trajectory screening; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 41.3984848484848
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "medium"
+variant = "three attempts per task; blocking checks and trajectory screening; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 31.3682323232323
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "low"
+variant = "three attempts per task; blocking checks and trajectory screening; GPT-6 Luna (medium) judge; 500-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 60.1010101010101
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 56.0606060606061
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 58.5858585858586
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "high"
+variant = "mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 56.0606060606061
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "medium"
+variant = "mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 37.8787878787879
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "low"
+variant = "mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 67.6190476190476
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 66.6666666666667
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "xhigh"
+variant = "mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 67.6190476190476
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "high"
+variant = "mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 60.4761904761905
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "medium"
+variant = "mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 37.1428571428571
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "low"
+variant = "mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 62.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "max"
+variant = "mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 62.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "xhigh"
+variant = "mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 61.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "high"
+variant = "mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 64
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "medium"
+variant = "mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 58
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "low"
+variant = "mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 40.36666666666667
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "max"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 38.6
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 38.3
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "high"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 34.2
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "medium"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 24.766666666666666
+metric = "Net Score"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "low"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 61.63333333333333
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "max"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 60.7
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 61.43333333333333
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "high"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 59.16666666666667
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "medium"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 54.63333333333333
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "low"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 55.43006081668115
+metric = "hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "max"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 56.23409669211196
+metric = "hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 59.98271391529818
+metric = "hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "high"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 61.14285714285714
+metric = "hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "medium"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 65.83394562821455
+metric = "hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "low"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 64
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "max"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 61.8
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "xhigh"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 58.3
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "high"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 50.7
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "medium"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 34.5
+metric = "accuracy"
+dataset = "1,000 questions, including 272 image questions"
+effort = "low"
+variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Harvey LAB-AA"
+score = 11.11111111111111
+metric = "hallucination-gated all-pass rate"
+version = "1.1"
+dataset = "120 private tasks across 24 practice areas"
+effort = "max"
+variant = "three-judge panel; zero credit for material hallucinations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Harvey LAB-AA"
+score = 6.111111111111111
+metric = "hallucination-gated all-pass rate"
+version = "1.1"
+dataset = "120 private tasks across 24 practice areas"
+effort = "xhigh"
+variant = "three-judge panel; zero credit for material hallucinations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Harvey LAB-AA"
+score = 5.8333333333333334
+metric = "hallucination-gated all-pass rate"
+version = "1.1"
+dataset = "120 private tasks across 24 practice areas"
+effort = "high"
+variant = "three-judge panel; zero credit for material hallucinations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Harvey LAB-AA"
+score = 5
+metric = "hallucination-gated all-pass rate"
+version = "1.1"
+dataset = "120 private tasks across 24 practice areas"
+effort = "medium"
+variant = "three-judge panel; zero credit for material hallucinations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+[[benchmarks]]
+name = "Harvey LAB-AA"
+score = 3.0555555555555555
+metric = "hallucination-gated all-pass rate"
+version = "1.1"
+dataset = "120 private tasks across 24 practice areas"
+effort = "low"
+variant = "three-judge panel; zero credit for material hallucinations"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+
+# Vals AI overall results. Costs and standard errors come from the same rows.
+
+# Standard error = 0.91 percentage points.
+[[benchmarks]]
+name = "Vals Index"
+score = 66.059
+metric = "performance score"
+version = "2.2"
+effort = "max"
+cost = 3.179284
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.BNFVgfUN.json"
+source = "https://www.vals.ai/benchmarks/vals_index"
+
+# Standard error = 2.264 percentage points.
+[[benchmarks]]
+name = "Vals Science Index"
+score = 57.762
+metric = "performance score"
+version = "1.0"
+effort = "max"
+cost = 1.119045
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_science_index.l8CjNqnP.json"
+source = "https://www.vals.ai/benchmarks/science_index"
+
+# Standard error = 1.386 percentage points.
+[[benchmarks]]
+name = "Vals Finance Index"
+score = 56.66
+metric = "performance score"
+version = "1"
+effort = "max"
+cost = 1.768236
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_finance_index.BtdqENlb.json"
+source = "https://www.vals.ai/benchmarks/finance_index"
+
+# Standard error = 1.672 percentage points.
+[[benchmarks]]
+name = "Vals Legal Index"
+score = 66.675
+metric = "performance score"
+version = "1"
+effort = "max"
+cost = 2.804642
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_index.DxaJtXex.json"
+source = "https://www.vals.ai/benchmarks/legal_index"
+
+# Standard error = 0.0 percentage points.
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 60.606
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "max"
+variant = "mean of three pass@1 runs; eight-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 1.127386
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.RnX0f5kq.json"
+source = "https://www.vals.ai/benchmarks/terminal-bench-4"
+
+# Standard error = 5.93 percentage points.
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 58.571
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "max"
+variant = "single-run pass@1; infrastructure/provider-error retries only; eight-hour task limit"
+harness = "Mini-SWE-agent"
+cost = 2.53223
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.C2xNKj8i.json"
+source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+# Standard error = 0.642 percentage points.
+[[benchmarks]]
+name = "BioMysteryBench"
+score = 77.778
+metric = "accuracy"
+version = "1"
+dataset = "90 tasks"
+effort = "max"
+variant = "mean of three full runs; 200-turn cap; four-hour limit; restricted scientific network"
+harness = "Terminus 2"
+cost = 0.338256
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_biomysterybench.dUbMxJZJ.json"
+source = "https://www.vals.ai/benchmarks/biomysterybench"
+
+# Standard error = 3.247 percentage points.
+[[benchmarks]]
+name = "MysteryMechanism"
+score = 36.937
+metric = "functional recovery accuracy"
+version = "1"
+effort = "max"
+variant = "binary functional equivalence on private structural probes; noise-aware error thresholds"
+cost = 0.486648
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_mysterymechanism.CLvIENRU.json"
+source = "https://www.vals.ai/benchmarks/mysterymechanism"
+
+# Standard error = 2.247 percentage points.
+[[benchmarks]]
+name = "EMB v1.1"
+score = 74.294
+metric = "modeling score"
+version = "1.1"
+effort = "max"
+variant = "template cell matching and Scratch rubric scoring; equal category weights; 3.5-hour task limit"
+cost = 0.840823
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_emb_v1_1.DXQCgVSk.json"
+source = "https://www.vals.ai/benchmarks/emb-v1-1"
+
+# Standard error = 2.096 percentage points.
+[[benchmarks]]
+name = "Finance Agent v2.1"
+score = 58.913
+metric = "partial credit"
+version = "2.1"
+effort = "max"
+variant = "dealbreaker-gated, severity-weighted checks; three-judge jury; two-hour task limit"
+cost = 2.062252
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_finance_agent_v2_1.B8Zc5L-X.json"
+source = "https://www.vals.ai/benchmarks/fabv2-1"
+
+# Standard error = 3.356 percentage points.
+[[benchmarks]]
+name = "Legal Research Bench"
+score = 37.019
+metric = "all-pass accuracy"
+version = "1"
+dataset = "Private Test split (208 questions)"
+effort = "max"
+variant = "GPT 5.4 rubric judge; three-hour task limit"
+cost = 3.766098
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_research.OLFyjGJR.json"
+source = "https://www.vals.ai/benchmarks/legal_research"
+
+# Standard error = 3.116 percentage points.
+[[benchmarks]]
+name = "Tax Agent Bench"
+score = 24.839
+metric = "citation-adjusted all-pass accuracy"
+version = "1"
+dataset = "Private Test split (193 questions)"
+effort = "max"
+variant = "all-pass times (0.7 + 0.3 times citation quality); GPT 5.4 rubric judge; three-hour task limit"
+cost = 2.401632
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_tax_agent_bench.DAMF7G_y.json"
+source = "https://www.vals.ai/benchmarks/tax_agent_bench"
+
+# Standard error = 2.711 percentage points.
+[[benchmarks]]
+name = "HLAB-Vals-1.1"
+score = 12.083
+metric = "all-pass rate"
+version = "1.1"
+dataset = "120 tasks"
+effort = "max"
+variant = "average across GPT 5.5 and Claude Sonnet 4.6 judges; offline"
+cost = 2.246196
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_legal_agent_benchmark.BP8-toiz.json"
+source = "https://www.vals.ai/benchmarks/hlab"
+
+# Standard error = 2.195 percentage points.
+[[benchmarks]]
+name = "Vibe Code Bench v1.1"
+score = 87.616
+metric = "test pass rate"
+version = "1.1"
+effort = "max"
+harness = "OpenHands"
+cost = 3.228244
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DdZkxrDU.json"
+source = "https://www.vals.ai/benchmarks/vibe-code"
+
+# Standard error = 5.074 percentage points.
+[[benchmarks]]
+name = "Vibe Code Bench 1-100 v1.1"
+score = 40.944
+metric = "mean consecutive passing iteration percentage"
+version = "1.1"
+dataset = "50 test scenarios"
+effort = "max"
+variant = "new features and regression checks; first failed iteration ends the attempt; ten-hour shared generation budget"
+harness = "OpenHands"
+cost = 12.735155
+cost_unit = "USD/test"
+cost_source = "https://www.vals.ai/_astro/benchmark_view_vcb_1_100_v1_1.BVnSVMzE.json"
+source = "https://www.vals.ai/benchmarks/vcb-1-100-v1-1"
+
+# Benchmark maintainer results, including OpenAI runs credited by BenchCAD.
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 73.04398616455706
+metric = "average rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "max"
+harness = "Codex"
+cost = 169.46
+cost_unit = "USD/evaluation"
+cost_source = "https://agents-last-exam.org/api/demo/leaderboard/v1.1"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 40.16393442622951
+metric = "task pass rate"
+version = "1.1"
+dataset = "122 tasks"
+effort = "max"
+harness = "Codex"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 72.48200922037955
+metric = "average rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "xhigh"
+harness = "Codex"
+cost = 111.32
+cost_unit = "USD/evaluation"
+cost_source = "https://agents-last-exam.org/api/demo/leaderboard/v1.1"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 41.80327868852459
+metric = "task pass rate"
+version = "1.1"
+dataset = "122 tasks"
+effort = "xhigh"
+harness = "Codex"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 72.03595245098597
+metric = "average rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "high"
+harness = "Codex"
+cost = 89.41
+cost_unit = "USD/evaluation"
+cost_source = "https://agents-last-exam.org/api/demo/leaderboard/v1.1"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 40.16393442622951
+metric = "task pass rate"
+version = "1.1"
+dataset = "122 tasks"
+effort = "high"
+harness = "Codex"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 70.25776982820281
+metric = "average rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "medium"
+harness = "Codex"
+cost = 74.3
+cost_unit = "USD/evaluation"
+cost_source = "https://agents-last-exam.org/api/demo/leaderboard/v1.1"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 38.524590163934425
+metric = "task pass rate"
+version = "1.1"
+dataset = "122 tasks"
+effort = "medium"
+harness = "Codex"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 66.6509910606572
+metric = "average rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "low"
+harness = "Codex"
+cost = 34.84
+cost_unit = "USD/evaluation"
+cost_source = "https://agents-last-exam.org/api/demo/leaderboard/v1.1"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 35.24590163934426
+metric = "task pass rate"
+version = "1.1"
+dataset = "122 tasks"
+effort = "low"
+harness = "Codex"
+source = "https://agents-last-exam.org/leaderboard"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 41.25
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private held-out task set"
+effort = "High"
+cost = 0.21
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 41.10
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private held-out task set"
+effort = "Max"
+cost = 0.27
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 40.64
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private held-out task set"
+effort = "XHigh"
+cost = 0.23
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 40.18
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private held-out task set"
+effort = "Medium"
+cost = 0.18
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 31.20
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "private held-out task set"
+effort = "Low"
+cost = 0.13
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks"
+
+[[benchmarks]]
+name = "BenchCAD"
+score = 0.239
+metric = "score (0–1)"
+version = "2.1"
+dataset = "Core (100 held-out cases across six tasks)"
+effort = "low"
+variant = "with tools"
+harness = "Codex"
+cost = 0.15
+cost_unit = "USD/case"
+source = "https://benchcad.com/"
+
+[[benchmarks]]
+name = "BenchCAD"
+score = 0.412
+metric = "score (0–1)"
+version = "2.1"
+dataset = "Core (100 held-out cases across six tasks)"
+effort = "medium"
+variant = "with tools"
+harness = "Codex"
+cost = 0.29
+cost_unit = "USD/case"
+source = "https://benchcad.com/"
+
+[[benchmarks]]
+name = "BenchCAD"
+score = 0.640
+metric = "score (0–1)"
+version = "2.1"
+dataset = "Core (100 held-out cases across six tasks)"
+effort = "high"
+variant = "with tools"
+harness = "Codex"
+cost = 0.75
+cost_unit = "USD/case"
+source = "https://benchcad.com/"
+
+[[benchmarks]]
+name = "BenchCAD"
+score = 0.704
+metric = "score (0–1)"
+version = "2.1"
+dataset = "Core (100 held-out cases across six tasks)"
+effort = "xhigh"
+variant = "with tools"
+harness = "Codex"
+cost = 1.00
+cost_unit = "USD/case"
+source = "https://benchcad.com/"
+
+[[benchmarks]]
+name = "BenchCAD"
+score = 0.731
+metric = "score (0–1)"
+version = "2.1"
+dataset = "Core (100 held-out cases across six tasks)"
+effort = "max"
+variant = "with tools"
+harness = "Codex"
+cost = 1.60
+cost_unit = "USD/case"
+source = "https://benchcad.com/"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 43.8
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "max"
+harness = "Codex"
+cost = 1.29
+cost_unit = "USD/rollout"
+source = "https://cognition.com/frontiercode"
+
+# OpenAI launch chart results transcribed from the supplied comparison.
+
+[[benchmarks]]
+name = "GDPval"
+score = 46.9
+metric = "task score (%)"
+version = "2"
+dataset = "OpenAI internal"
+effort = "max"
+source = "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+
+# OpenAI launch-chart value. Vals publishes a separate max-effort row above.
+[[benchmarks]]
+name = "Vals Science Index"
+score = 58.5
+metric = "performance score"
+version = "1"
+effort = "xhigh"
+source = "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
