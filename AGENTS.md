@@ -20,7 +20,8 @@ ModelAtlas Data 是 [ModelAtlas Android](https://github.com/chenlongapps/model-a
 1. 检查已有模型、成绩及相关 Benchmark 定义，确认身份和版本。
 2. 核实来源、成绩、评测条件和许可，检查重复与冲突。
 3. 修改源文件；不要无故重写结构、批量重命名或新增数据库等复杂工具。
-4. 按下文处理本地化、上游同步、校验和报告。
+4. **同步 Benchmark 成绩汇总。** 新增、修改或删除模型成绩时，先更新 `models/<lab>/<model-id>.toml` 中的 `[[benchmarks]]`，再运行 `python3 scripts/build.py` 重新生成 `benchmark-results/`，并用 `python3 scripts/validate.py --check-results` 检查汇总与源数据是否一致。将受影响的汇总 TOML 纳入同一次变更（包括 `uncategorized/`）；不要手工编辑汇总。若无法重建或校验，须报告原因及尚未同步的范围。
+5. 按下文处理本地化、上游同步、校验和报告。
 
 ## 模型数据
 
