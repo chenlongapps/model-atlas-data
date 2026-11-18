@@ -33,7 +33,7 @@ def main(argv=None):
     try:
         with tempfile.TemporaryDirectory(prefix="model-atlas-preview-") as directory:
             output = Path(directory)
-            models, definitions, locales, warnings = build(ROOT, output)
+            models, definitions, locales, warnings = build(ROOT, output, write_results=False)
             for warning in warnings:
                 print(f"警告：{warning}", file=sys.stderr)
             shutil.copy2(ROOT / "LICENSE.models-dev", output / "LICENSE.models-dev")

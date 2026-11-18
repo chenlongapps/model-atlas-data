@@ -10,10 +10,15 @@ import subprocess
 import sys
 import tempfile
 
+if __package__:
+    from .benchmark_results import JSON_FILE
+else:
+    from benchmark_results import JSON_FILE
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_PATHS = ("models", "benchmarks", "i18n", "scripts/build.py",
-                "scripts/manifest.py", "LICENSE.models-dev")
+                "scripts/benchmark_results.py", "scripts/manifest.py", "LICENSE.models-dev")
 
 
 def git(root, *args):
@@ -50,10 +55,14 @@ def create_manifest(root, output):
         raise ValueError(f"{locale_output}: expected a non-symlink directory")
     actual_json = {p.relative_to(output).as_posix() for p in output.rglob("*.json")
                    if p.relative_to(output).as_posix() != "manifest.json"}
-    expected_json = paths - {"LICENSE.models-dev"}
+    # Android's v1 manifest reader only accepts its known files and locale paths.
+    expected_json = (paths - {"LICENSE.models-dev"}) | {JSON_FILE}
     if actual_json != expected_json:
         raise ValueError(f"JSON files do not match expected outputs: missing={sorted(expected_json - actual_json)}, "
                          f"unexpected={sorted(actual_json - expected_json)}")
+    results = output / JSON_FILE
+    if results.is_symlink() or not results.is_file():
+        raise ValueError(f"{results}: expected a non-symlink file")
     files = {}
     for name in sorted(paths):
         path = output / name

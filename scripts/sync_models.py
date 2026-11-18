@@ -17,9 +17,11 @@ import tomlkit
 from tomlkit.exceptions import TOMLKitError
 
 if __package__:
+    from . import benchmark_results
     from .build import validate_parameter_metadata
     from .translate_descriptions import translate_candidates
 else:
+    import benchmark_results
     from build import validate_parameter_metadata
     from translate_descriptions import translate_candidates
 
@@ -31,7 +33,6 @@ MODEL_FIELDS = set("schema v2_only type name description family open_weights kno
                    "weights benchmarks metadata".split())
 BENCHMARK_FIELDS = set("name score metric version dataset effort variant harness source date "
                        "cost cost_unit cost_source".split())
-BENCHMARK_COST_FIELDS = {"cost", "cost_unit", "cost_source"}
 
 
 def require(condition, message):
@@ -157,7 +158,7 @@ def validate_model(data, definitions, *, partial_local=False, skip_bad_benchmark
     return skipped
 
 
-def validate_benchmark(result, definitions):
+def validate_benchmark(result, definitions_by_key):
     table(result, BENCHMARK_FIELDS, "benchmark")
     require(text(result.get("name")), "benchmark.name: required")
     score = result.get("score")
@@ -179,23 +180,23 @@ def validate_benchmark(result, definitions):
     # No aliases, version normalization, or inferred metrics/default versions.
     require("version" in result and "metric" in result,
             "benchmark definition mapping requires an explicit version and metric")
-    matches = [definition for definition in definitions
-               if result["name"] == definition.get("name")
-               and result["metric"] == definition.get("metric")
-               and result["version"] in (definition.get("version"), *definition.get("compatible_versions", []))]
+    matches = benchmark_results.matching_definitions(result, definitions_by_key)
     require(matches, "benchmark definition mapping is missing (exact name, version and metric required)")
     require(len(matches) == 1, "benchmark definition mapping is ambiguous")
     # Omitted effort is not default effort; cost and provenance are not conditions.
-    return tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"} - BENCHMARK_COST_FIELDS))
+    return tuple(result.get(key) for key in sorted(BENCHMARK_FIELDS - {"score"} - benchmark_results.COST_FIELDS))
 
 
 def benchmark_skips(results, definitions):
     if not isinstance(results, list):
         return [{"index": None, "reason": "benchmarks: expected an array"}]
+    if not results:
+        return []
+    definitions_by_key = benchmark_results.definition_index(enumerate(definitions))
     groups, reasons = {}, {}
     for index, result in enumerate(results, 1):
         try:
-            identity = validate_benchmark(result, definitions)
+            identity = validate_benchmark(result, definitions_by_key)
         except (ValueError, TypeError, OverflowError) as error:
             reasons[index] = str(error)
         else:

@@ -27,6 +27,7 @@ class ManifestTests(unittest.TestCase):
                  "-c", "commit.gpgsign=false", "commit", "-qm", "fixture")
         self.write(self.output / "models.json", b'{"model": 1}\n')
         self.write(self.output / "benchmarks.json", b'{}\n')
+        self.write(self.output / "benchmark-results.json", b'{"benchmarks":{},"uncategorized":{}}\n')
         self.write(self.output / "i18n/zh-CN.json", '"中文"\n'.encode())
         self.write(self.output / "LICENSE.models-dev", b"license\n")
 
@@ -65,6 +66,17 @@ class ManifestTests(unittest.TestCase):
         self.write(self.output / "models.json", b'{"model": 2}\n')
         third = create_manifest(self.root, self.output)
         self.assertNotEqual(first["data_version"], third["data_version"])
+
+    def test_separate_results_endpoint_is_required_but_preserves_android_manifest(self):
+        before = create_manifest(self.root, self.output)
+        result = self.output / "benchmark-results.json"
+        self.write(result, b'{"benchmarks":{"example":{}},"uncategorized":{}}\n')
+        after = create_manifest(self.root, self.output)
+        self.assertEqual(before["files"], after["files"])
+        self.assertEqual(before["data_version"], after["data_version"])
+        result.unlink()
+        with self.assertRaisesRegex(ValueError, "missing=.*benchmark-results.json"):
+            create_manifest(self.root, self.output)
 
     def test_missing_or_extra_output_does_not_replace_manifest(self):
         create_manifest(self.root, self.output)

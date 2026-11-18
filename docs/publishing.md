@@ -65,13 +65,14 @@ python3 scripts/preview.py
 ```text
 models.json
 benchmarks.json
+benchmark-results.json
 i18n/zh-CN.json
 manifest.json
 LICENSE.models-dev
 llms.txt
 ```
 
-网站和 Android 使用同一 JSON 结构。AI 导航源为 [`web/llms.txt`](../web/llms.txt)，使用英文手工维护；项目结构或数据约定变化时同步更新。网页资源（含 llms.txt）不进入 manifest，也不影响 `data_version`。
+现有 Web Explorer 和 Android 端点继续使用原有 JSON 结构，成绩汇总作为独立端点发布。AI 导航源为 [`web/llms.txt`](../web/llms.txt)，使用英文手工维护；项目结构或数据约定变化时同步更新。网页资源（含 llms.txt）不进入 manifest，也不影响 `data_version`。
 
 ### manifest
 
@@ -83,14 +84,15 @@ llms.txt
 | `files` | JSON 与许可文件的相对路径 → 实际字节的 `sha256`（小写十六进制）、`size`（字节）；不含 manifest 自身 |
 | `data_version` | `sha256:` 加规范化 `files` 对象的 SHA-256 |
 
-`files` 包含 `models.json`、`benchmarks.json`、所有构建的 `i18n/*.json` 和 `LICENSE.models-dev`。规范化使用 UTF-8 JSON、按键排序、不转义非 ASCII、无多余空格、不添加末尾换行：`json.dumps(files, ensure_ascii=False, sort_keys=True, separators=(",", ":"))`。同一清单及内容得到同一数据版本，不受 Git 提交或生成时间影响。哈希检测一致性，不提供签名或真实性保证。
+`files` 包含 `models.json`、`benchmarks.json`、所有构建的 `i18n/*.json` 和 `LICENSE.models-dev`。Android 的 v1 清单校验仅接受这些路径，因此 `benchmark-results.json` 随发布包提供，独立于 `files` 和 `data_version`。规范化使用 UTF-8 JSON、按键排序、不转义非 ASCII、无多余空格、不添加末尾换行，参见 `json.dumps(files, ensure_ascii=False, sort_keys=True, separators=(",", ":"))`。同一清单及内容得到同一数据版本，不受 Git 提交或生成时间影响。哈希检测一致性，不提供签名或真实性保证。
 
 ### 本地生成完整发布包
 
 先提交相关源码，输出目录应为全新目录：
 
 ```sh
-python3 scripts/build.py --output /path/to/release
+python3 scripts/validate.py --check-results
+python3 scripts/build.py --json-only --output /path/to/release
 cp LICENSE.models-dev /path/to/release/LICENSE.models-dev
 python3 scripts/manifest.py --output /path/to/release
 cp -R web/. /path/to/release/

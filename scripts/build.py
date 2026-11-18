@@ -1,7 +1,7 @@
-"""Build JSON from source TOML using Python 3.11+ (no third-party dependencies)."""
+"""Build JSON and Benchmark result TOML using Python 3.11+."""
 
 import argparse
-from collections import Counter
+from contextlib import ExitStack
 import json
 import math
 from pathlib import Path
@@ -11,12 +11,16 @@ import tempfile
 import tomllib
 from urllib.parse import urlsplit
 
+if __package__:
+    from . import benchmark_results
+else:
+    import benchmark_results
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SLUG = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
 RESULT_TEXT_FIELDS = ("name", "metric", "version", "dataset", "effort", "variant", "harness", "source", "date",
                       "cost_unit", "cost_source")
-RESULT_COST_FIELDS = {"cost", "cost_unit", "cost_source"}
 
 
 def require(condition, message):
@@ -147,7 +151,7 @@ def validate_model(data):
         # Cost is an observation, not an evaluation condition. Cost metadata must
         # not hide duplicate/conflicting scores. Preserve future conditions.
         # Missing effort stays distinct from any explicit value; never infer defaults.
-        identity = json.dumps({k: v for k, v in result.items() if k not in {"score", *RESULT_COST_FIELDS}},
+        identity = json.dumps({k: v for k, v in result.items() if k not in {"score", *benchmark_results.COST_FIELDS}},
                               sort_keys=True, allow_nan=False)
         require(identity not in seen, f"{label}: duplicate or conflicting benchmark record")
         seen.add(identity)
@@ -215,28 +219,6 @@ def load_sources(root):
 
 def check_references(models, definitions, locales):
     warnings = []
-    mappings = Counter(
-        (d["name"], version, d["metric"])
-        for d in definitions.values()
-        for version in (d["version"], *d.get("compatible_versions", []))
-    )
-    unmatched = ambiguous = missing_source = 0
-    for model in models.values():
-        for result in model.get("benchmarks", []):
-            key = tuple(result.get(k) for k in ("name", "version", "metric"))
-            if result.get("version") is None:
-                unversioned_key = (result.get("name"), "unspecified", result.get("metric"))
-                if mappings[unversioned_key]:
-                    key = unversioned_key
-            count = mappings[key]
-            unmatched += count == 0
-            ambiguous += count > 1
-            missing_source += "source" not in result
-    if unmatched or ambiguous:
-        warnings.append(f"Benchmark 定义映射：未匹配 {unmatched} 条，歧义 {ambiguous} 条"
-                        "（要求 name/version/metric 匹配或使用定义声明的兼容版本；unspecified 定义允许源记录省略版本；原始成绩全部保留）。")
-    if missing_source:
-        warnings.append(f"{missing_source} 条成绩未提供 source；原始成绩保留，来源需人工核实。")
     for language, data in locales.items():
         label = f"i18n/{language}.toml"
         fields(data, {"model": dict, "benchmark": dict}, label)
@@ -255,10 +237,12 @@ def check_references(models, definitions, locales):
     return warnings
 
 
-def build(root, output):
+def build(root, output, *, write_results=True):
     models, definitions, locales = load_sources(root)
-    warnings = check_references(models, definitions, locales)
-    documents = {Path("models.json"): models, Path("benchmarks.json"): definitions}
+    results, warnings = benchmark_results.collect_results(models, definitions)
+    warnings.extend(check_references(models, definitions, locales))
+    documents = {Path("models.json"): models, Path("benchmarks.json"): definitions,
+                 Path(benchmark_results.JSON_FILE): results}
     documents.update({Path("i18n") / f"{language}.json": data for language, data in locales.items()})
     # Serialize everything before touching existing output. Reject TOML dates and NaN/Infinity
     # rather than silently changing their types or emitting nonstandard JSON.
@@ -281,17 +265,39 @@ def build(root, output):
         target = output / path
         require(not target.is_symlink(), f"{target}: symlink not allowed")
         require(not target.exists() or target.is_file(), f"{target}: expected a file")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix=".model-atlas-build-", dir=output.parent) as staging:
-        stage = Path(staging)
-        for path, content in serialized.items():
-            target = stage / path
+    batches = [(output, serialized)]
+    stale_results = []
+    if write_results:
+        results_dir = root / benchmark_results.DIRECTORY
+        toml = benchmark_results.toml_documents(results)
+        existing = benchmark_results.existing_toml(results_dir)
+        for path, content in existing.items():
+            require(content.startswith(benchmark_results.GENERATED),
+                    f"{results_dir / path}: missing generated file header")
+        stale_results = [results_dir / path for path in existing.keys() - toml.keys()]
+        batches.append((results_dir, {path: content for path, content in toml.items()
+                                      if existing.get(path) != content}))
+
+    # Stage each batch on its destination filesystem before installing any files.
+    with ExitStack() as stack:
+        replacements = []
+        for destination, files in batches:
+            if not files:
+                continue
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            stage = Path(stack.enter_context(
+                tempfile.TemporaryDirectory(prefix=".model-atlas-build-", dir=destination.parent)))
+            for path, content in files.items():
+                temporary = stage / path
+                temporary.parent.mkdir(parents=True, exist_ok=True)
+                temporary.write_text(content, encoding="utf-8", newline="\n")
+                replacements.append((temporary, destination / path))
+        # Remove obsolete names before installing replacements, including case-only renames.
+        for path in sorted(stale_results):
+            path.unlink(missing_ok=True)
+        for temporary, target in replacements:
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(content, encoding="utf-8", newline="\n")
-        for path in documents:
-            target = output / path
-            target.parent.mkdir(parents=True, exist_ok=True)
-            (stage / path).replace(target)
+            temporary.replace(target)
     return len(models), len(definitions), len(locales), warnings
 
 
@@ -299,11 +305,12 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT, help="source repository (default: script's repository)")
     parser.add_argument("--output", type=Path, help="output directory (default: <root>/dist)")
+    parser.add_argument("--json-only", action="store_true", help="leave benchmark-results/ unchanged")
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve()
         output = args.output.absolute() if args.output is not None else root / "dist"
-        models, definitions, locales, warnings = build(root, output)
+        models, definitions, locales, warnings = build(root, output, write_results=not args.json_only)
         for warning in warnings:
             print(f"警告：{warning}", file=sys.stderr)
         print(f"构建完成：{models} 个模型，{definitions} 个 Benchmark 定义，{locales} 个语言文件 → {output}")

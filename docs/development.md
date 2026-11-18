@@ -11,6 +11,7 @@
 ```sh
 python3 scripts/validate.py
 python3 scripts/build.py
+python3 scripts/validate.py --check-results
 
 # 完整测试
 python3 -m pip install tomlkit==0.13.3
@@ -26,7 +27,8 @@ git diff --check
 
 | 检查 | 覆盖内容 | 不覆盖内容 |
 | --- | --- | --- |
-| `validate.py` | 递归解析 `models/`、`benchmarks/`、`i18n/` 的 TOML，报告位置与成功/失败数量 | Schema、字段语义、成绩真实性 |
+| `validate.py` | 递归解析 `models/`、`benchmarks/`、`benchmark-results/`、`i18n/` 的 TOML，报告位置与成功/失败数量 | Schema、字段语义、成绩真实性 |
+| `validate.py --check-results` | 语法检查后，重新计算 TOML 汇总并核对文件清单、字段和排序，报告缺失、过期或改动的生成文件 | 实验条件与成绩来源的人工复核 |
 | `build.py` | 路径、`schema = 2`、主要字段类型、成绩必填项与重复/冲突、URL 格式、定义必填项及唯一 ID、本地化结构和键引用 | 完整上游 Schema、联网核验来源、翻译语义、许可授权 |
 | 单元测试 | 脚本及网页行为的回归检查 | 所有模型资料或评测条件的人工审核 |
 
@@ -36,21 +38,24 @@ git diff --check
 
 **构建成功不等于资料已核实。** 修改数据后还需对照来源、实验条件和模型版本；修改本地化后还需检查译文与原文一致。区分历史警告和本次新增问题，不为消除警告编造数据或新增定义。
 
-## JSON 输出
+## 构建产物
+
+`build.py` 默认刷新仓库根目录的 `benchmark-results/`，其中 TOML 随源文件提交。构建会移除不再对应现有定义或成绩的生成 TOML，并保留其他文件。需要仅构建 JSON 时使用 `--json-only`。见[成绩汇总规范](data-format.md#benchmark-成绩汇总)。
 
 默认输出到仓库的 `dist/`，不提交 Git：
 
 ```text
 dist/
-  models.json        # { "<lab>/<model-id>": { ...模型字段... } }
-  benchmarks.json    # { "<benchmark-id>": { ...定义字段... } }
+  models.json              # { "<lab>/<model-id>": { ...模型字段... } }
+  benchmarks.json          # { "<benchmark-id>": { ...定义字段... } }
+  benchmark-results.json   # { "benchmarks": { ... }, "uncategorized": { ... } }
   i18n/
     zh-CN.json       # 保留原本地化表结构
 ```
 
 - 模型保留 `schema`；Benchmark 的 `id` 用作对象键，不在定义内部重复。
-- 不增加顶层 `version`、内嵌翻译、派生 `results` 或排行榜。
-- 保留源字段（包括可转换为 JSON 的未知字段）、数组顺序、条件、来源和缺失状态；不补默认值、不合并成绩、不选择最高分。
+- `models.json` 保留原始成绩数组顺序，`benchmarks.json` 保留定义结构。已定义评测的派生成绩按分数排列，详见[成绩汇总](data-format.md#benchmark-成绩汇总)。
+- 保留源字段（包括可转换为 JSON 的未知字段）、条件、来源和缺失状态；不补默认值、不合并成绩、不选择最高分。
 - JSON 不保留 TOML 注释和数字书写形式，例如 `42.10` 可能输出为 `42.1`；不主动取整或重评分。NaN、Infinity 和不能直接转换为 JSON 的 TOML 日期/时间值被拒绝，日期应为源格式要求的字符串。
 - 使用 UTF-8、稳定键排序及末尾换行，相同源数据得到相同内容。
 
@@ -61,7 +66,7 @@ python3 /path/to/model-atlas-data/scripts/build.py \
   --root /path/to/model-atlas-data --output /path/to/output
 ```
 
-全部校验、序列化和临时文件写入成功后，才逐文件原子替换产物；这不是整个目录的事务，替换阶段 I/O 故障可能留下部分更新，应修复后重跑。脚本不清空输出目录；已无对应源文件的旧 `i18n/*.json` 须手动移走。正式发布使用全新目录，见[发布说明](publishing.md)。
+`--output` 只指定 JSON 目录。全部校验、序列化和临时文件写入成功后，构建逐文件原子替换产物。替换阶段 I/O 故障可能留下部分更新，修复后可重跑。已无对应源文件的旧 `i18n/*.json` 须手动移走。正式发布使用全新目录，见[发布说明](publishing.md)。
 
 ## 修改后报告
 

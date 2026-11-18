@@ -9,6 +9,7 @@ import tomllib
 import unittest
 from unittest.mock import patch
 
+from scripts.build import build
 from scripts.sync_models import (ROOT, benchmark_bytes, check_staged, main,
                                 sync_models, update_content, validate_model)
 
@@ -144,6 +145,30 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(set(update["fields"]), {"name", "limit.context"})
         self.assertEqual(update["before"], hashlib.sha256(local).hexdigest())
         self.assertEqual(update["after"], hashlib.sha256(target.read_bytes()).hexdigest())
+
+    def test_verified_sync_can_rebuild_results_including_preserved_local_scores(self):
+        existing = self.write(self.root, "models/lab/existing.toml", MODEL + LOCAL_RESULTS)
+        self.write(self.root, "benchmarks/example.toml",
+                   DEFINITION_TOML + b'category = "reasoning"\nunit = "percent"\nhigher_is_better = true\n')
+        self.write(self.upstream, "models/lab/existing.toml", MODEL + UPSTREAM_RESULT)
+        self.write(self.upstream, "models/lab/new.toml", MODEL + UPSTREAM_RESULT + UNMAPPED_RESULT)
+        self.init_git()
+
+        report = sync_models(self.upstream, self.root)
+        self.git("add", "--", "models")
+        check_staged(self.root, report)
+        output = self.base / "dist"
+        build(self.root, output)
+        self.git("add", "-A", "--", "benchmark-results/")
+
+        self.assertEqual(existing.read_bytes(), MODEL + LOCAL_RESULTS)
+        self.assertIn("models/lab/new.toml", report["skipped_benchmarks"])
+        results = json.loads((output / "benchmark-results.json").read_text())
+        published = results["benchmarks"]["example-bench-v1"]["results"]
+        self.assertEqual(published, [{"model_id": "lab/new", "result": RESULT}])
+        local = results["uncategorized"]["Local Bench"]["unranked"]
+        self.assertEqual(local, [{"model_id": "lab/existing", "result": tomllib.loads(LOCAL_RESULTS.decode())["benchmarks"][0]}])
+        self.assertEqual(set(results["uncategorized"]), {"Local Bench"})
 
     def test_existing_model_without_benchmarks_never_imports_upstream_results(self):
         target = self.write(self.root, "models/lab/existing.toml")
@@ -818,6 +843,11 @@ class ModelValidationTests(unittest.TestCase):
             self.data["benchmarks"] = [result]
             with self.assertRaisesRegex(ValueError, "mapping"):
                 validate_model(self.data, [DEFINITION])
+
+    def test_sync_requires_explicit_version_even_for_unspecified_definition(self):
+        self.data["benchmarks"] = [{key: value for key, value in RESULT.items() if key != "version"}]
+        with self.assertRaisesRegex(ValueError, "explicit version"):
+            validate_model(self.data, [{**DEFINITION, "version": "unspecified"}])
 
     def test_rejects_ambiguous_definitions(self):
         self.data["benchmarks"] = [RESULT]

@@ -12,7 +12,8 @@
 
 ```sh
 python3 scripts/validate.py  # TOML 语法检查
-python3 scripts/build.py     # 结构检查并生成 dist/ JSON
+python3 scripts/build.py     # 结构检查，生成 benchmark-results/ TOML 和 dist/ JSON
+python3 scripts/validate.py --check-results  # 校验汇总与源数据一致
 python3 scripts/preview.py   # 本地网页预览
 ```
 
@@ -24,6 +25,7 @@ python3 scripts/preview.py   # 本地网页预览
 | --- | --- |
 | `models/<lab>/<model-id>.toml` | 一个模型一个文件，包含该模型的原始成绩 |
 | `benchmarks/` | 评测定义，不重复维护成绩 |
+| `benchmark-results/` | 自动生成并随仓库提交，按定义 ID 或未分类评测名称汇总成绩 |
 | `i18n/` | 模型和评测描述的翻译 |
 | `scripts/`、`tests/` | 校验、构建、同步及测试 |
 | `web/` | Web Explorer 静态网页 |
@@ -37,17 +39,18 @@ python3 scripts/preview.py   # 本地网页预览
 | --- | --- |
 | [models.json](https://chenlongapps.github.io/model-atlas-data/models.json) | 模型 ID → 档案及逐条成绩 |
 | [benchmarks.json](https://chenlongapps.github.io/model-atlas-data/benchmarks.json) | 评测 ID → 定义 |
+| [benchmark-results.json](https://chenlongapps.github.io/model-atlas-data/benchmark-results.json) | 评测 ID → 按分数排列的成绩，含未分类评测 |
 | [i18n/zh-CN.json](https://chenlongapps.github.io/model-atlas-data/i18n/zh-CN.json) | 简体中文描述 |
 | [manifest.json](https://chenlongapps.github.io/model-atlas-data/manifest.json) | 数据版本、Git 提交、发布包生成时间及文件哈希 |
 | [llms.txt](https://chenlongapps.github.io/model-atlas-data/llms.txt) | 面向 AI 的数据导航 |
 
 - 缺失值表示未知，不是零或默认配置；不同模型版本、指标、数据集、档位及 Harness 不自动可比。
-- 按名称、版本和指标关联定义，兼容版本及 `unspecified` 例外见[映射规则](docs/data-format.md#benchmark-定义与展示)；未映射成绩仍在模型数据中保留。网页排序和前沿不代表经核实的排行榜。
+- 按名称、版本和指标关联定义。每个已定义评测的 `results` 按分数排列。未能唯一匹配定义的成绩按原名放入 `uncategorized`，沿用原有顺序。格式和排序规则见[成绩汇总](docs/data-format.md#benchmark-成绩汇总)。
 - 构建检查不证明来源真实性或许可。Models.dev 的 [MIT 声明](LICENSE.models-dev)不覆盖第三方评测数据及模型权重，分发前须核对[许可与待核实事项](docs/review-notes.md)。
 
 ## 维护数据
 
-修改前阅读 [AGENTS.md](AGENTS.md)，具体格式见[数据规范](docs/data-format.md)。准确性优先：未知项省略，保留有效来源、原始精度及条件；新增 Benchmark 定义须先获用户确认。
+修改前阅读 [AGENTS.md](AGENTS.md)，具体格式见[数据规范](docs/data-format.md)。成绩只在模型 TOML 的 `[[benchmarks]]` 中维护，修改后运行构建并提交生成的 TOML。未知项省略，保留有效来源、原始精度及条件。新增 Benchmark 定义须先获用户确认。
 
 ### 模型参数量
 
@@ -75,4 +78,4 @@ python3 scripts/preview.py   # 本地网页预览
 - [Models.dev 自动同步与翻译](docs/models-dev-sync.md)
 - [评测来源、成本字段与实验口径](docs/benchmark-sources.md)
 
-自动同步每小时检查上游。新模型基本字段合法即可导入，未通过校验或无法唯一映射的成绩逐条跳过并报告；已有模型只更新基本信息、不改已有成绩，有翻译的描述保留待人工核验。历史执行报告不再单独维护，仍有影响的限制集中在[待核实事项](docs/review-notes.md)。
+自动同步每小时检查上游，导入后重建并校验成绩汇总。新模型基本字段合法即可导入，未通过校验或无法唯一映射的上游成绩逐条跳过并报告。已有模型只更新基本信息，有翻译的描述保留待人工核验。历史执行报告不再单独维护，仍有影响的限制集中在[待核实事项](docs/review-notes.md)。

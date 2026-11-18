@@ -4,8 +4,8 @@
 
 | 文档 | 用途 |
 | --- | --- |
-| [数据规范](data-format.md) | 模型、参数量、成绩、成本、定义与本地化 |
-| [开发与校验](development.md) | 环境、测试、JSON 构建及检查边界 |
+| [数据规范](data-format.md) | 模型、参数量、成绩、成本、定义、汇总与本地化 |
+| [开发与校验](development.md) | 环境、测试、TOML / JSON 构建及检查边界 |
 | [网页与发布](publishing.md) | 本地预览、图表解读、Pages 部署及 manifest |
 | [Models.dev 同步](models-dev-sync.md) | 自动同步范围、描述保护、翻译与故障处理 |
 | [评测来源与口径](benchmark-sources.md) | 常用来源、成本字段及不可混用的实验条件 |

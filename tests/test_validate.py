@@ -5,6 +5,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from scripts.build import build
 from scripts.validate import main
 
 
@@ -19,10 +20,10 @@ class ValidateTests(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
 
-    def validate(self):
+    def validate(self, **options):
         stdout, stderr = StringIO(), StringIO()
         with redirect_stdout(stdout), redirect_stderr(stderr):
-            code = main(self.root)
+            code = main(self.root, **options)
         return code, stdout.getvalue(), stderr.getvalue()
 
     def test_valid_files_in_all_source_directories(self):
@@ -38,27 +39,52 @@ variant = "without tools"
 ''')
         self.write("benchmarks/example.toml", b'name = "Example"\n')
         self.write("i18n/zh-CN.toml", 'description = "中文"\n'.encode())
+        self.write("benchmark-results/uncategorized/example.toml", b"groups = []\nunranked = []\n")
         self.write("dist/ignored.toml", b"invalid = [")
         self.write("models/ignored.txt", b"invalid = [")
 
         code, stdout, stderr = self.validate()
 
         self.assertEqual(code, 0)
-        self.assertIn("检查 3 个 TOML 文件：成功 3，失败 0", stdout)
+        self.assertIn("检查 4 个 TOML 文件：成功 4，失败 0", stdout)
         self.assertEqual(stderr, "")
 
     def test_reports_all_syntax_errors_and_continues(self):
         self.write("models/lab/invalid.toml", b"valid = 1\nbroken = ]\n")
         self.write("benchmarks/duplicate.toml", b"score = 1\nscore = 2\n")
         self.write("i18n/valid.toml", b"valid = true\n")
+        self.write("benchmark-results/invalid.toml", b"groups = [")
 
         code, stdout, stderr = self.validate()
 
         self.assertEqual(code, 1)
-        self.assertIn("成功 1，失败 2", stdout)
+        self.assertIn("成功 1，失败 3", stdout)
         self.assertIn("models/lab/invalid.toml:", stderr)
         self.assertIn("benchmarks/duplicate.toml:", stderr)
+        self.assertIn("benchmark-results/invalid.toml:", stderr)
         self.assertIn("line 2", stderr)
+
+    def test_check_results_rejects_missing_edited_and_stale_files(self):
+        self.write("models/lab/model.toml", b'''schema = 2
+name = "Example model"
+[[benchmarks]]
+name = "Example"
+score = 42
+''')
+        code, _, stderr = self.validate(check_results=True)
+        self.assertEqual(code, 1)
+        self.assertIn("benchmark-results/uncategorized/", stderr)
+        build(self.root, self.root / "dist")
+        self.assertEqual(self.validate(check_results=True)[0], 0)
+
+        generated, = (self.root / "benchmark-results/uncategorized").glob("*.toml")
+        content = generated.read_bytes()
+        generated.write_bytes(content.replace(b"score = 42", b"score = 43"))
+        self.write("benchmark-results/stale.toml", content)
+        code, _, stderr = self.validate(check_results=True)
+        self.assertEqual(code, 1)
+        self.assertIn("benchmark-results/stale.toml", stderr)
+        self.assertIn(generated.relative_to(self.root).as_posix(), stderr)
 
     def test_invalid_utf8_is_a_failure(self):
         self.write("i18n/invalid.toml", b'name = "\xff"\n')

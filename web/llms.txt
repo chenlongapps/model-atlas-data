@@ -17,6 +17,7 @@ When using the data:
 
 - [Model profiles and results](https://chenlongapps.github.io/model-atlas-data/models.json): JSON object keyed by model ID, preserving profile fields and individual benchmark results, including unmatched results.
 - [Benchmark definitions](https://chenlongapps.github.io/model-atlas-data/benchmarks.json): JSON object keyed by definition ID, with names, versions, metrics, units, and scoring direction (`higher_is_better`).
+- [Benchmark results by definition](https://chenlongapps.github.io/model-atlas-data/benchmark-results.json): `benchmarks` uses definition IDs with a score-sorted `results` array for each. `uncategorized` uses original names with an `unranked` array. Rows contain `model_id` and the original structured `result`. Check the evaluation conditions before comparing models.
 - [Simplified Chinese descriptions](https://chenlongapps.github.io/model-atlas-data/i18n/zh-CN.json): Translations under `model.descriptions` (model IDs) and `benchmark.description` (definition IDs). Missing translations fall back to the original descriptions in the Web Explorer.
 - [Release manifest](https://chenlongapps.github.io/model-atlas-data/manifest.json): Data version, source Git commit, publication-package generation time, and file sizes and SHA-256 hashes. This time is not an evaluation date. Website assets, including llms.txt, are outside the data manifest and its data version.
 
@@ -25,7 +26,7 @@ When using the data:
 - [README](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/README.md): Project overview, quick start, data endpoints, and documentation links.
 - [Documentation index](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/README.md): Topic-based documentation navigation.
 - [Data conventions](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/data-format.md): Model identity, parameter counts, benchmark extensions, definition matching, and localization.
-- [Development and validation](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/development.md): Tests, JSON construction, and validation limits.
+- [Development and validation](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/development.md): Tests, generated TOML and JSON, and validation limits.
 - [Web and publishing](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/publishing.md): Local preview, chart interpretation, GitHub Pages, and release manifests.
 - [Models.dev synchronization](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/models-dev-sync.md): Import scope, protected descriptions, translation, and write safeguards.
 - [Upstream license notice](https://chenlongapps.github.io/model-atlas-data/LICENSE.models-dev): Retained MIT notice for Models.dev-derived material; model weight licenses must be checked separately.

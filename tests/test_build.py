@@ -116,6 +116,98 @@ class BuildTests(unittest.TestCase):
         self.assertTrue(raw.endswith(b"\n"))
         self.assertNotIn(b"\r", raw)
 
+    def test_sorts_defined_results_in_both_directions_and_uses_model_id_for_ties(self):
+        source_path = "models/lab/example.toml"
+        variant = RESULT.replace("without tools", "with tools")
+        self.write(source_path, MODEL + RESULT + variant)
+        self.write("models/lab/z.toml", MODEL + RESULT + 'cost = 1.1\ncost_unit = "USD/task"\n'
+                   + variant.replace("42.10", "55"))
+        self.write("models/lab/a.toml", MODEL + RESULT.replace("42.10", "20"))
+        self.write("models/lab/b.toml", MODEL + RESULT.replace("42.10", "90"))
+        for identifier, result in (
+            ("dataset", RESULT.replace("full set", "subset")),
+            ("effort", RESULT + 'effort = "default"\n'),
+            ("harness", RESULT.replace("Example Harness", "Different Harness")),
+            ("source", RESULT.replace("/results", "/other")),
+            ("date", RESULT.replace("2026-10-01", "2026-10-02")),
+            ("version", RESULT.replace("1.0", "1.1")),
+            ("missing", RESULT.replace('dataset = "full set"\n', "")),
+            ("text", RESULT.replace("42.10", '"42.1 ± 0.2"')),
+        ):
+            self.write(f"models/lab/{identifier}.toml", MODEL + result)
+        definition = DEFINITION + 'compatible_versions = ["1.1"]\n'
+        original = (self.root / source_path).read_bytes()
+        tied = ["dataset", "date", "effort", "example", "example", "harness", "missing", "source", "version", "z"]
+        for higher, expected_order in (
+            ("true", ["b", "z", *tied, "a", "text"]),
+            ("false", ["a", *tied, "z", "b", "text"]),
+        ):
+            with self.subTest(higher_is_better=higher):
+                self.write("benchmarks/filename-need-not-match-id.toml",
+                           definition.replace("higher_is_better = true", f"higher_is_better = {higher}"))
+                code, _, stderr = self.run_build()
+                self.assertEqual(code, 0, stderr)
+                document = self.read_json("benchmark-results.json")["benchmarks"]["example-bench"]
+                toml = self.root / "benchmark-results/example-bench.toml"
+                self.assertEqual(tomllib.loads(toml.read_text()), document)
+                rows = document["results"]
+                self.assertEqual([row["model_id"] for row in rows], [f"lab/{model}" for model in expected_order])
+                self.assertEqual([row["result"]["variant"] for row in rows if row["model_id"] == "lab/example"],
+                                 ["without tools", "with tools"])
+                self.assertEqual(next(row["result"]["cost"] for row in rows
+                                      if row["model_id"] == "lab/z" and row["result"]["variant"] == "without tools"), 1.1)
+                self.assertEqual(rows[-1]["result"]["score"], "42.1 ± 0.2")
+                self.assertEqual((self.root / source_path).read_bytes(), original)
+
+    def test_uncategorized_keeps_original_names_fields_and_unranked_order(self):
+        names = ("Same Name", "same-name", "路径/评测", "../../unsafe", "Example Bench")
+        self.write("models/lab/example.toml", MODEL)
+        weird_fields = r'''
+"field.with.dots" = { "a b" = ["A\u007f\nB", 42, true, { "" = -0.0 }] }
+model_id = "source extension"
+'''
+        for identifier, score in (("a", "1"), ("z", "90")):
+            self.write(f"models/lab/{identifier}.toml", MODEL + "".join(
+                RESULT.replace("Example Bench", name).replace("42.10", score) + weird_fields for name in names))
+        self.write("benchmarks/ambiguous.toml", DEFINITION.replace("example-bench", "also-example"))
+        code, _, stderr = self.run_build()
+        self.assertEqual(code, 0, stderr)
+        self.assertIn("未匹配 8 条，歧义 2 条", stderr)
+        results = self.read_json("benchmark-results.json")
+        self.assertEqual(set(results["uncategorized"]), set(names))
+        self.assertEqual(results["benchmarks"]["example-bench"], {"results": []})
+        uncategorized = self.root / "benchmark-results/uncategorized"
+        documents = [tomllib.loads(path.read_text()) for path in uncategorized.glob("*.toml")]
+        toml_by_name = {doc["unranked"][0]["result"]["name"]: doc for doc in documents}
+        self.assertEqual(len(documents), len(names))
+        self.assertEqual(toml_by_name, results["uncategorized"])
+        for name, document in toml_by_name.items():
+            self.assertEqual(document["groups"], [])
+            self.assertEqual([row["model_id"] for row in document["unranked"]], ["lab/a", "lab/z"])
+            self.assertEqual([row["result"]["score"] for row in document["unranked"]], [1, 90])
+            for row in document["unranked"]:
+                source = self.read_json("models.json")[row["model_id"]]["benchmarks"]
+                self.assertEqual(row["result"], next(result for result in source if result["name"] == name))
+
+    def test_rebuild_replaces_stale_generated_files_and_json_only_leaves_them_alone(self):
+        model = self.root / "models/lab/example.toml"
+        model.write_text(MODEL + RESULT.replace("Example Bench", "Unmapped"))
+        self.assertEqual(self.run_build()[0], 0)
+        stale, = (self.root / "benchmark-results/uncategorized").glob("*.toml")
+        keep = self.write("benchmark-results/keep.txt", "unrelated file")
+        model.write_text(MODEL + RESULT)
+        self.assertEqual(self.run_build("--json-only")[0], 0)
+        self.assertEqual(self.read_json("benchmark-results.json")["uncategorized"], {})
+        self.assertTrue(stale.is_file())
+        self.assertEqual(self.run_build()[0], 0)
+        self.assertFalse(stale.exists())
+        self.assertEqual(keep.read_text(), "unrelated file")
+
+    def test_build_does_not_delete_unmarked_toml_files(self):
+        manual = self.write("benchmark-results/manual.toml", 'name = "Manual"\n')
+        self.assert_failure("missing generated file header")
+        self.assertEqual(manual.read_text(), 'name = "Manual"\n')
+
     def test_optional_benchmark_popularity_round_trips_without_a_default(self):
         for value in (None, "0", "1", "0.98"):
             with self.subTest(value=value):
@@ -258,10 +350,13 @@ sources = ["https://example.com/language"]
     def test_repeated_build_has_identical_bytes_and_leaves_unrelated_files_alone(self):
         self.write("dist/keep.txt", "not a generated file")
         self.assertEqual(self.run_build()[0], 0)
-        before = {p.relative_to(self.output): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
+        def generated():
+            return {p.relative_to(self.root): p.read_bytes()
+                    for base in (self.output, self.root / "benchmark-results") for p in base.rglob("*") if p.is_file()}
+
+        before = generated()
         self.assertEqual(self.run_build()[0], 0)
-        after = {p.relative_to(self.output): p.read_bytes() for p in self.output.rglob("*") if p.is_file()}
-        self.assertEqual(before, after)
+        self.assertEqual(before, generated())
         self.assertEqual(list(self.base.glob(".model-atlas-build-*")), [])
         self.assertEqual(list(self.root.glob(".model-atlas-build-*")), [])
 

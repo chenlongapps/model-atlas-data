@@ -50,6 +50,7 @@ class PreviewTests(unittest.TestCase):
                 models = json.loads((self.output / "models.json").read_text())
                 test.assertEqual(models["lab/example"]["name"], "Example")
                 test.assertTrue((self.output / "benchmarks.json").is_file())
+                test.assertTrue((self.output / "benchmark-results.json").is_file())
                 test.assertFalse((self.output / "manifest.json").exists())
                 test.assertFalse((self.output / "models").exists())
                 raise KeyboardInterrupt
@@ -61,6 +62,7 @@ class PreviewTests(unittest.TestCase):
         self.assertIn("预览已停止", stdout)
         self.assertEqual(len(paths), 1)
         self.assertFalse(paths[0].exists())
+        self.assertFalse((self.root / "benchmark-results").exists())
 
     def test_build_failure_does_not_start_server(self):
         (self.root / "models/lab/example.toml").write_text("invalid = [", encoding="utf-8")

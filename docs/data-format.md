@@ -130,6 +130,19 @@ source = "https://example.com/results"
 
 字段可省略，JSON 保留缺失状态、不填零。Web Explorer 默认按其降序排列评测，同分按名称和 ID、缺失值置后；搜索及分类沿用此顺序，手动表头排序优先。不增加知名度展示列，也不改变模型成绩排序。
 
+## Benchmark 成绩汇总
+
+`models/<lab>/<model-id>.toml` 的 `[[benchmarks]]` 是成绩的维护入口。构建从这些记录和 `benchmarks/` 的定义同时生成两份汇总。
+
+- `benchmark-results/<benchmark-id>.toml` 对应一个定义。未匹配或匹配有歧义的记录按原始 `name` 分文件，放入 `benchmark-results/uncategorized/`。文件名使用简化的名称和原名 SHA-256 的前 16 位十六进制字符，记录内部保留准确名称。
+- `dist/benchmark-results.json` 的 `benchmarks` 以定义 ID 为键，`uncategorized` 以原始评测名称为键。每个键的值与相应 TOML 解析后的结构一致。已有模型、定义和本地化 JSON 继续使用原有结构。
+
+已定义评测使用一个 `results` 数组，TOML 表示为 `[[results]]`。数组可为空。每条记录包含 `model_id` 和 `result`，后者逐字段保留源记录，包括字符串分数、扩展字段和缺失状态。
+
+- `higher_is_better = true` 按数值分数降序，否则升序。同分按模型 ID 升序，同模型同分沿用源文件顺序。字符串分数保持原文，放在数值之后，按模型 ID 和源文件顺序排列。
+- 该顺序用于展示。比较模型能力时，仍须核对版本、数据集、工具、推理档位、Harness 等实验条件。
+- 未分类评测保留空的 `groups` 和原有 `unranked` 数组，按模型 ID 及模型文件中的记录顺序排列。
+
 ## 国际化
 
 - `[model.descriptions]` 以模型 ID（`<lab>/<model-id>`）为键。

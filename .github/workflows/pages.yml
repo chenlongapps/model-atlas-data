@@ -6,9 +6,11 @@ on:
     paths:
       - 'models/**'
       - 'benchmarks/**'
+      - 'benchmark-results/**'
       - 'i18n/**'
       - 'web/**'
       - 'scripts/build.py'
+      - 'scripts/benchmark_results.py'
       - 'scripts/manifest.py'
       - 'scripts/validate.py'
       - 'tests/**'
@@ -59,12 +61,12 @@ jobs:
       - name: Run Web tests
         run: node --test tests/web.test.mjs
 
-      - name: Validate TOML syntax
-        run: python3 scripts/validate.py
+      - name: Validate TOML syntax and Benchmark results
+        run: python3 scripts/validate.py --check-results
 
       - name: Build JSON and include upstream license
         run: |
-          python3 scripts/build.py --output "$RUNNER_TEMP/pages"
+          python3 scripts/build.py --json-only --output "$RUNNER_TEMP/pages"
           cp LICENSE.models-dev "$RUNNER_TEMP/pages/LICENSE.models-dev"
 
       - name: Generate release manifest
