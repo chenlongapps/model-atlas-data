@@ -87,6 +87,37 @@ metric = "accuracy"
 source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "GDP.pdf"
+score = 28.0
+dataset = "100 tasks; 500 attempts"
+effort = "xhigh"
+metric = "all-pass rate"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Artificial Analysis; extracted text and adapted page images; no tools; five attempts per task"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "GDP.pdf"
+score = 33.4
+dataset = "100 tasks; 500 attempts"
+effort = "high"
+metric = "all-pass rate"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Artificial Analysis; extracted text and adapted page images; no tools; five attempts per task"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "GDP.pdf"
+score = 53.4
+effort = "High"
+metric = "score"
+source = "https://surgehq.ai/benchmarks/gdp-pdf"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "GDP.pdf"

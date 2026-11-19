@@ -72,6 +72,14 @@ source = "https://artificialanalysis.ai/agents/coding-agents"
 variant = "high"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Artificial Analysis Coding Agent Index"
+score = 58.6
+metric = "index score"
+source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "Artificial Analysis Coding Agent Index"

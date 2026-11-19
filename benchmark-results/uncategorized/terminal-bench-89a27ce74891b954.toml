@@ -584,6 +584,17 @@ variant = "Google self-computed; Average Reward over 5 attempts per task"
 version = "4.1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Terminal-Bench"
+score = 65.2
+harness = "Antigravity-CLI 1.5.9"
+metric = "cheating-adjusted accuracy"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+variant = "Evaluated by Artificial Analysis; reported by Google"
+version = "4.1"
+
+[[unranked]]
 model_id = "google/gemini-flash-latest"
 [unranked.result]
 name = "Terminal-Bench"

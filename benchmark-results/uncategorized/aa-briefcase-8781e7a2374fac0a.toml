@@ -136,6 +136,98 @@ source = "https://www.anthropic.com/claude-opus-5-system-card"
 variant = "max effort"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 1700.15
+effort = "xhigh"
+harness = "Stirrup"
+metric = "Elo"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+variant = "Combined Elo"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 1631.97
+effort = "high"
+harness = "Stirrup"
+metric = "Elo"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+variant = "Combined Elo"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 1517.7
+effort = "medium"
+harness = "Stirrup"
+metric = "Elo"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+variant = "Combined Elo"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 1296.59
+effort = "low"
+harness = "Stirrup"
+metric = "Elo"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+variant = "Combined Elo"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 62.02020202020202
+effort = "xhigh"
+harness = "Stirrup"
+metric = "rubric pass rate"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 58.18181818181818
+effort = "high"
+harness = "Stirrup"
+metric = "rubric pass rate"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 53.23232323232323
+effort = "medium"
+harness = "Stirrup"
+metric = "rubric pass rate"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+version = "1.1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AA-Briefcase"
+score = 38.98989898989899
+effort = "low"
+harness = "Stirrup"
+metric = "rubric pass rate"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+version = "1.1"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "AA-Briefcase"

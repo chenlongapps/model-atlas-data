@@ -32,6 +32,15 @@ source = "https://www.anthropic.com/claude-sonnet-5-5"
 version = "4.0"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "CursorBench"
+score = 65.4
+metric = "score"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+version = "4.1"
+
+[[unranked]]
 model_id = "xai/grok-4.6"
 [unranked.result]
 name = "CursorBench"

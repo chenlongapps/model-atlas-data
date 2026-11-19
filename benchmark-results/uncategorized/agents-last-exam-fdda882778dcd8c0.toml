@@ -114,6 +114,19 @@ variant = "Google self-computed; pass@1; 5-hour window; official integration; sa
 version = "1.1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Agents' Last Exam"
+score = 75.8
+dataset = "122 tasks"
+effort = "xhigh"
+harness = "Antigravity-CLI 1.4.8"
+metric = "averaged rubric score"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+variant = "5-hour window; official integration; safety filters enabled"
+version = "1.1"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "Agents' Last Exam"

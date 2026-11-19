@@ -29,6 +29,19 @@ variant = "dealbreaker-gated, severity-weighted per-check scores; 2-hour task li
 version = "2.1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Finance Agent v2.1"
+score = 68.558
+cost = 5.854933
+cost_unit = "USD/test"
+effort = "xhigh"
+metric = "Partial Credit"
+source = "https://www.vals.ai/_astro/benchmark_view_finance_agent_v2_1.BeLQ5GKf.json"
+variant = "Dealbreaker-gated, severity-weighted per-check scores"
+version = "2.1"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "Finance Agent v2.1"

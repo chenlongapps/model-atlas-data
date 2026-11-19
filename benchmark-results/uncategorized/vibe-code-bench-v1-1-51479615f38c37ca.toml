@@ -29,6 +29,19 @@ source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DLGw-pgN.jso
 version = "1.1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Vibe Code Bench v1.1"
+score = 93.698
+cost = 6.755234
+cost_unit = "USD/test"
+effort = "xhigh"
+harness = "OpenHands"
+metric = "score"
+source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.BtDrEBW2.json"
+version = "1.1"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "Vibe Code Bench v1.1"

@@ -10,3 +10,13 @@ metric = "bank balance (USD)"
 source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
 variant = "Reported by Google from the Andon Labs public leaderboard"
 version = "2"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Vending-Bench"
+score = 16843.41
+metric = "bank balance (USD)"
+source = "https://andonlabs.com/evals/vending-bench-2"
+variant = "Mean final balance after one simulated year"
+version = "2"

@@ -26,3 +26,13 @@ score = 87.1
 metric = "pass@1"
 source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
 variant = "static; 1024 frames; without tools"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "LVBench"
+score = 89.0
+effort = "xhigh"
+metric = "pass@1"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+variant = "Vision only; no tools; low resolution at 1 FPS"

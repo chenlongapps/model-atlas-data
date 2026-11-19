@@ -11,3 +11,23 @@ harness = "Antigravity-CLI (agy) 1.4.8"
 metric = "subtask-weighted reward"
 source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
 variant = "Google self-computed; pass@1; official integration; safety filters enabled"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "SWE-sweep"
+score = 39.0
+effort = "xhigh"
+harness = "Antigravity-CLI 1.5.9"
+metric = "subtask-weighted reward"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "SWE-sweep"
+score = 12.8
+effort = "xhigh"
+harness = "mini-swe-agent vision"
+metric = "subtask-weighted reward"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"

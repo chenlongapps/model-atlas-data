@@ -10,3 +10,12 @@ effort = "xhigh"
 metric = "Climb WSR accuracy"
 source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
 variant = "Google self-computed; pass@1"
+
+[[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "MKA"
+score = 56.48217589644973
+effort = "xhigh"
+metric = "Climb WSR accuracy"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"

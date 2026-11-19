@@ -120,6 +120,19 @@ variant = "avg@3 (three runs, each pass@1)"
 version = "4.0.0"
 
 [[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Terminal-Bench"
+score = 63.6363636363636
+dataset = "66 tasks"
+effort = "xhigh"
+harness = "mini-swe-agent"
+metric = "task resolution rate"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Artificial Analysis; mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+version = "4.0"
+
+[[results]]
 model_id = "moonshotai/kimi-k3.1-pro"
 [results.result]
 name = "Terminal-Bench"
@@ -180,6 +193,21 @@ metric = "task resolution rate"
 source = "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
 variant = "Default Fallback; pass@1 averaged over three repeats per task; 500-step cap; no context compaction or summarization"
 version = "4.0.0"
+
+[[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Terminal-Bench"
+score = 61.616
+cost = 6.421364
+cost_unit = "USD/test"
+dataset = "66 tasks"
+effort = "xhigh"
+harness = "Mini-SWE-agent"
+metric = "task resolution rate"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.Ch7cIsrW.json"
+variant = "Vals AI; mean of three pass@1 runs; 8-hour task limit; no step or cost limit"
+version = "4.0"
 
 [[results]]
 model_id = "openai/gpt-6.2-sol"

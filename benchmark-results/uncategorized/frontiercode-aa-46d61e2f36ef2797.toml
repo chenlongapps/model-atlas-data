@@ -15,6 +15,19 @@ variant = "three attempts per task; 500-turn cap; GPT-6 Luna (medium) judge; blo
 version = "2.0"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "FrontierCode-AA"
+score = 44.4105303030303
+dataset = "132 tasks"
+effort = "xhigh"
+harness = "Stirrup"
+metric = "weighted rubric score"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Three attempts per task; blocking checks and trajectory screening"
+version = "2.0"
+
+[[unranked]]
 model_id = "openai/gpt-6.2-astra"
 [unranked.result]
 name = "FrontierCode-AA"

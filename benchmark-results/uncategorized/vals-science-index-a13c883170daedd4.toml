@@ -16,6 +16,18 @@ variant = "published score; server-side Opus 5 fallback included"
 version = "1.0"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Vals Science Index"
+score = 62.634
+cost = 8.259574
+cost_unit = "USD/test"
+effort = "xhigh"
+metric = "accuracy"
+source = "https://www.vals.ai/_astro/benchmark_view_science_index.bYk4V6bY.json"
+version = "1.0"
+
+[[unranked]]
 model_id = "openai/gpt-6.2-astra"
 [unranked.result]
 name = "Vals Science Index"

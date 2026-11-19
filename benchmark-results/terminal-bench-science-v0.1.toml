@@ -99,6 +99,19 @@ variant = "Default Fallback; pass@1 averaged over three repeats per task; 1,000-
 version = "0.1.0"
 
 [[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Terminal-Bench-Science"
+score = 70.0
+dataset = "70 tasks"
+effort = "xhigh"
+harness = "mini-swe-agent"
+metric = "task resolution rate"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Artificial Analysis; mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+version = "0.1.0"
+
+[[results]]
 model_id = "anthropic/claude-fable-5-2"
 [results.result]
 name = "Terminal-Bench-Science"
@@ -184,6 +197,21 @@ harness = "mini-swe-agent"
 metric = "task resolution rate"
 source = "https://www.vals.ai/benchmarks/terminal-bench-science"
 variant = "single pass@1 run; ungraded infrastructure/provider errors retried; 8-hour task limit"
+version = "0.1.0"
+
+[[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Terminal-Bench-Science"
+score = 62.857
+cost = 13.741423
+cost_unit = "USD/test"
+dataset = "70 tasks"
+effort = "xhigh"
+harness = "Mini-SWE-agent"
+metric = "task resolution rate"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.CJULNFDe.json"
+variant = "Vals AI; single pass@1 run"
 version = "0.1.0"
 
 [[results]]

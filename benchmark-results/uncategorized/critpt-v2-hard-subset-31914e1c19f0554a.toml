@@ -77,6 +77,19 @@ variant = "Default Fallback; five repeats, mean pass@1; code tools; offline; 50-
 version = "2"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "CritPt v2 (Hard Subset)"
+score = 60.5
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "xhigh"
+harness = "Stirrup"
+metric = "accuracy"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+version = "2"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "CritPt v2 (Hard Subset)"

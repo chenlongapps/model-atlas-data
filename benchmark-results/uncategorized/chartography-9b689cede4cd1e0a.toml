@@ -131,6 +131,16 @@ source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
 variant = "Google self-computed; without tools; following the official Surge public leaderboard"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Chartography"
+score = 73.5
+effort = "xhigh"
+metric = "pass@1"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+variant = "Google self-computed; without tools"
+
+[[unranked]]
 model_id = "meta/muse-spark-1.1"
 [unranked.result]
 name = "Chartography"

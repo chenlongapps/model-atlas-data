@@ -99,6 +99,17 @@ source = "https://deepmind.google/models/model-cards/gemini-4-hydrogen/"
 variant = "Reported by Google from the Artificial Analysis leaderboard"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "AutomationBench-AA"
+score = 79.33804374911678
+dataset = "657 tasks"
+effort = "xhigh"
+metric = "guardrail-gated objective completion rate"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+variant = "Partial credit; zero credit for any guardrail violation"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "AutomationBench-AA"

@@ -64,6 +64,18 @@ source = "https://artificialanalysis.ai/models/gpt-6-2-astra"
 version = "5.0.1"
 
 [[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Artificial Analysis Intelligence Index"
+score = 61.3982491392674
+cost = 6.444838101104699
+cost_unit = "USD/weighted task"
+effort = "xhigh"
+metric = "index score"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+version = "5.0.1"
+
+[[results]]
 model_id = "openai/gpt-6.2-astra"
 [results.result]
 name = "Artificial Analysis Intelligence Index"
@@ -85,6 +97,18 @@ cost_unit = "USD/weighted task"
 effort = "High"
 metric = "index score"
 source = "https://artificialanalysis.ai/models/gemini-4-carbon"
+version = "5.0.1"
+
+[[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Artificial Analysis Intelligence Index"
+score = 59.6189441875232
+cost = 3.7427499092845027
+cost_unit = "USD/weighted task"
+effort = "high"
+metric = "index score"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
 version = "5.0.1"
 
 [[results]]
@@ -219,6 +243,18 @@ cost_unit = "USD/weighted task"
 effort = "high"
 metric = "index score"
 source = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+version = "5.0.1"
+
+[[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Artificial Analysis Intelligence Index"
+score = 54.8622945007349
+cost = 1.9045555241044152
+cost_unit = "USD/weighted task"
+effort = "medium"
+metric = "index score"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
 version = "5.0.1"
 
 [[results]]
@@ -552,6 +588,18 @@ cost_unit = "USD/weighted task"
 effort = "Max"
 metric = "index score"
 source = "https://artificialanalysis.ai/models/gpt-6-sol"
+version = "5.0.1"
+
+[[results]]
+model_id = "google/gemini-4-neon"
+[results.result]
+name = "Artificial Analysis Intelligence Index"
+score = 44.0831506204565
+cost = 0.7452280945089245
+cost_unit = "USD/weighted task"
+effort = "low"
+metric = "index score"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
 version = "5.0.1"
 
 [[results]]

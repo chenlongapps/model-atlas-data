@@ -45,6 +45,19 @@ source = "https://blog.google/innovation-and-ai/models-and-research/gemini-model
 variant = "with tools"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "BioMysteryBench"
+score = 80.0
+cost = 4.40725
+cost_unit = "USD/test"
+effort = "xhigh"
+harness = "Terminus 2"
+metric = "accuracy"
+source = "https://www.vals.ai/_astro/benchmark_view_biomysterybench.BO8f4CNC.json"
+version = "1"
+
+[[unranked]]
 model_id = "openai/gpt-6.2-astra"
 [unranked.result]
 name = "BioMysteryBench"

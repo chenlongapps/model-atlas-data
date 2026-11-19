@@ -44,6 +44,19 @@ variant = "all-pass multiplied by (0.7 + 0.3 times citation quality); 3-hour tas
 version = "1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Tax Agent Bench"
+score = 54.894
+cost = 4.947756
+cost_unit = "USD/test"
+dataset = "193-question private test set"
+effort = "xhigh"
+metric = "citation-adjusted all-pass accuracy"
+source = "https://www.vals.ai/_astro/benchmark_view_tax_agent_bench.DAMIpNLA.json"
+version = "1"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "Tax Agent Bench"

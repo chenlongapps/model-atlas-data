@@ -16,6 +16,18 @@ variant = "binary functional equivalence on private structural probes; noise-awa
 version = "1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "MysteryMechanism"
+score = 45.045
+cost = 6.630049
+cost_unit = "USD/test"
+effort = "xhigh"
+metric = "functional recovery accuracy"
+source = "https://www.vals.ai/_astro/benchmark_view_mysterymechanism.CSOiVKBt.json"
+version = "1"
+
+[[unranked]]
 model_id = "openai/gpt-6.2-astra"
 [unranked.result]
 name = "MysteryMechanism"

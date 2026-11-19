@@ -176,6 +176,16 @@ source = "https://deepmind.google/models/model-cards/gemini-3-7-flash/"
 version = "1.1 Main"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "FrontierCode"
+score = 46.2
+effort = "high"
+metric = "main score"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+version = "2.0"
+
+[[unranked]]
 model_id = "meta/muse-ember-1.0"
 [unranked.result]
 name = "FrontierCode"

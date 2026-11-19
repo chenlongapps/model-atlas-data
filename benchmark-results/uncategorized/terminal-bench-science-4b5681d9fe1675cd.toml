@@ -177,6 +177,18 @@ variant = "Google self-computed; averaged over 5 attempts per task"
 version = "0.1"
 
 [[unranked]]
+model_id = "google/gemini-4-neon"
+[unranked.result]
+name = "Terminal-Bench-Science"
+score = 70.5
+effort = "xhigh"
+harness = "mini-swe-agent vision"
+metric = "Average Reward"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+variant = "Mean reward over five attempts per task"
+version = "0.1"
+
+[[unranked]]
 model_id = "google/gemini-flash-latest"
 [unranked.result]
 name = "Terminal-Bench-Science"

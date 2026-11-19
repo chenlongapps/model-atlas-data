@@ -59,3 +59,1011 @@ top_k = false
 [limit]
 context = 1_048_576
 output = 65_536
+
+# Google model card and evaluation methods:
+# https://storage.googleapis.com/deepmind-media/gemini/gemini_4_neon_model_evaluation.pdf
+# Rounded or reprinted AA, Vals, Zapier and Riemann-bench results are recorded
+# with their original publishers below. Cyber figures here are as labeled in
+# the model card; the separately announced AutoBaxBench result is for Neon for cyber.
+
+[[benchmarks]]
+name = "CursorBench"
+score = 65.4
+metric = "score"
+version = "4.1"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 65.2
+metric = "cheating-adjusted accuracy"
+version = "4.1"
+variant = "Evaluated by Artificial Analysis; reported by Google"
+harness = "Antigravity-CLI 1.5.9"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "FrontierCode"
+score = 46.2
+metric = "main score"
+version = "2.0"
+effort = "high"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "SWE-sweep"
+score = 39.0
+metric = "subtask-weighted reward"
+effort = "xhigh"
+harness = "Antigravity-CLI 1.5.9"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "SWE-sweep"
+score = 12.8
+metric = "subtask-weighted reward"
+effort = "xhigh"
+harness = "mini-swe-agent vision"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "Agents' Last Exam"
+score = 75.8
+metric = "averaged rubric score"
+version = "1.1"
+dataset = "122 tasks"
+effort = "xhigh"
+variant = "5-hour window; official integration; safety filters enabled"
+harness = "Antigravity-CLI 1.4.8"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 70.5
+metric = "Average Reward"
+version = "0.1"
+effort = "xhigh"
+variant = "Mean reward over five attempts per task"
+harness = "mini-swe-agent vision"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "Chartography"
+score = 73.5
+metric = "pass@1"
+effort = "xhigh"
+variant = "Google self-computed; without tools"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "LVBench"
+score = 89.0
+metric = "pass@1"
+effort = "xhigh"
+variant = "Vision only; no tools; low resolution at 1 FPS"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "GraphWalks"
+score = 95.2
+metric = "BFS F1"
+dataset = "200 problems with 256K–1M tokens of context"
+effort = "xhigh"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "CWE-Bench"
+score = 70.7
+metric = "programmatic pass@1"
+version = "2"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "SEC-bench Pro"
+score = 90.5
+metric = "pass@1"
+dataset = "183-task May 2026 JavaScript engine split"
+variant = "Mean of three independent attempts per task"
+harness = "Antigravity"
+source = "https://deepmind.google/models/model-cards/gemini-4-neon/"
+
+[[benchmarks]]
+name = "WebExploitBench"
+# Google's launch report gives 51.26%; the model card rounds it to 51.3%.
+score = 51.26
+metric = "score"
+version = "1.2"
+source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+
+# Artificial Analysis. Keep index points, Elo and percentage metrics separate.
+# Intelligence Index costs are weighted per task, not individual benchmark costs.
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 61.3982491392674
+metric = "index score"
+version = "5.0.1"
+effort = "xhigh"
+cost = 6.444838101104699
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 59.6189441875232
+metric = "index score"
+version = "5.0.1"
+effort = "high"
+cost = 3.7427499092845027
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 54.8622945007349
+metric = "index score"
+version = "5.0.1"
+effort = "medium"
+cost = 1.9045555241044152
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Artificial Analysis Intelligence Index"
+score = 44.0831506204565
+metric = "index score"
+version = "5.0.1"
+effort = "low"
+cost = 0.7452280945089245
+cost_unit = "USD/weighted task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Finance & Accounting Index"
+score = 65.0510769572976
+metric = "index score"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Strategy & Ops Index"
+score = 63.7737073846756
+metric = "index score"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Legal Index"
+score = 63.7559419157939
+metric = "index score"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Engineering Index"
+score = 66.8388920454545
+metric = "index score"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Economics Index"
+score = 61.92575
+metric = "index score"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+# 95% confidence interval: 1689.61–1710.68 Elo.
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1700.15
+metric = "Elo"
+version = "1.1"
+effort = "xhigh"
+variant = "Combined Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1631.97
+metric = "Elo"
+version = "1.1"
+effort = "high"
+variant = "Combined Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1517.70
+metric = "Elo"
+version = "1.1"
+effort = "medium"
+variant = "Combined Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 1296.59
+metric = "Elo"
+version = "1.1"
+effort = "low"
+variant = "Combined Elo"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 62.02020202020202
+metric = "rubric pass rate"
+version = "1.1"
+effort = "xhigh"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 58.18181818181818
+metric = "rubric pass rate"
+version = "1.1"
+effort = "high"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 53.23232323232323
+metric = "rubric pass rate"
+version = "1.1"
+effort = "medium"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AA-Briefcase"
+score = 38.98989898989899
+metric = "rubric pass rate"
+version = "1.1"
+effort = "low"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/evaluations/aa-briefcase"
+
+[[benchmarks]]
+name = "AutomationBench-AA"
+score = 79.33804374911678
+metric = "guardrail-gated objective completion rate"
+dataset = "657 tasks"
+effort = "xhigh"
+variant = "Partial credit; zero credit for any guardrail violation"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 28.0
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "xhigh"
+variant = "Artificial Analysis; extracted text and adapted page images; no tools; five attempts per task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 33.4
+metric = "all-pass rate"
+dataset = "100 tasks; 500 attempts"
+effort = "high"
+variant = "Artificial Analysis; extracted text and adapted page images; no tools; five attempts per task"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "HLE-Diamond"
+score = 71.3
+metric = "accuracy"
+dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
+effort = "xhigh"
+variant = "No tools; pass@1; GPT-5.6 Luna (medium) judge"
+harness = "Artificial Analysis"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 63.6363636363636
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "Artificial Analysis; mean of three pass@1 runs; 500-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "FrontierCode-AA"
+score = 44.4105303030303
+metric = "weighted rubric score"
+version = "2.0"
+dataset = "132 tasks"
+effort = "xhigh"
+variant = "Three attempts per task; blocking checks and trajectory screening"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 70.0
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "xhigh"
+variant = "Artificial Analysis; mean of three pass@1 runs; 1,000-step cap; upstream task timeouts"
+harness = "mini-swe-agent"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "CritPt v2 (Hard Subset)"
+score = 60.5
+metric = "accuracy"
+version = "2"
+dataset = "Fixed private hard subset (40 of 70 problems)"
+effort = "xhigh"
+variant = "Mean pass@1 across five attempts; code tools; offline; 50-turn cap"
+harness = "Stirrup"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+# OpenRouter is the source for this full-set value; the AA model page's CritPt
+# field is null. Do not substitute the hard-subset configuration or score.
+[[benchmarks]]
+name = "CritPt"
+score = 77.4
+metric = "accuracy"
+version = "2"
+dataset = "Full set"
+effort = "Xhigh"
+source = "https://openrouter.ai/google/gemini-4-neon-20261118"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 60.46666666666667
+metric = "accuracy"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "AA-Omniscience"
+score = 85.6
+metric = "non-hallucination rate"
+version = "1.1"
+dataset = "3,000 questions"
+effort = "xhigh"
+variant = "GPT-5.6 Luna (medium) judge; no tools"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+[[benchmarks]]
+name = "MKA"
+score = 56.48217589644973
+metric = "Climb WSR accuracy"
+effort = "xhigh"
+source = "https://artificialanalysis.ai/models/gemini-4-neon"
+
+# Vals AI: https://www.vals.ai/models/google_gemini-4-neon
+# The profile maps Gemini 4 Neon to the JSON ID "google/cobalt-c-high-1p00".
+# Use the row's explicit xhigh effort, not the alias text. The profile's Dataset
+# metadata declares CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+# Scores, standard errors (percentage points) and costs are from the same row.
+
+# stderr = 0.935; the profile shows 70.87%, and Google rounds to 70.9%.
+[[benchmarks]]
+name = "Vals Index"
+score = 70.873
+metric = "performance score"
+version = "2.2"
+effort = "xhigh"
+cost = 7.404554
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_vals_index.D4UVDIPY.json"
+
+# stderr = 1.377; profile table 68.31%, launch update 68.32%, overall JSON 68.315%.
+[[benchmarks]]
+name = "Vals Finance Index"
+score = 68.315
+metric = "accuracy"
+version = "1"
+effort = "xhigh"
+cost = 4.875306
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_finance_index.CqvuNh-a.json"
+
+# stderr = 1.835.
+[[benchmarks]]
+name = "Vals Legal Index"
+score = 78.359
+metric = "accuracy"
+version = "1"
+effort = "xhigh"
+cost = 6.095992
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_index.BVqYCSXY.json"
+
+# stderr = 2.327.
+[[benchmarks]]
+name = "Vals Science Index"
+score = 62.634
+metric = "accuracy"
+version = "1.0"
+effort = "xhigh"
+cost = 8.259574
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_science_index.bYk4V6bY.json"
+
+# stderr = 2.064.
+[[benchmarks]]
+name = "EMB v1.1"
+score = 76.46
+metric = "partial-credit score"
+version = "1.1"
+effort = "xhigh"
+cost = 3.823228
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_emb_v1_1.CjYLFjyX.json"
+
+# stderr = 1.944.
+[[benchmarks]]
+name = "Finance Agent v2.1"
+score = 68.558
+metric = "Partial Credit"
+version = "2.1"
+effort = "xhigh"
+variant = "Dealbreaker-gated, severity-weighted per-check scores"
+cost = 5.854933
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_finance_agent_v2_1.BeLQ5GKf.json"
+
+# stderr = 3.448.
+[[benchmarks]]
+name = "Legal Research Bench"
+score = 56.25
+metric = "All-Pass"
+version = "1"
+effort = "xhigh"
+cost = 7.366111
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_research.CRGmC5eC.json"
+
+# stderr = 3.589.
+[[benchmarks]]
+name = "Tax Agent Bench"
+score = 54.894
+metric = "citation-adjusted all-pass accuracy"
+version = "1"
+dataset = "193-question private test set"
+effort = "xhigh"
+cost = 4.947756
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_tax_agent_bench.DAMIpNLA.json"
+
+# stderr = 3.31.
+[[benchmarks]]
+name = "HLAB-Vals-1.1"
+score = 19.583
+metric = "Task Pass Rate"
+version = "1.1"
+dataset = "120-task private holdout"
+effort = "xhigh"
+cost = 5.97411
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_legal_agent_benchmark.B9EhWi3q.json"
+
+# stderr = 1.165.
+[[benchmarks]]
+name = "Vibe Code Bench v1.1"
+score = 93.698
+metric = "score"
+version = "1.1"
+effort = "xhigh"
+harness = "OpenHands"
+cost = 6.755234
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.BtDrEBW2.json"
+
+# stderr = 1.925.
+[[benchmarks]]
+name = "BioMysteryBench"
+score = 80.0
+metric = "accuracy"
+version = "1"
+effort = "xhigh"
+harness = "Terminus 2"
+cost = 4.40725
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_biomysterybench.BO8f4CNC.json"
+
+# stderr = 3.347.
+[[benchmarks]]
+name = "MysteryMechanism"
+score = 45.045
+metric = "functional recovery accuracy"
+version = "1"
+effort = "xhigh"
+cost = 6.630049
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_mysterymechanism.CSOiVKBt.json"
+
+# stderr = 2.02; Vals benchmark metadata supplies the harness.
+[[benchmarks]]
+name = "Terminal-Bench"
+score = 61.616
+metric = "task resolution rate"
+version = "4.0"
+dataset = "66 tasks"
+effort = "xhigh"
+variant = "Vals AI; mean of three pass@1 runs; 8-hour task limit; no step or cost limit"
+harness = "Mini-SWE-agent"
+cost = 6.421364
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.Ch7cIsrW.json"
+
+# stderr = 5.817; Vals methodology identifies the scored release as v0.1.0.
+[[benchmarks]]
+name = "Terminal-Bench-Science"
+score = 62.857
+metric = "task resolution rate"
+version = "0.1.0"
+dataset = "70 tasks"
+effort = "xhigh"
+variant = "Vals AI; single pass@1 run"
+harness = "Mini-SWE-agent"
+cost = 13.741423
+cost_unit = "USD/test"
+source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_science.CJULNFDe.json"
+
+# Zapier AutomationBench: strict pass rates. Per-task costs are list-price
+# estimates with caching and are reported only for the full 657-task runs.
+[[benchmarks]]
+name = "AutomationBench"
+score = 49.6
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Low"
+variant = "326 of 657 passed; strict all-assertions scoring"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+cost = 0.40
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 53.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "Medium"
+variant = "350 of 657 passed; strict all-assertions scoring"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+cost = 0.58
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 54.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "High"
+variant = "357 of 657 passed; strict all-assertions scoring"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+cost = 0.88
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 56.3
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "657 held-out evaluation tasks"
+effort = "XHigh"
+variant = "370 of 657 passed; strict all-assertions scoring"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+cost = 1.69
+cost_unit = "USD/task"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report"
+
+# Domain breakdowns are subsets of the same runs, not comparable to the full set.
+[[benchmarks]]
+name = "AutomationBench"
+score = 47.9
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Sales (117 tasks)"
+effort = "Low"
+variant = "56 of 117 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 52.1
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Sales (117 tasks)"
+effort = "Medium"
+variant = "61 of 117 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 53.8
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Sales (117 tasks)"
+effort = "High"
+variant = "63 of 117 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 59.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Sales (117 tasks)"
+effort = "XHigh"
+variant = "69 of 117 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 55.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Marketing (100 tasks)"
+effort = "Low"
+variant = "55 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 59.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Marketing (100 tasks)"
+effort = "Medium"
+variant = "59 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 64.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Marketing (100 tasks)"
+effort = "High"
+variant = "64 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 68.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Marketing (100 tasks)"
+effort = "XHigh"
+variant = "68 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 68.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Operations (100 tasks)"
+effort = "Low"
+variant = "68 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 68.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Operations (100 tasks)"
+effort = "Medium"
+variant = "68 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 65.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Operations (100 tasks)"
+effort = "High"
+variant = "65 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 68.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Operations (100 tasks)"
+effort = "XHigh"
+variant = "68 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 37.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Support (100 tasks)"
+effort = "Low"
+variant = "37 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 41.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Support (100 tasks)"
+effort = "Medium"
+variant = "41 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 43.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Support (100 tasks)"
+effort = "High"
+variant = "43 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 45.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Support (100 tasks)"
+effort = "XHigh"
+variant = "45 of 100 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 57.5
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Finance (120 tasks)"
+effort = "Low"
+variant = "69 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 65.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Finance (120 tasks)"
+effort = "Medium"
+variant = "78 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 64.2
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Finance (120 tasks)"
+effort = "High"
+variant = "77 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 65.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "Finance (120 tasks)"
+effort = "XHigh"
+variant = "78 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 34.2
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "HR (120 tasks)"
+effort = "Low"
+variant = "41 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 35.8
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "HR (120 tasks)"
+effort = "Medium"
+variant = "43 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 37.5
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "HR (120 tasks)"
+effort = "High"
+variant = "45 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+[[benchmarks]]
+name = "AutomationBench"
+score = 35.0
+metric = "task_completed_correctly"
+version = "1.0.6"
+dataset = "HR (120 tasks)"
+effort = "XHigh"
+variant = "42 of 120 passed"
+harness = "Zapier API; 50-step cap"
+date = "2026-11-17 to 2026-11-18"
+source = "https://zapier.com/benchmarks/gemini-neon-4-report#domains"
+
+# Surge AI leaderboard results (High reasoning).
+[[benchmarks]]
+name = "DAYJOB: Finance"
+score = 50.5
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/dayjob-finance"
+
+[[benchmarks]]
+name = "DAYJOB: Law"
+score = 26.2
+metric = "pass rate"
+effort = "High"
+variant = "Pass threshold: at least 95% of the task rubric"
+source = "https://surgehq.ai/benchmarks/dayjob-law"
+
+[[benchmarks]]
+name = "DAYJOB: Tax"
+score = 12.8
+metric = "pass rate"
+effort = "High"
+variant = "Pass threshold: at least 95% of the task rubric"
+source = "https://surgehq.ai/benchmarks/dayjob-tax"
+
+[[benchmarks]]
+name = "DAYJOB: Healthcare"
+score = 47.2
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/dayjob-healthcare"
+
+[[benchmarks]]
+name = "GDP.xlsx"
+score = 43.1
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/gdp-xlsx"
+
+[[benchmarks]]
+name = "GDP.pdf"
+score = 53.4
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/gdp-pdf"
+
+[[benchmarks]]
+name = "ComplexConstraints"
+score = 72.9
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/complex-constraints"
+
+[[benchmarks]]
+name = "Chartography"
+score = 86.6
+metric = "accuracy (mean; Pass@1)"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/chartography"
+
+[[benchmarks]]
+name = "HANDBOOK.md Agents"
+score = 52.3
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/handbook"
+
+[[benchmarks]]
+name = "sudo L7"
+score = 38.3
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/sudo-l7"
+
+[[benchmarks]]
+name = "Riemann-bench"
+score = 84.0
+metric = "score"
+effort = "High"
+source = "https://surgehq.ai/benchmarks/riemann-bench"
+
+# Additional launch scores. The Arena score is a launch observation, not a live rank.
+[[benchmarks]]
+name = "Artificial Analysis Coding Agent Index"
+score = 58.6
+metric = "index score"
+source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+
+[[benchmarks]]
+name = "Agent Arena Index"
+score = 1336
+metric = "rating"
+source = "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+
+# Standard error of the mean: USD 972 across six runs.
+[[benchmarks]]
+name = "Vending-Bench"
+score = 16843.41
+metric = "bank balance (USD)"
+version = "2"
+variant = "Mean final balance after one simulated year"
+source = "https://andonlabs.com/evals/vending-bench-2"
