@@ -949,6 +949,10 @@
 "google/gemini-4-neon" = "谷歌的 Gemini 4 模型，专为快速实现前沿级编码、知识工作和科学工作流程而设计，具备四种思维层级以及一个 1M 标记的上下文窗口。"
 "microsoft/mai-code-2-flash" = "微软用于解释、针对性编辑和批量常规修复的轻量级编码模型"
 "microsoft/mai-code-2" = "微软用于调试、多文件变更和仓库级推理的更大型智能体编码模型"
+"microsoft/mai-image-2.7-flash" = "速度更快、成本更低的 MAI-Image-2.7，用于高通量生成与编辑"
+"microsoft/mai-image-2.7" = "支持透明背景的图像生成与精准多参考编辑模型"
+"microsoft/microsoft-decision-1.1" = "微软决策模型，可为有关文本、JSON 和图像的“是/否”、选择题和评分题返回经过校准的概率"
+"microsoft/microsoft-decision-1" = "用于对文本和 JSON 中的“是/否”、选择题和评分题返回校准后概率的 Microsoft 决策模型"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
