@@ -946,6 +946,9 @@
 "particle-ai/particle-1" = "在 DeepSeek V4.1 Flash 上后训练的 token 高效智能体编码模型，可使用更少的推理和工具调用 token 完成软件工程任务"
 "openai/gpt-6.2-astra" = "一款用于编程、计算机操作以及幻灯片、电子表格和文档等专业工作的前沿推理模型。"
 "openai/gpt-6.2-sol" = "适用于日常工作、多步骤智能体工作流和编码的高效推理模型。"
+"google/gemini-4-neon" = "谷歌的 Gemini 4 模型，专为快速实现前沿级编码、知识工作和科学工作流程而设计，具备四种思维层级以及一个 1M 标记的上下文窗口。"
+"microsoft/mai-code-2-flash" = "微软用于解释、针对性编辑和批量常规修复的轻量级编码模型"
+"microsoft/mai-code-2" = "微软用于调试、多文件变更和仓库级推理的更大型智能体编码模型"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
