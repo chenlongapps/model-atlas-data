@@ -8,6 +8,7 @@ name = "Kinfra Text Embedding 0.6B"
 description = "Lightweight Tencent text embedding model producing 1,024-dimensional vectors for large-scale retrieval"
 open_weights = false
 release_date = "2026-07"
+family = "kinfra-embedding"
 
 [modalities]
 input = ["text"]

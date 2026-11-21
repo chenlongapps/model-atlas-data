@@ -8,6 +8,7 @@ name = "Riverflow 2.5 Fast"
 description = "Speed-optimized Riverflow 2.5 agentic image model with candidate scoring"
 open_weights = false
 release_date = "2026-06-05"
+family = "riverflow-fast"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]

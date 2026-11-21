@@ -12,6 +12,7 @@ description = "StepFun's next-generation flagship base model for coding and prof
 open_weights = true
 release_date = "2026-09-16"
 last_updated = "2026-09-20"
+family = "step"
 
 [metadata.modelatlas.parameters]
 total_billion = 600

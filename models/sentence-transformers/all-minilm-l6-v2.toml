@@ -11,6 +11,7 @@ description = "Sentence and short-paragraph embedding model for clustering and s
 open_weights = true
 release_date = "2021-08-30"
 license = "Apache-2.0"
+family = "minilm"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.022713216

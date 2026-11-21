@@ -8,6 +8,7 @@ name = "Universal-3 Pro"
 description = "Promptable speech-to-text model with natural-language prompting, keyterms and speaker diarization"
 open_weights = false
 release_date = "2026-02-03"
+family = "assemblyai-universal"
 
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]

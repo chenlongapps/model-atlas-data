@@ -11,6 +11,7 @@ description = "Compact vision-language model for multilingual document parsing, 
 open_weights = true
 release_date = "2025-10-16"
 license = "Apache-2.0"
+family = "paddleocr"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.9

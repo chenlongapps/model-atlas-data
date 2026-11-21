@@ -8,6 +8,7 @@ name = "HeyGen Voice"
 description = "Text-to-speech model with default voices and HeyGen voice clones"
 open_weights = false
 release_date = "2026-10-13"
+family = "heygen-voice"
 
 [modalities]
 input = ["text"]

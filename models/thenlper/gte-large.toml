@@ -8,6 +8,7 @@ description = "English text embedding model producing 1024-dimensional vectors"
 open_weights = true
 release_date = "2023-07"
 license = "MIT"
+family = "gte"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.335141888

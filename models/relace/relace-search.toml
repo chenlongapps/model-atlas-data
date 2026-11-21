@@ -9,6 +9,7 @@ name = "Relace Search"
 description = "Tool-capable chat model for instruction following and agentic application workflows"
 open_weights = false
 release_date = "2025-12-08"
+family = "relace-search"
 
 [modalities]
 input = ["text"]

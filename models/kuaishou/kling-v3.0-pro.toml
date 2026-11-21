@@ -8,6 +8,7 @@ name = "Kling VIDEO 3.0 Pro"
 description = "Higher-quality Kling 3.0 video model with first and last frame control and native audio"
 open_weights = false
 release_date = "2026-02-05"
+family = "kling"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]

@@ -9,6 +9,7 @@ description = "Fast coding model"
 open_weights = false
 knowledge = "2026-09"
 release_date = "2026-09-21"
+family = "viv"
 
 [modalities]
 input = ["text", "image"]

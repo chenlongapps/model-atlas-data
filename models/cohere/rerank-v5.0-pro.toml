@@ -9,6 +9,7 @@ name = "Rerank 5 Pro"
 description = "Highest-quality multilingual reranker for reasoning-heavy queries and long documents"
 open_weights = false
 release_date = "2026-10-21"
+family = "cohere-rerank-pro"
 
 [modalities]
 input = ["text"]

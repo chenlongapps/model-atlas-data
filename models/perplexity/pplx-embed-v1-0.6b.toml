@@ -8,6 +8,7 @@ description = "Open text embedding model for web-scale dense retrieval"
 open_weights = true
 release_date = "2026-02-26"
 license = "MIT"
+family = "pplx-embed"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.59604992

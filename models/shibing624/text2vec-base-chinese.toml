@@ -9,6 +9,7 @@ description = "Chinese sentence embedding model for semantic similarity and retr
 open_weights = true
 release_date = "2022-01-23"
 license = "Apache-2.0"
+family = "text2vec"
 
 [modalities]
 input = ["text"]

@@ -9,6 +9,7 @@ description = "Dense 1B-class open-source model for on-device and resource-const
 open_weights = true
 release_date = "2026-05-19"
 license = "apache-2.0"
+family = "minicpm"
 
 [metadata.modelatlas.parameters]
 total_billion = 1.080632832

@@ -13,6 +13,7 @@ description = "Fully open 8B multilingual multimodal LLM from the Swiss AI Initi
 open_weights = true
 release_date = "2026-10-15"
 license = "Apache-2.0"
+family = "apertus"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "audio/mpeg"]

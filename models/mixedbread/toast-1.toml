@@ -8,6 +8,7 @@ name = "Toast 1"
 description = "Specialized search model for knowledge-intensive questions, multi-step retrieval, and evidence synthesis"
 open_weights = false
 release_date = "2026-08-13"
+family = "toast"
 
 [modalities]
 input = ["text"]

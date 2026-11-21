@@ -8,6 +8,7 @@ description = "Compact MiniCPM-V model for single-image, multi-image and video u
 open_weights = true
 release_date = "2026-10-06"
 license = "Apache-2.0"
+family = "minicpm-v"
 
 [metadata.modelatlas.parameters]
 total_billion = 1.554476272

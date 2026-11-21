@@ -15,6 +15,7 @@ description = "Fully open multilingual multimodal reasoner from the Swiss AI Ini
 open_weights = true
 release_date = "2026-07-24"
 license = "Apache-2.0"
+family = "apertus"
 
 [modalities]
 input = ["text", "image", "audio"]

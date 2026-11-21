@@ -8,6 +8,7 @@ name = "Kling VIDEO O1"
 description = "Unified multimodal Kling model for video generation and editing"
 open_weights = false
 release_date = "2025-12-01"
+family = "kling-omni"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]

@@ -8,6 +8,7 @@ open_weights = true
 release_date = "2025-03-04"
 last_updated = "2025-05-14"
 license = "CC-BY-NC-4.0"
+family = "aya-vision"
 
 [metadata.modelatlas.parameters]
 total_billion = 33.137896688

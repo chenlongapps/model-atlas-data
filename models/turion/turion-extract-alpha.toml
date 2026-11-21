@@ -18,6 +18,7 @@ description = "Open-weight extraction model on Gemma 4 12B (LoRA plus extraction
 open_weights = true
 release_date = "2026-10-25"
 license = "Apache-2.0"
+family = "turion-extract"
 
 [modalities]
 input = ["text"]

@@ -10,6 +10,7 @@ name = "Wan3.0"
 description = "All-in-one video model for reference, editing and image-to-video generation with audio, up to 30 seconds"
 open_weights = false
 release_date = "2026-08-06"
+family = "wan"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]

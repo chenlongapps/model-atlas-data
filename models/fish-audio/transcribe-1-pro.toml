@@ -8,6 +8,7 @@ name = "Transcribe 1 Pro"
 description = "Speech-to-text model with speaker markers and emotion and vocal-event cues"
 open_weights = false
 release_date = "2026-09-18"
+family = "fish-transcribe-pro"
 
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/aac", "audio/mp4", "audio/flac", "audio/ogg", "audio/webm", "video/x-matroska", "video/quicktime"]

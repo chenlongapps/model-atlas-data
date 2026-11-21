@@ -8,6 +8,7 @@ name = "Particle-1"
 description = "Token-efficient agentic coding model post-trained on DeepSeek V4.1 Flash to finish software engineering tasks with fewer reasoning and tool-call tokens"
 open_weights = false
 release_date = "2026-10-28"
+family = "particle"
 
 [modalities]
 input = ["text", "image"]

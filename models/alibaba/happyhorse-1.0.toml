@@ -9,6 +9,7 @@ name = "HappyHorse-1.0"
 description = "Video model for text, image and reference to video with realistic motion"
 open_weights = false
 release_date = "2026-04-22"
+family = "happyhorse"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp"]

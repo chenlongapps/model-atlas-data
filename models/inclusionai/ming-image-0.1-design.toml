@@ -11,6 +11,7 @@ name = "Ming Image 0.1 Design"
 description = "Design image generation and editing model for UI drafts and visual design workflows"
 open_weights = false
 release_date = "2026-10-27"
+family = "ming-image"
 
 [modalities]
 input = ["text", "image"]

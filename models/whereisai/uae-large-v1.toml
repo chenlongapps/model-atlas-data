@@ -8,6 +8,7 @@ description = "English text embedding model trained with angle-optimized contras
 open_weights = true
 release_date = "2023-12-04"
 license = "MIT"
+family = "uae"
 
 [modalities]
 input = ["text"]

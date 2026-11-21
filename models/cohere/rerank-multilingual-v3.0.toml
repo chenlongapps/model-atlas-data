@@ -9,6 +9,7 @@ name = "Rerank Multilingual 3"
 description = "Reranker for non-English documents and semi-structured data"
 open_weights = false
 release_date = "2024-04-11"
+family = "cohere-rerank"
 
 [modalities]
 input = ["text"]

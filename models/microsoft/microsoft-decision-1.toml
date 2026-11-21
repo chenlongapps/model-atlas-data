@@ -12,6 +12,7 @@ name = "Microsoft-Decision-1"
 description = "Microsoft decision model that returns calibrated probabilities for typed yes/no, choice and score questions about text and JSON"
 open_weights = false
 release_date = "2026-10-09"
+family = "microsoft-decision"
 
 [modalities]
 input = ["text"]

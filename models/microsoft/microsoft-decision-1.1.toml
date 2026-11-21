@@ -12,6 +12,7 @@ name = "Microsoft-Decision-1.1"
 description = "Microsoft decision model that returns calibrated probabilities for typed yes/no, choice and score questions about text, JSON and images"
 open_weights = false
 release_date = "2026-11-17"
+family = "microsoft-decision"
 
 [modalities]
 input = ["text", "image/png"]

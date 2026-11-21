@@ -7,7 +7,7 @@
 schema = 2
 name = "openPangu 2.0 Flash"
 description = "Huawei's Ascend-trained text MoE model with approximately 92B total parameters, 6B active per token, 512K context, and thinking and non-thinking modes"
-family = "pangu"
+family = "pangu-flash"
 open_weights = true
 license = "OpenPangu Model License Agreement Version 2.0"
 release_date = "2026-06-30"

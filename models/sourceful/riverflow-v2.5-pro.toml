@@ -8,6 +8,7 @@ name = "Riverflow 2.5 Pro"
 description = "Most capable Riverflow 2.5 agentic image model with candidate scoring and 4K output"
 open_weights = false
 release_date = "2026-06-05"
+family = "riverflow-pro"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]

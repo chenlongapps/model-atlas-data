@@ -8,6 +8,7 @@ description = "Multilingual text embedding model for retrieval and semantic simi
 open_weights = true
 release_date = "2023-06"
 license = "MIT"
+family = "e5-multilingual"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.559890432

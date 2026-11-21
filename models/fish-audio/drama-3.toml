@@ -7,6 +7,7 @@ name = "Drama 3"
 description = "Text-to-speech model directed with plain-language performance notes"
 open_weights = false
 release_date = "2026-10-13"
+family = "fish-drama"
 
 [modalities]
 input = ["text"]

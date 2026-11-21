@@ -9,6 +9,7 @@ name = "Wan2.6"
 description = "Video model for text- and image-to-video with audio input and synchronized sound"
 open_weights = false
 release_date = "2025-12-03"
+family = "wan"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]

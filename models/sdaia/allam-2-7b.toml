@@ -6,6 +6,7 @@ name = "ALLaM-2-7b"
 description = "ALLaM-2-7b instruction tuned model by SDAIA"
 open_weights = true
 release_date = "2025-01-23"
+family = "allam"
 
 [metadata.modelatlas.parameters]
 total_billion = 7

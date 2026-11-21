@@ -12,6 +12,7 @@ name = "Kling VIDEO 4.0"
 description = "Kling video model with native 30-second generation, multi-keyframe control, omni references, video editing and native audio"
 open_weights = false
 release_date = "2026-10-15"
+family = "kling"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "video/mp4", "video/quicktime"]

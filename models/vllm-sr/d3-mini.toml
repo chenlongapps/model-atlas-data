@@ -11,6 +11,7 @@ description = "vLLM Semantic Router 4B decision model that answers typed choice,
 open_weights = true
 release_date = "2026-10-10"
 license = "Apache-2.0"
+family = "d3-mini"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "video/quicktime", "video/x-matroska"]

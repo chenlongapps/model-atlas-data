@@ -13,6 +13,7 @@ description = "vLLM Semantic Router 27B decision model that answers typed choice
 open_weights = true
 release_date = "2026-10-10"
 license = "Apache-2.0"
+family = "d3"
 
 [metadata.modelatlas.parameters]
 total_billion = 26.09

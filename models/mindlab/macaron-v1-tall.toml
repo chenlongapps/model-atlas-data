@@ -12,6 +12,7 @@ description = "Qwen3.6-based Mixture-of-LoRA model with specialists for chat, pe
 open_weights = true
 release_date = "2026-07-21"
 license = "MIT"
+family = "macaron-tall"
 
 [metadata.modelatlas.parameters]
 notes = "The card's nominal release footprint is not treated as an inclusive exact total. Only independently disclosed specialist weight counts are recorded; they are not summed."

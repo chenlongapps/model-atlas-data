@@ -13,6 +13,7 @@ name = "CogVideoX-3"
 description = "Video generation model for text-to-video, image-to-video, and first/last-frame clips with optional sound effects"
 open_weights = false
 release_date = "2025-07-15"
+family = "cogvideox"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg"]

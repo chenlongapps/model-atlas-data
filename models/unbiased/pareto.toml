@@ -11,6 +11,7 @@ name = "Pareto"
 description = "Blended multimodal model that runs multiple language models in parallel and returns a synthesized answer"
 open_weights = false
 release_date = "2026-09-17"
+family = "pareto"
 
 [modalities]
 input = ["text", "image"]

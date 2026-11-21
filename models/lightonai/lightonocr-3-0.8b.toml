@@ -9,6 +9,7 @@ open_weights = true
 release_date = "2026-10-08"
 last_updated = "2026-10-14"
 license = "apache-2.0"
+family = "lightonocr"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.85298592

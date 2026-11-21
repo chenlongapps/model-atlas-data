@@ -9,6 +9,7 @@ name = "Rerank 4 Pro"
 description = "Multilingual reranker for maximum relevance on documents and semi-structured data"
 open_weights = false
 release_date = "2025-12-11"
+family = "cohere-rerank-pro"
 
 [modalities]
 input = ["text"]

@@ -9,6 +9,7 @@ description = "GLM-5.2-based Mixture-of-LoRA model with specialists for chat, pe
 open_weights = true
 release_date = "2026-07-21"
 license = "MIT"
+family = "macaron-venti"
 
 [metadata.modelatlas.parameters]
 total_billion = 748

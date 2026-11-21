@@ -15,6 +15,7 @@ name = "Sage 1.4"
 description = "Decision model that answers typed yes/no, choice, scale, sort and tag questions with calibrated probabilities"
 open_weights = false
 release_date = "2026-10-04"
+family = "levanto-sage"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]

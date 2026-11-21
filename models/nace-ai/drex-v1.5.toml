@@ -15,6 +15,7 @@ description = "System One decision model for typed, calibrated probabilistic ans
 open_weights = true
 release_date = "2026-09-28"
 license = "Nace.AI Open RAIL-M"
+family = "drex"
 
 [metadata.modelatlas.parameters]
 total_billion = 8.95

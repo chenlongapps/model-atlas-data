@@ -12,6 +12,7 @@ name = "Perceptron Mk1"
 description = "Multimodal reasoning model for visual analysis, planning, and tool use"
 open_weights = false
 release_date = "2026-05-12"
+family = "perceptron-mk"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm"]

@@ -11,6 +11,7 @@ name = "Decider 1"
 description = "meraGPT decision model that answers typed yes/no, choice and score questions about a JSON state with calibrated probabilities"
 open_weights = false
 release_date = "2026-09-22"
+family = "decider"
 
 [modalities]
 input = ["text"]

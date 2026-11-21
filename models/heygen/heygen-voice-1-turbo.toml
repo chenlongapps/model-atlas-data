@@ -8,6 +8,7 @@ name = "HeyGen Voice Turbo"
 description = "Lower-latency version of HeyGen Voice"
 open_weights = false
 release_date = "2026-10-13"
+family = "heygen-voice-turbo"
 
 [modalities]
 input = ["text"]

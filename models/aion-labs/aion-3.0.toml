@@ -7,6 +7,7 @@ name = "Aion-3.0"
 description = "Reasoning model for deliberate analysis, multi-step problem solving, and tool use"
 open_weights = false
 release_date = "2026-05-05"
+family = "aion"
 
 [modalities]
 input = ["text"]

@@ -9,6 +9,7 @@ description = "Open multilingual text-to-speech model with bracket emotion cues 
 open_weights = true
 release_date = "2026-03"
 license = "Fish Audio Research License"
+family = "fish-s-pro"
 
 [metadata.modelatlas.parameters]
 total_billion = 4.561852416

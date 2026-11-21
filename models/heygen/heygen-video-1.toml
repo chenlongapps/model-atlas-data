@@ -11,6 +11,7 @@ name = "HeyGen Video"
 description = "General-purpose video model for text, image and reference to video with generated dialogue, ambience and effects"
 open_weights = false
 release_date = "2026-09-30"
+family = "heygen-video"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "video/mp4", "audio/mpeg"]

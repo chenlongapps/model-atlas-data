@@ -9,6 +9,7 @@ name = "Chirp 3"
 description = "Multilingual speech-to-text model with diarization and automatic language detection"
 open_weights = false
 release_date = "2025-08-29"
+family = "chirp"
 
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]

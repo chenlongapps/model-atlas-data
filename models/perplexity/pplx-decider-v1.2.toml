@@ -11,6 +11,7 @@ description = "Perplexity's open-weight decision model on Qwen3.8-27B that retur
 open_weights = true
 release_date = "2026-10-15"
 license = "Apache-2.0"
+family = "pplx-decider"
 
 [metadata.modelatlas.parameters]
 notes = "Main checkpoint and required readout are scoped separately; no complete total is inferred by adding components."

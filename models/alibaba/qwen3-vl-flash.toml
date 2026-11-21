@@ -7,6 +7,7 @@ name = "Qwen3 VL Flash (Alibaba Cloud)"
 description = "Qwen vision-language model for visual reasoning, documents, and agent tasks"
 open_weights = false
 release_date = "2025-10-15"
+family = "qwen-vl-flash"
 
 [modalities]
 input = ["text", "image/bmp", "image/jpeg", "image/png", "image/tiff", "image/webp", "image/heic"]

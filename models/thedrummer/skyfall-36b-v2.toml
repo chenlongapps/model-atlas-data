@@ -8,6 +8,7 @@ description = "Open-weight instruction model for adaptable chat and self-hosted 
 open_weights = true
 knowledge = "2024-06-30"
 release_date = "2025-03-10"
+family = "skyfall"
 
 [metadata.modelatlas.parameters]
 total_billion = 36.91053568

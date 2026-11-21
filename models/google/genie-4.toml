@@ -12,6 +12,7 @@ name = "Genie 4"
 description = "Real-time interactive world generation model that streams steerable 720p video with stereo audio from a text or image seed"
 open_weights = false
 release_date = "2026-11-19"
+family = "genie"
 
 [modalities]
 input = ["text", "image/jpeg"]

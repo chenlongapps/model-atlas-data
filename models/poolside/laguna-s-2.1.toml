@@ -3,7 +3,7 @@
 schema = 2
 name = "Laguna S 2.1"
 description = "118B Mixture-of-Experts agentic coding model from Poolside"
-family = "laguna"
+family = "laguna-s"
 open_weights = true
 release_date = "2026-07-21"
 

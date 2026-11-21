@@ -13,6 +13,7 @@ name = "Mistral OCR 4.1"
 description = "Document OCR model with paragraph-level bounding boxes, block labels, and confidence scores"
 open_weights = false
 release_date = "2026-07-16"
+family = "mistral-ocr"
 
 [modalities]
 input = ["image/jpeg", "image/png", "image/avif", "image/tiff", "image/gif", "image/heic", "image/heif", "image/bmp", "image/webp", "application/pdf", "text/csv", "text/plain", "text/xml", "text/troff"]

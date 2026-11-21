@@ -14,6 +14,7 @@ description = "Base Labs' 9B open-weight decision model on Qwen3.5-9B that retur
 open_weights = true
 release_date = "2026-10-19"
 license = "MIT"
+family = "elephant"
 
 [metadata.modelatlas.parameters]
 total_billion = 9

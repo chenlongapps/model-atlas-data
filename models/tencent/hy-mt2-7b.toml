@@ -7,7 +7,7 @@
 schema = 2
 name = "Hy-MT2-7B"
 description = "Multilingual translation model for complex real-world tasks, supporting translation among 33 languages and multilingual translation instructions"
-family = "Hy"
+family = "hy-mt"
 open_weights = true
 release_date = "2026-05-21"
 

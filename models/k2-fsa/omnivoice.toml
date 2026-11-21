@@ -8,6 +8,7 @@ name = "OmniVoice"
 description = "Massively multilingual zero-shot text-to-speech model with preset, described or cloned voices"
 open_weights = true
 release_date = "2026-03-30"
+family = "omnivoice"
 
 [metadata.modelatlas.parameters]
 notes = "The speech generation checkpoint and audio tokenizer are separate observations; no complete pipeline total is inferred."

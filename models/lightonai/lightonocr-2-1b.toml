@@ -13,6 +13,7 @@ description = "End-to-end 1B-parameter vision-language OCR model from the French
 open_weights = true
 release_date = "2026-01-16"
 license = "apache-2.0"
+family = "lightonocr"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp"]

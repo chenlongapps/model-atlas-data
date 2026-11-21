@@ -9,6 +9,7 @@ description = "Open conversational speech generation model"
 open_weights = true
 release_date = "2025-03"
 license = "Apache-2.0"
+family = "csm"
 
 [metadata.modelatlas.parameters]
 total_billion = 1.552791552

@@ -10,6 +10,7 @@ description = "Compact English text-to-speech model with zero-shot voice cloning
 open_weights = true
 release_date = "2026-04-14"
 license = "MIT"
+family = "chatterbox"
 
 [modalities]
 input = ["text"]

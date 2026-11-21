@@ -15,7 +15,7 @@ open_weights = true
 release_date = "2026-11-05"
 last_updated = "2026-11-12"
 license = "Apache-2.0"
-family = "ling"
+family = "inkling-small"
 
 [metadata.modelatlas.parameters]
 total_billion = 594

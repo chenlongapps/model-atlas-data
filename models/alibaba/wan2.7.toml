@@ -10,6 +10,7 @@ name = "Wan2.7"
 description = "Video model for text, image and reference to video, with mixed image and video references and voice timbre cloning"
 open_weights = false
 release_date = "2026-04-03"
+family = "wan"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]

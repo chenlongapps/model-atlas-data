@@ -10,6 +10,7 @@ description = "Sentence embedding model for paraphrase detection and semantic si
 open_weights = true
 release_date = "2021-05-19"
 license = "Apache-2.0"
+family = "minilm"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.022713216

@@ -9,6 +9,7 @@ name = "Rerank 4 Fast"
 description = "Low-latency multilingual reranker for high-throughput retrieval"
 open_weights = false
 release_date = "2025-12-11"
+family = "cohere-rerank-fast"
 
 [modalities]
 input = ["text"]

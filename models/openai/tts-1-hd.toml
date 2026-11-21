@@ -9,6 +9,7 @@ name = "TTS-1 HD"
 description = "Text-to-speech model optimized for audio quality"
 open_weights = false
 release_date = "2023-11-06"
+family = "gpt-tts"
 
 [modalities]
 input = ["text"]

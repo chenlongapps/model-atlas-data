@@ -8,6 +8,7 @@ name = "TTS-1.5 Max"
 description = "Realtime text-to-speech model with expressive, stable delivery and voice cloning across 15 languages"
 open_weights = false
 release_date = "2026-01-21"
+family = "inworld-tts-max"
 
 [modalities]
 input = ["text"]

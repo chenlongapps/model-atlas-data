@@ -11,6 +11,7 @@ description = "PixilabAI's fast 26B-A4B open-weight decision model on Gemma 4 th
 open_weights = true
 release_date = "2026-10-02"
 license = "Apache-2.0"
+family = "blink"
 
 [modalities]
 input = ["text", "image"]

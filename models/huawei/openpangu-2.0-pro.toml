@@ -7,7 +7,7 @@
 schema = 2
 name = "openPangu 2.0 Pro"
 description = "Huawei's Ascend-trained text MoE model with approximately 505B total parameters, 18B active per token, 512K context, and thinking and non-thinking modes"
-family = "pangu"
+family = "pangu-pro"
 open_weights = true
 license = "OpenPangu Model License Agreement Version 2.0"
 release_date = "2026-07-31"

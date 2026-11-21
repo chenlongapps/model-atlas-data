@@ -10,6 +10,7 @@ name = "Kling VIDEO 2.5 Turbo"
 description = "Faster, lower-cost Kling video model for text-to-video and image-to-video with first and last frame control"
 open_weights = false
 release_date = "2025-09-23"
+family = "kling-turbo"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]

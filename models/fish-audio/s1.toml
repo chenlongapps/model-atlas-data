@@ -7,6 +7,7 @@ name = "S1"
 description = "Multilingual text-to-speech model with parenthetical emotion controls"
 open_weights = false
 release_date = "2025-06"
+family = "fish-s"
 
 [modalities]
 input = ["text"]

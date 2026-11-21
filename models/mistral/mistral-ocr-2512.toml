@@ -13,6 +13,7 @@ name = "Mistral OCR 3"
 description = "Document OCR model that extracts interleaved text and images from documents"
 open_weights = false
 release_date = "2025-12-18"
+family = "mistral-ocr"
 
 [modalities]
 input = ["image/jpeg", "image/png", "image/avif", "image/tiff", "image/gif", "image/heic", "image/heif", "image/bmp", "image/webp", "application/pdf", "text/csv", "text/plain", "text/xml", "text/troff"]

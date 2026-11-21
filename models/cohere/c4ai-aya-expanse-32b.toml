@@ -5,6 +5,7 @@ description = "Open multilingual model optimized for generation across 23 langua
 open_weights = true
 release_date = "2024-10-24"
 license = "CC-BY-NC-4.0"
+family = "aya"
 
 [metadata.modelatlas.parameters]
 total_billion = 32

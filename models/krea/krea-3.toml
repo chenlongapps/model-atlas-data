@@ -8,6 +8,7 @@ name = "Krea 3"
 description = "Fast image editing model that keeps products and characters consistent"
 open_weights = false
 release_date = "2026-10-15"
+family = "krea"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]

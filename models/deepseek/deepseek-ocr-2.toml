@@ -8,6 +8,7 @@ name = "DeepSeek OCR 2"
 description = "High-accuracy OCR model for extracting text from documents, screenshots, receipts, and natural scenes"
 open_weights = true
 release_date = "2026-01-27"
+family = "deepseek-ocr"
 
 [metadata.modelatlas.parameters]
 total_billion = 3.38911936

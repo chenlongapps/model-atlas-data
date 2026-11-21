@@ -7,6 +7,7 @@ name = "S2.1 Pro"
 description = "Production text-to-speech model improving on S2 Pro in quality, latency, and throughput"
 open_weights = false
 release_date = "2026-06-23"
+family = "fish-s-pro"
 
 [modalities]
 input = ["text"]

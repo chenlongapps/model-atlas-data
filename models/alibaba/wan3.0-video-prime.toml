@@ -10,6 +10,7 @@ name = "Wan3.0-Video-Prime"
 description = "High-speed Wan3.0 video model with the same four-modal references, up to 30 seconds"
 open_weights = false
 release_date = "2026-08-20"
+family = "wan"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/bmp", "image/webp", "video/mp4", "video/quicktime", "audio/wav", "audio/mpeg"]

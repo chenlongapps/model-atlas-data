@@ -10,6 +10,7 @@ description = "Multilingual text encoder that embeds text into the CLIP ViT-B/32
 open_weights = true
 release_date = "2021-06-22"
 license = "Apache-2.0"
+family = "clip"
 
 [modalities]
 input = ["text"]

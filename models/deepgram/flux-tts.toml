@@ -8,6 +8,7 @@ name = "Flux TTS"
 description = "Conversation-native text-to-speech model for real-time voice agents"
 open_weights = false
 release_date = "2026-08-12"
+family = "deepgram-flux"
 
 [modalities]
 input = ["text"]

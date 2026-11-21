@@ -12,6 +12,7 @@ open_weights = true
 knowledge = "2025-09"
 release_date = "2025-09-02"
 license = "Apache-2.0"
+family = "apertus"
 
 [metadata.modelatlas.parameters]
 total_billion = 8.053338176

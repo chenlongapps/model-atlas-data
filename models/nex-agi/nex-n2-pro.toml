@@ -8,6 +8,7 @@ name = "Nex-N2-Pro"
 description = "Open agentic MoE model (397B total, 17B active) for coding, tool use, and research workflows"
 open_weights = true
 release_date = "2026-06-02"
+family = "nex-n-pro"
 
 [metadata.modelatlas.parameters]
 total_billion = 396.802360816

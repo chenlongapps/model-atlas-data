@@ -7,6 +7,7 @@ name = "FLUX.1 Kontext [pro]"
 description = "Image generation and in-context editing model that edits images from simple text instructions"
 open_weights = false
 release_date = "2025-05-29"
+family = "flux-kontext-pro"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]

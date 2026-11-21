@@ -9,6 +9,7 @@ open_weights = true
 release_date = "2026-10-08"
 last_updated = "2026-10-09"
 license = "Apache-2.0"
+family = "phocinae-largha"
 
 [metadata.modelatlas.parameters]
 total_billion = 0.14429287

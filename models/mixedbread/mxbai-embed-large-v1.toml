@@ -8,6 +8,7 @@ description = "English text embedding model for retrieval with Matryoshka and bi
 open_weights = true
 release_date = "2024-03-07"
 license = "Apache-2.0"
+family = "mxbai-embed"
 
 [modalities]
 input = ["text"]

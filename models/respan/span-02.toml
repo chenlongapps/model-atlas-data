@@ -16,6 +16,7 @@ description = "Open-weight decision model with optional anytime reasoning over t
 open_weights = true
 release_date = "2026-10-15"
 license = "Apache-2.0"
+family = "span"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg"]

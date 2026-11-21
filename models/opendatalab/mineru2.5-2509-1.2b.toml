@@ -12,6 +12,7 @@ description = "1.2B-parameter vision-language model from OpenDataLab for two-ste
 open_weights = true
 release_date = "2025-09-17"
 license = "AGPL-3.0"
+family = "mineru"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp"]

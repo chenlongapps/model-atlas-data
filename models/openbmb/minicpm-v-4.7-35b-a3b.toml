@@ -8,6 +8,7 @@ description = "First MoE MiniCPM-V model for single-image, multi-image and video
 open_weights = true
 release_date = "2026-10-07"
 license = "Apache-2.0"
+family = "minicpm-v"
 
 [metadata.modelatlas.parameters]
 total_billion = 35.212875824

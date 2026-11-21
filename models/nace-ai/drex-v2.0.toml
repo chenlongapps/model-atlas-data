@@ -14,6 +14,7 @@ open_weights = true
 release_date = "2026-10-06"
 last_updated = "2026-10-12"
 license = "Nace.AI Open RAIL-M"
+family = "drex"
 
 [metadata.modelatlas.parameters]
 total_billion = 35.107181936

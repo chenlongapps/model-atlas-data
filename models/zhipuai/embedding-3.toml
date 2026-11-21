@@ -9,6 +9,7 @@ name = "Embedding-3"
 description = "Zhipu third-generation text embedding model with 256 to 2,048 dimensions"
 open_weights = false
 release_date = "2024-08"
+family = "glm-embedding"
 
 [modalities]
 input = ["text"]

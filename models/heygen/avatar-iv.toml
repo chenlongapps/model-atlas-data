@@ -9,6 +9,7 @@ name = "Avatar IV"
 description = "Image-to-video avatar model that turns one photo and a script or audio track into a lip-synced talking video"
 open_weights = false
 release_date = "2025-05"
+family = "heygen-avatar"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "audio/mpeg"]

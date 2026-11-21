@@ -10,6 +10,7 @@ name = "Kling VIDEO 3.0 Omni"
 description = "Kling 3.0 multimodal video model for reference-based generation and editing with images, videos and elements, multi-shot storyboards and native audio"
 open_weights = false
 release_date = "2026-02-05"
+family = "kling-omni"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "video/mp4", "video/quicktime"]

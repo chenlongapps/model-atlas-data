@@ -10,6 +10,7 @@ name = "Transcribe 1"
 description = "Speech-to-text model for short recordings with language detection and optional timestamps"
 open_weights = false
 release_date = "2025-09"
+family = "fish-transcribe"
 
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/aac", "audio/mp4", "audio/flac", "audio/ogg"]

@@ -8,6 +8,7 @@ description = "Open-weight instruction model for adaptable chat and self-hosted 
 open_weights = true
 knowledge = "2023-06-30"
 release_date = "2023-07-22"
+family = "remm"
 
 [metadata.modelatlas.parameters]
 total_billion = 13.01586432

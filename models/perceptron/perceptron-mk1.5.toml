@@ -13,6 +13,7 @@ name = "Perceptron Mk1.5"
 description = "Image, video, and audio understanding with visual grounding, reasoning, and function calling"
 open_weights = false
 release_date = "2026-09-25"
+family = "perceptron-mk"
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "video/mp4", "video/quicktime", "video/webm", "audio/wav", "audio/mpeg", "audio/flac"]

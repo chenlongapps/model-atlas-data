@@ -11,6 +11,7 @@ open_weights = true
 release_date = "2026-09-06"
 last_updated = "2026-09-12"
 license = "apache-2.0"
+family = "minicpm"
 
 [metadata.modelatlas.parameters]
 total_billion = 2.51675648

@@ -8,6 +8,7 @@ name = "Universal-3.6 Pro"
 description = "Speech-to-text model trained on voice-agent and telephony audio, successor to Universal-3.5 Pro"
 open_weights = false
 release_date = "2026-09-29"
+family = "assemblyai-universal"
 
 [modalities]
 input = ["audio/wav", "audio/mpeg", "audio/flac", "audio/mp4", "audio/ogg", "audio/webm", "audio/aac"]

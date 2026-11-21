@@ -13,6 +13,7 @@ description = "Open-weight decision model built on Qwen3.5-35B-A3B that answers 
 open_weights = true
 release_date = "2026-11-05"
 license = "Apache-2.0"
+family = "cicero"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]

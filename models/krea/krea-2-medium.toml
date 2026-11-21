@@ -8,6 +8,7 @@ name = "Krea 2 Medium"
 description = "Balanced Krea 2 image model for general and expressive styles"
 open_weights = false
 release_date = "2026-05-12"
+family = "krea-medium"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
