@@ -281,3 +281,6 @@ metric = "index score"
 version = "5.0.1"
 effort = "Low"
 source = "https://artificialanalysis.ai/models/kimi-k3-low"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/moonshotai/Kimi-K3"

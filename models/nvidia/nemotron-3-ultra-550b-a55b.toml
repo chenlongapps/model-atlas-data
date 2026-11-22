@@ -134,3 +134,6 @@ dataset = "220 tasks across 44 occupations and 9 industries"
 variant = "Reasoning; CI -17/+17"
 harness = "Stirrup agentic loop (shell and web browsing)"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"

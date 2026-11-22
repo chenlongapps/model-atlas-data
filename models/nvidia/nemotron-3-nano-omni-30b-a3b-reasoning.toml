@@ -37,3 +37,6 @@ version = "2.1"
 dataset = "220 tasks across 44 occupations and 9 major industries"
 harness = "Stirrup"
 source = "https://artificialanalysis.ai/evaluations/gdpval-aa"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16"

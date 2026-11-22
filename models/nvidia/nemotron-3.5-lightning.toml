@@ -152,3 +152,6 @@ cost_unit = "USD/weighted task"
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/nemotron-3-5-lightning"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"

@@ -43,3 +43,6 @@ score = 22.82
 metric = "accuracy"
 variant = "with tools"
 source = "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16"

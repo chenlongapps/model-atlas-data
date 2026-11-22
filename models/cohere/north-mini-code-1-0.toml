@@ -78,3 +78,6 @@ score = 3.42470262148493
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/north-mini-code"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/CohereLabs/North-Mini-Code-1.0"

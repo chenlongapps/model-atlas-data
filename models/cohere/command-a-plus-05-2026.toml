@@ -64,3 +64,6 @@ score = 6.24120025576958
 metric = "index score"
 version = "5.0.1"
 source = "https://artificialanalysis.ai/models/command-a-plus"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16"

@@ -38,3 +38,6 @@ variant = "pass@1 averaged over 3 attempts per task"
 harness = "pool"
 source = "https://poolside.ai/blog/introducing-laguna-s-2-1"
 date = "2026-07-21"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/poolside/Laguna-S-2.1"

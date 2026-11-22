@@ -91,3 +91,6 @@ cost_source = "https://www.vals.ai/_astro/benchmark_view_vals_index.CxyItaos.jso
 metric = "performance score"
 version = "2.2"
 source = "https://www.vals.ai/benchmarks/vals_index"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/tencent/Hy4-preview"

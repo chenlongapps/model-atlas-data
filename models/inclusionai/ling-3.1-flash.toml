@@ -64,3 +64,6 @@ dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/ling-3-1-flash-1019"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/inclusionAI/Ling-3.1-flash"

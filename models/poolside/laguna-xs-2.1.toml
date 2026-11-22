@@ -68,3 +68,6 @@ version = "1.1"
 dataset = "113 tasks"
 variant = "pass@1 averaged over 3 attempts per task"
 source = "https://poolside.ai/blog/introducing-laguna-s-2-1"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/poolside/Laguna-XS-2.1"

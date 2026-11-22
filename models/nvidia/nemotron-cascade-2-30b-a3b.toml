@@ -37,3 +37,6 @@ dataset = "HLE text-only split (2,158 examples)"
 variant = "no tool; thinking mode; 128K-token thinking budget"
 harness = "default system prompt with boxed-answer instruction; GPT-OSS-120B for answer extraction and correctness verification"
 source = "https://arxiv.org/html/2603.19220"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/nvidia/Nemotron-Cascade-2-30B-A3B"

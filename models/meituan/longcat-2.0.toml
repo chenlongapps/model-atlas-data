@@ -97,3 +97,6 @@ metric = "accuracy"
 dataset = "2,158 text-only questions"
 variant = "pass@1; judged by GPT-5.6 Luna (medium)"
 source = "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-low-vs-longcat-2-0"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/meituan-longcat/LongCat-2.0"
