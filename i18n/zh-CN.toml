@@ -955,6 +955,11 @@
 "microsoft/microsoft-decision-1" = "用于对文本和 JSON 中的“是/否”、选择题和评分题返回校准后概率的 Microsoft 决策模型"
 "openai/gpt-live-1.1" = "用于多语言对话的全双工语音模型，与 GPT-Live 相比，其转录更准确，口音更稳定 1"
 "google/genie-4" = "一种实时交互式世界生成模型，可根据文本或图像种子，流式传输可操控的 720p 视频并附带立体声音频"
+"paperinstruments/ultramarine-1-flash" = "Paper Instruments 针对专业知识工作的智能体模型，基于 GLM-5.3 Flash 进行强化学习训练"
+"sarvam/sarvam-prism" = "基于 Sarvam 105B 构建的 System-1 决策模型，可为“是/否”、选择和评分类问题返回经过校准的概率。"
+"writer/palmyra-vision-7b" = "用于读取图像中笔迹、图表和文档的作家多模态模型"
+"xai/grok-4.20-multi-agent-0309" = "Grok 模型，可同时运行多个智能体，用于研究、推理和长时间任务"
+"zhipuai/glm-5.4" = "用于编码、智能体和复杂项目交付的多模态 GLM 旗舰模型"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
