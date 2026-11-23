@@ -10,7 +10,7 @@ release_date = "2026-04-08"
 last_updated = "2026-07-09"
 
 [modalities]
-input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "application/pdf", "video/mp4"]
+input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp", "application/pdf", "video/mp4", "audio/mpeg", "audio/wav"]
 output = ["text"]
 
 [capabilities]

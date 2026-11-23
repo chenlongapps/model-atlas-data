@@ -960,6 +960,11 @@
 "writer/palmyra-vision-7b" = "用于读取图像中笔迹、图表和文档的作家多模态模型"
 "xai/grok-4.20-multi-agent-0309" = "Grok 模型，可同时运行多个智能体，用于研究、推理和长时间任务"
 "zhipuai/glm-5.4" = "用于编码、智能体和复杂项目交付的多模态 GLM 旗舰模型"
+"mistral/voxtral-mini-transcribe-3-0" = "提供转录、说话人分离和时间戳功能且价格实惠的语音转文本模型"
+"mistral/voxtral-mini-transcribe-realtime-3-0" = "适用于语音代理、具备话轮检测功能的低延迟流式语音转文本模型"
+"mistral/voxtral-mini-tts-3-0" = "支持零样本和专业级语音克隆及流式传输的多语言文本转语音模型"
+"mistral/voxtral-small-transcribe-3-0" = "Mistral 用于转录、说话人识别和时间戳标注的旗舰语音转文本模型"
+"thinkingmachines/inkling-2-mini" = "用于智能体编码、视觉和知识工作的循环 MoE 推理模型（26.4B 总计，3.4B 活跃）"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
