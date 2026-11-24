@@ -5,7 +5,7 @@ schema = 2
 name = "Hy4 flash"
 description = "Tencent's lower-cost Hy4 tier for everyday agent and productivity tasks, with image understanding and a 1M-token context window."
 family = "hy-flash"
-open_weights = false
+open_weights = true
 release_date = "2026-11-16"
 
 [modalities]
@@ -214,3 +214,6 @@ metric = "pass@5"
 variant = "with tools; network-isolated environment supporting image outputs; up to 80 tool-calling rounds per run; 10 independent runs per problem to estimate pass@5; highest available reasoning setting"
 harness = "Jupyter"
 source = "https://hy.tencent.ai/research/hy4-flash"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/tencent/Hy4-flash"

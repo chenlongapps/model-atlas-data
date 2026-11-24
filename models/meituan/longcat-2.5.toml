@@ -10,7 +10,7 @@ open_weights = false
 release_date = "2026-11-02"
 
 [modalities]
-input = ["text", "image"]
+input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]
 
 [capabilities]

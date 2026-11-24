@@ -965,6 +965,15 @@
 "mistral/voxtral-mini-tts-3-0" = "支持零样本和专业级语音克隆及流式传输的多语言文本转语音模型"
 "mistral/voxtral-small-transcribe-3-0" = "Mistral 用于转录、说话人识别和时间戳标注的旗舰语音转文本模型"
 "thinkingmachines/inkling-2-mini" = "用于智能体编码、视觉和知识工作的循环 MoE 推理模型（26.4B 总计，3.4B 活跃）"
+"baseten/bison-1" = "Base Labs 的 31B 开放式权重决策模型，基于 Gemma 4 31B，可为有关长文本和图像的有类型选择、评分以及“是/否”问题返回经过校准的概率。"
+"baseten/groundhog-1" = "Base Labs 的 26B 混合专家开源决策模型（关于 4B 活动）在 Gemma 4 26B A4B 上，可为有关长文本和图像的有类型选择、评分以及“是/否”问题返回经过校准的概率。"
+"baseten/joey-1" = "Base Labs 基于 Qwen3.5-2B 构建的 2B 开放权重决策模型，可为有关文本和图像的有类型选择、评分以及“是/否”问题返回经过校准的概率。"
+"elorian-labs/glimpse-1.0" = "一种可对图像和视频进行推理的视觉思维模型，由 Elorian 在开放权重基础上进行后训练"
+"minimax/speech-02-hd" = "支持语音克隆的高保真文本转语音模型"
+"minimax/speech-02-turbo" = "支持语音克隆的低延迟文本转语音模型"
+"minimax/speech-2.6-hd" = "支持语音克隆的高保真文本转语音模型"
+"minimax/speech-2.6-turbo" = "支持语音克隆的低延迟文本转语音模型"
+"zhipuai/glm-5.3-flashx-legal" = "GLM-5.3-FlashX 针对法律工作流程进行了优化：法律研究、合同审查和文件起草"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"

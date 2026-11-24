@@ -14,7 +14,7 @@ knowledge = "2025-01"
 release_date = "2026-06-30"
 
 [modalities]
-input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif"]
+input = ["text", "image/png", "image/jpeg", "image/webp", "image/heic", "image/heif", "video/mp4", "video/mpeg", "video/mov", "video/avi", "video/x-flv", "video/mpg", "video/webm", "video/wmv", "video/3gpp", "application/pdf"]
 output = ["text", "image/png", "image/jpeg"]
 
 [capabilities]

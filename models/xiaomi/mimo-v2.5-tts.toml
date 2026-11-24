@@ -15,6 +15,7 @@ description = "Speech generation model for controllable voice, narration, and au
 family = "mimo-tts"
 open_weights = false
 release_date = "2026-04-22"
+v2_only = true
 
 [modalities]
 input = ["text"]

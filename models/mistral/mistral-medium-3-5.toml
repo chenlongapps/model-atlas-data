@@ -6,8 +6,9 @@ schema = 2
 name = "Mistral Medium 3.5"
 description = "Mistral model for multilingual chat, reasoning, and tool-assisted workflows"
 family = "mistral-medium"
-open_weights = false
-release_date = "2026-04-30"
+open_weights = true
+release_date = "2026-04-28"
+license = "Modified MIT"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif", "application/pdf"]
@@ -22,7 +23,7 @@ top_k = false
 
 [limit]
 context = 262_144
-output = 209_715
+output = 262144
 
 [[benchmarks]]
 name = "Terminal-Bench"
@@ -72,3 +73,6 @@ metric = "index score"
 version = "5.0.1"
 effort = "High"
 source = "https://artificialanalysis.ai/models/mistral-medium-3-5"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"

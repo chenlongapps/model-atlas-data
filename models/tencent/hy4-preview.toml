@@ -24,8 +24,9 @@ top_p = true
 top_k = true
 
 [limit]
-context = 1_024_000
-output = 64_000
+context = 1048576
+output = 65536
+input = 983040
 
 # Vals overall JSON checked 2026-11-06; model = "tencent/hy4-preview"; stderr = 1.336 percentage points.
 # Row settings: temperature = 0.9; top_p = 1; max_output_tokens = 64000; provider = "Tencent".

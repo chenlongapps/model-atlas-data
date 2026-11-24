@@ -4,7 +4,8 @@ name = "Mistral Medium 3.5"
 description = "Balanced Mistral model for enterprise assistants, multilingual work, and tools"
 family = "mistral-medium"
 open_weights = true
-release_date = "2026-04-29"
+release_date = "2026-04-28"
+license = "Modified MIT"
 
 [metadata.modelatlas.parameters]
 total_billion = 128
@@ -19,7 +20,7 @@ tools = { supported = true }
 reasoning = { supported = true }
 temperature = true
 top_p = true
-top_k = true
+top_k = false
 
 [limit]
 context = 262_144

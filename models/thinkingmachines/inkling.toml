@@ -37,6 +37,11 @@ output = 1_048_576
 label = "Hugging Face"
 url = "https://huggingface.co/thinkingmachines/Inkling"
 
+[[weights]]
+label = "Hugging Face (NVFP4)"
+url = "https://huggingface.co/thinkingmachines/Inkling-NVFP4"
+quantization = "nvfp4"
+
 [[benchmarks]]
 name = "SWE-bench Pro"
 score = 89.88

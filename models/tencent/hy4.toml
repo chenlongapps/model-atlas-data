@@ -2,7 +2,7 @@ schema = 2
 name = "Hy4"
 description = "A next-generation multimodal productivity model with significantly enhanced Agent and complex task execution capabilities."
 family = "hy"
-open_weights = false
+open_weights = true
 release_date = "2026-11-04"
 
 [modalities]
@@ -18,7 +18,7 @@ top_k = true
 
 [limit]
 context = 1_048_576
-input = 983_010
+input = 983040
 output = 65_536
 
 [[benchmarks]]
@@ -331,3 +331,6 @@ dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/hy4"
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/tencent/Hy4"

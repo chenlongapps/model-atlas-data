@@ -6,7 +6,8 @@ name = "Mistral Medium (latest)"
 description = "Balanced Mistral model for enterprise assistants, multilingual work, and tools"
 family = "mistral-medium"
 open_weights = true
-release_date = "2026-04-29"
+release_date = "2026-04-28"
+license = "Modified MIT"
 
 [metadata.modelatlas.parameters]
 total_billion = 128
@@ -14,7 +15,7 @@ sources = ["https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"]
 notes = "The checkpoint linked by this local alias; not a guarantee for future alias targets."
 
 [modalities]
-input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
+input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif", "application/pdf"]
 output = ["text"]
 
 [capabilities]
@@ -22,7 +23,7 @@ tools = { supported = true }
 reasoning = { supported = true }
 temperature = true
 top_p = true
-top_k = true
+top_k = false
 
 [limit]
 context = 262_144

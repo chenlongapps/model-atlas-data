@@ -36,6 +36,11 @@ output = 1_048_576
 label = "Hugging Face"
 url = "https://huggingface.co/thinkingmachines/Inkling-Small"
 
+[[weights]]
+label = "Hugging Face (NVFP4)"
+url = "https://huggingface.co/thinkingmachines/Inkling-Small-NVFP4"
+quantization = "nvfp4"
+
 # Vals overall JSON checked 2026-11-06; model = "thinkingmachines/inkling-small"; stderr = 0.0 percentage points.
 # Row settings: temperature = 1; top_p = 1; max_output_tokens = 262000; reasoning_effort = "0.99"; provider = "Thinkingmachines".
 [[benchmarks]]
