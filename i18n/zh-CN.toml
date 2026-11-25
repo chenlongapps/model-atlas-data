@@ -974,6 +974,18 @@
 "minimax/speech-2.6-hd" = "支持语音克隆的高保真文本转语音模型"
 "minimax/speech-2.6-turbo" = "支持语音克隆的低延迟文本转语音模型"
 "zhipuai/glm-5.3-flashx-legal" = "GLM-5.3-FlashX 针对法律工作流程进行了优化：法律研究、合同审查和文件起草"
+"amazon/nova-2-5-sonic" = "用于实时语音代理的亚马逊语音到语音模型，与 Nova 2 Sonic 相比，工具调用能力更优、延迟更低"
+"amazon/nova-2-multimodal-embeddings" = "将文本、文档、图像、视频和音频映射到同一向量空间的 Amazon 嵌入模型"
+"amazon/nova-2-sonic" = "用于实时语音对话并支持工具调用的亚马逊语音到语音模型"
+"amazon/titan-embed-image-v1" = "将文本、图像或两者映射到同一向量空间以用于多模态搜索的 Amazon 嵌入模型"
+"amazon/titan-embed-text-v1" = "亚马逊用于搜索、个性化和聚类的初代文本嵌入模型"
+"amazon/titan-embed-text-v2" = "亚马逊第二代文本嵌入模型，支持可选输出维度"
+"luma/ray-2" = "Luma AI 视频生成模型，可根据文本或图像关键帧生成具有自然、连贯运动的逼真视频片段"
+"prism-ml/ternary-bonsai-27b" = "用于在本地硬件上进行推理、图像理解和工具使用的 Qwen3.6 27B 三权重版本"
+"ricursiveai/ripple-65b-preview" = "Dense 65B 开源模型，使用 12T 标记从头开始预训练，并针对智能体编码进行了后训练"
+"stepfun/step-1o-turbo-vision" = "用于图像和视频理解并生成文本输出的 Fast StepFun 视觉模型"
+"stepfun/stepaudio-2.5-chat" = "能够识别音频输入中的语气、犹豫和笑声并以文本形式回复的语音理解聊天模型"
+"twelvelabs/marengo3.0" = "TwelveLabs 视频理解嵌入模型，支持视频、音频、图像和文本之间的任意到任意搜索"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"

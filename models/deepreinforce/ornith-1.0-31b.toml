@@ -11,7 +11,7 @@ schema = 2
 name = "Ornith 1.0 31B"
 description = "Open coding-reasoning model for repository tasks and self-improving agents"
 family = "ornith"
-open_weights = true
+open_weights = false
 release_date = "2026-06-25"
 license = "MIT"
 
