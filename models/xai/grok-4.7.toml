@@ -8,7 +8,7 @@ knowledge = "2026-05"
 release_date = "2026-09-21"
 
 [modalities]
-input = ["text", "image/jpeg", "image/png", "application/pdf"]
+input = ["text", "image/jpeg", "image/png"]
 output = ["text"]
 
 [capabilities]

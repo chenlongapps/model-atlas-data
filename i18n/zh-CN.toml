@@ -986,6 +986,15 @@
 "stepfun/step-1o-turbo-vision" = "用于图像和视频理解并生成文本输出的 Fast StepFun 视觉模型"
 "stepfun/stepaudio-2.5-chat" = "能够识别音频输入中的语气、犹豫和笑声并以文本形式回复的语音理解聊天模型"
 "twelvelabs/marengo3.0" = "TwelveLabs 视频理解嵌入模型，支持视频、音频、图像和文本之间的任意到任意搜索"
+"bytedance-seed/seedance-2.5-flash" = "更快速、成本更低的 Seedance 2.5 变体，支持基于文本、图像、视频和音频参考，生成、编辑和扩展长达 30 秒的视频。"
+"moonshotai/kimi-k3.1-pro-highspeed" = "推理速度更快的 Kimi K3.1 Pro，拥有 1M 标记的上下文窗口，并支持持续推理"
+"openai/gpt-6-astra-healthcare" = "GPT-6 Astra 搭配了专为临床问题而设计的工具；其网络搜索功能使用了一个专门的医学来源索引。"
+"openai/gpt-6.1-sol-healthcare" = "GPT-6.1 解决方案，搭配专为临床问题设计的工具；其网络搜索功能使用专门的医学来源索引。"
+"openai/gpt-6.2-astra-healthcare" = "GPT-6.2 Astra 搭配了专为临床问题而设计的工具；其网络搜索功能使用了一个专门的医学来源索引。"
+"openai/gpt-6.2-sol-healthcare" = "GPT-6.2 解决方案，搭配专为临床问题设计的工具；其网络搜索功能使用专门的医学来源索引。"
+"pipecat-ai/phonellm-mini-alpha-2" = "用于支持工具调用的手机语音代理的 Nemotron 3 Nano 快速开放权重微调模型"
+"zhipuai/cogview-4" = "支持中英文双语提示词、图像内中文文本渲染以及从 512 到 2048 像素任意分辨率的开源文生图模型"
+"zhipuai/glm-4-32b-0414-128k" = "32B GLM-4 是一款针对指令遵循、代码生成、函数调用和基于搜索的问答进行微调的基础模型"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"

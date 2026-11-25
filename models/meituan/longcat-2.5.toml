@@ -6,8 +6,9 @@ schema = 2
 name = "LongCat-2.5"
 description = "Meituan's multimodal reasoning model for long-horizon coding and agent tasks, with visual understanding and a 1M-token context window"
 family = "longcat"
-open_weights = false
+open_weights = true
 release_date = "2026-11-02"
+license = "MIT"
 
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
@@ -23,3 +24,7 @@ top_k = true
 [limit]
 context = 1_000_000
 output = 262_144
+
+[[weights]]
+label = "Hugging Face"
+url = "https://huggingface.co/meituan-longcat/LongCat-2.5"

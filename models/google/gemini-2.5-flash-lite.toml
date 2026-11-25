@@ -4,7 +4,7 @@ description = "Lean Gemini 2.5 lane for cheap multimodal traffic and quick agent
 family = "gemini-flash-lite"
 open_weights = false
 knowledge = "2025-01"
-release_date = "2025-06-17"
+release_date = "2025-07-22"
 
 [modalities]
 input = [
