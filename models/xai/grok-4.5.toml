@@ -141,3 +141,15 @@ harness = "Mini-SWE-agent"
 cost = 5.51917
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.6 percentage points (as displayed).
+score = 12.42
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+variant = "Official regrade of 4.0 submissions"
+harness = "Grok Build"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"

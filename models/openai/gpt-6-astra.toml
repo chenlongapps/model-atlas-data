@@ -619,3 +619,63 @@ effort = "Max"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/gpt-6-astra"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.8 percentage points (as displayed).
+score = 60.30
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+variant = "Official regrade of 4.0 submissions"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.7 percentage points (as displayed).
+score = 59.70
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+variant = "Official regrade of 4.0 submissions"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.8 percentage points (as displayed).
+score = 60.00
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+variant = "Official regrade of 4.0 submissions"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.7 percentage points (as displayed).
+score = 55.15
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "medium"
+variant = "Official regrade of 4.0 submissions"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 2.8 percentage points (as displayed).
+score = 50.91
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "low"
+variant = "Official regrade of 4.0 submissions"
+harness = "Codex"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"

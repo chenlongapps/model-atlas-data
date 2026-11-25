@@ -1,0 +1,14 @@
+id = "terminal-bench-v4.1"
+name = "Terminal-Bench"
+version = "4.1.0"
+compatible_versions = ["4.1"]
+category = "coding"
+description = "Evaluates agents on 66 tasks in sandboxed terminals. The full 4.1 release retains the 4.0 tasks and agent environments but updates the verifiers for correctness, reproducibility, and resistance to reward hacking."
+
+organization = "Terminal-Bench / Harbor"
+metric = "task resolution rate"
+unit = "percent"
+higher_is_better = true
+
+url = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+methodology = "https://www.tbench.ai/news/terminal-bench-4-1"

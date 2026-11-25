@@ -346,3 +346,63 @@ effort = "Max"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/claude-opus-5"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.4 percentage points (as displayed).
+score = 52.12
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.1 percentage points (as displayed).
+score = 53.33
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.7 percentage points (as displayed).
+score = 49.70
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.8 percentage points (as displayed).
+score = 45.15
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "medium"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.9 percentage points (as displayed).
+score = 34.85
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "low"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"

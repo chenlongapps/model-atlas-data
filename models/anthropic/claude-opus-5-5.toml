@@ -352,3 +352,15 @@ effort = "Max"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/claude-opus-5-5"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.1 percentage points (as displayed).
+score = 65.76
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+variant = "Official regrade of 4.0 submissions"
+harness = "Claude Code"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"

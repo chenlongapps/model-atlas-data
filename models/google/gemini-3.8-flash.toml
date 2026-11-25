@@ -353,3 +353,15 @@ effort = "High"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/gemini-3-8-flash"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Harbor 4.1 leaderboard: 95% CI half-width 3.4 percentage points (as displayed).
+score = 18.18
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+variant = "Official regrade of 4.0 submissions"
+harness = "mini-SWE-agent"
+source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"

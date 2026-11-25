@@ -9,7 +9,7 @@
 | 来源 | 成绩与方法 | 成本口径 |
 | --- | --- | --- |
 | [DeepSWE](https://deepswe.datacurve.ai/) · [v1.1 方法](https://deepswe.datacurve.ai/blog/deepswe-v1-1) · [JSON](https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json) | 同一模型、reasoning_effort、Harness 的 `pass_at_1`，不取 pass@4 或推算通过率 | `mean_cost_usd`，已评分尝试的平均 `USD/task`，不是中位数或总费用 |
-| [Terminal-Bench 官方榜](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | 原生 Agent、档位和任务配置分别匹配 | `metrics.total_cost_usd`，`USD/evaluation`；保留任务与试验数，不除成每任务 |
+| Terminal-Bench 官方榜：[4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) · [4.1](https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/5?tab=leaderboard&leaderboard=4-1-0) · [4.1 重评说明](https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard) | 原生 Agent、档位和任务配置分别匹配；4.1 公告给出两位小数的重评分数，榜单用于交叉核对 | 4.0 已核实字段为 `metrics.total_cost_usd`，`USD/evaluation`；重评未新增推理费用不等于整次评测免费 |
 | [Vals Terminal-Bench](https://www.vals.ai/benchmarks/terminal-bench-4) · [Science](https://www.vals.ai/benchmarks/terminal-bench-science) · [Index](https://www.vals.ai/benchmarks/vals_index) | 页面所引用 JSON 的 `tasks.overall[model]`，不重复算分类或行业总分 | 同一行 `cost_per_test`，`USD/test`；null 省略，舍入显示不替代原始值 |
 | [AA Index](https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index) · [方法](https://artificialanalysis.ai/methodology/intelligence-benchmarking) | 精确配置页/对象及适用 Index 版本；不能凭快照文件名确定版本 | Index 用 `intelligenceIndexCostPerTask.cost.total`，`USD/weighted task` |
 | [AA 组成评测](https://artificialanalysis.ai/methodology/intelligence-benchmarking) | 同一配置对象的独立评测主指标 | `intelligenceIndexEvaluations[].costPerTask`，`USD/task`；不取 `weightedCostPerTask` 或总评测成本 |
@@ -21,7 +21,8 @@
 | 评测 | 已知边界 |
 | --- | --- |
 | DeepSWE v1.1 | 全集 113 项，逐配置保留已尝试/有效任务、重复次数及错误排除规则，不假定每个模型完成全量。Provider/verifier/network 错误排除，不代表上下文失败或 Agent 超时也排除 |
-| Terminal-Bench 4 | Vals 既有核验为 66 项、mini-swe-agent、三次 pass@1 均值、每任务 8 小时、不设步骤/费用上限；AA 与原生 Agent 不同，不互套成本 |
+| Terminal-Bench 4.0 | Vals 既有核验为 66 项、mini-swe-agent、三次 pass@1 均值、每任务 8 小时、不设步骤/费用上限；AA 与原生 Agent 不同，不互套成本 |
+| Terminal-Bench 4.1 | 全量版保留 66 项任务并更新验证器，不与 4.0 或 63 项 CPU-only 版混排。官方重评复用 4.0 产物；没有可用重评结果的试验可能保留旧判分。AA 的 mini-swe-agent 结果与官方原生 Agent 榜单分开；`cheating-adjusted accuracy` 不映射到 `task resolution rate` |
 | Terminal-Bench Science | Vals 既有核验为 70 项、单次 pass@1、8 小时，仅基础设施/Provider 错误可重试；AA 为每任务三次 pass@1 均值，不当作同次实验 |
 | AutomationBench | [AA](https://artificialanalysis.ai/evaluations/automationbench-aa)是护栏门控的目标完成比例；[Zapier](https://zapier.com/benchmarks)是整任务严格完成率，两者不能互换 |
 | 原始 HLE | [Scale](https://labs.scale.com/leaderboard/humanitys_last_exam)最终 2,500 题多模态；[AA](https://artificialanalysis.ai/evaluations/humanitys-last-exam)为其中 2,158 道文本题，不是同一实验 |
