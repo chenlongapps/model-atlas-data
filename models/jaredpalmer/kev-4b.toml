@@ -13,6 +13,11 @@ open_weights = true
 release_date = "2026-09-24"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 4
+sources = ["https://huggingface.co/jaredpalmer/kev-4b/blob/6cfce5c2fa4b4bd64026336ab649c5ca78857d52/README.md"]
+notes = "Official card places the model on Qwen3.5-4B-Base with a LoRA adapter and pointer head. The merged checkpoint total is not separately published, so 4B is the official base-model scale, not an exact merged tensor count."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

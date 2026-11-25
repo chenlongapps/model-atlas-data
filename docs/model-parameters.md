@@ -43,6 +43,7 @@
 | Bison-1 / Groundhog-1 / Turion Jev 31B | Gemma 4 系 tied embeddings 在两个分片合计中重复计数；采用固定索引去重后的总量，并按官方 31B/26B 口径记录 |
 | Hy4 / Hy4 Flash | 官方表分别列出语言骨干、Engram、ViT 与 DFly2；完整检查点统计与官方组件口径分开保留，不自行把组件相加当总量 |
 | DiffusionGemma 26B A4B | 卡面 25.2B 加约 0.55B 视觉编码器；固定 BF16 检查点 25.82B，差异按视觉编码器解释 |
+| DeepSeek V4.1 Flash | 按项目决定采用官方 552B；该数字为 backbone-only，196B Engram 与视觉模块未计入 |
 
 ## 组件范围
 
@@ -72,5 +73,6 @@
 | `mistral/ministral-3b` | [OpenRouter 精确版本页](https://openrouter.ai/mistralai/ministral-3b)与[官方文档](https://docs.mistral.ai/models/ministral-3b-24-1.md)对应 2024 版，不借用 2025 替代版计数；权重公开及许可待核实 |
 | `nvidia/nemotron-3.5-super-120b-a12b` | [NVIDIA 架构规格](https://developer.nvidia.com/nemotron)及[Perplexity 文本服务映射](https://docs.perplexity.ai/docs/agent-api/models.md)；不推断服务移除了视觉组件，不自行扣除编码器参数 |
 | `sdaia/allam-2-7b` | [Groq 精确 ID 模型卡](https://console.groq.com/docs/model/allam-2-7b)正文披露规模；不改用 ALLaM-7B-Instruct-preview，本地权重链接仍待核实 |
+| `turion/turion-extract-alpha`、`jaredpalmer/kev-4b` | 只发布 LoRA adapter 与少量头；参数取官方 base 模型标称规模（Gemma 4 12B / Qwen3.5-4B），不代表合并后张量计数 |
 
 历史基本信息与目标权重年代不一致的条目（如 `mistral/mistral-large-latest`）仍需复核，不据日期自行换模型。`microsoft/wizardlm-2-8x22b` 的第三方重传来源也不因参数计数获得出处或再分发许可认证。模型权重许可始终以对应官方资料为准。

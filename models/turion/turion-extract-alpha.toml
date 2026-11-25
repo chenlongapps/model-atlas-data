@@ -20,6 +20,11 @@ release_date = "2026-10-25"
 license = "Apache-2.0"
 family = "turion-extract"
 
+[metadata.modelatlas.parameters]
+total_billion = 12
+sources = ["https://huggingface.co/turion-ai/turion-extract-alpha/blob/5060d5f90f5ea5be0db8908874c5267433430496/README.md"]
+notes = "Official card places the model on Gemma 4 12B and publishes a LoRA adapter plus extraction heads. The merged checkpoint total is not separately published, so 12B is the official base-model scale, not an exact merged tensor count."
+
 [modalities]
 input = ["text"]
 output = ["text"]

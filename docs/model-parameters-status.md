@@ -49,22 +49,22 @@
 | 指标 | 数值 | 说明 |
 | --- | ---: | --- |
 | 开放权重模型总数 | 421 | 当前追踪范围 |
-| 已完成模型数 | 388 | ✅ 已收集；`total_billion` 已记录 |
-| 部分完成模型数 | 2 | ⚠️ 待核实；缺完整总量，仅记录激活量 |
-| 待收集模型数 | 2 | ❌ 待收集；尚无任何参数量记录 |
+| 已完成模型数 | 392 | ✅ 已收集；`total_billion` 已记录 |
+| 部分完成模型数 | 0 | ⚠️ 待核实；缺完整总量，仅记录激活量 |
+| 待收集模型数 | 0 | ❌ 待收集；尚无任何参数量记录 |
 | 无法获取参数的模型数 | 29 | 🔒 官方未披露；仅组件等，完整总量未披露 |
 | 不适用模型数 | 0 | ➖ 不适用；人工确认无需收集 |
-| 总参数量覆盖率 | 92.2% | `total_billion` 存在：388 / 421 |
+| 总参数量覆盖率 | 93.1% | `total_billion` 存在：392 / 421 |
 | 激活参数量覆盖率 | 32.1% | `active_billion` 存在：135 / 421 |
-| 总量已收集但激活量缺失 | 255 | 已计入 ✅；不推定等于总参数量，按独立覆盖率统计 |
-| 组件参数量记录数 | 7.4% | `components` 非空：31 / 421；可选字段，不计入完成率 |
-| 整体收集完成率 | 92.2% | `✅ 已收集 / 总数` |
-| 已确定率 | 99.0% | `(✅ 已收集 + 🔒 官方未披露 + ➖ 不适用) / 总数`，表示无需继续收集 |
-| 待处理率 | 1.0% | `(⚠️ 待核实 + ❌ 待收集) / 总数` |
+| 总量已收集但激活量缺失 | 257 | 已计入 ✅；不推定等于总参数量，按独立覆盖率统计 |
+| 组件参数量记录数 | 7.1% | `components` 非空：30 / 421；可选字段，不计入完成率 |
+| 整体收集完成率 | 93.1% | `✅ 已收集 / 总数` |
+| 已确定率 | 100.0% | `(✅ 已收集 + 🔒 官方未披露 + ➖ 不适用) / 总数`，表示无需继续收集 |
+| 待处理率 | 0.0% | `(⚠️ 待核实 + ❌ 待收集) / 总数` |
 
 收集完成以 `total_billion` 为核心口径；`active_billion` 只在来源披露时记录，不推定等于总参数量，也不因缺失单独判为模型未完成。已收集总量但未单列激活量的模型仍计入 ✅，激活量缺口由单独的覆盖率反映，避免把稠密模型或来源未单列激活量的模型误判为未完成。
 
-同步状态分布：待写入 0，已入库 419，已构建 0，已发布 0，未核验 2。
+同步状态分布：待写入 0，已入库 421，已构建 0，已发布 0，未核验 0。
 
 ## 模型收集清单
 
@@ -85,7 +85,7 @@
 | `sarvam/sarvam-prism` | ✅ | — | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；FP8 固定发布：骨干与 decision head 合计 105.02B，官方未单列激活量；来源 3；未单列激活量；TOML 备注 |
 | `mistral/mistral-large-4-1t-a52b` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `baseten/joey-1` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
-| `turion/turion-extract-alpha` | — | — | — | ❌ 待收集 | 未核验 | 核验 2026-11-25；LoRA adapter 加提取头，官方未披露合并后完整总量；尚无参数记录 |
+| `turion/turion-extract-alpha` | ✅ | — | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；LoRA adapter 加提取头，采用官方 Gemma 4 12B 标称规模，合并后总量未单列；来源 1；未单列激活量；TOML 备注 |
 | `turion/turion-jev-31b` | ✅ | — | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；官方 31B；采用固定检查点索引的去重总量；来源 1；未单列激活量；TOML 备注 |
 | `moonshotai/kimi-k3.1-pro` | ✅ | ✅ | ✅ | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `recursive/flint` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
@@ -95,7 +95,7 @@
 | `baseten/mammoth-1` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量 |
 | `minimax/MiniMax-M3.1-Flash` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `nvidia/nemotron-3.5-embed-8b` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
-| `deepseek/deepseek-v4.1-flash-1017` | — | ✅ | ✅ | ⚠️ 待核实 | 已入库 | 仅激活量；来源 3；TOML 备注 |
+| `deepseek/deepseek-v4.1-flash-1017` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；按项目决定沿用家族 552B；该数字为 backbone-only，Engram 与视觉模块未计入；来源 2；TOML 备注 |
 | `black-forest-labs/flux-3-image-klein` | — | — | ✅ | 🔒 官方未披露 | 已入库 | 仅组件 1 项；来源 1；TOML 备注 |
 | `meta/muse-spark-open` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
 | `nvidia/nemotron-3.5-super-120b-a12b` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 核验 2026-11-06；架构规格不证明服务移除了视觉组件，不自行扣除编码器参数；来源 2；TOML 备注 |
@@ -122,14 +122,14 @@
 | `cloudflare/clef-flash` | — | — | ✅ | 🔒 官方未披露 | 已入库 | 仅组件 2 项；来源 3；TOML 备注 |
 | `inclusionai/ling-3.1-flash` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1 |
 | `nace-ai/drex-v1.5` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
-| `jaredpalmer/kev-4b` | — | — | — | ❌ 待收集 | 未核验 | 核验 2026-11-25；LoRA adapter 加指针头，官方未披露合并后完整总量；尚无参数记录 |
+| `jaredpalmer/kev-4b` | ✅ | — | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；LoRA adapter 加指针头，采用官方 Qwen3.5-4B 标称规模，合并后总量未单列；来源 1；未单列激活量；TOML 备注 |
 | `xiaomi/mimo-v2.6-flash` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `xiaomi/mimo-v2.6-pro` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `xiaomi/mimo-v2.6-pro-ultraspeed` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1；TOML 备注 |
 | `surogate/rune-26b-a4b` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
 | `stepfun/step-5-preview` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1 |
 | `alibaba/qwen-image-2.1` | — | — | ✅ | 🔒 官方未披露 | 已入库 | 仅组件 1 项；来源 1；TOML 备注 |
-| `deepseek/deepseek-v4.1-flash` | — | ✅ | — | ⚠️ 待核实 | 已入库 | 仅激活量；来源 1；TOML 备注 |
+| `deepseek/deepseek-v4.1-flash` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 核验 2026-11-25；按项目决定采用官方 552B；该数字为 backbone-only，另有 196B Engram 与视觉模块未计入；来源 1；TOML 备注 |
 | `inclusionai/ling-3.0-flash-vl` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1 |
 | `cohere/north-small-translate-1-0` | ✅ | ✅ | — | ✅ 已收集 | 已入库 | 来源 1 |
 | `openbmb/minicpm5-2b` | ✅ | — | — | ✅ 已收集 | 已入库 | 来源 1；未单列激活量；TOML 备注 |
@@ -512,7 +512,7 @@
 
 ### 仅公开激活量
 
-`deepseek/deepseek-v4.1-flash` 和 `deepseek/deepseek-v4.1-flash-1017` 都没有完整总量，状态为 ⚠️。前者只有 `active_billion`；后者另将官方 552B backbone 记为组件。552B 不含 Engram 与视觉模块，不能当作完整模型总量。`google/diffusiongemma-26b-a4b-it` 已按官方 25.2B 加约 0.55B 视觉编码器与固定 BF16 检查点核对，补为 25.82B。
+目前没有只剩激活量的模型。`deepseek/deepseek-v4.1-flash` 和 `deepseek/deepseek-v4.1-flash-1017` 已按项目决定采用官方 552B 作为总量；该数字是 backbone-only，196B Engram 条件记忆与视觉模块未计入，限制保留在 TOML `notes`。`google/diffusiongemma-26b-a4b-it` 已按官方 25.2B 加约 0.55B 视觉编码器与固定 BF16 检查点核对，补为 25.82B。
 
 ### 参数规格不证明权重状态
 
@@ -530,6 +530,8 @@
 - `tencent/hy4`、`tencent/hy4-flash`：官方规格表分别列出骨干、Engram、ViT 与 DFly2；完整检查点统计与官方组件口径分开保留。
 - `deepreinforce/ornith-1.5-122b`：官方 122B，Hub BF16 检查点 125.09B，差异未解释，保留官方口径。
 - `swiss-ai/apertus-v1.5-8b`、`swiss-ai/apertus-v1.5-70b`：仓库 gated 且模型卡不可读，采用完整 BF16 仓库统计，包含视觉与音频 tokenizer。
+- `deepseek/deepseek-v4.1-flash`、`deepseek/deepseek-v4.1-flash-1017`：按项目决定采用官方 552B；卡面明确为 backbone-only，196B Engram 与视觉模块未计入。
+- `turion/turion-extract-alpha`、`jaredpalmer/kev-4b`：仅发布 LoRA adapter 与少量头，采用官方 base 模型标称规模（12B / 4B），不代表合并后张量计数。
 - `zhipuai/autoglm-phone-9b-multilingual`：采用固定 commit 五个 BF16 分片的权重/偏置计数，不采用异常偏小的 Hub total。
 - `xiaomi/mimo-v2.5-asr`：ASR 检查点需要另行下载 Audio Tokenizer，当前只记录 ASR 组件，不补管线总量。
 - 其他仍未解决的许可、评测条件和版本冲突见[待核实事项](review-notes.md)；参数核验方法及更多组件范围见[参数量核验](model-parameters.md)。
@@ -642,12 +644,22 @@ notes = "仅记录语言权重与视觉塔组件；完整总量未披露，量�
 [[model]]
 id = "turion/turion-extract-alpha"
 verified = "2026-11-25"
-notes = "LoRA adapter 加提取头，官方未披露合并后完整总量。"
+notes = "LoRA adapter 加提取头，采用官方 Gemma 4 12B 标称规模，合并后总量未单列。"
 
 [[model]]
 id = "jaredpalmer/kev-4b"
 verified = "2026-11-25"
-notes = "LoRA adapter 加指针头，官方未披露合并后完整总量。"
+notes = "LoRA adapter 加指针头，采用官方 Qwen3.5-4B 标称规模，合并后总量未单列。"
+
+[[model]]
+id = "deepseek/deepseek-v4.1-flash"
+verified = "2026-11-25"
+notes = "按项目决定采用官方 552B；该数字为 backbone-only，另有 196B Engram 与视觉模块未计入。"
+
+[[model]]
+id = "deepseek/deepseek-v4.1-flash-1017"
+verified = "2026-11-25"
+notes = "按项目决定沿用家族 552B；该数字为 backbone-only，Engram 与视觉模块未计入。"
 ```
 <!-- parameters-status:manual:end -->
 
