@@ -221,3 +221,16 @@ effort = "Max"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.76 percentage points; 8,187,123,046 total tokens across 330 trials.
+score = 38.48
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 184.89
+cost_unit = "USD/evaluation"

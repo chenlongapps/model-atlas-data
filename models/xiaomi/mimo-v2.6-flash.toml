@@ -206,3 +206,17 @@ harness = "Mini-SWE-agent"
 cost = 0.211804
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.36 percentage points; 9,904,029,742 total tokens across 330 trials.
+score = 16.06
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+variant = "Leaderboard links the MiMo V2.6 Flash API; exact checkpoint not disclosed"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 194.6
+cost_unit = "USD/evaluation"

@@ -101,3 +101,17 @@ source = "https://artificialanalysis.ai/models/mistral-large-4"
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.87 percentage points; 5,768,673,528 total tokens across 330 trials.
+# The leaderboard links the mistralai/mistral-large-4-0 API, not the Oct 29 open-weight release.
+score = 27.58
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 718.4
+cost_unit = "USD/evaluation"

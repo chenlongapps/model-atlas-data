@@ -181,3 +181,16 @@ dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/kimi-k3-1-pro"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 4.18 percentage points; 3,163,165,614 total tokens across 330 trials.
+score = 59.7
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 1086.66
+cost_unit = "USD/evaluation"

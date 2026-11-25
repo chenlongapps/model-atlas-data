@@ -177,3 +177,16 @@ effort = "none"
 variant = "Official regrade of 4.0 submissions"
 harness = "Claude Code"
 source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.64 percentage points; 8,180,504,468 total tokens across 330 trials.
+score = 36.97
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 374.72
+cost_unit = "USD/evaluation"

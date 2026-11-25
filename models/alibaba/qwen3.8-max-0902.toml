@@ -128,7 +128,7 @@ source = "https://artificialanalysis.ai/models/qwen3-8-max"
 
 [[benchmarks]]
 name = "Terminal-Bench"
-# Harbor 4.1 leaderboard: 95% CI half-width 3.9 percentage points (as displayed).
+# Official 4.1 leaderboard: 95% CI half-width 3.87 percentage points; 2,957,967,711 total tokens across 330 trials.
 score = 26.97
 metric = "task resolution rate"
 version = "4.1.0"
@@ -137,3 +137,6 @@ effort = "max"
 variant = "Official regrade of 4.0 submissions"
 harness = "Claude Code"
 source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+cost = 4635.67
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"

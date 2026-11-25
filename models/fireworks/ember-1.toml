@@ -70,3 +70,16 @@ dataset = "70 tasks"
 variant = "single-run pass@1"
 harness = "Mini-SWE-agent"
 source = "https://www.vals.ai/benchmarks/terminal-bench-science"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.46 percentage points; 11,906,454,756 total tokens across 330 trials.
+score = 21.82
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 4718.49
+cost_unit = "USD/evaluation"

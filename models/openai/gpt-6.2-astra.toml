@@ -1164,3 +1164,16 @@ version = "2"
 dataset = "OpenAI internal"
 effort = "max"
 source = "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.3 percentage points; 1,115,258,588 total tokens across 330 trials.
+score = 62.12
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Codex"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 1409.14
+cost_unit = "USD/evaluation"

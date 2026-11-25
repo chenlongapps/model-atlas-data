@@ -106,3 +106,16 @@ metric = "performance score"
 version = "2.2"
 effort = "0.99"
 source = "https://www.vals.ai/benchmarks/vals_index"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 0.94 percentage points; 373,378,039 total tokens across 330 trials.
+score = 0.91
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 49.55
+cost_unit = "USD/evaluation"

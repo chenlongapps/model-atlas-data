@@ -346,3 +346,16 @@ effort = "Medium"
 cost = 0.7979866055252406
 cost_unit = "USD/weighted task"
 source = "https://artificialanalysis.ai/models/gemini-4-hydrogen-medium"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.97 percentage points; 3,586,959,926 total tokens across 330 trials.
+score = 56.36
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+harness = "Antigravity CLI"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 784.24
+cost_unit = "USD/evaluation"

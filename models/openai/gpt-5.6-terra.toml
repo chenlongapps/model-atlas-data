@@ -299,7 +299,7 @@ source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.js
 
 [[benchmarks]]
 name = "Terminal-Bench"
-# Harbor 4.1 leaderboard: 95% CI half-width 3.3 percentage points (as displayed).
+# Official 4.1 leaderboard: 95% CI half-width 3.25 percentage points; 5,683,805,798 total tokens across 330 trials.
 score = 21.52
 metric = "task resolution rate"
 version = "4.1.0"
@@ -308,3 +308,6 @@ effort = "max"
 variant = "Official regrade of 4.0 submissions"
 harness = "Codex"
 source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+cost = 1733.52
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"

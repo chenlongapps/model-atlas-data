@@ -95,3 +95,16 @@ source = "https://www.vals.ai/benchmarks/vals_index"
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/tencent/Hy4-preview"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.09 percentage points; 6,035,957,325 total tokens across 330 trials.
+score = 19.09
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 658.09
+cost_unit = "USD/evaluation"

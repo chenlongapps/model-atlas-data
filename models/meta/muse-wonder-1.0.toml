@@ -266,3 +266,16 @@ effort = "Max"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/muse-wonder"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.78 percentage points; 5,452,903,717 total tokens across 330 trials.
+score = 46.97
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+harness = "Muse Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 2452.31
+cost_unit = "USD/evaluation"

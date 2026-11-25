@@ -227,3 +227,17 @@ effort = "high"
 variant = "Scale Labs evaluation; temperature=0.0 when configurable (otherwise provider-stated); o3-mini-2025-01-31 extractor/judge; tool use not stated"
 harness = "Scale Labs leaderboard"
 source = "https://labs.scale.com/leaderboard/humanitys_last_exam"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 1.68 percentage points; 7,932,198,780 total tokens across 330 trials.
+# The leaderboard links the Feb 19 announcement of the 3.1 Pro preview in Antigravity.
+score = 2.73
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "high"
+harness = "Antigravity CLI"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 3651.15
+cost_unit = "USD/evaluation"

@@ -217,3 +217,16 @@ source = "https://hy.tencent.ai/research/hy4-flash"
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/tencent/Hy4-flash"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.85 percentage points; 4,479,123,106 total tokens across 330 trials.
+score = 11.82
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 15.47
+cost_unit = "USD/evaluation"

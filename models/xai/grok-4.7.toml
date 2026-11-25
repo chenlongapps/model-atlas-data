@@ -222,7 +222,7 @@ source = "https://artificialanalysis.ai/models/grok-4-7"
 
 [[benchmarks]]
 name = "Terminal-Bench"
-# Harbor 4.1 leaderboard: 95% CI half-width 3.6 percentage points (as displayed).
+# Official 4.1 leaderboard: 95% CI half-width 3.59 percentage points; 5,485,862,389 total tokens across 330 trials.
 score = 38.79
 metric = "task resolution rate"
 version = "4.1.0"
@@ -231,3 +231,6 @@ effort = "xhigh"
 variant = "Official regrade of 4.0 submissions"
 harness = "Grok Build"
 source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+cost = 3683.287146
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"

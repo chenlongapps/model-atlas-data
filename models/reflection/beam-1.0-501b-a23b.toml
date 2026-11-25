@@ -317,3 +317,16 @@ dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/reflection-beam"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 1.68 percentage points; 4,124,399,942 total tokens across 330 trials.
+score = 6.36
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 220.96
+cost_unit = "USD/evaluation"

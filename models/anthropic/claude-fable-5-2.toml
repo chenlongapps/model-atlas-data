@@ -1184,3 +1184,16 @@ harness = "Stirrup"
 cost = 6.353041121460681
 cost_unit = "USD/task"
 source = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.85 percentage points; 15,726,404,102 total tokens across 330 trials.
+score = 65.76
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 16492.76
+cost_unit = "USD/evaluation"

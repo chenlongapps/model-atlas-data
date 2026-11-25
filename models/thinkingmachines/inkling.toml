@@ -161,3 +161,16 @@ dataset = "GDP-weighted finance, coding, legal, and tax evaluations"
 effort = "0.99"
 variant = "reported ±1.12; Inkling via Thinking Machines"
 source = "https://www.vals.ai/models/thinkingmachines_inkling"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 0 percentage points; 1,389,283,126 total tokens across 330 trials.
+score = 0
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "none"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 1011.52
+cost_unit = "USD/evaluation"

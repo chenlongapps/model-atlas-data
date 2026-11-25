@@ -248,3 +248,16 @@ dataset = "HLE-Diamond; 1,000 questions, including 272 image questions"
 variant = "no tools; pass@1; GPT-5.6 Luna (medium) judge"
 harness = "Artificial Analysis"
 source = "https://artificialanalysis.ai/models/inkling-2-small"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.85 percentage points; 27,469,901,900 total tokens across 330 trials.
+score = 13.03
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+harness = "mini-swe-agent"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 963.65
+cost_unit = "USD/evaluation"

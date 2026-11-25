@@ -356,7 +356,7 @@ source = "https://artificialanalysis.ai/models/gemini-3-8-flash"
 
 [[benchmarks]]
 name = "Terminal-Bench"
-# Harbor 4.1 leaderboard: 95% CI half-width 3.4 percentage points (as displayed).
+# Official 4.1 leaderboard: 95% CI half-width 3.36 percentage points; 17,189,729,495 total tokens across 330 trials.
 score = 18.18
 metric = "task resolution rate"
 version = "4.1.0"
@@ -365,3 +365,6 @@ effort = "high"
 variant = "Official regrade of 4.0 submissions"
 harness = "mini-SWE-agent"
 source = "https://www.tbench.ai/news/terminal-bench-4-1#updated-leaderboard"
+cost = 1828.77
+cost_unit = "USD/evaluation"
+cost_source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"

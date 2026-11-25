@@ -539,3 +539,16 @@ harness = "Stirrup"
 cost = 0.040508304584
 cost_unit = "USD/task"
 source = "https://artificialanalysis.ai/models/muse-ember-xhigh"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.8 percentage points; 8,131,161,565 total tokens across 330 trials.
+score = 30.61
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+harness = "Muse Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 157.18
+cost_unit = "USD/evaluation"

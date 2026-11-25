@@ -284,3 +284,16 @@ source = "https://artificialanalysis.ai/models/kimi-k3-low"
 [[weights]]
 label = "Hugging Face"
 url = "https://huggingface.co/moonshotai/Kimi-K3"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 3.73 percentage points; 4,923,348,457 total tokens across 330 trials.
+score = 23.03
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "max"
+harness = "Claude Code"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 1919.83
+cost_unit = "USD/evaluation"

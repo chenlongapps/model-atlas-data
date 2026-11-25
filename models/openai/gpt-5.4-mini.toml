@@ -178,3 +178,16 @@ harness = "Mini-SWE-agent"
 cost = 1.438224
 cost_unit = "USD/test"
 source = "https://www.vals.ai/_astro/benchmark_view_terminal_bench_4.g-vQx4Dh.json"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 1.26 percentage points; 4,185,553,052 total tokens across 330 trials.
+score = 1.82
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+harness = "Codex"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 671.57
+cost_unit = "USD/evaluation"

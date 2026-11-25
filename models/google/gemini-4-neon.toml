@@ -1067,3 +1067,16 @@ metric = "bank balance (USD)"
 version = "2"
 variant = "Mean final balance after one simulated year"
 source = "https://andonlabs.com/evals/vending-bench-2"
+
+[[benchmarks]]
+name = "Terminal-Bench"
+# Official 4.1 leaderboard: 95% CI half-width 2.85 percentage points; 3,190,918,994 total tokens across 330 trials.
+score = 61.21
+metric = "task resolution rate"
+version = "4.1.0"
+dataset = "all 66 tasks"
+effort = "xhigh"
+harness = "Antigravity CLI"
+source = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
+cost = 1922.24
+cost_unit = "USD/evaluation"
