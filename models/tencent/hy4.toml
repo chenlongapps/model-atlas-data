@@ -5,6 +5,12 @@ family = "hy"
 open_weights = true
 release_date = "2026-11-04"
 
+[metadata.modelatlas.parameters]
+total_billion = 774.434002142
+active_billion = 50.23
+sources = ["https://huggingface.co/tencent/Hy4/blob/c10c0de5b6f850703fb0a90e65d1c32b558b9167/README.md", "https://huggingface.co/api/models/tencent/Hy4"]
+notes = "Official table: 770B language backbone (49B text active per token) plus 1.23B ViT and 3.3B DFly2; activated per token is 49B text + 1.23B vision. The published BF16/F32 checkpoint totals 774.43B."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "image/gif"]
 output = ["text"]

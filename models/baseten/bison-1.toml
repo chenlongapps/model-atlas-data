@@ -17,6 +17,11 @@ open_weights = true
 release_date = "2026-11-20"
 license = "MIT AND Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 31
+sources = ["https://huggingface.co/baselabs/bison-1/blob/bf8350b2c59eb6c36e95d02a2af870aec18724a7/README.md"]
+notes = "Official card states 31B. The published BF16 checkpoint index records 31,273,086,512 parameters after tied-embedding deduplication; the per-dtype sum (32,682,375,020) counts tied word embeddings twice."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["decision"]

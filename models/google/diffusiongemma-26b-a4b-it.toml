@@ -19,9 +19,10 @@ last_updated = "2026-07-15"
 license = "Apache 2.0"
 
 [metadata.modelatlas.parameters]
+total_billion = 25.823778864
 active_billion = 3.8
-sources = ["https://huggingface.co/google/diffusiongemma-26B-A4B-it"]
-notes = "Official per-token active count. Complete total omitted: the table separately lists the vision encoder, and the Hub's safetensors total disagrees with its dtype parameter count."
+sources = ["https://huggingface.co/google/diffusiongemma-26B-A4B-it/blob/cd40195554d3cfcb56f34b9adfb66efc790ed5b6/README.md", "https://huggingface.co/api/models/google/diffusiongemma-26B-A4B-it"]
+notes = "Official card lists 25.2B total plus a ~550M vision encoder; the fixed BF16 checkpoint index totals 25.82B including that encoder. The 2,364-element difference between the index total and the per-dtype sum is non-parameter buffers, not another model size. Active parameters 3.8B."
 
 [modalities]
 input = ["text", "image/jpeg", "image/png"]

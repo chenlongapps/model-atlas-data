@@ -13,6 +13,11 @@ open_weights = true
 release_date = "2026-10-19"
 license = "OpenMDW-1.1"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.38
+sources = ["https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16/blob/781e779ee4ca9c2d2a4f38321993556baeab49a1/README.md"]
+notes = "Official card: 8.38B parameters."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg"]
 output = ["embedding"]

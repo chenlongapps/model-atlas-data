@@ -13,6 +13,28 @@ open_weights = true
 release_date = "2025-08-19"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+sources = ["https://huggingface.co/Qwen/Qwen-Image/blob/75e0b4be04f60ec59a75f475837eced720f823b6/README.md"]
+notes = "The card calls the visual generation component 20B and does not state a complete pipeline total; the text encoder and VAE are recorded as separate components."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Visual generation transformer (MMDiT)"
+total_billion = 20.430401088
+sources = ["https://huggingface.co/Qwen/Qwen-Image/blob/75e0b4be04f60ec59a75f475837eced720f823b6/transformer/diffusion_pytorch_model.safetensors.index.json"]
+notes = "Verified from all nine BF16 shard headers."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Text encoder (Qwen2.5-VL-7B)"
+total_billion = 8.292166656
+sources = ["https://huggingface.co/Qwen/Qwen-Image/blob/75e0b4be04f60ec59a75f475837eced720f823b6/text_encoder/model.safetensors.index.json"]
+notes = "Index total for the four BF16 text-encoder shards."
+
+[[metadata.modelatlas.parameters.components]]
+name = "VAE"
+total_billion = 0.126892531
+sources = ["https://huggingface.co/Qwen/Qwen-Image/blob/75e0b4be04f60ec59a75f475837eced720f823b6/vae/diffusion_pytorch_model.safetensors"]
+notes = "BF16 VAE tensor header count."
+
 [modalities]
 input = ["text"]
 output = ["image/png"]

@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-04-11"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.05
+sources = ["https://huggingface.co/pfnet/plamo-embedding-1b/blob/51507f82e5884f7a9f2306038cfd4104b56748de/README.md"]
+notes = "Official card: 1B model size; the BF16 checkpoint counts 1,050,644,480 parameters."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

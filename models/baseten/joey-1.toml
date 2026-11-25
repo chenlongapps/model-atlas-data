@@ -16,6 +16,11 @@ open_weights = true
 release_date = "2026-10-27"
 license = "MIT AND Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 2
+sources = ["https://huggingface.co/baselabs/joey-1/blob/87eb48acc94c1ed7ebc7bff6c66ca326ce578bf9/README.md"]
+notes = "Official card states 2B parameters."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["decision"]

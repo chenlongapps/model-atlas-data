@@ -76,6 +76,7 @@ python3 scripts/preview.py   # 本地网页预览
 
 - [网页、图表与 GitHub Pages 发布](docs/publishing.md)
 - [Models.dev 自动同步与翻译](docs/models-dev-sync.md)
+- [开放权重模型参数量收集状态](docs/model-parameters-status.md)
 - [评测来源、成本字段与实验口径](docs/benchmark-sources.md)
 
 自动同步每小时检查上游，导入后重建并校验成绩汇总。新模型基本字段合法即可导入，未通过校验或无法唯一映射的上游成绩逐条跳过并报告。已有模型只更新基本信息，有翻译的描述保留待人工核验。历史执行报告不再单独维护，仍有影响的限制集中在[待核实事项](docs/review-notes.md)。

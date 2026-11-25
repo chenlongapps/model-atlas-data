@@ -12,6 +12,11 @@ release_date = "2026-04-14"
 license = "MIT"
 family = "chatterbox"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.11
+sources = ["https://huggingface.co/ResembleAI/chatterbox-nano/blob/71ccd1d0081b430592cea481f4307e764e07bc64/README.md"]
+notes = "Official card: 110M-parameter architecture."
+
 [modalities]
 input = ["text"]
 output = ["audio"]

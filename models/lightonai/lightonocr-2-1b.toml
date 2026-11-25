@@ -15,6 +15,11 @@ release_date = "2026-01-16"
 license = "apache-2.0"
 family = "lightonocr"
 
+[metadata.modelatlas.parameters]
+total_billion = 1.01
+sources = ["https://huggingface.co/lightonai/LightOnOCR-2-1B/blob/be7c41313c30e940fe5571de59e5fabc779e00c8/README.md"]
+notes = "Official card names a 1B end-to-end model; the BF16 checkpoint counts 1,005,647,872 parameters."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp"]
 output = ["text"]

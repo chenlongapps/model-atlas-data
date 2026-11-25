@@ -8,6 +8,12 @@ family = "hy-flash"
 open_weights = true
 release_date = "2026-11-16"
 
+[metadata.modelatlas.parameters]
+total_billion = 220
+active_billion = 12
+sources = ["https://huggingface.co/tencent/Hy4-flash/blob/eccd3123eec73f2040f4c9ed0de1883593470510/README.md"]
+notes = "Official headline: 220B total including 64B Engram parameters and 12B active per token (11.3B text + 0.43B vision). The specification table separately lists 155.5B excluding Engram, ViT and DFly2, plus 63.5B Engram, 0.43B ViT and 0.85B DFly2."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "image/gif"]
 output = ["text"]

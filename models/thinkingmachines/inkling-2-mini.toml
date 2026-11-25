@@ -13,6 +13,12 @@ open_weights = true
 release_date = "2026-11-20"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 26.4
+active_billion = 3.4
+sources = ["https://huggingface.co/thinkingmachines/Inkling-2-Mini/blob/c9d028302cd0f035fdf8e7e91f089a4ce94d2195/README.md"]
+notes = "Official card: 26.4B total, 3.4B active. Each additional pass through the looped layers adds about 1.0B effective active parameters; with three passes the card lists 5.4B effective active per token."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

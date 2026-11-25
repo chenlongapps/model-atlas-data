@@ -13,6 +13,12 @@ release_date = "2026-10-02"
 license = "Apache-2.0"
 family = "blink"
 
+[metadata.modelatlas.parameters]
+total_billion = 26
+active_billion = 4
+sources = ["https://huggingface.co/PixilabAI/Blink-v0.3-26B-A4B-FP8/blob/a3b03317bb8dfca46597546b1afa13837464bf12/README.md"]
+notes = "Official card: Gemma 4 26B-A4B fine-tune with 4B active parameters. Only FP8/NVFP4 builds are published; quantized stored counts are not used as the logical total."
+
 [modalities]
 input = ["text", "image"]
 output = ["decision"]

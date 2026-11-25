@@ -16,6 +16,22 @@ open_weights = true
 release_date = "2026-07-04"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+sources = ["https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf/blob/86e89f34c93201c3dfd5e5880fedb0022fc7e34d/README.md"]
+notes = "Official card discloses language and vision components separately; no complete total is stated and the ternary/quantized stored counts are not expanded into parameter counts."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Ternary language weights"
+total_billion = 27.3
+sources = ["https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf/blob/86e89f34c93201c3dfd5e5880fedb0022fc7e34d/README.md"]
+notes = "Author-reported approximate figure: ~24.8B backbone plus ~2.5B embedding/LM head."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Vision tower"
+total_billion = 0.46
+sources = ["https://huggingface.co/prism-ml/Ternary-Bonsai-27B-gguf/blob/86e89f34c93201c3dfd5e5880fedb0022fc7e34d/README.md"]
+notes = "Author-reported approximate 27-block vision tower."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

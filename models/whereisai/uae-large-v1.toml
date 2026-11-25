@@ -10,6 +10,11 @@ release_date = "2023-12-04"
 license = "MIT"
 family = "uae"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.335
+sources = ["https://huggingface.co/api/models/WhereIsAI/UAE-Large-V1"]
+notes = "Complete F32 checkpoint count (335,141,888)."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

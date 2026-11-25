@@ -34,5 +34,6 @@ When using the data:
 ## Optional
 
 - [Parameter verification notes](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/model-parameters.md): Parameter-count sources, verification methods, and scope restrictions.
+- [Parameter collection status](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/model-parameters-status.md): Open-weight model parameter coverage, sync states, and manual exceptions.
 - [Benchmark sources](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/benchmark-sources.md): Source-specific score and cost accounting, evaluation conditions, and model mappings.
 - [Review notes and licensing](https://raw.githubusercontent.com/chenlongapps/model-atlas-data/main/docs/review-notes.md): Unresolved evidence, version conflicts, redistribution risks, and links to historical reports.

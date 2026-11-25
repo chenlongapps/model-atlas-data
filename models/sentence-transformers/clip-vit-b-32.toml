@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2021-06-22"
 family = "clip"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.151277313
+sources = ["https://huggingface.co/sentence-transformers/clip-ViT-B-32/blob/327ab6726d33c0e22f920c83f2ff9e4bd38ca37f/0_CLIPModel/model.safetensors"]
+notes = "Complete CLIP text+vision F32 tensor count from the safetensors header; the 127-element I64 buffer is excluded."
+
 [modalities]
 input = ["text", "image"]
 output = ["embedding"]

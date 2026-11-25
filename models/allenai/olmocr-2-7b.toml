@@ -14,6 +14,11 @@ release_date = "2025-10-22"
 license = "Apache-2.0"
 family = "olmocr"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.29
+sources = ["https://huggingface.co/allenai/olmOCR-2-7B-1025/blob/7c6fa1611328bd17dbf5f3a07509d2b6fa2eba4e/README.md", "https://huggingface.co/api/models/allenai/olmOCR-2-7B-1025"]
+notes = "No parameter total on the card; the complete BF16 checkpoint counts 8,292,166,656 parameters, including the Qwen2.5-VL vision encoder."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png"]
 output = ["text"]

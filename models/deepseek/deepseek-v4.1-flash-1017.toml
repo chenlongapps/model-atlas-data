@@ -15,7 +15,13 @@ license = "MIT"
 [metadata.modelatlas.parameters]
 active_billion = 16
 sources = ["https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017", "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"]
-notes = "Artificial Analysis reports 16B active for this exact snapshot, without a separate prefill count. Complete total omitted: the family's 552B figure is backbone-only, not an inclusive model total."
+notes = "Artificial Analysis reports 16B active for this exact snapshot, without a separate prefill count. Complete total omitted: the family's 552B figure is backbone-only, not an inclusive model total, and is recorded as a component instead."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Backbone"
+total_billion = 552
+sources = ["https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/blob/08c8657f02291e11b6f6b63e0e16014f8e748518/README.md"]
+notes = "Official card states 552B backbone parameters, excluding Engram conditional memory (196B) and visual components; not a complete model total."
 
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/gif", "image/webp"]

@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-07-16"
 license = "OpenMDW-1.1"
 
+[metadata.modelatlas.parameters]
+total_billion = 8
+sources = ["https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16/blob/d1f2f25730bbd775b99b29185134bc86653bf2d1/README.md"]
+notes = "Official card: approximately 8B parameters; the BF16 checkpoint counts 7,952,683,008."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

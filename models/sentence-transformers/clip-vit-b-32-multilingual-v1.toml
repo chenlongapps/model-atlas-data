@@ -12,6 +12,11 @@ release_date = "2021-06-22"
 license = "Apache-2.0"
 family = "clip"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.13473408
+sources = ["https://huggingface.co/api/models/sentence-transformers/clip-ViT-B-32-multilingual-v1"]
+notes = "Complete F32 checkpoint count (134,734,080)."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

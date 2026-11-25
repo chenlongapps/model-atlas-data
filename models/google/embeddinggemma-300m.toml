@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2025-09-04"
 license = "Gemma Terms of Use"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.3
+sources = ["https://huggingface.co/google/embeddinggemma-300m/blob/57c266a740f537b4dc058e1b0cda161fd15afa75/README.md"]
+notes = "Official name designates the 300M model; the F32 checkpoint counts 302,863,104 parameters."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

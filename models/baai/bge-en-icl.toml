@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2024-07-25"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 7.11
+sources = ["https://huggingface.co/api/models/BAAI/bge-en-icl"]
+notes = "Complete F32 checkpoint count (7,110,672,384); the card does not state a parameter total."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

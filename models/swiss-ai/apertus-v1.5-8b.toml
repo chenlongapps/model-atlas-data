@@ -15,6 +15,11 @@ release_date = "2026-10-15"
 license = "Apache-2.0"
 family = "apertus"
 
+[metadata.modelatlas.parameters]
+total_billion = 8.903547555
+sources = ["https://huggingface.co/api/models/swiss-ai/Apertus-v1.5-8B"]
+notes = "Complete repository count for the BF16 release, including the vision and wav tokenizers (8,609,083,456 BF16 + 294,464,099 F32). The gated repository serves no readable model card; the 8B name is the language-model designation."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "audio/mpeg"]
 output = ["text"]

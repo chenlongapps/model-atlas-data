@@ -18,6 +18,12 @@ release_date = "2026-10-15"
 license = "Apache-2.0"
 family = "span"
 
+[metadata.modelatlas.parameters]
+total_billion = 26
+active_billion = 4
+sources = ["https://huggingface.co/respanai/span-02/blob/63cbdd774391f1b7d9bc3829179efe996d0191ce/README.md"]
+notes = "Official card: Gemma 4 26B-A4B fine-tune with about 4B active parameters. Only NVFP4/FP8 builds are published; stored quantized counts are not used as logical totals."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg"]
 output = ["text"]

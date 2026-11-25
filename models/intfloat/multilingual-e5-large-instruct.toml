@@ -10,6 +10,11 @@ release_date = "2024-02-08"
 license = "MIT"
 family = "e5-multilingual"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.56
+sources = ["https://huggingface.co/api/models/intfloat/multilingual-e5-large-instruct"]
+notes = "Complete F16 checkpoint count (559,890,432)."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

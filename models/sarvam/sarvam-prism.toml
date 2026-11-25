@@ -13,6 +13,11 @@ family = "sarvam-prism"
 open_weights = true
 release_date = "2026-11-03"
 
+[metadata.modelatlas.parameters]
+total_billion = 105.021348736
+sources = ["https://huggingface.co/sarvamai/prism/blob/417cf26c2eea27286a803dd721b4e78698bdb875/README.md", "https://huggingface.co/api/models/sarvamai/prism", "https://huggingface.co/sarvamai/prism/blob/417cf26c2eea27286a803dd721b4e78698bdb875/decision_head.safetensors"]
+notes = "Fixed FP8 release: 104,991,889,280 backbone parameters (FP8 logical count) plus 29,459,456 decision-head parameters verified from the tensor header. The card does not state a separate active count."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

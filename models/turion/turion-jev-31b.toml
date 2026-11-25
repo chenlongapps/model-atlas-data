@@ -16,6 +16,11 @@ release_date = "2026-10-24"
 license = "Apache-2.0"
 family = "turion-jev"
 
+[metadata.modelatlas.parameters]
+total_billion = 31
+sources = ["https://huggingface.co/turion-ai/turion-jev-31b/blob/b32ba16788b8238365c4532d8a4a164af3cb5289/README.md"]
+notes = "Official card names the model 31B; the fixed BF16 checkpoint index records 31,273,086,512 parameters after tied-embedding deduplication."
+
 [modalities]
 input = ["text"]
 output = ["decision"]

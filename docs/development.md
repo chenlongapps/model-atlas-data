@@ -12,6 +12,8 @@
 python3 scripts/validate.py
 python3 scripts/build.py
 python3 scripts/validate.py --check-results
+python3 scripts/parameters_status.py          # 更新参数量收集状态文档
+python3 scripts/parameters_status.py --check  # 检查状态文档是否最新
 
 # 完整测试
 python3 -m pip install tomlkit==0.13.3
@@ -33,6 +35,8 @@ git diff --check
 | 单元测试 | 脚本及网页行为的回归检查 | 所有模型资料或评测条件的人工审核 |
 
 `validate.py` 全部通过返回 `0`；语法、编码、读取错误或未找到 TOML 时返回 `1`。从其他目录运行可使用脚本绝对路径。
+
+`parameters_status.py` 只读取模型 TOML 和状态文档，生成参数量覆盖率与清单；不联网，也不修改模型参数。`--check` 在文档需要更新时返回 `1`，适合本地检查或 CI。
 
 构建错误使 `build.py` 返回 `1`；以下情况只警告，不阻止构建：成绩未匹配定义、匹配歧义、来源缺失、现有语言缺少描述翻译。未知本地化 ID、无效字段类型等仍是错误。没有有效模型时失败，`benchmarks/` 和 `i18n/` 可以暂缺。
 

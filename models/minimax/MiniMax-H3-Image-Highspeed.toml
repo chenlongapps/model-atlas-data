@@ -17,6 +17,16 @@ open_weights = true
 release_date = "2026-11-10"
 license = "MiniMax H3 Image Community License Agreement"
 
+[metadata.modelatlas.parameters]
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-H3-Image/blob/8ced60068623def5b74b4d10558117cb61d6482d/README.md"]
+notes = "Same released checkpoint as MiniMax-H3-Image; the card discloses the diffusion transformer only. Complete pipeline total including the H3 encoder is not stated."
+
+[[metadata.modelatlas.parameters.components]]
+name = "Diffusion transformer"
+total_billion = 33.1
+sources = ["https://huggingface.co/MiniMaxAI/MiniMax-H3-Image/blob/8ced60068623def5b74b4d10558117cb61d6482d/README.md"]
+notes = "Official dense single-stream diffusion transformer count; excludes the text/vision encoder and VAE."
+
 [modalities]
 input = ["text", "image/jpeg", "image/png", "image/webp", "image/heic", "image/heif"]
 output = ["image/jpeg", "image/png", "image/webp"]

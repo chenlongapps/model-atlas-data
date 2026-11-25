@@ -11,6 +11,11 @@ open_weights = true
 release_date = "2022-09-21"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.039
+sources = ["https://huggingface.co/openai/whisper-tiny/blob/169d4a4341b33bc18d8881c4b69c2e104e1cc0af/README.md"]
+notes = "Official Whisper table lists 39M; the F32 checkpoint counts 37,760,640."
+
 [modalities]
 input = ["audio/flac", "audio/mpeg", "audio/mp4", "audio/ogg", "audio/wav", "audio/webm"]
 output = ["text"]

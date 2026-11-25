@@ -1,6 +1,6 @@
 # 参数量核验方法
 
-[文档导航](README.md) · [字段与组件规范](data-format.md#模型参数量) · [待核实事项](review-notes.md)
+[文档导航](README.md) · [字段与组件规范](data-format.md#模型参数量) · [收集状态](model-parameters-status.md) · [待核实事项](review-notes.md)
 
 参数数值及独立来源只维护在模型 TOML。本页保留核验方法和统计边界，不维护覆盖率或参数排名。下列案例来自 2026-11-06 核验，不代表来源和权重状态已持续复核。
 
@@ -40,6 +40,9 @@
 | MiMo V2.5 ASR | 七个 F32 分片且 `tie_word_embeddings = false`；另需 Audio Tokenizer，因此只记录 ASR 组件，不补管线总量 |
 | MythoMax、ReMM、Euryale v2.2、Nemotron Mini | 核对全部 PyTorch 描述及索引，不按名称或基础模型规模推算 |
 | Ornith 1.0 9B / 35B | Hub 统计冲突，改用[作者正文明确披露的近似规格](https://deep-reinforce.com/ornith_1_0.html)，在 notes 说明口径 |
+| Bison-1 / Groundhog-1 / Turion Jev 31B | Gemma 4 系 tied embeddings 在两个分片合计中重复计数；采用固定索引去重后的总量，并按官方 31B/26B 口径记录 |
+| Hy4 / Hy4 Flash | 官方表分别列出语言骨干、Engram、ViT 与 DFly2；完整检查点统计与官方组件口径分开保留，不自行把组件相加当总量 |
+| DiffusionGemma 26B A4B | 卡面 25.2B 加约 0.55B 视觉编码器；固定 BF16 检查点 25.82B，差异按视觉编码器解释 |
 
 ## 组件范围
 
@@ -57,6 +60,7 @@
 | Pixtral 12B / GLM Image | 官方 decoder/vision 或 autoregressive/diffusion 组件，不自行汇总 |
 | DeepSeek V4 Flash Vision Exp | 全部未量化 `vision.*`、`aligner.*` 与索引核对，不推算量化语言部分及 DSpark 总量 |
 | MiMo V2.5 ASR | ASR 检查点，不含另行下载的 Audio Tokenizer |
+| Qwen-Image、MiniMax H3 Image、Ternary Bonsai 27B | 视觉生成或语言组件分别核验，完整管线总量未合并；Ternary Bonsai 的量化打包计数不展开 |
 
 ## 参数规格不证明权重状态
 

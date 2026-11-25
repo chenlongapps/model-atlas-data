@@ -8,6 +8,12 @@ open_weights = true
 release_date = "2026-10-05"
 license = "Mistral Ecosystem Open Weight License"
 
+[metadata.modelatlas.parameters]
+total_billion = 1000
+active_billion = 52
+sources = ["https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B/blob/6c0166e17ab8a3d504ff1553804abec9fb0993dc/README.md"]
+notes = "Official card: ~1T total and ~52B active including embeddings and output layers (49B per token excluding them). The FP8 checkpoint does not publish safetensors statistics."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif"]
 output = ["text"]

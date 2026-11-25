@@ -8,6 +8,11 @@ open_weights = true
 release_date = "2026-10-20"
 license = "MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 122
+sources = ["https://huggingface.co/ornith-ai/Ornith-1.5-122B/blob/7681ef608624e7532d8164128bcffdbdbaf1b1af/README.md"]
+notes = "Official card describes a 122B MoE model. The published BF16 checkpoint totals 125,086,497,008 parameters; the card does not explain the difference or state an active count, so the official 122B figure is kept."
+
 [modalities]
 input = ["text", "image"]
 output = ["text"]

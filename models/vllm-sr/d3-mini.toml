@@ -13,6 +13,11 @@ release_date = "2026-10-10"
 license = "Apache-2.0"
 family = "d3-mini"
 
+[metadata.modelatlas.parameters]
+total_billion = 4.54
+sources = ["https://huggingface.co/vllm-sr/d3-mini/blob/df99bf4ca4418bc6908ee68e9b7479af1f3b8800/README.md"]
+notes = "Official card: 4.54B including the 0.33B vision encoder."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "video/mp4", "video/webm", "video/quicktime", "video/x-matroska"]
 output = ["decision"]

@@ -10,6 +10,11 @@ open_weights = true
 release_date = "2026-04-28"
 license = "Modified MIT"
 
+[metadata.modelatlas.parameters]
+total_billion = 128
+sources = ["https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/ff62230e1c990bdf05bbf6efa1c73fefe094ebf4/README.md"]
+notes = "Official card: dense 128B parameters."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp", "image/gif", "application/pdf"]
 output = ["text"]

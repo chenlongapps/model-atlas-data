@@ -15,6 +15,12 @@ release_date = "2026-11-05"
 license = "Apache-2.0"
 family = "cicero"
 
+[metadata.modelatlas.parameters]
+total_billion = 35
+active_billion = 3
+sources = ["https://huggingface.co/butler-compute/Cicero/blob/cfc870449d4347d65efdf93aee66916fe8e6caa1/README.md"]
+notes = "Official card: 35B total, 3B active per token; vision tower is the Qwen3.5-35B-A3B base model's."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["decision"]

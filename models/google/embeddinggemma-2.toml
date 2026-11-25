@@ -12,6 +12,11 @@ open_weights = true
 release_date = "2026-10-06"
 license = "Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.74
+sources = ["https://huggingface.co/google/embeddinggemma-2/blob/f9972ac22e696a105c482202646979e33e4b5a1e/README.md"]
+notes = "Official card: 740M total, combining a 270M text model with 170M vision and 300M audio encoders."
+
 [modalities]
 input = ["text", "image", "audio", "video"]
 output = ["embedding"]

@@ -11,6 +11,11 @@ release_date = "2022-01-23"
 license = "Apache-2.0"
 family = "text2vec"
 
+[metadata.modelatlas.parameters]
+total_billion = 0.102267648
+sources = ["https://huggingface.co/api/models/shibing624/text2vec-base-chinese"]
+notes = "Complete F32 weight count (102,267,648); the 512-element I64 buffer is excluded."
+
 [modalities]
 input = ["text"]
 output = ["embedding"]

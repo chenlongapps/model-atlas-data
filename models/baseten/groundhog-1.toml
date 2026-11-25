@@ -17,6 +17,12 @@ open_weights = true
 release_date = "2026-11-20"
 license = "MIT AND Apache-2.0"
 
+[metadata.modelatlas.parameters]
+total_billion = 26
+active_billion = 4
+sources = ["https://huggingface.co/baselabs/groundhog-1/blob/f4e4a46e0f7f14499dc1e5b080e3b50f2333ded8/README.md"]
+notes = "Official card: 26B total, about 4B active parameters per token."
+
 [modalities]
 input = ["text", "image/png", "image/jpeg", "image/webp"]
 output = ["decision"]
