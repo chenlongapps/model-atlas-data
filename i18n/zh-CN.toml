@@ -997,6 +997,7 @@
 "zhipuai/glm-4-32b-0414-128k" = "32B GLM-4 是一款针对指令遵循、代码生成、函数调用和基于搜索的问答进行微调的基础模型"
 "inclusionai/lingsante-3.1-air-vl" = "用于医学影像报告、健康评估、证据搜索和 GUI 智能体的开源多模态 MoE 模型"
 "xiaomi/mimo-v2.6-flash-mopd" = "MiMo Flash 检查点：从领域教师模型蒸馏而来，旨在减少智能体工作流中重复的工具调用"
+"mindlab/macaron-v1.1-venti" = "基于 GLM-5.3 的混合 LoRA 模型，包含用于聊天、个人代理、编码和生成式 UI 的专家模型"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
