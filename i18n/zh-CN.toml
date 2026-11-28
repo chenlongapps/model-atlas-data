@@ -998,6 +998,10 @@
 "inclusionai/lingsante-3.1-air-vl" = "用于医学影像报告、健康评估、证据搜索和 GUI 智能体的开源多模态 MoE 模型"
 "xiaomi/mimo-v2.6-flash-mopd" = "MiMo Flash 检查点：从领域教师模型蒸馏而来，旨在减少智能体工作流中重复的工具调用"
 "mindlab/macaron-v1.1-venti" = "基于 GLM-5.3 的混合 LoRA 模型，包含用于聊天、个人代理、编码和生成式 UI 的专家模型"
+"alibaba/z-image-turbo" = "经蒸馏的 6B 文本到图像模型，支持 8 步生成以及英文和中文双语文本渲染"
+"bytedance-seed/seedream-5.5" = "支持原生 RGBA 输出与图层分解的图像生成及多轮编辑模型"
+"elevenlabs/scribe_v3" = "适用于录音音频的语音转文本模型，支持说话人日记、单词时间戳以及 90+ 语言的关键术语提示"
+"kuaishou/kling-image-v4.0" = "Kling 4.0 图像模型，支持带参考图像的文本到图像和图像到图像生成，并原生输出 8K 格式"
 
 [benchmark.description]
 "artificial-analysis-intelligence-index-v5" = "综合评估语言模型在知识工作、编程、科学及通用知识方面的表现，并汇总九项评测形成单一分数。"
